@@ -1,0 +1,7212 @@
+{
+ "edition": "FY2027",
+ "source": {
+  "title": "ICD-10-CM Official Guidelines for Coding and Reporting FY 2027 (October 1, 2026 - September 30, 2027)",
+  "url": "https://www.cms.gov/files/document/fy-2027-icd-10-cm-coding-guidelines.pdf",
+  "publisher": "CMS and NCHS"
+ },
+ "how_to_cite": "Cite as \"ICD-10-CM Guidelines FY2027 Section <id>\", e.g. Section I.C.4.a.3 or IV.H.",
+ "files": [
+  {
+   "id": "intro",
+   "file": "00_introduction.md",
+   "title": "ICD-10-CM Official Guidelines for Coding and Reporting (introduction)",
+   "pages": [
+    1,
+    1
+   ],
+   "words": 530,
+   "keywords": [
+    "official",
+    "reporting"
+   ],
+   "codes_mentioned": [],
+   "subsections": [
+    "intro"
+   ]
+  },
+  {
+   "id": "I.A",
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "Conventions for the ICD-10-CM",
+   "pages": [
+    7,
+    12
+   ],
+   "words": 2161,
+   "keywords": [
+    "abbreviations",
+    "notes",
+    "conventions",
+    "alphabetic",
+    "index",
+    "list",
+    "tabular",
+    "unspecified",
+    "chapter",
+    "general",
+    "specific",
+    "icd-10-cm",
+    "format",
+    "structure",
+    "purposes",
+    "reporting",
+    "character",
+    "placeholder",
+    "characters",
+    "punctuation",
+    "includes",
+    "inclusion",
+    "terms",
+    "excludes",
+    "excludes1",
+    "excludes2",
+    "additional",
+    "classified",
+    "convention",
+    "diseases",
+    "elsewhere",
+    "etiology",
+    "first",
+    "manifestation",
+    "note",
+    "default",
+    "assignment",
+    "clinical",
+    "criteria"
+   ],
+   "codes_mentioned": [
+    "F02",
+    "F45",
+    "G47",
+    "G20",
+    "T36",
+    "T50",
+    "A18"
+   ],
+   "subsections": [
+    "I",
+    "I.A",
+    "I.A.1",
+    "I.A.2",
+    "I.A.3",
+    "I.A.4",
+    "I.A.5",
+    "I.A.6",
+    "I.A.6.a",
+    "I.A.6.b",
+    "I.A.7",
+    "I.A.8",
+    "I.A.9",
+    "I.A.9.a",
+    "I.A.9.b",
+    "I.A.10",
+    "I.A.11",
+    "I.A.12",
+    "I.A.12.a",
+    "I.A.12.b",
+    "I.A.13",
+    "I.A.14",
+    "I.A.15",
+    "I.A.16",
+    "I.A.17",
+    "I.A.18",
+    "I.A.19"
+   ]
+  },
+  {
+   "id": "I.B",
+   "file": "I.B_general.md",
+   "title": "General Coding Guidelines",
+   "pages": [
+    12,
+    19
+   ],
+   "words": 3207,
+   "keywords": [
+    "external",
+    "morbidity",
+    "disease",
+    "integral",
+    "part",
+    "process",
+    "multiple",
+    "documentation",
+    "causes",
+    "general",
+    "icd-10-cm",
+    "locating",
+    "detail",
+    "level",
+    "a00",
+    "t88",
+    "through",
+    "u00-u85",
+    "z00-z99",
+    "signs",
+    "symptoms",
+    "single",
+    "acute",
+    "chronic",
+    "combination",
+    "effects",
+    "late",
+    "sequela",
+    "impending",
+    "threatened",
+    "once",
+    "reporting",
+    "same",
+    "laterality",
+    "clinicians",
+    "provider",
+    "syndromes",
+    "care",
+    "complications",
+    "borderline"
+   ],
+   "codes_mentioned": [
+    "X37",
+    "Z99",
+    "Z59",
+    "Z75",
+    "A00",
+    "T88",
+    "Z00",
+    "U00",
+    "U85",
+    "X38",
+    "X36",
+    "R00",
+    "R99",
+    "B95",
+    "B96",
+    "F10",
+    "X30",
+    "X31",
+    "Z76"
+   ],
+   "subsections": [
+    "I.B",
+    "I.B.1",
+    "I.B.2",
+    "I.B.3",
+    "I.B.4",
+    "I.B.5",
+    "I.B.6",
+    "I.B.7",
+    "I.B.8",
+    "I.B.9",
+    "I.B.10",
+    "I.B.11",
+    "I.B.12",
+    "I.B.13",
+    "I.B.14",
+    "I.B.15",
+    "I.B.16",
+    "I.B.17",
+    "I.B.18",
+    "I.B.19",
+    "I.B.19.a",
+    "I.B.19.b",
+    "I.B.19.c",
+    "I.B.19.d",
+    "I.B.20"
+   ]
+  },
+  {
+   "id": "I.C",
+   "file": "I.C.00_chapter-specific-coding-guidelines.md",
+   "title": "Chapter-Specific Coding Guidelines",
+   "pages": [
+    19,
+    19
+   ],
+   "words": 45,
+   "keywords": [
+    "chapter-specific"
+   ],
+   "codes_mentioned": [],
+   "subsections": [
+    "I.C"
+   ]
+  },
+  {
+   "id": "I.C.1",
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "Chapter 1: Certain Infectious and Parasitic Diseases (A00-B99), U07.1, U09.9",
+   "pages": [
+    19,
+    32
+   ],
+   "words": 3969,
+   "keywords": [
+    "sepsis",
+    "infection",
+    "hiv",
+    "covid-19",
+    "severe",
+    "mrsa",
+    "acute",
+    "infections",
+    "sequencing",
+    "disease",
+    "septic",
+    "shock",
+    "respiratory",
+    "virus",
+    "cases",
+    "confirmed",
+    "associated",
+    "due",
+    "postprocedural",
+    "syndrome",
+    "diseases",
+    "infectious",
+    "human",
+    "immunodeficiency",
+    "selection",
+    "admitted",
+    "hiv-related",
+    "diagnosed",
+    "asymptomatic",
+    "inconclusive",
+    "childbirth",
+    "pregnancy",
+    "puerperium",
+    "testing",
+    "positive",
+    "status",
+    "resistant",
+    "dysfunction",
+    "organ",
+    "aureus"
+   ],
+   "codes_mentioned": [
+    "R65",
+    "U07",
+    "B20",
+    "T81",
+    "Z20",
+    "U09",
+    "Z21",
+    "O86",
+    "Z11",
+    "B95",
+    "Z16",
+    "A41",
+    "Z22",
+    "M35",
+    "D59",
+    "R75",
+    "O98",
+    "Z71",
+    "A92",
+    "R05",
+    "Z86",
+    "Z28",
+    "A00",
+    "B99",
+    "Z79"
+   ],
+   "subsections": [
+    "I.C.1",
+    "I.C.1.a",
+    "I.C.1.a.1",
+    "I.C.1.a.2",
+    "I.C.1.a.2.a",
+    "I.C.1.a.2.b",
+    "I.C.1.a.2.c",
+    "I.C.1.a.2.d",
+    "I.C.1.a.2.e",
+    "I.C.1.a.2.f",
+    "I.C.1.a.2.g",
+    "I.C.1.a.2.h",
+    "I.C.1.a.2.i",
+    "I.C.1.a.2.j",
+    "I.C.1.a.2.k",
+    "I.C.1.b",
+    "I.C.1.c",
+    "I.C.1.d",
+    "I.C.1.d.1",
+    "I.C.1.d.1.a",
+    "I.C.1.d.1.a.i",
+    "I.C.1.d.1.a.ii",
+    "I.C.1.d.1.a.iii",
+    "I.C.1.d.1.a.iv",
+    "I.C.1.d.1.b",
+    "I.C.1.d.2",
+    "I.C.1.d.3",
+    "I.C.1.d.4",
+    "I.C.1.d.5",
+    "I.C.1.d.5.a",
+    "I.C.1.d.5.b",
+    "I.C.1.d.5.c",
+    "I.C.1.d.6",
+    "I.C.1.d.7",
+    "I.C.1.d.8",
+    "I.C.1.d.9",
+    "I.C.1.e",
+    "I.C.1.e.1",
+    "I.C.1.e.1.a",
+    "I.C.1.e.1.b",
+    "I.C.1.e.1.c",
+    "I.C.1.e.1.d",
+    "I.C.1.f",
+    "I.C.1.f.1",
+    "I.C.1.g",
+    "I.C.1.g.1",
+    "I.C.1.g.1.a",
+    "I.C.1.g.1.b",
+    "I.C.1.g.1.c",
+    "I.C.1.g.1.c.i",
+    "I.C.1.g.1.c.ii",
+    "I.C.1.g.1.c.iii",
+    "I.C.1.g.1.c.iv",
+    "I.C.1.g.1.c.v",
+    "I.C.1.g.1.d",
+    "I.C.1.g.1.e",
+    "I.C.1.g.1.f",
+    "I.C.1.g.1.g",
+    "I.C.1.g.1.h",
+    "I.C.1.g.1.i",
+    "I.C.1.g.1.j",
+    "I.C.1.g.1.k",
+    "I.C.1.g.1.l",
+    "I.C.1.g.1.m",
+    "I.C.1.g.1.n"
+   ]
+  },
+  {
+   "id": "I.C.2",
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "Chapter 2: Neoplasms (C00-D49)",
+   "pages": [
+    32,
+    39
+   ],
+   "words": 2383,
+   "keywords": [
+    "neoplasm",
+    "malignancy",
+    "treatment",
+    "associated",
+    "malignant",
+    "admission",
+    "chemotherapy",
+    "immunotherapy",
+    "radiation",
+    "therapy",
+    "neoplasms",
+    "primary",
+    "site",
+    "secondary",
+    "complication",
+    "surgical",
+    "chapter",
+    "complications",
+    "sequencing",
+    "anemia",
+    "due",
+    "management",
+    "procedure",
+    "antineoplastic",
+    "care",
+    "removal",
+    "history",
+    "personal",
+    "versus",
+    "cell",
+    "organ",
+    "c00-d49",
+    "dehydration",
+    "resulting",
+    "excised",
+    "previously",
+    "admissions",
+    "involving",
+    "episode",
+    "involves"
+   ],
+   "codes_mentioned": [
+    "Z51",
+    "Z85",
+    "C80",
+    "D63",
+    "M84",
+    "C84",
+    "C00",
+    "D49",
+    "C25",
+    "Z15",
+    "T45",
+    "Y84",
+    "O9A",
+    "C90",
+    "T86",
+    "C81",
+    "C85",
+    "C83"
+   ],
+   "subsections": [
+    "I.C.2",
+    "I.C.2.a",
+    "I.C.2.b",
+    "I.C.2.c",
+    "I.C.2.c.1",
+    "I.C.2.c.2",
+    "I.C.2.c.3",
+    "I.C.2.c.4",
+    "I.C.2.d",
+    "I.C.2.e",
+    "I.C.2.e.1",
+    "I.C.2.e.2",
+    "I.C.2.e.3",
+    "I.C.2.f",
+    "I.C.2.g",
+    "I.C.2.h",
+    "I.C.2.i",
+    "I.C.2.j",
+    "I.C.2.k",
+    "I.C.2.l",
+    "I.C.2.l.1",
+    "I.C.2.l.2",
+    "I.C.2.l.3",
+    "I.C.2.l.4",
+    "I.C.2.l.5",
+    "I.C.2.l.6",
+    "I.C.2.m",
+    "I.C.2.n",
+    "I.C.2.o",
+    "I.C.2.p",
+    "I.C.2.q",
+    "I.C.2.r",
+    "I.C.2.s",
+    "I.C.2.t"
+   ]
+  },
+  {
+   "id": "I.C.3",
+   "file": "I.C.03_chapter-3-diseases-blood-blood-forming-organs-certain-disord.md",
+   "title": "Chapter 3: Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism (D50-D89)",
+   "pages": [
+    39,
+    39
+   ],
+   "words": 23,
+   "keywords": [
+    "blood",
+    "blood-forming",
+    "certain",
+    "chapter",
+    "d50-d89",
+    "diseases",
+    "disorders",
+    "immune",
+    "involving",
+    "mechanism",
+    "organs"
+   ],
+   "codes_mentioned": [
+    "D50",
+    "D89"
+   ],
+   "subsections": [
+    "I.C.3"
+   ]
+  },
+  {
+   "id": "I.C.4",
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "Chapter 4: Endocrine, Nutritional, and Metabolic Diseases (E00-E89)",
+   "pages": [
+    39,
+    42
+   ],
+   "words": 1175,
+   "keywords": [
+    "diabetes",
+    "mellitus",
+    "insulin",
+    "due",
+    "secondary",
+    "drugs",
+    "pump",
+    "type",
+    "injectable",
+    "non-insulin",
+    "oral",
+    "failure",
+    "obesity",
+    "chapter",
+    "diseases",
+    "e00-e89",
+    "endocrine",
+    "metabolic",
+    "nutritional",
+    "documented",
+    "hypoglycemics",
+    "gestational",
+    "pregnancy",
+    "complications",
+    "malfunction",
+    "underdose",
+    "overdose",
+    "hypoglycemic",
+    "assigning",
+    "causes",
+    "sequencing",
+    "pancreatectomy",
+    "class"
+   ],
+   "codes_mentioned": [
+    "Z79",
+    "E13",
+    "E66",
+    "E08",
+    "E11",
+    "E89",
+    "T85",
+    "T38",
+    "E09",
+    "E00",
+    "E10",
+    "Z90",
+    "E88",
+    "C4R",
+    "O99"
+   ],
+   "subsections": [
+    "I.C.4",
+    "I.C.4.a",
+    "I.C.4.a.1",
+    "I.C.4.a.2",
+    "I.C.4.a.3",
+    "I.C.4.a.4",
+    "I.C.4.a.5",
+    "I.C.4.a.5.a",
+    "I.C.4.a.5.b",
+    "I.C.4.a.6",
+    "I.C.4.a.6.a",
+    "I.C.4.a.6.b",
+    "I.C.4.a.6.b.i",
+    "I.C.4.a.6.b.ii",
+    "I.C.4.b",
+    "I.C.4.b.1"
+   ]
+  },
+  {
+   "id": "I.C.5",
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "Chapter 5: Mental, Behavioral and Neurodevelopmental disorders (F01 – F99)",
+   "pages": [
+    43,
+    45
+   ],
+   "words": 885,
+   "keywords": [
+    "psychoactive",
+    "substance",
+    "disorders",
+    "behavioral",
+    "mental",
+    "due",
+    "abuse",
+    "dependence",
+    "chapter",
+    "f01",
+    "f99",
+    "neurodevelopmental",
+    "factors",
+    "pain",
+    "psychological",
+    "related",
+    "remission",
+    "unspecified",
+    "medical",
+    "alcohol",
+    "blood",
+    "level",
+    "disorder",
+    "factitious",
+    "dementia"
+   ],
+   "codes_mentioned": [
+    "F10",
+    "F45",
+    "G89",
+    "F19",
+    "F01",
+    "F68",
+    "F99",
+    "F11",
+    "F12",
+    "F13",
+    "F14",
+    "F15",
+    "F16",
+    "F18",
+    "K85",
+    "Y90",
+    "T74",
+    "T76",
+    "F02",
+    "F03"
+   ],
+   "subsections": [
+    "I.C.5",
+    "I.C.5.a",
+    "I.C.5.b",
+    "I.C.5.b.1",
+    "I.C.5.b.2",
+    "I.C.5.b.3",
+    "I.C.5.b.4",
+    "I.C.5.b.5",
+    "I.C.5.c",
+    "I.C.5.d"
+   ]
+  },
+  {
+   "id": "I.C.6",
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "Chapter 6: Diseases of the Nervous System (G00-G99)",
+   "pages": [
+    45,
+    48
+   ],
+   "words": 1001,
+   "keywords": [
+    "pain",
+    "category",
+    "g89",
+    "specific",
+    "postoperative",
+    "site-specific",
+    "associated",
+    "complication",
+    "chronic",
+    "chapter",
+    "diseases",
+    "g00-g99",
+    "nervous",
+    "system",
+    "dominant",
+    "nondominant",
+    "side",
+    "general",
+    "information",
+    "first-listed",
+    "principal",
+    "conjunction",
+    "site",
+    "assigning",
+    "sequencing",
+    "devices",
+    "due",
+    "grafts",
+    "implants",
+    "neoplasm",
+    "related",
+    "syndrome"
+   ],
+   "codes_mentioned": [
+    "G89",
+    "G83",
+    "G00",
+    "G99",
+    "G81",
+    "M54"
+   ],
+   "subsections": [
+    "I.C.6",
+    "I.C.6.a",
+    "I.C.6.b",
+    "I.C.6.b.1",
+    "I.C.6.b.1.a",
+    "I.C.6.b.1.b",
+    "I.C.6.b.1.b.i",
+    "I.C.6.b.1.b.ii",
+    "I.C.6.b.2",
+    "I.C.6.b.3",
+    "I.C.6.b.3.a",
+    "I.C.6.b.3.b",
+    "I.C.6.b.4",
+    "I.C.6.b.5",
+    "I.C.6.b.6"
+   ]
+  },
+  {
+   "id": "I.C.7",
+   "file": "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "title": "Chapter 7: Diseases of the Eye and Adnexa (H00-H59)",
+   "pages": [
+    48,
+    49
+   ],
+   "words": 460,
+   "keywords": [
+    "glaucoma",
+    "stage",
+    "bilateral",
+    "adnexa",
+    "chapter",
+    "diseases",
+    "eye",
+    "h00-h59",
+    "assigning",
+    "same",
+    "type",
+    "different",
+    "stages",
+    "types",
+    "admission",
+    "admitted",
+    "during",
+    "evolves",
+    "indeterminate",
+    "blindness"
+   ],
+   "codes_mentioned": [
+    "H40",
+    "H54",
+    "H00",
+    "H59"
+   ],
+   "subsections": [
+    "I.C.7",
+    "I.C.7.a",
+    "I.C.7.a.1",
+    "I.C.7.a.2",
+    "I.C.7.a.3",
+    "I.C.7.a.4",
+    "I.C.7.a.5",
+    "I.C.7.b"
+   ]
+  },
+  {
+   "id": "I.C.8",
+   "file": "I.C.08_chapter-8-diseases-ear-mastoid-process.md",
+   "title": "Chapter 8: Diseases of the Ear and Mastoid Process (H60-H95)",
+   "pages": [
+    49,
+    49
+   ],
+   "words": 16,
+   "keywords": [
+    "chapter",
+    "diseases",
+    "ear",
+    "h60-h95",
+    "mastoid",
+    "process"
+   ],
+   "codes_mentioned": [
+    "H60",
+    "H95"
+   ],
+   "subsections": [
+    "I.C.8"
+   ]
+  },
+  {
+   "id": "I.C.9",
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "Chapter 9: Diseases of the Circulatory System (I00-I99)",
+   "pages": [
+    50,
+    55
+   ],
+   "words": 2034,
+   "keywords": [
+    "hypertension",
+    "disease",
+    "infarction",
+    "myocardial",
+    "hypertensive",
+    "cerebrovascular",
+    "category",
+    "i69",
+    "acute",
+    "heart",
+    "chronic",
+    "kidney",
+    "transient",
+    "coronary",
+    "sequelae",
+    "ami",
+    "chapter",
+    "circulatory",
+    "diseases",
+    "i00-i99",
+    "system",
+    "retinopathy",
+    "secondary",
+    "controlled",
+    "uncontrolled",
+    "crisis",
+    "pulmonary",
+    "resistant",
+    "angina",
+    "artery",
+    "atherosclerotic",
+    "accident",
+    "intraoperative",
+    "postprocedural",
+    "i60-i67",
+    "attack",
+    "cerebral",
+    "history",
+    "ischemic",
+    "personal"
+   ],
+   "codes_mentioned": [
+    "I21",
+    "I51",
+    "I69",
+    "I15",
+    "I13",
+    "I60",
+    "I22",
+    "I10",
+    "I67",
+    "I50",
+    "I11",
+    "I12",
+    "N18",
+    "I27",
+    "I25",
+    "I1A",
+    "I00",
+    "I99",
+    "H35",
+    "R03",
+    "O13",
+    "O14",
+    "I16",
+    "Z86",
+    "I24"
+   ],
+   "subsections": [
+    "I.C.9",
+    "I.C.9.a",
+    "I.C.9.a.1",
+    "I.C.9.a.2",
+    "I.C.9.a.3",
+    "I.C.9.a.4",
+    "I.C.9.a.5",
+    "I.C.9.a.6",
+    "I.C.9.a.7",
+    "I.C.9.a.8",
+    "I.C.9.a.9",
+    "I.C.9.a.10",
+    "I.C.9.a.11",
+    "I.C.9.a.12",
+    "I.C.9.b",
+    "I.C.9.c",
+    "I.C.9.d",
+    "I.C.9.d.1",
+    "I.C.9.d.2",
+    "I.C.9.d.3",
+    "I.C.9.e",
+    "I.C.9.e.1",
+    "I.C.9.e.2",
+    "I.C.9.e.3",
+    "I.C.9.e.4",
+    "I.C.9.e.5",
+    "I.C.9.e.6"
+   ]
+  },
+  {
+   "id": "I.C.10",
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "Chapter 10: Diseases of the Respiratory System (J00-J99), U07.0",
+   "pages": [
+    56,
+    58
+   ],
+   "words": 840,
+   "keywords": [
+    "respiratory",
+    "acute",
+    "failure",
+    "associated",
+    "pneumonia",
+    "ventilator",
+    "asthma",
+    "chronic",
+    "obstructive",
+    "chapter",
+    "diseases",
+    "j00-j99",
+    "system",
+    "u07",
+    "copd",
+    "disease",
+    "pulmonary",
+    "bronchitis",
+    "exacerbation",
+    "principal",
+    "secondary",
+    "another",
+    "sequencing",
+    "certain",
+    "due",
+    "identified",
+    "influenza",
+    "viruses",
+    "documentation",
+    "admission",
+    "after",
+    "develops",
+    "disorders",
+    "vaping-related"
+   ],
+   "codes_mentioned": [
+    "U07",
+    "J96",
+    "J09",
+    "J10",
+    "J95",
+    "J12",
+    "J18",
+    "J00",
+    "J99",
+    "J44",
+    "J45",
+    "H1N",
+    "H3N",
+    "J11",
+    "B96",
+    "J13",
+    "J68"
+   ],
+   "subsections": [
+    "I.C.10",
+    "I.C.10.a",
+    "I.C.10.a.1",
+    "I.C.10.b",
+    "I.C.10.b.1",
+    "I.C.10.b.2",
+    "I.C.10.b.3",
+    "I.C.10.c",
+    "I.C.10.d",
+    "I.C.10.d.1",
+    "I.C.10.d.2",
+    "I.C.10.e"
+   ]
+  },
+  {
+   "id": "I.C.11",
+   "file": "I.C.11_chapter-11-diseases-digestive-system.md",
+   "title": "Chapter 11: Diseases of the Digestive System (K00-K95)",
+   "pages": [
+    58,
+    58
+   ],
+   "words": 14,
+   "keywords": [
+    "chapter",
+    "digestive",
+    "diseases",
+    "k00-k95",
+    "system"
+   ],
+   "codes_mentioned": [
+    "K00",
+    "K95"
+   ],
+   "subsections": [
+    "I.C.11"
+   ]
+  },
+  {
+   "id": "I.C.12",
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "Chapter 12: Diseases of the Skin and Subcutaneous Tissue (L00-L99)",
+   "pages": [
+    58,
+    60
+   ],
+   "words": 732,
+   "keywords": [
+    "pressure",
+    "ulcers",
+    "ulcer",
+    "documented",
+    "admitted",
+    "non-pressure",
+    "stage",
+    "tissue",
+    "healed",
+    "healing",
+    "admission",
+    "another",
+    "during",
+    "chapter",
+    "diseases",
+    "l00-l99",
+    "skin",
+    "subcutaneous",
+    "stages",
+    "unstageable",
+    "evolving",
+    "damage",
+    "deep",
+    "pressure-induced",
+    "chronic",
+    "level",
+    "progresses",
+    "severity"
+   ],
+   "codes_mentioned": [
+    "L89",
+    "L00",
+    "L99"
+   ],
+   "subsections": [
+    "I.C.12",
+    "I.C.12.a",
+    "I.C.12.a.1",
+    "I.C.12.a.2",
+    "I.C.12.a.3",
+    "I.C.12.a.4",
+    "I.C.12.a.5",
+    "I.C.12.a.6",
+    "I.C.12.a.7",
+    "I.C.12.b",
+    "I.C.12.b.1",
+    "I.C.12.b.2",
+    "I.C.12.b.3"
+   ]
+  },
+  {
+   "id": "I.C.13",
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "Chapter 13: Diseases of the Musculoskeletal System and Connective Tissue (M00-M99)",
+   "pages": [
+    60,
+    62
+   ],
+   "words": 607,
+   "keywords": [
+    "osteoporosis",
+    "musculoskeletal",
+    "versus",
+    "fracture",
+    "pathological",
+    "chapter",
+    "connective",
+    "diseases",
+    "m00-m99",
+    "system",
+    "tissue",
+    "laterality",
+    "site",
+    "bone",
+    "joint",
+    "multiple",
+    "sites",
+    "acute",
+    "chronic",
+    "recurrent",
+    "traumatic",
+    "fractures",
+    "pathologic",
+    "current",
+    "inflammatory",
+    "multisystem",
+    "syndrome"
+   ],
+   "codes_mentioned": [
+    "M80",
+    "M81",
+    "M00",
+    "M99",
+    "M87",
+    "Z87"
+   ],
+   "subsections": [
+    "I.C.13",
+    "I.C.13.a",
+    "I.C.13.a.1",
+    "I.C.13.a.2",
+    "I.C.13.b",
+    "I.C.13.c",
+    "I.C.13.d",
+    "I.C.13.d.1",
+    "I.C.13.d.2",
+    "I.C.13.e"
+   ]
+  },
+  {
+   "id": "I.C.14",
+   "file": "I.C.14_chapter-14-diseases-genitourinary-system.md",
+   "title": "Chapter 14: Diseases of Genitourinary System (N00-N99)",
+   "pages": [
+    62,
+    63
+   ],
+   "words": 262,
+   "keywords": [
+    "chronic",
+    "disease",
+    "kidney",
+    "chapter",
+    "diseases",
+    "genitourinary",
+    "n00-n99",
+    "system",
+    "ckd",
+    "stages",
+    "status",
+    "transplant"
+   ],
+   "codes_mentioned": [
+    "N18",
+    "N00",
+    "N99",
+    "Z94"
+   ],
+   "subsections": [
+    "I.C.14",
+    "I.C.14.a",
+    "I.C.14.a.1",
+    "I.C.14.a.2",
+    "I.C.14.a.3"
+   ]
+  },
+  {
+   "id": "I.C.15",
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "Chapter 15: Pregnancy, Childbirth, and the Puerperium (O00-O9A)",
+   "pages": [
+    63,
+    71
+   ],
+   "words": 3026,
+   "keywords": [
+    "pregnancy",
+    "childbirth",
+    "puerperium",
+    "delivery",
+    "abortion",
+    "postpartum",
+    "during",
+    "chapter",
+    "trimester",
+    "complication",
+    "peripartum",
+    "following",
+    "o94",
+    "sequencing",
+    "character",
+    "selection",
+    "fetus",
+    "routine",
+    "occurs",
+    "outcome",
+    "pre-existing",
+    "infection",
+    "diabetes",
+    "term",
+    "sepsis",
+    "alcohol",
+    "drug",
+    "tobacco",
+    "pregnant",
+    "o80",
+    "uncomplicated",
+    "periods",
+    "after",
+    "complications",
+    "period",
+    "o00-o9a",
+    "cases",
+    "general",
+    "obstetric",
+    "rules"
+   ],
+   "codes_mentioned": [
+    "O80",
+    "O9A",
+    "O24",
+    "O35",
+    "O98",
+    "O99",
+    "O94",
+    "O07",
+    "O36",
+    "Z37",
+    "Z79",
+    "O03",
+    "O04",
+    "O00",
+    "Z33",
+    "O33",
+    "O60",
+    "O09",
+    "O10",
+    "R65",
+    "O85",
+    "O90",
+    "U07",
+    "O31",
+    "O32"
+   ],
+   "subsections": [
+    "I.C.15",
+    "I.C.15.a",
+    "I.C.15.a.1",
+    "I.C.15.a.2",
+    "I.C.15.a.3",
+    "I.C.15.a.4",
+    "I.C.15.a.5",
+    "I.C.15.a.6",
+    "I.C.15.a.7",
+    "I.C.15.b",
+    "I.C.15.b.1",
+    "I.C.15.b.2",
+    "I.C.15.b.3",
+    "I.C.15.b.4",
+    "I.C.15.b.5",
+    "I.C.15.c",
+    "I.C.15.d",
+    "I.C.15.e",
+    "I.C.15.e.1",
+    "I.C.15.e.2",
+    "I.C.15.f",
+    "I.C.15.g",
+    "I.C.15.h",
+    "I.C.15.i",
+    "I.C.15.j",
+    "I.C.15.k",
+    "I.C.15.l",
+    "I.C.15.l.1",
+    "I.C.15.l.2",
+    "I.C.15.l.3",
+    "I.C.15.m",
+    "I.C.15.n",
+    "I.C.15.n.1",
+    "I.C.15.n.2",
+    "I.C.15.n.3",
+    "I.C.15.o",
+    "I.C.15.o.1",
+    "I.C.15.o.2",
+    "I.C.15.o.3",
+    "I.C.15.o.4",
+    "I.C.15.o.5",
+    "I.C.15.p",
+    "I.C.15.p.1",
+    "I.C.15.p.2",
+    "I.C.15.p.3",
+    "I.C.15.q",
+    "I.C.15.q.1",
+    "I.C.15.q.2",
+    "I.C.15.q.3",
+    "I.C.15.q.4",
+    "I.C.15.r",
+    "I.C.15.s"
+   ]
+  },
+  {
+   "id": "I.C.16",
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "Chapter 16: Certain Conditions Originating in the Perinatal Period (P00-P96)",
+   "pages": [
+    71,
+    74
+   ],
+   "words": 1154,
+   "keywords": [
+    "birth",
+    "chapter",
+    "perinatal",
+    "record",
+    "z05",
+    "period",
+    "newborn",
+    "certain",
+    "originating",
+    "p00-p96",
+    "general",
+    "rules",
+    "principal",
+    "chapters",
+    "after",
+    "acquired",
+    "community",
+    "process",
+    "clinically",
+    "significant",
+    "evaluation",
+    "found",
+    "newborns",
+    "observation",
+    "suspected",
+    "additional",
+    "assigning",
+    "require",
+    "treatment",
+    "care",
+    "future",
+    "having",
+    "health",
+    "implications",
+    "needs",
+    "specified",
+    "fetal",
+    "growth",
+    "prematurity",
+    "retardation"
+   ],
+   "codes_mentioned": [
+    "Z05",
+    "Z38",
+    "P36",
+    "P07",
+    "P95",
+    "B96",
+    "U07",
+    "P00",
+    "P96",
+    "P05",
+    "B95",
+    "R65",
+    "P35"
+   ],
+   "subsections": [
+    "I.C.16",
+    "I.C.16.a",
+    "I.C.16.a.1",
+    "I.C.16.a.2",
+    "I.C.16.a.3",
+    "I.C.16.a.4",
+    "I.C.16.a.5",
+    "I.C.16.a.6",
+    "I.C.16.b",
+    "I.C.16.b.1",
+    "I.C.16.b.2",
+    "I.C.16.b.3",
+    "I.C.16.c",
+    "I.C.16.c.1",
+    "I.C.16.c.2",
+    "I.C.16.d",
+    "I.C.16.e",
+    "I.C.16.f",
+    "I.C.16.g",
+    "I.C.16.h"
+   ]
+  },
+  {
+   "id": "I.C.17",
+   "file": "I.C.17_chapter-17-congenital-malformations-deformations-chromosomal.md",
+   "title": "Chapter 17: Congenital malformations, deformations, chromosomal abnormalities, and genetic disorders (Q00-QA1)",
+   "pages": [
+    74,
+    74
+   ],
+   "words": 231,
+   "keywords": [
+    "abnormalities",
+    "chapter",
+    "chromosomal",
+    "congenital",
+    "deformations",
+    "disorders",
+    "genetic",
+    "malformations",
+    "q00-qa1"
+   ],
+   "codes_mentioned": [
+    "Q00",
+    "Z38"
+   ],
+   "subsections": [
+    "I.C.17"
+   ]
+  },
+  {
+   "id": "I.C.18",
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "Chapter 18: Symptoms, signs, and abnormal clinical and laboratory findings, not elsewhere classified (R00-R99)",
+   "pages": [
+    75,
+    77
+   ],
+   "words": 849,
+   "keywords": [
+    "symptoms",
+    "symptom",
+    "coma",
+    "scale",
+    "abnormal",
+    "chapter",
+    "classified",
+    "clinical",
+    "elsewhere",
+    "findings",
+    "laboratory",
+    "r00-r99",
+    "signs",
+    "definitive",
+    "combination",
+    "include",
+    "falls",
+    "repeated",
+    "functional",
+    "quadriplegia",
+    "due",
+    "non-infectious",
+    "process",
+    "sirs",
+    "death",
+    "nos",
+    "nihss",
+    "stroke"
+   ],
+   "codes_mentioned": [
+    "R40",
+    "R29",
+    "R65",
+    "R99",
+    "Z91",
+    "R00",
+    "I60",
+    "I63"
+   ],
+   "subsections": [
+    "I.C.18",
+    "I.C.18.a",
+    "I.C.18.b",
+    "I.C.18.c",
+    "I.C.18.d",
+    "I.C.18.e",
+    "I.C.18.e.1",
+    "I.C.18.f",
+    "I.C.18.g",
+    "I.C.18.h",
+    "I.C.18.i"
+   ]
+  },
+  {
+   "id": "I.C.19",
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "Chapter 19: Injury, poisoning, and certain other consequences of external causes (S00-T88)",
+   "pages": [
+    77,
+    87
+   ],
+   "words": 3469,
+   "keywords": [
+    "complications",
+    "burns",
+    "drug",
+    "fractures",
+    "burn",
+    "care",
+    "external",
+    "poisoning",
+    "injuries",
+    "corrosions",
+    "transplant",
+    "chapter",
+    "injury",
+    "sequencing",
+    "same",
+    "site",
+    "body",
+    "classified",
+    "effect",
+    "cause",
+    "adverse",
+    "effects",
+    "toxic",
+    "underdosing",
+    "drugs",
+    "describe",
+    "taken",
+    "kidney",
+    "causes",
+    "certain",
+    "consequences",
+    "s00-t88",
+    "application",
+    "characters",
+    "superficial",
+    "blood",
+    "damage",
+    "nerves",
+    "primary",
+    "vessels"
+   ],
+   "codes_mentioned": [
+    "Z04",
+    "T31",
+    "T36",
+    "T76",
+    "T86",
+    "T50",
+    "Z91",
+    "T32",
+    "G89",
+    "S00",
+    "T65",
+    "Y63",
+    "T74",
+    "T88",
+    "T84",
+    "T07",
+    "T14",
+    "S04",
+    "S15",
+    "S02",
+    "S12",
+    "S22",
+    "S32",
+    "S42",
+    "S49"
+   ],
+   "subsections": [
+    "I.C.19",
+    "I.C.19.a",
+    "I.C.19.b",
+    "I.C.19.b.1",
+    "I.C.19.b.2",
+    "I.C.19.b.3",
+    "I.C.19.c",
+    "I.C.19.c.1",
+    "I.C.19.c.2",
+    "I.C.19.c.3",
+    "I.C.19.d",
+    "I.C.19.d.1",
+    "I.C.19.d.2",
+    "I.C.19.d.3",
+    "I.C.19.d.4",
+    "I.C.19.d.5",
+    "I.C.19.d.6",
+    "I.C.19.d.7",
+    "I.C.19.d.8",
+    "I.C.19.d.9",
+    "I.C.19.e",
+    "I.C.19.e.1",
+    "I.C.19.e.2",
+    "I.C.19.e.3",
+    "I.C.19.e.4",
+    "I.C.19.e.5",
+    "I.C.19.e.5.a",
+    "I.C.19.e.5.b",
+    "I.C.19.e.5.b.i",
+    "I.C.19.e.5.b.ii",
+    "I.C.19.e.5.b.iii",
+    "I.C.19.e.5.b.iv",
+    "I.C.19.e.5.c",
+    "I.C.19.e.5.d",
+    "I.C.19.f",
+    "I.C.19.g",
+    "I.C.19.g.1",
+    "I.C.19.g.1.a",
+    "I.C.19.g.2",
+    "I.C.19.g.3",
+    "I.C.19.g.3.a",
+    "I.C.19.g.3.b",
+    "I.C.19.g.4",
+    "I.C.19.g.5"
+   ]
+  },
+  {
+   "id": "I.C.20",
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "Chapter 20: External Causes of Morbidity (V00-Y99)",
+   "pages": [
+    87,
+    92
+   ],
+   "words": 1890,
+   "keywords": [
+    "cause",
+    "external",
+    "terrorism",
+    "guideline",
+    "injury",
+    "range",
+    "occurrence",
+    "place",
+    "activity",
+    "status",
+    "intent",
+    "undetermined",
+    "effects",
+    "sequelae",
+    "sequela",
+    "causes",
+    "chapter",
+    "morbidity",
+    "v00-y99",
+    "general",
+    "a00",
+    "t88",
+    "z00-z99",
+    "length",
+    "treatment",
+    "full",
+    "assign",
+    "many",
+    "necessary",
+    "appropriate",
+    "selection",
+    "never",
+    "principal",
+    "combination",
+    "certain",
+    "circumstances",
+    "needed",
+    "format",
+    "limits",
+    "number"
+   ],
+   "codes_mentioned": [
+    "Y38",
+    "Y99",
+    "Y92",
+    "Y93",
+    "A00",
+    "T88",
+    "Z00",
+    "Z99",
+    "V00",
+    "T36",
+    "Y07"
+   ],
+   "subsections": [
+    "I.C.20",
+    "I.C.20.a",
+    "I.C.20.a.1",
+    "I.C.20.a.2",
+    "I.C.20.a.3",
+    "I.C.20.a.4",
+    "I.C.20.a.5",
+    "I.C.20.a.6",
+    "I.C.20.a.7",
+    "I.C.20.a.8",
+    "I.C.20.b",
+    "I.C.20.c",
+    "I.C.20.d",
+    "I.C.20.e",
+    "I.C.20.f",
+    "I.C.20.g",
+    "I.C.20.h",
+    "I.C.20.h.1",
+    "I.C.20.i",
+    "I.C.20.i.1",
+    "I.C.20.i.2",
+    "I.C.20.i.3",
+    "I.C.20.j",
+    "I.C.20.j.1",
+    "I.C.20.j.2",
+    "I.C.20.j.3",
+    "I.C.20.k"
+   ]
+  },
+  {
+   "id": "I.C.21",
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "Chapter 21: Factors influencing health status and contact with health services (Z00-Z99)",
+   "pages": [
+    92,
+    106
+   ],
+   "words": 5292,
+   "keywords": [
+    "contact",
+    "health",
+    "services",
+    "status",
+    "chapter",
+    "factors",
+    "influencing",
+    "z00-z99",
+    "healthcare",
+    "setting",
+    "about",
+    "additional",
+    "indicate",
+    "information",
+    "provide",
+    "reason",
+    "categories",
+    "exposure",
+    "inoculations",
+    "vaccinations",
+    "history",
+    "screening",
+    "observation",
+    "aftercare",
+    "follow-up",
+    "donor",
+    "counseling",
+    "obstetrical",
+    "reproductive",
+    "administrative",
+    "examinations",
+    "routine",
+    "miscellaneous",
+    "nonspecific",
+    "first-listed",
+    "principal",
+    "infants",
+    "newborns",
+    "determinants",
+    "social"
+   ],
+   "codes_mentioned": [
+    "Z91",
+    "Z76",
+    "Z31",
+    "Z92",
+    "Z40",
+    "Z00",
+    "Z99",
+    "Z32",
+    "Z71",
+    "Z33",
+    "Z38",
+    "Z03",
+    "Z04",
+    "Z52",
+    "Z3A",
+    "Z02",
+    "Z15",
+    "Z28",
+    "Z74",
+    "Z79",
+    "Z88",
+    "Z93",
+    "Z84",
+    "Z13",
+    "Z51"
+   ],
+   "subsections": [
+    "I.C.21",
+    "I.C.21.a",
+    "I.C.21.b",
+    "I.C.21.c",
+    "I.C.21.c.1",
+    "I.C.21.c.2",
+    "I.C.21.c.3",
+    "I.C.21.c.4",
+    "I.C.21.c.5",
+    "I.C.21.c.6",
+    "I.C.21.c.7",
+    "I.C.21.c.8",
+    "I.C.21.c.9",
+    "I.C.21.c.10",
+    "I.C.21.c.11",
+    "I.C.21.c.12",
+    "I.C.21.c.13",
+    "I.C.21.c.14",
+    "I.C.21.c.15",
+    "I.C.21.c.16",
+    "I.C.21.c.17"
+   ]
+  },
+  {
+   "id": "I.C.22",
+   "file": "I.C.22_chapter-22-special-purposes.md",
+   "title": "Chapter 22: Codes for Special Purposes (U00-U85)",
+   "pages": [
+    108,
+    108
+   ],
+   "words": 31,
+   "keywords": [
+    "chapter",
+    "purposes",
+    "special",
+    "u00-u85"
+   ],
+   "codes_mentioned": [
+    "U07",
+    "U00",
+    "U85",
+    "U09"
+   ],
+   "subsections": [
+    "I.C.22"
+   ]
+  },
+  {
+   "id": "II",
+   "file": "II_selection-principal.md",
+   "title": "Selection of Principal Diagnosis",
+   "pages": [
+    108,
+    110
+   ],
+   "words": 1103,
+   "keywords": [
+    "admission",
+    "principal",
+    "observation",
+    "definition",
+    "comparative",
+    "contrasting",
+    "medical",
+    "surgery",
+    "following",
+    "selection",
+    "ill-defined",
+    "signs",
+    "symptoms",
+    "interrelated",
+    "meeting",
+    "potentially",
+    "equally",
+    "meet",
+    "followed",
+    "symptom",
+    "carried",
+    "original",
+    "out",
+    "plan",
+    "treatment",
+    "care",
+    "complications",
+    "uncertain",
+    "unit",
+    "post-operative",
+    "outpatient",
+    "admissions",
+    "rehabilitation"
+   ],
+   "codes_mentioned": [
+    "T80",
+    "T88",
+    "I69",
+    "Z47",
+    "S72"
+   ],
+   "subsections": [
+    "II",
+    "II.A",
+    "II.B",
+    "II.C",
+    "II.D",
+    "II.E",
+    "II.F",
+    "II.G",
+    "II.H",
+    "II.I",
+    "II.I.1",
+    "II.I.2",
+    "II.J",
+    "II.K"
+   ]
+  },
+  {
+   "id": "III",
+   "file": "III_reporting-additional.md",
+   "title": "Reporting Additional Diagnoses",
+   "pages": [
+    110,
+    111
+   ],
+   "words": 520,
+   "keywords": [
+    "additional",
+    "iii",
+    "reporting",
+    "previous",
+    "abnormal",
+    "findings",
+    "uncertain"
+   ],
+   "codes_mentioned": [
+    "Z80",
+    "Z87"
+   ],
+   "subsections": [
+    "III",
+    "III.A",
+    "III.B",
+    "III.C"
+   ]
+  },
+  {
+   "id": "IV",
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "Diagnostic Coding and Reporting Guidelines for Outpatient Services",
+   "pages": [
+    112,
+    115
+   ],
+   "words": 1548,
+   "keywords": [
+    "outpatient",
+    "services",
+    "icd-10-cm",
+    "receiving",
+    "diagnostic",
+    "reporting",
+    "surgery",
+    "level",
+    "characters",
+    "routine",
+    "first-listed",
+    "selection",
+    "observation",
+    "stay",
+    "a00",
+    "t88",
+    "through",
+    "u00-u85",
+    "z00-z99",
+    "accurate",
+    "describe",
+    "signs",
+    "symptoms",
+    "circumstances",
+    "disease",
+    "injury",
+    "detail",
+    "full",
+    "number",
+    "required",
+    "highest",
+    "specificity",
+    "problem",
+    "reason",
+    "visit",
+    "uncertain",
+    "chronic",
+    "diseases",
+    "coexist",
+    "documented"
+   ],
+   "codes_mentioned": [
+    "Z00",
+    "Z99",
+    "A00",
+    "T88",
+    "U00",
+    "U85",
+    "Z01",
+    "R00",
+    "R99",
+    "Z80",
+    "Z87"
+   ],
+   "subsections": [
+    "IV",
+    "IV.A",
+    "IV.A.1",
+    "IV.A.2",
+    "IV.B",
+    "IV.C",
+    "IV.D",
+    "IV.E",
+    "IV.F",
+    "IV.F.1",
+    "IV.F.2",
+    "IV.F.3",
+    "IV.G",
+    "IV.H",
+    "IV.I",
+    "IV.J",
+    "IV.K",
+    "IV.L",
+    "IV.M",
+    "IV.N",
+    "IV.O",
+    "IV.P",
+    "IV.Q"
+   ]
+  },
+  {
+   "id": "AppI",
+   "file": "AppI_present-on-admission-reporting-guidelines.md",
+   "title": "Appendix I: Present on Admission Reporting Guidelines",
+   "pages": [
+    116,
+    116
+   ],
+   "words": 1834,
+   "keywords": [],
+   "codes_mentioned": [
+    "T79",
+    "O11",
+    "Q00",
+    "Q99"
+   ],
+   "subsections": [
+    "AppI",
+    "AppI"
+   ]
+  }
+ ],
+ "sections": {
+  "intro": {
+   "file": "00_introduction.md",
+   "title": "ICD-10-CM Official Guidelines for Coding and Reporting",
+   "page": 1,
+   "keywords": [
+    "official",
+    "reporting"
+   ]
+  },
+  "I": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "Section I. Conventions, general coding guidelines and chapter specific guidelines",
+   "page": 7,
+   "keywords": [
+    "chapter",
+    "conventions",
+    "general",
+    "specific"
+   ]
+  },
+  "I.A": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "A. Conventions for the ICD-10-CM",
+   "page": 7,
+   "keywords": [
+    "conventions",
+    "icd-10-cm"
+   ]
+  },
+  "I.A.1": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "1. The Alphabetic Index and Tabular List",
+   "page": 7,
+   "keywords": [
+    "alphabetic",
+    "index",
+    "list",
+    "tabular"
+   ]
+  },
+  "I.A.2": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "2. Format and Structure:",
+   "page": 7,
+   "keywords": [
+    "format",
+    "structure"
+   ]
+  },
+  "I.A.3": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "3. Use of codes for reporting purposes",
+   "page": 7,
+   "keywords": [
+    "purposes",
+    "reporting"
+   ]
+  },
+  "I.A.4": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "4. Placeholder character",
+   "page": 7,
+   "keywords": [
+    "character",
+    "placeholder"
+   ]
+  },
+  "I.A.5": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "5. 7th Characters",
+   "page": 8,
+   "keywords": [
+    "characters"
+   ]
+  },
+  "I.A.6": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "6. Abbreviations",
+   "page": 8,
+   "keywords": [
+    "abbreviations"
+   ]
+  },
+  "I.A.6.a": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "a. Alphabetic Index abbreviations",
+   "page": 8,
+   "keywords": [
+    "abbreviations",
+    "alphabetic",
+    "index"
+   ]
+  },
+  "I.A.6.b": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "b. Tabular List abbreviations",
+   "page": 8,
+   "keywords": [
+    "abbreviations",
+    "list",
+    "tabular"
+   ]
+  },
+  "I.A.7": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "7. Punctuation",
+   "page": 8,
+   "keywords": [
+    "punctuation"
+   ]
+  },
+  "I.A.8": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "8. Use of “and”.",
+   "page": 9,
+   "keywords": []
+  },
+  "I.A.9": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "9. Other and Unspecified codes",
+   "page": 9,
+   "keywords": [
+    "unspecified"
+   ]
+  },
+  "I.A.9.a": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "a. “Other” codes",
+   "page": 9,
+   "keywords": []
+  },
+  "I.A.9.b": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "b. “Unspecified” codes",
+   "page": 9,
+   "keywords": [
+    "unspecified"
+   ]
+  },
+  "I.A.10": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "10. Includes Notes",
+   "page": 9,
+   "keywords": [
+    "includes",
+    "notes"
+   ]
+  },
+  "I.A.11": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "11. Inclusion terms",
+   "page": 9,
+   "keywords": [
+    "inclusion",
+    "terms"
+   ]
+  },
+  "I.A.12": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "12. Excludes Notes",
+   "page": 9,
+   "keywords": [
+    "excludes",
+    "notes"
+   ]
+  },
+  "I.A.12.a": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "a. Excludes1",
+   "page": 9,
+   "keywords": [
+    "excludes1"
+   ]
+  },
+  "I.A.12.b": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "b. Excludes2",
+   "page": 10,
+   "keywords": [
+    "excludes2"
+   ]
+  },
+  "I.A.13": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "13. Etiology/manifestation convention (“code first”, “use additional code” and “in diseases classified elsewhere” notes)",
+   "page": 10,
+   "keywords": [
+    "additional",
+    "classified",
+    "convention",
+    "diseases",
+    "elsewhere",
+    "etiology",
+    "first",
+    "manifestation",
+    "notes"
+   ]
+  },
+  "I.A.14": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "14. “And”",
+   "page": 11,
+   "keywords": []
+  },
+  "I.A.15": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "15. “With”",
+   "page": 11,
+   "keywords": []
+  },
+  "I.A.16": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "16. “See” and “See Also”",
+   "page": 11,
+   "keywords": []
+  },
+  "I.A.17": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "17. “Code also” note",
+   "page": 12,
+   "keywords": [
+    "note"
+   ]
+  },
+  "I.A.18": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "18. Default codes",
+   "page": 12,
+   "keywords": [
+    "default"
+   ]
+  },
+  "I.A.19": {
+   "file": "I.A_conventions-icd-10-cm.md",
+   "title": "19. Code assignment and Clinical Criteria",
+   "page": 12,
+   "keywords": [
+    "assignment",
+    "clinical",
+    "criteria"
+   ]
+  },
+  "I.B": {
+   "file": "I.B_general.md",
+   "title": "B. General Coding Guidelines",
+   "page": 12,
+   "keywords": [
+    "general"
+   ]
+  },
+  "I.B.1": {
+   "file": "I.B_general.md",
+   "title": "1. Locating a code in the ICD-10-CM",
+   "page": 12,
+   "keywords": [
+    "icd-10-cm",
+    "locating"
+   ]
+  },
+  "I.B.2": {
+   "file": "I.B_general.md",
+   "title": "2. Level of Detail in Coding",
+   "page": 12,
+   "keywords": [
+    "detail",
+    "level"
+   ]
+  },
+  "I.B.3": {
+   "file": "I.B_general.md",
+   "title": "3. Code or codes from A00.0 through T88.9, Z00-Z99.8, U00-U85",
+   "page": 13,
+   "keywords": [
+    "a00",
+    "t88",
+    "through",
+    "u00-u85",
+    "z00-z99"
+   ]
+  },
+  "I.B.4": {
+   "file": "I.B_general.md",
+   "title": "4. Signs and symptoms",
+   "page": 13,
+   "keywords": [
+    "signs",
+    "symptoms"
+   ]
+  },
+  "I.B.5": {
+   "file": "I.B_general.md",
+   "title": "5. Conditions that are an integral part of a disease process",
+   "page": 13,
+   "keywords": [
+    "disease",
+    "integral",
+    "part",
+    "process"
+   ]
+  },
+  "I.B.6": {
+   "file": "I.B_general.md",
+   "title": "6. Conditions that are not an integral part of a disease process",
+   "page": 13,
+   "keywords": [
+    "disease",
+    "integral",
+    "part",
+    "process"
+   ]
+  },
+  "I.B.7": {
+   "file": "I.B_general.md",
+   "title": "7. Multiple coding for a single condition",
+   "page": 13,
+   "keywords": [
+    "multiple",
+    "single"
+   ]
+  },
+  "I.B.8": {
+   "file": "I.B_general.md",
+   "title": "8. Acute and Chronic Conditions",
+   "page": 14,
+   "keywords": [
+    "acute",
+    "chronic"
+   ]
+  },
+  "I.B.9": {
+   "file": "I.B_general.md",
+   "title": "9. Combination Code",
+   "page": 14,
+   "keywords": [
+    "combination"
+   ]
+  },
+  "I.B.10": {
+   "file": "I.B_general.md",
+   "title": "10. Sequela (Late Effects)",
+   "page": 14,
+   "keywords": [
+    "effects",
+    "late",
+    "sequela"
+   ]
+  },
+  "I.B.11": {
+   "file": "I.B_general.md",
+   "title": "11. Impending or Threatened Condition",
+   "page": 15,
+   "keywords": [
+    "impending",
+    "threatened"
+   ]
+  },
+  "I.B.12": {
+   "file": "I.B_general.md",
+   "title": "12. Reporting Same Diagnosis Code More than Once",
+   "page": 15,
+   "keywords": [
+    "once",
+    "reporting",
+    "same"
+   ]
+  },
+  "I.B.13": {
+   "file": "I.B_general.md",
+   "title": "13. Laterality",
+   "page": 15,
+   "keywords": [
+    "laterality"
+   ]
+  },
+  "I.B.14": {
+   "file": "I.B_general.md",
+   "title": "14. Documentation by Clinicians Other than the Patient's Provider",
+   "page": 15,
+   "keywords": [
+    "clinicians",
+    "documentation",
+    "provider"
+   ]
+  },
+  "I.B.15": {
+   "file": "I.B_general.md",
+   "title": "15. Syndromes",
+   "page": 16,
+   "keywords": [
+    "syndromes"
+   ]
+  },
+  "I.B.16": {
+   "file": "I.B_general.md",
+   "title": "16. Documentation of Complications of Care",
+   "page": 16,
+   "keywords": [
+    "care",
+    "complications",
+    "documentation"
+   ]
+  },
+  "I.B.17": {
+   "file": "I.B_general.md",
+   "title": "17. Borderline Diagnosis",
+   "page": 17,
+   "keywords": [
+    "borderline"
+   ]
+  },
+  "I.B.18": {
+   "file": "I.B_general.md",
+   "title": "18. Use of Sign/Symptom/Unspecified Codes",
+   "page": 17,
+   "keywords": [
+    "sign",
+    "symptom",
+    "unspecified"
+   ]
+  },
+  "I.B.19": {
+   "file": "I.B_general.md",
+   "title": "19. Coding for Healthcare Encounters in Hurricane Aftermath",
+   "page": 17,
+   "keywords": [
+    "aftermath",
+    "healthcare",
+    "hurricane"
+   ]
+  },
+  "I.B.19.a": {
+   "file": "I.B_general.md",
+   "title": "a. Use of External Cause of Morbidity Codes",
+   "page": 17,
+   "keywords": [
+    "cause",
+    "external",
+    "morbidity"
+   ]
+  },
+  "I.B.19.b": {
+   "file": "I.B_general.md",
+   "title": "b. Sequencing of External Causes of Morbidity Codes",
+   "page": 18,
+   "keywords": [
+    "causes",
+    "external",
+    "morbidity",
+    "sequencing"
+   ]
+  },
+  "I.B.19.c": {
+   "file": "I.B_general.md",
+   "title": "c. Other External Causes of Morbidity Code Issues",
+   "page": 18,
+   "keywords": [
+    "causes",
+    "external",
+    "issues",
+    "morbidity"
+   ]
+  },
+  "I.B.19.d": {
+   "file": "I.B_general.md",
+   "title": "d. Use of Z codes",
+   "page": 18,
+   "keywords": []
+  },
+  "I.B.20": {
+   "file": "I.B_general.md",
+   "title": "20. Multiple Sites Coding",
+   "page": 19,
+   "keywords": [
+    "multiple",
+    "sites"
+   ]
+  },
+  "I.C": {
+   "file": "I.C.00_chapter-specific-coding-guidelines.md",
+   "title": "C. Chapter-Specific Coding Guidelines",
+   "page": 19,
+   "keywords": [
+    "chapter-specific"
+   ]
+  },
+  "I.C.1": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "1. Chapter 1: Certain Infectious and Parasitic Diseases (A00-B99), U07.1, U09.9",
+   "page": 19,
+   "keywords": [
+    "a00-b99",
+    "certain",
+    "chapter",
+    "diseases",
+    "infectious",
+    "parasitic",
+    "u07",
+    "u09"
+   ]
+  },
+  "I.C.1.a": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "a. Human Immunodeficiency Virus (HIV) Infections",
+   "page": 19,
+   "keywords": [
+    "hiv",
+    "human",
+    "immunodeficiency",
+    "infections",
+    "virus"
+   ]
+  },
+  "I.C.1.a.1": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "1) Code only confirmed cases",
+   "page": 19,
+   "keywords": [
+    "cases",
+    "confirmed"
+   ]
+  },
+  "I.C.1.a.2": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "2) Selection and sequencing of HIV codes",
+   "page": 20,
+   "keywords": [
+    "hiv",
+    "selection",
+    "sequencing"
+   ]
+  },
+  "I.C.1.a.2.a": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(a) HIV disease",
+   "page": 20,
+   "keywords": [
+    "disease",
+    "hiv"
+   ]
+  },
+  "I.C.1.a.2.b": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(b) Patient admitted for HIV-related condition",
+   "page": 20,
+   "keywords": [
+    "admitted",
+    "hiv-related"
+   ]
+  },
+  "I.C.1.a.2.c": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(c) Patient with HIV disease admitted for unrelated condition",
+   "page": 20,
+   "keywords": [
+    "admitted",
+    "disease",
+    "hiv",
+    "unrelated"
+   ]
+  },
+  "I.C.1.a.2.d": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(d) Patient newly diagnosed with HIV disease",
+   "page": 20,
+   "keywords": [
+    "diagnosed",
+    "disease",
+    "hiv",
+    "newly"
+   ]
+  },
+  "I.C.1.a.2.e": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(e) Asymptomatic human immunodeficiency virus",
+   "page": 20,
+   "keywords": [
+    "asymptomatic",
+    "human",
+    "immunodeficiency",
+    "virus"
+   ]
+  },
+  "I.C.1.a.2.f": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(f) Inconclusive HIV serology",
+   "page": 21,
+   "keywords": [
+    "hiv",
+    "inconclusive",
+    "serology"
+   ]
+  },
+  "I.C.1.a.2.g": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(g) Previously diagnosed HIV-related illness",
+   "page": 21,
+   "keywords": [
+    "diagnosed",
+    "hiv-related",
+    "illness",
+    "previously"
+   ]
+  },
+  "I.C.1.a.2.h": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(h) HIV Infection in Pregnancy, Childbirth and the Puerperium",
+   "page": 21,
+   "keywords": [
+    "childbirth",
+    "hiv",
+    "infection",
+    "pregnancy",
+    "puerperium"
+   ]
+  },
+  "I.C.1.a.2.i": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(i) Encounters for HIV testing",
+   "page": 21,
+   "keywords": [
+    "hiv",
+    "testing"
+   ]
+  },
+  "I.C.1.a.2.j": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(j) HIV disease or HIV positive status managed by antiretroviral medication",
+   "page": 22,
+   "keywords": [
+    "antiretroviral",
+    "disease",
+    "hiv",
+    "managed",
+    "medication",
+    "positive",
+    "status"
+   ]
+  },
+  "I.C.1.a.2.k": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(k) Encounter for HIV Prophylaxis Measures",
+   "page": 22,
+   "keywords": [
+    "hiv",
+    "measures",
+    "prophylaxis"
+   ]
+  },
+  "I.C.1.b": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "b. Infectious agents as the cause of diseases classified to other chapters",
+   "page": 22,
+   "keywords": [
+    "agents",
+    "cause",
+    "chapters",
+    "classified",
+    "diseases",
+    "infectious"
+   ]
+  },
+  "I.C.1.c": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "c. Infections resistant to antibiotics",
+   "page": 22,
+   "keywords": [
+    "antibiotics",
+    "infections",
+    "resistant"
+   ]
+  },
+  "I.C.1.d": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "d. Sepsis, Severe Sepsis, and Septic Shock",
+   "page": 23,
+   "keywords": [
+    "sepsis",
+    "septic",
+    "severe",
+    "shock"
+   ]
+  },
+  "I.C.1.d.1": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "1) Coding of Sepsis and Severe Sepsis",
+   "page": 23,
+   "keywords": [
+    "sepsis",
+    "severe"
+   ]
+  },
+  "I.C.1.d.1.a": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(a) Sepsis",
+   "page": 23,
+   "keywords": [
+    "sepsis"
+   ]
+  },
+  "I.C.1.d.1.a.i": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(i) Negative or inconclusive blood cultures and sepsis",
+   "page": 23,
+   "keywords": [
+    "blood",
+    "cultures",
+    "inconclusive",
+    "negative",
+    "sepsis"
+   ]
+  },
+  "I.C.1.d.1.a.ii": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(ii) Urosepsis",
+   "page": 23,
+   "keywords": [
+    "urosepsis"
+   ]
+  },
+  "I.C.1.d.1.a.iii": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(iii) Sepsis with organ dysfunction",
+   "page": 23,
+   "keywords": [
+    "dysfunction",
+    "organ",
+    "sepsis"
+   ]
+  },
+  "I.C.1.d.1.a.iv": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(iv) Acute organ dysfunction that is not clearly associated with the sepsis",
+   "page": 23,
+   "keywords": [
+    "acute",
+    "associated",
+    "clearly",
+    "dysfunction",
+    "organ",
+    "sepsis"
+   ]
+  },
+  "I.C.1.d.1.b": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(b) Severe sepsis",
+   "page": 24,
+   "keywords": [
+    "sepsis",
+    "severe"
+   ]
+  },
+  "I.C.1.d.2": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "2) Septic shock",
+   "page": 24,
+   "keywords": [
+    "septic",
+    "shock"
+   ]
+  },
+  "I.C.1.d.3": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "3) Sequencing of severe sepsis",
+   "page": 24,
+   "keywords": [
+    "sepsis",
+    "sequencing",
+    "severe"
+   ]
+  },
+  "I.C.1.d.4": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "4) Sepsis or severe sepsis with a localized infection",
+   "page": 24,
+   "keywords": [
+    "infection",
+    "localized",
+    "sepsis",
+    "severe"
+   ]
+  },
+  "I.C.1.d.5": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "5) Sepsis due to a postprocedural infection",
+   "page": 25,
+   "keywords": [
+    "due",
+    "infection",
+    "postprocedural",
+    "sepsis"
+   ]
+  },
+  "I.C.1.d.5.a": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(a) Documentation of causal relationship",
+   "page": 25,
+   "keywords": [
+    "causal",
+    "documentation",
+    "relationship"
+   ]
+  },
+  "I.C.1.d.5.b": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(b) Sepsis due to a postprocedural infection",
+   "page": 25,
+   "keywords": [
+    "due",
+    "infection",
+    "postprocedural",
+    "sepsis"
+   ]
+  },
+  "I.C.1.d.5.c": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(c) Postprocedural infection and postprocedural septic shock",
+   "page": 25,
+   "keywords": [
+    "infection",
+    "postprocedural",
+    "septic",
+    "shock"
+   ]
+  },
+  "I.C.1.d.6": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "6) Sepsis and severe sepsis associated with a noninfectious process (condition)",
+   "page": 26,
+   "keywords": [
+    "associated",
+    "noninfectious",
+    "process",
+    "sepsis",
+    "severe"
+   ]
+  },
+  "I.C.1.d.7": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "7) Sepsis and septic shock complicating abortion, pregnancy, childbirth, and the puerperium",
+   "page": 26,
+   "keywords": [
+    "abortion",
+    "childbirth",
+    "complicating",
+    "pregnancy",
+    "puerperium",
+    "sepsis",
+    "septic",
+    "shock"
+   ]
+  },
+  "I.C.1.d.8": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "8) Newborn sepsis",
+   "page": 26,
+   "keywords": [
+    "newborn",
+    "sepsis"
+   ]
+  },
+  "I.C.1.d.9": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "9) Hemolytic-uremic syndrome associated with sepsis",
+   "page": 26,
+   "keywords": [
+    "associated",
+    "hemolytic-uremic",
+    "sepsis",
+    "syndrome"
+   ]
+  },
+  "I.C.1.e": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "e. Methicillin Resistant Staphylococcus aureus (MRSA) Conditions",
+   "page": 27,
+   "keywords": [
+    "aureus",
+    "methicillin",
+    "mrsa",
+    "resistant",
+    "staphylococcus"
+   ]
+  },
+  "I.C.1.e.1": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "1) Selection and sequencing of MRSA codes",
+   "page": 27,
+   "keywords": [
+    "mrsa",
+    "selection",
+    "sequencing"
+   ]
+  },
+  "I.C.1.e.1.a": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(a) Combination codes for MRSA infection",
+   "page": 27,
+   "keywords": [
+    "combination",
+    "infection",
+    "mrsa"
+   ]
+  },
+  "I.C.1.e.1.b": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(b) Other codes for MRSA infection",
+   "page": 27,
+   "keywords": [
+    "infection",
+    "mrsa"
+   ]
+  },
+  "I.C.1.e.1.c": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(c) Methicillin susceptible Staphylococcus aureus (MSSA) and MRSA colonization",
+   "page": 27,
+   "keywords": [
+    "aureus",
+    "colonization",
+    "methicillin",
+    "mrsa",
+    "mssa",
+    "staphylococcus",
+    "susceptible"
+   ]
+  },
+  "I.C.1.e.1.d": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(d) MRSA colonization and infection",
+   "page": 28,
+   "keywords": [
+    "colonization",
+    "infection",
+    "mrsa"
+   ]
+  },
+  "I.C.1.f": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "f. Zika virus infections",
+   "page": 28,
+   "keywords": [
+    "infections",
+    "virus",
+    "zika"
+   ]
+  },
+  "I.C.1.f.1": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "1) Code only confirmed cases",
+   "page": 28,
+   "keywords": [
+    "cases",
+    "confirmed"
+   ]
+  },
+  "I.C.1.g": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "g. Coronavirus infections",
+   "page": 28,
+   "keywords": [
+    "coronavirus",
+    "infections"
+   ]
+  },
+  "I.C.1.g.1": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "1) COVID-19 infection (infection due to SARS-CoV-2)",
+   "page": 28,
+   "keywords": [
+    "covid-19",
+    "due",
+    "infection",
+    "sars-cov-2"
+   ]
+  },
+  "I.C.1.g.1.a": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(a) Code only confirmed cases",
+   "page": 28,
+   "keywords": [
+    "cases",
+    "confirmed"
+   ]
+  },
+  "I.C.1.g.1.b": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(b) Sequencing of codes",
+   "page": 28,
+   "keywords": [
+    "sequencing"
+   ]
+  },
+  "I.C.1.g.1.c": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(c) Acute respiratory manifestations of COVID-19",
+   "page": 29,
+   "keywords": [
+    "acute",
+    "covid-19",
+    "manifestations",
+    "respiratory"
+   ]
+  },
+  "I.C.1.g.1.c.i": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(i) Pneumonia",
+   "page": 29,
+   "keywords": [
+    "pneumonia"
+   ]
+  },
+  "I.C.1.g.1.c.ii": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(ii) Acute bronchitis",
+   "page": 29,
+   "keywords": [
+    "acute",
+    "bronchitis"
+   ]
+  },
+  "I.C.1.g.1.c.iii": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(iii)Lower respiratory infection",
+   "page": 29,
+   "keywords": [
+    "infection",
+    "respiratory"
+   ]
+  },
+  "I.C.1.g.1.c.iv": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(iv) Acute respiratory distress syndrome",
+   "page": 30,
+   "keywords": [
+    "acute",
+    "distress",
+    "respiratory",
+    "syndrome"
+   ]
+  },
+  "I.C.1.g.1.c.v": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(v) Acute respiratory failure",
+   "page": 30,
+   "keywords": [
+    "acute",
+    "failure",
+    "respiratory"
+   ]
+  },
+  "I.C.1.g.1.d": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(d) Non-respiratory manifestations of COVID-19",
+   "page": 30,
+   "keywords": [
+    "covid-19",
+    "manifestations",
+    "non-respiratory"
+   ]
+  },
+  "I.C.1.g.1.e": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(e) Exposure to COVID-19",
+   "page": 30,
+   "keywords": [
+    "covid-19",
+    "exposure"
+   ]
+  },
+  "I.C.1.g.1.f": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(f) Screening for COVID-19",
+   "page": 30,
+   "keywords": [
+    "covid-19",
+    "screening"
+   ]
+  },
+  "I.C.1.g.1.g": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(g) Signs and symptoms without definitive diagnosis of COVID- 19",
+   "page": 30,
+   "keywords": [
+    "covid-",
+    "definitive",
+    "signs",
+    "symptoms"
+   ]
+  },
+  "I.C.1.g.1.h": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(h) Asymptomatic individuals who test positive for COVID-19",
+   "page": 31,
+   "keywords": [
+    "asymptomatic",
+    "covid-19",
+    "individuals",
+    "positive",
+    "test"
+   ]
+  },
+  "I.C.1.g.1.i": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(i) Personal history of COVID-19",
+   "page": 31,
+   "keywords": [
+    "covid-19",
+    "history",
+    "personal"
+   ]
+  },
+  "I.C.1.g.1.j": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(j) Follow-up visits after COVID-19 infection has resolved",
+   "page": 31,
+   "keywords": [
+    "after",
+    "covid-19",
+    "follow-up",
+    "infection",
+    "resolved",
+    "visits"
+   ]
+  },
+  "I.C.1.g.1.k": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(k) Encounter for antibody testing",
+   "page": 31,
+   "keywords": [
+    "antibody",
+    "testing"
+   ]
+  },
+  "I.C.1.g.1.l": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(l) Multisystem Inflammatory Syndrome",
+   "page": 31,
+   "keywords": [
+    "inflammatory",
+    "multisystem",
+    "syndrome"
+   ]
+  },
+  "I.C.1.g.1.m": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(m) Post COVID-19 Condition",
+   "page": 32,
+   "keywords": [
+    "covid-19",
+    "post"
+   ]
+  },
+  "I.C.1.g.1.n": {
+   "file": "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "title": "(n) Underimmunization for COVID-19 Status",
+   "page": 32,
+   "keywords": [
+    "covid-19",
+    "status",
+    "underimmunization"
+   ]
+  },
+  "I.C.2": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "2. Chapter 2: Neoplasms (C00-D49)",
+   "page": 32,
+   "keywords": [
+    "c00-d49",
+    "chapter",
+    "neoplasms"
+   ]
+  },
+  "I.C.2.a": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "a. Admission/Encounter for treatment of primary site",
+   "page": 33,
+   "keywords": [
+    "admission",
+    "primary",
+    "site",
+    "treatment"
+   ]
+  },
+  "I.C.2.b": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "b. Admission/Encounter for treatment of secondary site",
+   "page": 33,
+   "keywords": [
+    "admission",
+    "secondary",
+    "site",
+    "treatment"
+   ]
+  },
+  "I.C.2.c": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "c. Coding and sequencing of complications",
+   "page": 34,
+   "keywords": [
+    "complications",
+    "sequencing"
+   ]
+  },
+  "I.C.2.c.1": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "1) Anemia associated with malignancy",
+   "page": 34,
+   "keywords": [
+    "anemia",
+    "associated",
+    "malignancy"
+   ]
+  },
+  "I.C.2.c.2": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "2) Anemia associated with chemotherapy, immunotherapy and radiation therapy",
+   "page": 34,
+   "keywords": [
+    "anemia",
+    "associated",
+    "chemotherapy",
+    "immunotherapy",
+    "radiation",
+    "therapy"
+   ]
+  },
+  "I.C.2.c.3": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "3) Management of dehydration due to the malignancy",
+   "page": 34,
+   "keywords": [
+    "dehydration",
+    "due",
+    "malignancy",
+    "management"
+   ]
+  },
+  "I.C.2.c.4": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "4) Treatment of a complication resulting from a surgical procedure",
+   "page": 34,
+   "keywords": [
+    "complication",
+    "procedure",
+    "resulting",
+    "surgical",
+    "treatment"
+   ]
+  },
+  "I.C.2.d": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "d. Primary malignancy previously excised",
+   "page": 34,
+   "keywords": [
+    "excised",
+    "malignancy",
+    "previously",
+    "primary"
+   ]
+  },
+  "I.C.2.e": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "e. Admissions/Encounters involving antineoplastic chemotherapy, immunotherapy and radiation therapy",
+   "page": 35,
+   "keywords": [
+    "admissions",
+    "antineoplastic",
+    "chemotherapy",
+    "immunotherapy",
+    "involving",
+    "radiation",
+    "therapy"
+   ]
+  },
+  "I.C.2.e.1": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "1) Episode of care involves surgical removal of neoplasm",
+   "page": 35,
+   "keywords": [
+    "care",
+    "episode",
+    "involves",
+    "neoplasm",
+    "removal",
+    "surgical"
+   ]
+  },
+  "I.C.2.e.2": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "2) Patient admission/encounter chiefly for administration of antineoplastic chemotherapy, immunotherapy and radiation therapy",
+   "page": 35,
+   "keywords": [
+    "administration",
+    "admission",
+    "antineoplastic",
+    "chemotherapy",
+    "chiefly",
+    "immunotherapy",
+    "radiation",
+    "therapy"
+   ]
+  },
+  "I.C.2.e.3": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "3) Patient admitted for radiation therapy, chemotherapy or immunotherapy and develops complications",
+   "page": 35,
+   "keywords": [
+    "admitted",
+    "chemotherapy",
+    "complications",
+    "develops",
+    "immunotherapy",
+    "radiation",
+    "therapy"
+   ]
+  },
+  "I.C.2.f": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "f. Admission/encounter to determine extent of malignancy",
+   "page": 36,
+   "keywords": [
+    "admission",
+    "determine",
+    "extent",
+    "malignancy"
+   ]
+  },
+  "I.C.2.g": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "g. Symptoms, signs, and abnormal findings listed in Chapter 18 associated with neoplasms",
+   "page": 36,
+   "keywords": [
+    "abnormal",
+    "associated",
+    "chapter",
+    "findings",
+    "listed",
+    "neoplasms",
+    "signs",
+    "symptoms"
+   ]
+  },
+  "I.C.2.h": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "h. Admission/encounter for pain control/management",
+   "page": 36,
+   "keywords": [
+    "admission",
+    "control",
+    "management",
+    "pain"
+   ]
+  },
+  "I.C.2.i": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "i. Malignancy in two or more noncontiguous sites",
+   "page": 36,
+   "keywords": [
+    "malignancy",
+    "noncontiguous",
+    "sites"
+   ]
+  },
+  "I.C.2.j": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "j. Disseminated malignant neoplasm, unspecified",
+   "page": 36,
+   "keywords": [
+    "disseminated",
+    "malignant",
+    "neoplasm",
+    "unspecified"
+   ]
+  },
+  "I.C.2.k": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "k. Malignant neoplasm without specification of site",
+   "page": 36,
+   "keywords": [
+    "malignant",
+    "neoplasm",
+    "site",
+    "specification"
+   ]
+  },
+  "I.C.2.l": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "l. Sequencing of neoplasm codes",
+   "page": 37,
+   "keywords": [
+    "neoplasm",
+    "sequencing"
+   ]
+  },
+  "I.C.2.l.1": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "1) Encounter for treatment of primary malignancy",
+   "page": 37,
+   "keywords": [
+    "malignancy",
+    "primary",
+    "treatment"
+   ]
+  },
+  "I.C.2.l.2": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "2) Encounter for treatment of secondary malignancy",
+   "page": 37,
+   "keywords": [
+    "malignancy",
+    "secondary",
+    "treatment"
+   ]
+  },
+  "I.C.2.l.3": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "3) Malignant neoplasm in a pregnant patient",
+   "page": 37,
+   "keywords": [
+    "malignant",
+    "neoplasm",
+    "pregnant"
+   ]
+  },
+  "I.C.2.l.4": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "4) Encounter for complication associated with a neoplasm",
+   "page": 37,
+   "keywords": [
+    "associated",
+    "complication",
+    "neoplasm"
+   ]
+  },
+  "I.C.2.l.5": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "5) Complication from surgical procedure for treatment of a neoplasm",
+   "page": 37,
+   "keywords": [
+    "complication",
+    "neoplasm",
+    "procedure",
+    "surgical",
+    "treatment"
+   ]
+  },
+  "I.C.2.l.6": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "6) Pathologic fracture due to a neoplasm",
+   "page": 37,
+   "keywords": [
+    "due",
+    "fracture",
+    "neoplasm",
+    "pathologic"
+   ]
+  },
+  "I.C.2.m": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "m. Current malignancy versus personal history of malignancy",
+   "page": 38,
+   "keywords": [
+    "current",
+    "history",
+    "malignancy",
+    "personal",
+    "versus"
+   ]
+  },
+  "I.C.2.n": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "n. Leukemia, Multiple Myeloma, and Malignant Plasma Cell Neoplasms in remission versus personal history",
+   "page": 38,
+   "keywords": [
+    "cell",
+    "history",
+    "leukemia",
+    "malignant",
+    "multiple",
+    "myeloma",
+    "neoplasms",
+    "personal",
+    "plasma",
+    "remission",
+    "versus"
+   ]
+  },
+  "I.C.2.o": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "o. Aftercare following surgery for neoplasm",
+   "page": 38,
+   "keywords": [
+    "aftercare",
+    "following",
+    "neoplasm",
+    "surgery"
+   ]
+  },
+  "I.C.2.p": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "p. Follow-up care for completed treatment of a malignancy",
+   "page": 38,
+   "keywords": [
+    "care",
+    "completed",
+    "follow-up",
+    "malignancy",
+    "treatment"
+   ]
+  },
+  "I.C.2.q": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "q. Prophylactic organ removal for prevention of malignancy",
+   "page": 38,
+   "keywords": [
+    "malignancy",
+    "organ",
+    "prevention",
+    "prophylactic",
+    "removal"
+   ]
+  },
+  "I.C.2.r": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "r. Malignant neoplasm associated with transplanted organ",
+   "page": 38,
+   "keywords": [
+    "associated",
+    "malignant",
+    "neoplasm",
+    "organ",
+    "transplanted"
+   ]
+  },
+  "I.C.2.s": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "s. Breast Implant Associated Anaplastic Large Cell Lymphoma",
+   "page": 39,
+   "keywords": [
+    "anaplastic",
+    "associated",
+    "breast",
+    "cell",
+    "implant",
+    "large",
+    "lymphoma"
+   ]
+  },
+  "I.C.2.t": {
+   "file": "I.C.02_chapter-2-neoplasms.md",
+   "title": "t. Secondary malignant neoplasm of lymphoid tissue",
+   "page": 39,
+   "keywords": [
+    "lymphoid",
+    "malignant",
+    "neoplasm",
+    "secondary",
+    "tissue"
+   ]
+  },
+  "I.C.3": {
+   "file": "I.C.03_chapter-3-diseases-blood-blood-forming-organs-certain-disord.md",
+   "title": "3. Chapter 3: Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism (D50-D89)",
+   "page": 39,
+   "keywords": [
+    "blood",
+    "blood-forming",
+    "certain",
+    "chapter",
+    "d50-d89",
+    "diseases",
+    "disorders",
+    "immune",
+    "involving",
+    "mechanism",
+    "organs"
+   ]
+  },
+  "I.C.4": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "4. Chapter 4: Endocrine, Nutritional, and Metabolic Diseases (E00-E89)",
+   "page": 39,
+   "keywords": [
+    "chapter",
+    "diseases",
+    "e00-e89",
+    "endocrine",
+    "metabolic",
+    "nutritional"
+   ]
+  },
+  "I.C.4.a": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "a. Diabetes mellitus",
+   "page": 39,
+   "keywords": [
+    "diabetes",
+    "mellitus"
+   ]
+  },
+  "I.C.4.a.1": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "1) Type of diabetes",
+   "page": 39,
+   "keywords": [
+    "diabetes",
+    "type"
+   ]
+  },
+  "I.C.4.a.2": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "2) Type of diabetes mellitus not documented",
+   "page": 40,
+   "keywords": [
+    "diabetes",
+    "documented",
+    "mellitus",
+    "type"
+   ]
+  },
+  "I.C.4.a.3": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "3) Diabetes mellitus and the use of insulin, oral hypoglycemics, and injectable non-insulin drugs",
+   "page": 40,
+   "keywords": [
+    "diabetes",
+    "drugs",
+    "hypoglycemics",
+    "injectable",
+    "insulin",
+    "mellitus",
+    "non-insulin",
+    "oral"
+   ]
+  },
+  "I.C.4.a.4": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "4) Diabetes mellitus in pregnancy and gestational diabetes",
+   "page": 40,
+   "keywords": [
+    "diabetes",
+    "gestational",
+    "mellitus",
+    "pregnancy"
+   ]
+  },
+  "I.C.4.a.5": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "5) Complications due to insulin pump malfunction",
+   "page": 40,
+   "keywords": [
+    "complications",
+    "due",
+    "insulin",
+    "malfunction",
+    "pump"
+   ]
+  },
+  "I.C.4.a.5.a": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "(a) Underdose of insulin due to insulin pump failure",
+   "page": 40,
+   "keywords": [
+    "due",
+    "failure",
+    "insulin",
+    "pump",
+    "underdose"
+   ]
+  },
+  "I.C.4.a.5.b": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "(b) Overdose of insulin due to insulin pump failure",
+   "page": 41,
+   "keywords": [
+    "due",
+    "failure",
+    "insulin",
+    "overdose",
+    "pump"
+   ]
+  },
+  "I.C.4.a.6": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "6) Secondary diabetes mellitus",
+   "page": 41,
+   "keywords": [
+    "diabetes",
+    "mellitus",
+    "secondary"
+   ]
+  },
+  "I.C.4.a.6.a": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "(a) Secondary diabetes mellitus and the use of insulin, oral hypoglycemic drugs, or injectable non-insulin drugs",
+   "page": 41,
+   "keywords": [
+    "diabetes",
+    "drugs",
+    "hypoglycemic",
+    "injectable",
+    "insulin",
+    "mellitus",
+    "non-insulin",
+    "oral",
+    "secondary"
+   ]
+  },
+  "I.C.4.a.6.b": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "(b) Assigning and sequencing secondary diabetes codes and its causes",
+   "page": 42,
+   "keywords": [
+    "assigning",
+    "causes",
+    "diabetes",
+    "secondary",
+    "sequencing"
+   ]
+  },
+  "I.C.4.a.6.b.i": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "(i) Secondary diabetes mellitus due to pancreatectomy",
+   "page": 42,
+   "keywords": [
+    "diabetes",
+    "due",
+    "mellitus",
+    "pancreatectomy",
+    "secondary"
+   ]
+  },
+  "I.C.4.a.6.b.ii": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "(ii) Secondary diabetes due to drugs",
+   "page": 42,
+   "keywords": [
+    "diabetes",
+    "drugs",
+    "due",
+    "secondary"
+   ]
+  },
+  "I.C.4.b": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "b. Obesity",
+   "page": 42,
+   "keywords": [
+    "obesity"
+   ]
+  },
+  "I.C.4.b.1": {
+   "file": "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "title": "1) Obesity class",
+   "page": 42,
+   "keywords": [
+    "class",
+    "obesity"
+   ]
+  },
+  "I.C.5": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "5. Chapter 5: Mental, Behavioral and Neurodevelopmental disorders (F01 – F99)",
+   "page": 43,
+   "keywords": [
+    "behavioral",
+    "chapter",
+    "disorders",
+    "f01",
+    "f99",
+    "mental",
+    "neurodevelopmental"
+   ]
+  },
+  "I.C.5.a": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "a. Pain disorders related to psychological factors",
+   "page": 43,
+   "keywords": [
+    "disorders",
+    "factors",
+    "pain",
+    "psychological",
+    "related"
+   ]
+  },
+  "I.C.5.b": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "b. Mental and behavioral disorders due to psychoactive substance use",
+   "page": 43,
+   "keywords": [
+    "behavioral",
+    "disorders",
+    "due",
+    "mental",
+    "psychoactive",
+    "substance"
+   ]
+  },
+  "I.C.5.b.1": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "1) In Remission",
+   "page": 43,
+   "keywords": [
+    "remission"
+   ]
+  },
+  "I.C.5.b.2": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "2) Psychoactive Substance Use, Abuse and Dependence",
+   "page": 43,
+   "keywords": [
+    "abuse",
+    "dependence",
+    "psychoactive",
+    "substance"
+   ]
+  },
+  "I.C.5.b.3": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "3) Psychoactive Substance Use, Unspecified",
+   "page": 44,
+   "keywords": [
+    "psychoactive",
+    "substance",
+    "unspecified"
+   ]
+  },
+  "I.C.5.b.4": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "4) Medical Conditions Due to Psychoactive Substance Use, Abuse and Dependence",
+   "page": 44,
+   "keywords": [
+    "abuse",
+    "dependence",
+    "due",
+    "medical",
+    "psychoactive",
+    "substance"
+   ]
+  },
+  "I.C.5.b.5": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "5) Blood Alcohol Level",
+   "page": 44,
+   "keywords": [
+    "alcohol",
+    "blood",
+    "level"
+   ]
+  },
+  "I.C.5.c": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "c. Factitious Disorder",
+   "page": 44,
+   "keywords": [
+    "disorder",
+    "factitious"
+   ]
+  },
+  "I.C.5.d": {
+   "file": "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "title": "d. Dementia",
+   "page": 45,
+   "keywords": [
+    "dementia"
+   ]
+  },
+  "I.C.6": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "6. Chapter 6: Diseases of the Nervous System (G00-G99)",
+   "page": 45,
+   "keywords": [
+    "chapter",
+    "diseases",
+    "g00-g99",
+    "nervous",
+    "system"
+   ]
+  },
+  "I.C.6.a": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "a. Dominant/nondominant side",
+   "page": 45,
+   "keywords": [
+    "dominant",
+    "nondominant",
+    "side"
+   ]
+  },
+  "I.C.6.b": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "b. Pain - Category G89",
+   "page": 45,
+   "keywords": [
+    "category",
+    "g89",
+    "pain"
+   ]
+  },
+  "I.C.6.b.1": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "1) General coding information",
+   "page": 45,
+   "keywords": [
+    "general",
+    "information"
+   ]
+  },
+  "I.C.6.b.1.a": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "(a) Category G89 Codes as Principal or First-Listed Diagnosis",
+   "page": 46,
+   "keywords": [
+    "category",
+    "first-listed",
+    "g89",
+    "principal"
+   ]
+  },
+  "I.C.6.b.1.b": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "(b) Use of Category G89 Codes in Conjunction with Site Specific Pain Codes",
+   "page": 46,
+   "keywords": [
+    "category",
+    "conjunction",
+    "g89",
+    "pain",
+    "site",
+    "specific"
+   ]
+  },
+  "I.C.6.b.1.b.i": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "(i) Assigning Category G89 and Site-Specific Pain Codes",
+   "page": 46,
+   "keywords": [
+    "assigning",
+    "category",
+    "g89",
+    "pain",
+    "site-specific"
+   ]
+  },
+  "I.C.6.b.1.b.ii": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "(ii) Sequencing of Category G89 Codes with Site-Specific Pain Codes",
+   "page": 46,
+   "keywords": [
+    "category",
+    "g89",
+    "pain",
+    "sequencing",
+    "site-specific"
+   ]
+  },
+  "I.C.6.b.2": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "2) Pain due to devices, implants and grafts",
+   "page": 47,
+   "keywords": [
+    "devices",
+    "due",
+    "grafts",
+    "implants",
+    "pain"
+   ]
+  },
+  "I.C.6.b.3": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "3) Postoperative Pain",
+   "page": 47,
+   "keywords": [
+    "pain",
+    "postoperative"
+   ]
+  },
+  "I.C.6.b.3.a": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "(a) Postoperative pain not associated with specific postoperative complication",
+   "page": 47,
+   "keywords": [
+    "associated",
+    "complication",
+    "pain",
+    "postoperative",
+    "specific"
+   ]
+  },
+  "I.C.6.b.3.b": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "(b) Postoperative pain associated with specific postoperative complication",
+   "page": 47,
+   "keywords": [
+    "associated",
+    "complication",
+    "pain",
+    "postoperative",
+    "specific"
+   ]
+  },
+  "I.C.6.b.4": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "4) Chronic pain",
+   "page": 48,
+   "keywords": [
+    "chronic",
+    "pain"
+   ]
+  },
+  "I.C.6.b.5": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "5) Neoplasm Related Pain",
+   "page": 48,
+   "keywords": [
+    "neoplasm",
+    "pain",
+    "related"
+   ]
+  },
+  "I.C.6.b.6": {
+   "file": "I.C.06_chapter-6-diseases-nervous-system.md",
+   "title": "6) Chronic pain syndrome",
+   "page": 48,
+   "keywords": [
+    "chronic",
+    "pain",
+    "syndrome"
+   ]
+  },
+  "I.C.7": {
+   "file": "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "title": "7. Chapter 7: Diseases of the Eye and Adnexa (H00-H59)",
+   "page": 48,
+   "keywords": [
+    "adnexa",
+    "chapter",
+    "diseases",
+    "eye",
+    "h00-h59"
+   ]
+  },
+  "I.C.7.a": {
+   "file": "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "title": "a. Glaucoma",
+   "page": 48,
+   "keywords": [
+    "glaucoma"
+   ]
+  },
+  "I.C.7.a.1": {
+   "file": "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "title": "1) Assigning Glaucoma Codes",
+   "page": 48,
+   "keywords": [
+    "assigning",
+    "glaucoma"
+   ]
+  },
+  "I.C.7.a.2": {
+   "file": "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "title": "2) Bilateral glaucoma with same type and stage",
+   "page": 48,
+   "keywords": [
+    "bilateral",
+    "glaucoma",
+    "same",
+    "stage",
+    "type"
+   ]
+  },
+  "I.C.7.a.3": {
+   "file": "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "title": "3) Bilateral glaucoma stage with different types or stages",
+   "page": 49,
+   "keywords": [
+    "bilateral",
+    "different",
+    "glaucoma",
+    "stage",
+    "stages",
+    "types"
+   ]
+  },
+  "I.C.7.a.4": {
+   "file": "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "title": "4) Patient admitted with glaucoma and stage evolves during the admission",
+   "page": 49,
+   "keywords": [
+    "admission",
+    "admitted",
+    "during",
+    "evolves",
+    "glaucoma",
+    "stage"
+   ]
+  },
+  "I.C.7.a.5": {
+   "file": "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "title": "5) Indeterminate stage glaucoma",
+   "page": 49,
+   "keywords": [
+    "glaucoma",
+    "indeterminate",
+    "stage"
+   ]
+  },
+  "I.C.7.b": {
+   "file": "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "title": "b. Blindness",
+   "page": 49,
+   "keywords": [
+    "blindness"
+   ]
+  },
+  "I.C.8": {
+   "file": "I.C.08_chapter-8-diseases-ear-mastoid-process.md",
+   "title": "8. Chapter 8: Diseases of the Ear and Mastoid Process (H60-H95)",
+   "page": 49,
+   "keywords": [
+    "chapter",
+    "diseases",
+    "ear",
+    "h60-h95",
+    "mastoid",
+    "process"
+   ]
+  },
+  "I.C.9": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "9. Chapter 9: Diseases of the Circulatory System (I00-I99)",
+   "page": 50,
+   "keywords": [
+    "chapter",
+    "circulatory",
+    "diseases",
+    "i00-i99",
+    "system"
+   ]
+  },
+  "I.C.9.a": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "a. Hypertension",
+   "page": 50,
+   "keywords": [
+    "hypertension"
+   ]
+  },
+  "I.C.9.a.1": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "1) Hypertension with Heart Disease",
+   "page": 50,
+   "keywords": [
+    "disease",
+    "heart",
+    "hypertension"
+   ]
+  },
+  "I.C.9.a.2": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "2) Hypertensive Chronic Kidney Disease",
+   "page": 50,
+   "keywords": [
+    "chronic",
+    "disease",
+    "hypertensive",
+    "kidney"
+   ]
+  },
+  "I.C.9.a.3": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "3) Hypertensive Heart and Chronic Kidney Disease",
+   "page": 51,
+   "keywords": [
+    "chronic",
+    "disease",
+    "heart",
+    "hypertensive",
+    "kidney"
+   ]
+  },
+  "I.C.9.a.4": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "4) Hypertensive Cerebrovascular Disease",
+   "page": 51,
+   "keywords": [
+    "cerebrovascular",
+    "disease",
+    "hypertensive"
+   ]
+  },
+  "I.C.9.a.5": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "5) Hypertensive Retinopathy",
+   "page": 51,
+   "keywords": [
+    "hypertensive",
+    "retinopathy"
+   ]
+  },
+  "I.C.9.a.6": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "6) Hypertension, Secondary",
+   "page": 51,
+   "keywords": [
+    "hypertension",
+    "secondary"
+   ]
+  },
+  "I.C.9.a.7": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "7) Hypertension, Transient",
+   "page": 52,
+   "keywords": [
+    "hypertension",
+    "transient"
+   ]
+  },
+  "I.C.9.a.8": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "8) Hypertension, Controlled",
+   "page": 52,
+   "keywords": [
+    "controlled",
+    "hypertension"
+   ]
+  },
+  "I.C.9.a.9": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "9) Hypertension, Uncontrolled",
+   "page": 52,
+   "keywords": [
+    "hypertension",
+    "uncontrolled"
+   ]
+  },
+  "I.C.9.a.10": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "10) Hypertensive Crisis",
+   "page": 52,
+   "keywords": [
+    "crisis",
+    "hypertensive"
+   ]
+  },
+  "I.C.9.a.11": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "11) Pulmonary Hypertension",
+   "page": 52,
+   "keywords": [
+    "hypertension",
+    "pulmonary"
+   ]
+  },
+  "I.C.9.a.12": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "12) Hypertension, Resistant",
+   "page": 52,
+   "keywords": [
+    "hypertension",
+    "resistant"
+   ]
+  },
+  "I.C.9.b": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "b. Atherosclerotic Coronary Artery Disease and Angina",
+   "page": 52,
+   "keywords": [
+    "angina",
+    "artery",
+    "atherosclerotic",
+    "coronary",
+    "disease"
+   ]
+  },
+  "I.C.9.c": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "c. Intraoperative and Postprocedural Cerebrovascular Accident",
+   "page": 53,
+   "keywords": [
+    "accident",
+    "cerebrovascular",
+    "intraoperative",
+    "postprocedural"
+   ]
+  },
+  "I.C.9.d": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "d. Sequelae of Cerebrovascular Disease",
+   "page": 53,
+   "keywords": [
+    "cerebrovascular",
+    "disease",
+    "sequelae"
+   ]
+  },
+  "I.C.9.d.1": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "1) Category I69, Sequelae of Cerebrovascular disease",
+   "page": 53,
+   "keywords": [
+    "category",
+    "cerebrovascular",
+    "disease",
+    "i69",
+    "sequelae"
+   ]
+  },
+  "I.C.9.d.2": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "2) Codes from category I69 with codes from I60-I67",
+   "page": 53,
+   "keywords": [
+    "category",
+    "i60-i67",
+    "i69"
+   ]
+  },
+  "I.C.9.d.3": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "3) Codes from category I69 and Personal history of transient ischemic attack (TIA) and cerebral infarction (Z86.73)",
+   "page": 54,
+   "keywords": [
+    "attack",
+    "category",
+    "cerebral",
+    "history",
+    "i69",
+    "infarction",
+    "ischemic",
+    "personal",
+    "tia",
+    "transient",
+    "z86"
+   ]
+  },
+  "I.C.9.e": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "e. Acute myocardial infarction (AMI)",
+   "page": 54,
+   "keywords": [
+    "acute",
+    "ami",
+    "infarction",
+    "myocardial"
+   ]
+  },
+  "I.C.9.e.1": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "1) Type 1 ST elevation myocardial infarction (STEMI) and non- ST elevation myocardial infarction (NSTEMI)",
+   "page": 54,
+   "keywords": [
+    "elevation",
+    "infarction",
+    "myocardial",
+    "non-",
+    "nstemi",
+    "stemi",
+    "type"
+   ]
+  },
+  "I.C.9.e.2": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "2) Acute myocardial infarction, unspecified",
+   "page": 54,
+   "keywords": [
+    "acute",
+    "infarction",
+    "myocardial",
+    "unspecified"
+   ]
+  },
+  "I.C.9.e.3": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "3) AMI documented as nontransmural or subendocardial but site provided",
+   "page": 54,
+   "keywords": [
+    "ami",
+    "but",
+    "documented",
+    "nontransmural",
+    "provided",
+    "site",
+    "subendocardial"
+   ]
+  },
+  "I.C.9.e.4": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "4) Subsequent acute myocardial infarction",
+   "page": 55,
+   "keywords": [
+    "acute",
+    "infarction",
+    "myocardial",
+    "subsequent"
+   ]
+  },
+  "I.C.9.e.5": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "5) Other Types of Myocardial Infarction",
+   "page": 55,
+   "keywords": [
+    "infarction",
+    "myocardial",
+    "types"
+   ]
+  },
+  "I.C.9.e.6": {
+   "file": "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "title": "6) Myocardial Infarction with Coronary Microvascular Dysfunction",
+   "page": 55,
+   "keywords": [
+    "coronary",
+    "dysfunction",
+    "infarction",
+    "microvascular",
+    "myocardial"
+   ]
+  },
+  "I.C.10": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "10. Chapter 10: Diseases of the Respiratory System (J00-J99), U07.0",
+   "page": 56,
+   "keywords": [
+    "chapter",
+    "diseases",
+    "j00-j99",
+    "respiratory",
+    "system",
+    "u07"
+   ]
+  },
+  "I.C.10.a": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "a. Chronic Obstructive Pulmonary Disease [COPD] and Asthma",
+   "page": 56,
+   "keywords": [
+    "asthma",
+    "chronic",
+    "copd",
+    "disease",
+    "obstructive",
+    "pulmonary"
+   ]
+  },
+  "I.C.10.a.1": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "1) Acute exacerbation of chronic obstructive bronchitis and asthma",
+   "page": 56,
+   "keywords": [
+    "acute",
+    "asthma",
+    "bronchitis",
+    "chronic",
+    "exacerbation",
+    "obstructive"
+   ]
+  },
+  "I.C.10.b": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "b. Acute Respiratory Failure",
+   "page": 56,
+   "keywords": [
+    "acute",
+    "failure",
+    "respiratory"
+   ]
+  },
+  "I.C.10.b.1": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "1) Acute respiratory failure as principal diagnosis",
+   "page": 56,
+   "keywords": [
+    "acute",
+    "failure",
+    "principal",
+    "respiratory"
+   ]
+  },
+  "I.C.10.b.2": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "2) Acute respiratory failure as secondary diagnosis",
+   "page": 56,
+   "keywords": [
+    "acute",
+    "failure",
+    "respiratory",
+    "secondary"
+   ]
+  },
+  "I.C.10.b.3": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "3) Sequencing of acute respiratory failure and another acute condition",
+   "page": 56,
+   "keywords": [
+    "acute",
+    "another",
+    "failure",
+    "respiratory",
+    "sequencing"
+   ]
+  },
+  "I.C.10.c": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "c. Influenza due to certain identified influenza viruses",
+   "page": 57,
+   "keywords": [
+    "certain",
+    "due",
+    "identified",
+    "influenza",
+    "viruses"
+   ]
+  },
+  "I.C.10.d": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "d. Ventilator associated Pneumonia",
+   "page": 57,
+   "keywords": [
+    "associated",
+    "pneumonia",
+    "ventilator"
+   ]
+  },
+  "I.C.10.d.1": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "1) Documentation of Ventilator associated Pneumonia",
+   "page": 57,
+   "keywords": [
+    "associated",
+    "documentation",
+    "pneumonia",
+    "ventilator"
+   ]
+  },
+  "I.C.10.d.2": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "2) Ventilator associated Pneumonia Develops after Admission",
+   "page": 58,
+   "keywords": [
+    "admission",
+    "after",
+    "associated",
+    "develops",
+    "pneumonia",
+    "ventilator"
+   ]
+  },
+  "I.C.10.e": {
+   "file": "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "title": "e. Vaping-related disorders",
+   "page": 58,
+   "keywords": [
+    "disorders",
+    "vaping-related"
+   ]
+  },
+  "I.C.11": {
+   "file": "I.C.11_chapter-11-diseases-digestive-system.md",
+   "title": "11. Chapter 11: Diseases of the Digestive System (K00-K95)",
+   "page": 58,
+   "keywords": [
+    "chapter",
+    "digestive",
+    "diseases",
+    "k00-k95",
+    "system"
+   ]
+  },
+  "I.C.12": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "12. Chapter 12: Diseases of the Skin and Subcutaneous Tissue (L00-L99)",
+   "page": 58,
+   "keywords": [
+    "chapter",
+    "diseases",
+    "l00-l99",
+    "skin",
+    "subcutaneous",
+    "tissue"
+   ]
+  },
+  "I.C.12.a": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "a. Pressure ulcer stage codes",
+   "page": 58,
+   "keywords": [
+    "pressure",
+    "stage",
+    "ulcer"
+   ]
+  },
+  "I.C.12.a.1": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "1) Pressure ulcer stages",
+   "page": 58,
+   "keywords": [
+    "pressure",
+    "stages",
+    "ulcer"
+   ]
+  },
+  "I.C.12.a.2": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "2) Unstageable pressure ulcers",
+   "page": 58,
+   "keywords": [
+    "pressure",
+    "ulcers",
+    "unstageable"
+   ]
+  },
+  "I.C.12.a.3": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "3) Documented pressure ulcer stage",
+   "page": 59,
+   "keywords": [
+    "documented",
+    "pressure",
+    "stage",
+    "ulcer"
+   ]
+  },
+  "I.C.12.a.4": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "4) Patients admitted with pressure ulcers documented as healed",
+   "page": 59,
+   "keywords": [
+    "admitted",
+    "documented",
+    "healed",
+    "pressure",
+    "ulcers"
+   ]
+  },
+  "I.C.12.a.5": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "5) Pressure ulcers documented as healing",
+   "page": 59,
+   "keywords": [
+    "documented",
+    "healing",
+    "pressure",
+    "ulcers"
+   ]
+  },
+  "I.C.12.a.6": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "6) Patient admitted with pressure ulcer evolving into another stage during the admission",
+   "page": 59,
+   "keywords": [
+    "admission",
+    "admitted",
+    "another",
+    "during",
+    "evolving",
+    "pressure",
+    "stage",
+    "ulcer"
+   ]
+  },
+  "I.C.12.a.7": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "7) Pressure-induced deep tissue damage",
+   "page": 60,
+   "keywords": [
+    "damage",
+    "deep",
+    "pressure-induced",
+    "tissue"
+   ]
+  },
+  "I.C.12.b": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "b. Non-Pressure Chronic Ulcers",
+   "page": 60,
+   "keywords": [
+    "chronic",
+    "non-pressure",
+    "ulcers"
+   ]
+  },
+  "I.C.12.b.1": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "1) Patients admitted with non-pressure ulcers documented as healed",
+   "page": 60,
+   "keywords": [
+    "admitted",
+    "documented",
+    "healed",
+    "non-pressure",
+    "ulcers"
+   ]
+  },
+  "I.C.12.b.2": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "2) Non-pressure ulcers documented as healing",
+   "page": 60,
+   "keywords": [
+    "documented",
+    "healing",
+    "non-pressure",
+    "ulcers"
+   ]
+  },
+  "I.C.12.b.3": {
+   "file": "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "title": "3) Patient admitted with non-pressure ulcer that progresses to another severity level during the admission",
+   "page": 60,
+   "keywords": [
+    "admission",
+    "admitted",
+    "another",
+    "during",
+    "level",
+    "non-pressure",
+    "progresses",
+    "severity",
+    "ulcer"
+   ]
+  },
+  "I.C.13": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "13. Chapter 13: Diseases of the Musculoskeletal System and Connective Tissue (M00-M99)",
+   "page": 60,
+   "keywords": [
+    "chapter",
+    "connective",
+    "diseases",
+    "m00-m99",
+    "musculoskeletal",
+    "system",
+    "tissue"
+   ]
+  },
+  "I.C.13.a": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "a. Site and laterality",
+   "page": 60,
+   "keywords": [
+    "laterality",
+    "site"
+   ]
+  },
+  "I.C.13.a.1": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "1) Bone versus joint",
+   "page": 60,
+   "keywords": [
+    "bone",
+    "joint",
+    "versus"
+   ]
+  },
+  "I.C.13.a.2": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "2) Multiple sites",
+   "page": 61,
+   "keywords": [
+    "multiple",
+    "sites"
+   ]
+  },
+  "I.C.13.b": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "b. Acute traumatic versus chronic or recurrent musculoskeletal conditions",
+   "page": 61,
+   "keywords": [
+    "acute",
+    "chronic",
+    "musculoskeletal",
+    "recurrent",
+    "traumatic",
+    "versus"
+   ]
+  },
+  "I.C.13.c": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "c. Coding of Pathologic Fractures",
+   "page": 61,
+   "keywords": [
+    "fractures",
+    "pathologic"
+   ]
+  },
+  "I.C.13.d": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "d. Osteoporosis",
+   "page": 61,
+   "keywords": [
+    "osteoporosis"
+   ]
+  },
+  "I.C.13.d.1": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "1) Osteoporosis without pathological fracture",
+   "page": 62,
+   "keywords": [
+    "fracture",
+    "osteoporosis",
+    "pathological"
+   ]
+  },
+  "I.C.13.d.2": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "2) Osteoporosis with current pathological fracture",
+   "page": 62,
+   "keywords": [
+    "current",
+    "fracture",
+    "osteoporosis",
+    "pathological"
+   ]
+  },
+  "I.C.13.e": {
+   "file": "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "title": "e. Multisystem Inflammatory Syndrome",
+   "page": 62,
+   "keywords": [
+    "inflammatory",
+    "multisystem",
+    "syndrome"
+   ]
+  },
+  "I.C.14": {
+   "file": "I.C.14_chapter-14-diseases-genitourinary-system.md",
+   "title": "14. Chapter 14: Diseases of Genitourinary System (N00-N99)",
+   "page": 62,
+   "keywords": [
+    "chapter",
+    "diseases",
+    "genitourinary",
+    "n00-n99",
+    "system"
+   ]
+  },
+  "I.C.14.a": {
+   "file": "I.C.14_chapter-14-diseases-genitourinary-system.md",
+   "title": "a. Chronic kidney disease",
+   "page": 62,
+   "keywords": [
+    "chronic",
+    "disease",
+    "kidney"
+   ]
+  },
+  "I.C.14.a.1": {
+   "file": "I.C.14_chapter-14-diseases-genitourinary-system.md",
+   "title": "1) Stages of chronic kidney disease (CKD)",
+   "page": 62,
+   "keywords": [
+    "chronic",
+    "ckd",
+    "disease",
+    "kidney",
+    "stages"
+   ]
+  },
+  "I.C.14.a.2": {
+   "file": "I.C.14_chapter-14-diseases-genitourinary-system.md",
+   "title": "2) Chronic kidney disease and kidney transplant status",
+   "page": 62,
+   "keywords": [
+    "chronic",
+    "disease",
+    "kidney",
+    "status",
+    "transplant"
+   ]
+  },
+  "I.C.14.a.3": {
+   "file": "I.C.14_chapter-14-diseases-genitourinary-system.md",
+   "title": "3) Chronic kidney disease with other conditions",
+   "page": 63,
+   "keywords": [
+    "chronic",
+    "disease",
+    "kidney"
+   ]
+  },
+  "I.C.15": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "15. Chapter 15: Pregnancy, Childbirth, and the Puerperium (O00-O9A)",
+   "page": 63,
+   "keywords": [
+    "chapter",
+    "childbirth",
+    "o00-o9a",
+    "pregnancy",
+    "puerperium"
+   ]
+  },
+  "I.C.15.a": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "a. General Rules for Obstetric Cases",
+   "page": 63,
+   "keywords": [
+    "cases",
+    "general",
+    "obstetric",
+    "rules"
+   ]
+  },
+  "I.C.15.a.1": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "1) Codes from chapter 15 and sequencing priority",
+   "page": 63,
+   "keywords": [
+    "chapter",
+    "priority",
+    "sequencing"
+   ]
+  },
+  "I.C.15.a.2": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "2) Chapter 15 codes used only on the maternal record",
+   "page": 63,
+   "keywords": [
+    "chapter",
+    "maternal",
+    "record"
+   ]
+  },
+  "I.C.15.a.3": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "3) Final character for trimester",
+   "page": 63,
+   "keywords": [
+    "character",
+    "final",
+    "trimester"
+   ]
+  },
+  "I.C.15.a.4": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "4) Selection of trimester for inpatient admissions that encompass more than one trimester",
+   "page": 64,
+   "keywords": [
+    "admissions",
+    "encompass",
+    "inpatient",
+    "selection",
+    "trimester"
+   ]
+  },
+  "I.C.15.a.5": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "5) Unspecified trimester",
+   "page": 64,
+   "keywords": [
+    "trimester",
+    "unspecified"
+   ]
+  },
+  "I.C.15.a.6": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "6) 7th character for fetus identification",
+   "page": 64,
+   "keywords": [
+    "character",
+    "fetus",
+    "identification"
+   ]
+  },
+  "I.C.15.a.7": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "7) Completed weeks of gestation",
+   "page": 64,
+   "keywords": [
+    "completed",
+    "gestation",
+    "weeks"
+   ]
+  },
+  "I.C.15.b": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "b. Selection of OB Principal or First-listed Diagnosis",
+   "page": 64,
+   "keywords": [
+    "first-listed",
+    "principal",
+    "selection"
+   ]
+  },
+  "I.C.15.b.1": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "1) Routine outpatient prenatal visits",
+   "page": 64,
+   "keywords": [
+    "outpatient",
+    "prenatal",
+    "routine",
+    "visits"
+   ]
+  },
+  "I.C.15.b.2": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "2) Supervision of High-Risk Pregnancy",
+   "page": 65,
+   "keywords": [
+    "high-risk",
+    "pregnancy",
+    "supervision"
+   ]
+  },
+  "I.C.15.b.3": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "3) Episodes when no delivery occurs",
+   "page": 65,
+   "keywords": [
+    "delivery",
+    "episodes",
+    "occurs"
+   ]
+  },
+  "I.C.15.b.4": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "4) When a delivery occurs",
+   "page": 65,
+   "keywords": [
+    "delivery",
+    "occurs"
+   ]
+  },
+  "I.C.15.b.5": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "5) Outcome of delivery",
+   "page": 65,
+   "keywords": [
+    "delivery",
+    "outcome"
+   ]
+  },
+  "I.C.15.c": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "c. Pre-existing conditions versus conditions due to the pregnancy",
+   "page": 65,
+   "keywords": [
+    "due",
+    "pre-existing",
+    "pregnancy",
+    "versus"
+   ]
+  },
+  "I.C.15.d": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "d. Pre-existing hypertension in pregnancy",
+   "page": 66,
+   "keywords": [
+    "hypertension",
+    "pre-existing",
+    "pregnancy"
+   ]
+  },
+  "I.C.15.e": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "e. Fetal Conditions Affecting the Management of the Mother",
+   "page": 66,
+   "keywords": [
+    "affecting",
+    "fetal",
+    "management",
+    "mother"
+   ]
+  },
+  "I.C.15.e.1": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "1) Codes from categories O35 and O36",
+   "page": 66,
+   "keywords": [
+    "categories",
+    "o35",
+    "o36"
+   ]
+  },
+  "I.C.15.e.2": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "2) In utero surgery",
+   "page": 66,
+   "keywords": [
+    "surgery",
+    "utero"
+   ]
+  },
+  "I.C.15.f": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "f. HIV Infection in Pregnancy, Childbirth and the Puerperium",
+   "page": 66,
+   "keywords": [
+    "childbirth",
+    "hiv",
+    "infection",
+    "pregnancy",
+    "puerperium"
+   ]
+  },
+  "I.C.15.g": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "g. Diabetes mellitus in pregnancy",
+   "page": 66,
+   "keywords": [
+    "diabetes",
+    "mellitus",
+    "pregnancy"
+   ]
+  },
+  "I.C.15.h": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "h. Long term use of insulin and oral hypoglycemics",
+   "page": 67,
+   "keywords": [
+    "hypoglycemics",
+    "insulin",
+    "long",
+    "oral",
+    "term"
+   ]
+  },
+  "I.C.15.i": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "i. Gestational (pregnancy induced) diabetes",
+   "page": 67,
+   "keywords": [
+    "diabetes",
+    "gestational",
+    "induced",
+    "pregnancy"
+   ]
+  },
+  "I.C.15.j": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "j. Sepsis and septic shock complicating abortion, pregnancy, childbirth and the puerperium",
+   "page": 67,
+   "keywords": [
+    "abortion",
+    "childbirth",
+    "complicating",
+    "pregnancy",
+    "puerperium",
+    "sepsis",
+    "septic",
+    "shock"
+   ]
+  },
+  "I.C.15.k": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "k. Puerperal sepsis",
+   "page": 67,
+   "keywords": [
+    "puerperal",
+    "sepsis"
+   ]
+  },
+  "I.C.15.l": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "l. Alcohol, tobacco and drug use during pregnancy, childbirth and the puerperium",
+   "page": 68,
+   "keywords": [
+    "alcohol",
+    "childbirth",
+    "drug",
+    "during",
+    "pregnancy",
+    "puerperium",
+    "tobacco"
+   ]
+  },
+  "I.C.15.l.1": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "1) Alcohol use during pregnancy, childbirth and the puerperium",
+   "page": 68,
+   "keywords": [
+    "alcohol",
+    "childbirth",
+    "during",
+    "pregnancy",
+    "puerperium"
+   ]
+  },
+  "I.C.15.l.2": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "2) Tobacco use during pregnancy, childbirth and the puerperium",
+   "page": 68,
+   "keywords": [
+    "childbirth",
+    "during",
+    "pregnancy",
+    "puerperium",
+    "tobacco"
+   ]
+  },
+  "I.C.15.l.3": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "3) Drug use during pregnancy, childbirth and the puerperium",
+   "page": 68,
+   "keywords": [
+    "childbirth",
+    "drug",
+    "during",
+    "pregnancy",
+    "puerperium"
+   ]
+  },
+  "I.C.15.m": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "m. Poisoning, toxic effects, adverse effects and underdosing in a pregnant patient",
+   "page": 68,
+   "keywords": [
+    "adverse",
+    "effects",
+    "poisoning",
+    "pregnant",
+    "toxic",
+    "underdosing"
+   ]
+  },
+  "I.C.15.n": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "n. Normal Delivery, Code O80",
+   "page": 68,
+   "keywords": [
+    "delivery",
+    "normal",
+    "o80"
+   ]
+  },
+  "I.C.15.n.1": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "1) Encounter for full term uncomplicated delivery",
+   "page": 68,
+   "keywords": [
+    "delivery",
+    "full",
+    "term",
+    "uncomplicated"
+   ]
+  },
+  "I.C.15.n.2": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "2) Uncomplicated delivery with resolved antepartum complication",
+   "page": 69,
+   "keywords": [
+    "antepartum",
+    "complication",
+    "delivery",
+    "resolved",
+    "uncomplicated"
+   ]
+  },
+  "I.C.15.n.3": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "3) Outcome of delivery for O80",
+   "page": 69,
+   "keywords": [
+    "delivery",
+    "o80",
+    "outcome"
+   ]
+  },
+  "I.C.15.o": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "o. The Peripartum and Postpartum Periods",
+   "page": 69,
+   "keywords": [
+    "periods",
+    "peripartum",
+    "postpartum"
+   ]
+  },
+  "I.C.15.o.1": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "1) Peripartum and Postpartum periods",
+   "page": 69,
+   "keywords": [
+    "periods",
+    "peripartum",
+    "postpartum"
+   ]
+  },
+  "I.C.15.o.2": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "2) Peripartum and postpartum complication",
+   "page": 69,
+   "keywords": [
+    "complication",
+    "peripartum",
+    "postpartum"
+   ]
+  },
+  "I.C.15.o.3": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "3) Pregnancy-related complications after 6-week period",
+   "page": 69,
+   "keywords": [
+    "after",
+    "complications",
+    "period",
+    "pregnancy-related",
+    "week"
+   ]
+  },
+  "I.C.15.o.4": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "4) Admission for routine postpartum care following delivery outside hospital",
+   "page": 69,
+   "keywords": [
+    "admission",
+    "care",
+    "delivery",
+    "following",
+    "hospital",
+    "outside",
+    "postpartum",
+    "routine"
+   ]
+  },
+  "I.C.15.o.5": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "5) Pregnancy associated cardiomyopathy",
+   "page": 69,
+   "keywords": [
+    "associated",
+    "cardiomyopathy",
+    "pregnancy"
+   ]
+  },
+  "I.C.15.p": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "p. Code O94, Sequelae of complication of pregnancy, childbirth, and the puerperium",
+   "page": 70,
+   "keywords": [
+    "childbirth",
+    "complication",
+    "o94",
+    "pregnancy",
+    "puerperium",
+    "sequelae"
+   ]
+  },
+  "I.C.15.p.1": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "1) Code O94",
+   "page": 70,
+   "keywords": [
+    "o94"
+   ]
+  },
+  "I.C.15.p.2": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "2) After the initial postpartum period",
+   "page": 70,
+   "keywords": [
+    "after",
+    "initial",
+    "period",
+    "postpartum"
+   ]
+  },
+  "I.C.15.p.3": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "3) Sequencing of Code O94",
+   "page": 70,
+   "keywords": [
+    "o94",
+    "sequencing"
+   ]
+  },
+  "I.C.15.q": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "q. Termination of Pregnancy and Spontaneous abortions",
+   "page": 70,
+   "keywords": [
+    "abortions",
+    "pregnancy",
+    "spontaneous",
+    "termination"
+   ]
+  },
+  "I.C.15.q.1": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "1) Abortion with Liveborn Fetus",
+   "page": 70,
+   "keywords": [
+    "abortion",
+    "fetus",
+    "liveborn"
+   ]
+  },
+  "I.C.15.q.2": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "2) Retained Products of Conception following an abortion",
+   "page": 70,
+   "keywords": [
+    "abortion",
+    "conception",
+    "following",
+    "products",
+    "retained"
+   ]
+  },
+  "I.C.15.q.3": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "3) Complications leading to abortion",
+   "page": 70,
+   "keywords": [
+    "abortion",
+    "complications",
+    "leading"
+   ]
+  },
+  "I.C.15.q.4": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "4) Hemorrhage following elective abortion",
+   "page": 70,
+   "keywords": [
+    "abortion",
+    "elective",
+    "following",
+    "hemorrhage"
+   ]
+  },
+  "I.C.15.r": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "r. Abuse in a pregnant patient",
+   "page": 71,
+   "keywords": [
+    "abuse",
+    "pregnant"
+   ]
+  },
+  "I.C.15.s": {
+   "file": "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "title": "s. COVID-19 infection in pregnancy, childbirth, and the puerperium",
+   "page": 71,
+   "keywords": [
+    "childbirth",
+    "covid-19",
+    "infection",
+    "pregnancy",
+    "puerperium"
+   ]
+  },
+  "I.C.16": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "16. Chapter 16: Certain Conditions Originating in the Perinatal Period (P00-P96)",
+   "page": 71,
+   "keywords": [
+    "certain",
+    "chapter",
+    "originating",
+    "p00-p96",
+    "perinatal",
+    "period"
+   ]
+  },
+  "I.C.16.a": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "a. General Perinatal Rules",
+   "page": 71,
+   "keywords": [
+    "general",
+    "perinatal",
+    "rules"
+   ]
+  },
+  "I.C.16.a.1": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "1) Use of Chapter 16 Codes",
+   "page": 71,
+   "keywords": [
+    "chapter"
+   ]
+  },
+  "I.C.16.a.2": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "2) Principal Diagnosis for Birth Record",
+   "page": 71,
+   "keywords": [
+    "birth",
+    "principal",
+    "record"
+   ]
+  },
+  "I.C.16.a.3": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "3) Use of Codes from other Chapters with Codes from Chapter 16",
+   "page": 72,
+   "keywords": [
+    "chapter",
+    "chapters"
+   ]
+  },
+  "I.C.16.a.4": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "4) Use of Chapter 16 Codes after the Perinatal Period",
+   "page": 72,
+   "keywords": [
+    "after",
+    "chapter",
+    "perinatal",
+    "period"
+   ]
+  },
+  "I.C.16.a.5": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "5) Birth process or community acquired conditions",
+   "page": 72,
+   "keywords": [
+    "acquired",
+    "birth",
+    "community",
+    "process"
+   ]
+  },
+  "I.C.16.a.6": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "6) Code all clinically significant conditions",
+   "page": 72,
+   "keywords": [
+    "clinically",
+    "significant"
+   ]
+  },
+  "I.C.16.b": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "b. Observation and Evaluation of Newborns for Suspected Conditions not Found",
+   "page": 73,
+   "keywords": [
+    "evaluation",
+    "found",
+    "newborns",
+    "observation",
+    "suspected"
+   ]
+  },
+  "I.C.16.b.1": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "1) Use of Z05 codes",
+   "page": 73,
+   "keywords": [
+    "z05"
+   ]
+  },
+  "I.C.16.b.2": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "2) Z05 on other than the birth record",
+   "page": 73,
+   "keywords": [
+    "birth",
+    "record",
+    "z05"
+   ]
+  },
+  "I.C.16.b.3": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "3) Z05 on a birth record",
+   "page": 73,
+   "keywords": [
+    "birth",
+    "record",
+    "z05"
+   ]
+  },
+  "I.C.16.c": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "c. Coding Additional Perinatal Diagnoses",
+   "page": 73,
+   "keywords": [
+    "additional",
+    "perinatal"
+   ]
+  },
+  "I.C.16.c.1": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "1) Assigning codes for conditions that require treatment",
+   "page": 73,
+   "keywords": [
+    "assigning",
+    "require",
+    "treatment"
+   ]
+  },
+  "I.C.16.c.2": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "2) Codes for conditions specified as having implications for future health care needs",
+   "page": 73,
+   "keywords": [
+    "care",
+    "future",
+    "having",
+    "health",
+    "implications",
+    "needs",
+    "specified"
+   ]
+  },
+  "I.C.16.d": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "d. Prematurity and Fetal Growth Retardation",
+   "page": 73,
+   "keywords": [
+    "fetal",
+    "growth",
+    "prematurity",
+    "retardation"
+   ]
+  },
+  "I.C.16.e": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "e. Low birth weight and immaturity status",
+   "page": 74,
+   "keywords": [
+    "birth",
+    "immaturity",
+    "low",
+    "status",
+    "weight"
+   ]
+  },
+  "I.C.16.f": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "f. Bacterial Sepsis of Newborn",
+   "page": 74,
+   "keywords": [
+    "bacterial",
+    "newborn",
+    "sepsis"
+   ]
+  },
+  "I.C.16.g": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "g. Stillbirth",
+   "page": 74,
+   "keywords": [
+    "stillbirth"
+   ]
+  },
+  "I.C.16.h": {
+   "file": "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "title": "h. COVID-19 Infection in Newborn",
+   "page": 74,
+   "keywords": [
+    "covid-19",
+    "infection",
+    "newborn"
+   ]
+  },
+  "I.C.17": {
+   "file": "I.C.17_chapter-17-congenital-malformations-deformations-chromosomal.md",
+   "title": "17. Chapter 17: Congenital malformations, deformations, chromosomal abnormalities, and genetic disorders (Q00-QA1)",
+   "page": 74,
+   "keywords": [
+    "abnormalities",
+    "chapter",
+    "chromosomal",
+    "congenital",
+    "deformations",
+    "disorders",
+    "genetic",
+    "malformations",
+    "q00-qa1"
+   ]
+  },
+  "I.C.18": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "18. Chapter 18: Symptoms, signs, and abnormal clinical and laboratory findings, not elsewhere classified (R00-R99)",
+   "page": 75,
+   "keywords": [
+    "abnormal",
+    "chapter",
+    "classified",
+    "clinical",
+    "elsewhere",
+    "findings",
+    "laboratory",
+    "r00-r99",
+    "signs",
+    "symptoms"
+   ]
+  },
+  "I.C.18.a": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "a. Use of symptom codes",
+   "page": 75,
+   "keywords": [
+    "symptom"
+   ]
+  },
+  "I.C.18.b": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "b. Use of a symptom code with a definitive diagnosis code",
+   "page": 75,
+   "keywords": [
+    "definitive",
+    "symptom"
+   ]
+  },
+  "I.C.18.c": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "c. Combination codes that include symptoms",
+   "page": 75,
+   "keywords": [
+    "combination",
+    "include",
+    "symptoms"
+   ]
+  },
+  "I.C.18.d": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "d. Repeated falls",
+   "page": 76,
+   "keywords": [
+    "falls",
+    "repeated"
+   ]
+  },
+  "I.C.18.e": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "e. Coma",
+   "page": 76,
+   "keywords": [
+    "coma"
+   ]
+  },
+  "I.C.18.e.1": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "1) Coma Scale",
+   "page": 76,
+   "keywords": [
+    "coma",
+    "scale"
+   ]
+  },
+  "I.C.18.f": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "f. Functional quadriplegia",
+   "page": 76,
+   "keywords": [
+    "functional",
+    "quadriplegia"
+   ]
+  },
+  "I.C.18.g": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "g. SIRS due to Non-Infectious Process",
+   "page": 77,
+   "keywords": [
+    "due",
+    "non-infectious",
+    "process",
+    "sirs"
+   ]
+  },
+  "I.C.18.h": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "h. Death NOS",
+   "page": 77,
+   "keywords": [
+    "death",
+    "nos"
+   ]
+  },
+  "I.C.18.i": {
+   "file": "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "title": "i. NIHSS Stroke Scale",
+   "page": 77,
+   "keywords": [
+    "nihss",
+    "scale",
+    "stroke"
+   ]
+  },
+  "I.C.19": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "19. Chapter 19: Injury, poisoning, and certain other consequences of external causes (S00-T88)",
+   "page": 77,
+   "keywords": [
+    "causes",
+    "certain",
+    "chapter",
+    "consequences",
+    "external",
+    "injury",
+    "poisoning",
+    "s00-t88"
+   ]
+  },
+  "I.C.19.a": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "a. Application of 7th Characters in Chapter 19",
+   "page": 77,
+   "keywords": [
+    "application",
+    "chapter",
+    "characters"
+   ]
+  },
+  "I.C.19.b": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "b. Coding of Injuries",
+   "page": 78,
+   "keywords": [
+    "injuries"
+   ]
+  },
+  "I.C.19.b.1": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "1) Superficial injuries",
+   "page": 78,
+   "keywords": [
+    "injuries",
+    "superficial"
+   ]
+  },
+  "I.C.19.b.2": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "2) Primary injury with damage to nerves/blood vessels",
+   "page": 78,
+   "keywords": [
+    "blood",
+    "damage",
+    "injury",
+    "nerves",
+    "primary",
+    "vessels"
+   ]
+  },
+  "I.C.19.b.3": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "3) Iatrogenic injuries",
+   "page": 79,
+   "keywords": [
+    "iatrogenic",
+    "injuries"
+   ]
+  },
+  "I.C.19.c": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "c. Coding of Traumatic Fractures",
+   "page": 79,
+   "keywords": [
+    "fractures",
+    "traumatic"
+   ]
+  },
+  "I.C.19.c.1": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "1) Initial vs. subsequent encounter for fractures",
+   "page": 79,
+   "keywords": [
+    "fractures",
+    "initial",
+    "subsequent"
+   ]
+  },
+  "I.C.19.c.2": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "2) Multiple fractures sequencing",
+   "page": 80,
+   "keywords": [
+    "fractures",
+    "multiple",
+    "sequencing"
+   ]
+  },
+  "I.C.19.c.3": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "3) Physeal fractures",
+   "page": 80,
+   "keywords": [
+    "fractures",
+    "physeal"
+   ]
+  },
+  "I.C.19.d": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "d. Coding of Burns and Corrosions",
+   "page": 80,
+   "keywords": [
+    "burns",
+    "corrosions"
+   ]
+  },
+  "I.C.19.d.1": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "1) Sequencing of burn and related condition codes",
+   "page": 80,
+   "keywords": [
+    "burn",
+    "related",
+    "sequencing"
+   ]
+  },
+  "I.C.19.d.2": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "2) Burns of the same anatomic site",
+   "page": 81,
+   "keywords": [
+    "anatomic",
+    "burns",
+    "same",
+    "site"
+   ]
+  },
+  "I.C.19.d.3": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "3) Non-healing burns",
+   "page": 81,
+   "keywords": [
+    "burns",
+    "non-healing"
+   ]
+  },
+  "I.C.19.d.4": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "4) Infected burn",
+   "page": 81,
+   "keywords": [
+    "burn",
+    "infected"
+   ]
+  },
+  "I.C.19.d.5": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "5) Assign separate codes for each burn site",
+   "page": 81,
+   "keywords": [
+    "assign",
+    "burn",
+    "separate",
+    "site"
+   ]
+  },
+  "I.C.19.d.6": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "6) Burns and corrosions classified according to extent of body surface involved",
+   "page": 81,
+   "keywords": [
+    "according",
+    "body",
+    "burns",
+    "classified",
+    "corrosions",
+    "extent",
+    "involved",
+    "surface"
+   ]
+  },
+  "I.C.19.d.7": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "7) Encounters for treatment of sequela of burns",
+   "page": 82,
+   "keywords": [
+    "burns",
+    "sequela",
+    "treatment"
+   ]
+  },
+  "I.C.19.d.8": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "8) Sequelae with a late effect code and current burn",
+   "page": 82,
+   "keywords": [
+    "burn",
+    "current",
+    "effect",
+    "late",
+    "sequelae"
+   ]
+  },
+  "I.C.19.d.9": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "9) Use of an external cause code with burns and corrosions",
+   "page": 82,
+   "keywords": [
+    "burns",
+    "cause",
+    "corrosions",
+    "external"
+   ]
+  },
+  "I.C.19.e": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "e. Adverse Effects, Poisoning, Underdosing and Toxic Effects",
+   "page": 82,
+   "keywords": [
+    "adverse",
+    "effects",
+    "poisoning",
+    "toxic",
+    "underdosing"
+   ]
+  },
+  "I.C.19.e.1": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "1) Do not code directly from the Table of Drugs",
+   "page": 82,
+   "keywords": [
+    "directly",
+    "drugs",
+    "table"
+   ]
+  },
+  "I.C.19.e.2": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "2) Use as many codes as necessary to describe",
+   "page": 82,
+   "keywords": [
+    "describe",
+    "many",
+    "necessary"
+   ]
+  },
+  "I.C.19.e.3": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "3) If the same code would describe the causative agent",
+   "page": 82,
+   "keywords": [
+    "agent",
+    "causative",
+    "describe",
+    "same",
+    "would"
+   ]
+  },
+  "I.C.19.e.4": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "4) If two or more drugs, medicinal or biological substances",
+   "page": 82,
+   "keywords": [
+    "biological",
+    "drugs",
+    "medicinal",
+    "substances"
+   ]
+  },
+  "I.C.19.e.5": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "5) The occurrence of drug toxicity is classified in ICD-10-CM as follows:",
+   "page": 83,
+   "keywords": [
+    "classified",
+    "drug",
+    "follows",
+    "icd-10-cm",
+    "occurrence",
+    "toxicity"
+   ]
+  },
+  "I.C.19.e.5.a": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(a) Adverse Effect",
+   "page": 83,
+   "keywords": [
+    "adverse",
+    "effect"
+   ]
+  },
+  "I.C.19.e.5.b": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(b) Poisoning",
+   "page": 83,
+   "keywords": [
+    "poisoning"
+   ]
+  },
+  "I.C.19.e.5.b.i": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(i) Error was made in drug prescription",
+   "page": 83,
+   "keywords": [
+    "drug",
+    "error",
+    "made",
+    "prescription",
+    "was"
+   ]
+  },
+  "I.C.19.e.5.b.ii": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(ii) Overdose of a drug intentionally taken",
+   "page": 83,
+   "keywords": [
+    "drug",
+    "intentionally",
+    "overdose",
+    "taken"
+   ]
+  },
+  "I.C.19.e.5.b.iii": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(iii)Nonprescribed drug taken with correctly prescribed and properly administered drug",
+   "page": 84,
+   "keywords": [
+    "administered",
+    "correctly",
+    "drug",
+    "prescribed",
+    "properly",
+    "taken"
+   ]
+  },
+  "I.C.19.e.5.b.iv": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(iv) Interaction of drug(s) and alcohol",
+   "page": 84,
+   "keywords": [
+    "alcohol",
+    "drug",
+    "interaction"
+   ]
+  },
+  "I.C.19.e.5.c": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(c) Underdosing",
+   "page": 84,
+   "keywords": [
+    "underdosing"
+   ]
+  },
+  "I.C.19.e.5.d": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(d) Toxic Effects",
+   "page": 84,
+   "keywords": [
+    "effects",
+    "toxic"
+   ]
+  },
+  "I.C.19.f": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "f. Adult and child abuse, neglect and other maltreatment",
+   "page": 85,
+   "keywords": [
+    "abuse",
+    "adult",
+    "child",
+    "maltreatment",
+    "neglect"
+   ]
+  },
+  "I.C.19.g": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "g. Complications of care",
+   "page": 85,
+   "keywords": [
+    "care",
+    "complications"
+   ]
+  },
+  "I.C.19.g.1": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "1) General guidelines for complications of care",
+   "page": 85,
+   "keywords": [
+    "care",
+    "complications",
+    "general"
+   ]
+  },
+  "I.C.19.g.1.a": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(a) Documentation of complications of care",
+   "page": 85,
+   "keywords": [
+    "care",
+    "complications",
+    "documentation"
+   ]
+  },
+  "I.C.19.g.2": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "2) Pain due to medical devices",
+   "page": 86,
+   "keywords": [
+    "devices",
+    "due",
+    "medical",
+    "pain"
+   ]
+  },
+  "I.C.19.g.3": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "3) Transplant complications",
+   "page": 86,
+   "keywords": [
+    "complications",
+    "transplant"
+   ]
+  },
+  "I.C.19.g.3.a": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(a) Transplant complications other than kidney",
+   "page": 86,
+   "keywords": [
+    "complications",
+    "kidney",
+    "transplant"
+   ]
+  },
+  "I.C.19.g.3.b": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "(b) Kidney transplant complications",
+   "page": 86,
+   "keywords": [
+    "complications",
+    "kidney",
+    "transplant"
+   ]
+  },
+  "I.C.19.g.4": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "4) Complication codes that include the external cause",
+   "page": 87,
+   "keywords": [
+    "cause",
+    "complication",
+    "external",
+    "include"
+   ]
+  },
+  "I.C.19.g.5": {
+   "file": "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "title": "5) Complications of care codes within the body system chapters",
+   "page": 87,
+   "keywords": [
+    "body",
+    "care",
+    "chapters",
+    "complications",
+    "system"
+   ]
+  },
+  "I.C.20": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "20. Chapter 20: External Causes of Morbidity (V00-Y99)",
+   "page": 87,
+   "keywords": [
+    "causes",
+    "chapter",
+    "external",
+    "morbidity",
+    "v00-y99"
+   ]
+  },
+  "I.C.20.a": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "a. General External Cause Coding Guidelines",
+   "page": 88,
+   "keywords": [
+    "cause",
+    "external",
+    "general"
+   ]
+  },
+  "I.C.20.a.1": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "1) Used with any code in the range of A00.0-T88.9, Z00-Z99",
+   "page": 88,
+   "keywords": [
+    "a00",
+    "range",
+    "t88",
+    "z00-z99"
+   ]
+  },
+  "I.C.20.a.2": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "2) External cause code used for length of treatment",
+   "page": 88,
+   "keywords": [
+    "cause",
+    "external",
+    "length",
+    "treatment"
+   ]
+  },
+  "I.C.20.a.3": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "3) Use the full range of external cause codes",
+   "page": 88,
+   "keywords": [
+    "cause",
+    "external",
+    "full",
+    "range"
+   ]
+  },
+  "I.C.20.a.4": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "4) Assign as many external cause codes as necessary",
+   "page": 88,
+   "keywords": [
+    "assign",
+    "cause",
+    "external",
+    "many",
+    "necessary"
+   ]
+  },
+  "I.C.20.a.5": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "5) The selection of the appropriate external cause code",
+   "page": 88,
+   "keywords": [
+    "appropriate",
+    "cause",
+    "external",
+    "selection"
+   ]
+  },
+  "I.C.20.a.6": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "6) External cause code can never be a principal diagnosis",
+   "page": 88,
+   "keywords": [
+    "cause",
+    "external",
+    "never",
+    "principal"
+   ]
+  },
+  "I.C.20.a.7": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "7) Combination external cause codes",
+   "page": 88,
+   "keywords": [
+    "cause",
+    "combination",
+    "external"
+   ]
+  },
+  "I.C.20.a.8": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "8) No external cause code needed in certain circumstances",
+   "page": 89,
+   "keywords": [
+    "cause",
+    "certain",
+    "circumstances",
+    "external",
+    "needed"
+   ]
+  },
+  "I.C.20.b": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "b. Place of Occurrence Guideline",
+   "page": 89,
+   "keywords": [
+    "guideline",
+    "occurrence",
+    "place"
+   ]
+  },
+  "I.C.20.c": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "c. Activity Code",
+   "page": 89,
+   "keywords": [
+    "activity"
+   ]
+  },
+  "I.C.20.d": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "d. Place of Occurrence, Activity, and Status Codes Used with other External Cause Code",
+   "page": 89,
+   "keywords": [
+    "activity",
+    "cause",
+    "external",
+    "occurrence",
+    "place",
+    "status"
+   ]
+  },
+  "I.C.20.e": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "e. If the Reporting Format Limits the Number of External Cause Codes",
+   "page": 90,
+   "keywords": [
+    "cause",
+    "external",
+    "format",
+    "limits",
+    "number",
+    "reporting"
+   ]
+  },
+  "I.C.20.f": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "f. Multiple External Cause Coding Guidelines",
+   "page": 90,
+   "keywords": [
+    "cause",
+    "external",
+    "multiple"
+   ]
+  },
+  "I.C.20.g": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "g. Child and Adult Abuse Guideline",
+   "page": 90,
+   "keywords": [
+    "abuse",
+    "adult",
+    "child",
+    "guideline"
+   ]
+  },
+  "I.C.20.h": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "h. Unknown or Undetermined Intent Guideline",
+   "page": 91,
+   "keywords": [
+    "guideline",
+    "intent",
+    "undetermined",
+    "unknown"
+   ]
+  },
+  "I.C.20.h.1": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "1) Use of undetermined intent",
+   "page": 91,
+   "keywords": [
+    "intent",
+    "undetermined"
+   ]
+  },
+  "I.C.20.i": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "i. Sequelae (Late Effects) of External Cause Guidelines",
+   "page": 91,
+   "keywords": [
+    "cause",
+    "effects",
+    "external",
+    "late",
+    "sequelae"
+   ]
+  },
+  "I.C.20.i.1": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "1) Sequelae external cause codes",
+   "page": 91,
+   "keywords": [
+    "cause",
+    "external",
+    "sequelae"
+   ]
+  },
+  "I.C.20.i.2": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "2) Sequela external cause code with a related current injury",
+   "page": 91,
+   "keywords": [
+    "cause",
+    "current",
+    "external",
+    "injury",
+    "related",
+    "sequela"
+   ]
+  },
+  "I.C.20.i.3": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "3) Use of sequela external cause codes for subsequent visits",
+   "page": 91,
+   "keywords": [
+    "cause",
+    "external",
+    "sequela",
+    "subsequent",
+    "visits"
+   ]
+  },
+  "I.C.20.j": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "j. Terrorism Guidelines",
+   "page": 91,
+   "keywords": [
+    "terrorism"
+   ]
+  },
+  "I.C.20.j.1": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "1) Cause of injury identified by the Federal Government (FBI) as terrorism",
+   "page": 91,
+   "keywords": [
+    "cause",
+    "fbi",
+    "federal",
+    "government",
+    "identified",
+    "injury",
+    "terrorism"
+   ]
+  },
+  "I.C.20.j.2": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "2) Cause of an injury is suspected to be the result of terrorism",
+   "page": 92,
+   "keywords": [
+    "cause",
+    "injury",
+    "result",
+    "suspected",
+    "terrorism"
+   ]
+  },
+  "I.C.20.j.3": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "3) Code Y38.9, Terrorism, secondary effects",
+   "page": 92,
+   "keywords": [
+    "effects",
+    "secondary",
+    "terrorism",
+    "y38"
+   ]
+  },
+  "I.C.20.k": {
+   "file": "I.C.20_chapter-20-external-causes-morbidity.md",
+   "title": "k. External Cause Status",
+   "page": 92,
+   "keywords": [
+    "cause",
+    "external",
+    "status"
+   ]
+  },
+  "I.C.21": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "21. Chapter 21: Factors influencing health status and contact with health services (Z00-Z99)",
+   "page": 92,
+   "keywords": [
+    "chapter",
+    "contact",
+    "factors",
+    "health",
+    "influencing",
+    "services",
+    "status",
+    "z00-z99"
+   ]
+  },
+  "I.C.21.a": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "a. Use of Z Codes in Any Healthcare Setting",
+   "page": 92,
+   "keywords": [
+    "healthcare",
+    "setting"
+   ]
+  },
+  "I.C.21.b": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "b. Z Codes Indicate a Reason for an Encounter or Provide Additional Information about a Patient Encounter",
+   "page": 93,
+   "keywords": [
+    "about",
+    "additional",
+    "indicate",
+    "information",
+    "provide",
+    "reason"
+   ]
+  },
+  "I.C.21.c": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "c. Categories of Z Codes",
+   "page": 93,
+   "keywords": [
+    "categories"
+   ]
+  },
+  "I.C.21.c.1": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "1) Contact/Exposure",
+   "page": 93,
+   "keywords": [
+    "contact",
+    "exposure"
+   ]
+  },
+  "I.C.21.c.2": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "2) Inoculations and vaccinations",
+   "page": 93,
+   "keywords": [
+    "inoculations",
+    "vaccinations"
+   ]
+  },
+  "I.C.21.c.3": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "3) Status",
+   "page": 93,
+   "keywords": [
+    "status"
+   ]
+  },
+  "I.C.21.c.4": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "4) History (of)",
+   "page": 97,
+   "keywords": [
+    "history"
+   ]
+  },
+  "I.C.21.c.5": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "5) Screening",
+   "page": 98,
+   "keywords": [
+    "screening"
+   ]
+  },
+  "I.C.21.c.6": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "6) Observation",
+   "page": 98,
+   "keywords": [
+    "observation"
+   ]
+  },
+  "I.C.21.c.7": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "7) Aftercare",
+   "page": 99,
+   "keywords": [
+    "aftercare"
+   ]
+  },
+  "I.C.21.c.8": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "8) Follow-up",
+   "page": 101,
+   "keywords": [
+    "follow-up"
+   ]
+  },
+  "I.C.21.c.9": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "9) Donor",
+   "page": 101,
+   "keywords": [
+    "donor"
+   ]
+  },
+  "I.C.21.c.10": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "10) Counseling",
+   "page": 101,
+   "keywords": [
+    "counseling"
+   ]
+  },
+  "I.C.21.c.11": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "11) Encounters for Obstetrical and Reproductive Services",
+   "page": 102,
+   "keywords": [
+    "obstetrical",
+    "reproductive",
+    "services"
+   ]
+  },
+  "I.C.21.c.12": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "12) Routine and Administrative Examinations",
+   "page": 103,
+   "keywords": [
+    "administrative",
+    "examinations",
+    "routine"
+   ]
+  },
+  "I.C.21.c.13": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "13) Miscellaneous Z Codes",
+   "page": 104,
+   "keywords": [
+    "miscellaneous"
+   ]
+  },
+  "I.C.21.c.14": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "14) Nonspecific Z Codes",
+   "page": 105,
+   "keywords": [
+    "nonspecific"
+   ]
+  },
+  "I.C.21.c.15": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "15) Z Codes That May Only be Principal/First-Listed Diagnosis",
+   "page": 106,
+   "keywords": [
+    "first-listed",
+    "principal"
+   ]
+  },
+  "I.C.21.c.16": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "16) Newborns and Infants",
+   "page": 106,
+   "keywords": [
+    "infants",
+    "newborns"
+   ]
+  },
+  "I.C.21.c.17": {
+   "file": "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "title": "17) Social Determinants of Health",
+   "page": 106,
+   "keywords": [
+    "determinants",
+    "health",
+    "social"
+   ]
+  },
+  "I.C.22": {
+   "file": "I.C.22_chapter-22-special-purposes.md",
+   "title": "22. Chapter 22: Codes for Special Purposes (U00-U85)",
+   "page": 108,
+   "keywords": [
+    "chapter",
+    "purposes",
+    "special",
+    "u00-u85"
+   ]
+  },
+  "II": {
+   "file": "II_selection-principal.md",
+   "title": "Section II. Selection of Principal Diagnosis",
+   "page": 108,
+   "keywords": [
+    "principal",
+    "selection"
+   ]
+  },
+  "II.A": {
+   "file": "II_selection-principal.md",
+   "title": "A. Codes for symptoms, signs, and ill-defined conditions",
+   "page": 108,
+   "keywords": [
+    "ill-defined",
+    "signs",
+    "symptoms"
+   ]
+  },
+  "II.B": {
+   "file": "II_selection-principal.md",
+   "title": "B. Two or more interrelated conditions, each potentially meeting the definition for principal diagnosis.",
+   "page": 108,
+   "keywords": [
+    "definition",
+    "interrelated",
+    "meeting",
+    "potentially",
+    "principal"
+   ]
+  },
+  "II.C": {
+   "file": "II_selection-principal.md",
+   "title": "C. Two or more diagnoses that equally meet the definition for principal diagnosis",
+   "page": 108,
+   "keywords": [
+    "definition",
+    "equally",
+    "meet",
+    "principal"
+   ]
+  },
+  "II.D": {
+   "file": "II_selection-principal.md",
+   "title": "D. Two or more comparative or contrasting conditions",
+   "page": 109,
+   "keywords": [
+    "comparative",
+    "contrasting"
+   ]
+  },
+  "II.E": {
+   "file": "II_selection-principal.md",
+   "title": "E. A symptom(s) followed by contrasting/comparative diagnoses",
+   "page": 109,
+   "keywords": [
+    "comparative",
+    "contrasting",
+    "followed",
+    "symptom"
+   ]
+  },
+  "II.F": {
+   "file": "II_selection-principal.md",
+   "title": "F. Original treatment plan not carried out",
+   "page": 109,
+   "keywords": [
+    "carried",
+    "original",
+    "out",
+    "plan",
+    "treatment"
+   ]
+  },
+  "II.G": {
+   "file": "II_selection-principal.md",
+   "title": "G. Complications of surgery and other medical care",
+   "page": 109,
+   "keywords": [
+    "care",
+    "complications",
+    "medical",
+    "surgery"
+   ]
+  },
+  "II.H": {
+   "file": "II_selection-principal.md",
+   "title": "H. Uncertain Diagnosis",
+   "page": 109,
+   "keywords": [
+    "uncertain"
+   ]
+  },
+  "II.I": {
+   "file": "II_selection-principal.md",
+   "title": "I. Admission from Observation Unit",
+   "page": 109,
+   "keywords": [
+    "admission",
+    "observation",
+    "unit"
+   ]
+  },
+  "II.I.1": {
+   "file": "II_selection-principal.md",
+   "title": "1. Admission Following Medical Observation",
+   "page": 109,
+   "keywords": [
+    "admission",
+    "following",
+    "medical",
+    "observation"
+   ]
+  },
+  "II.I.2": {
+   "file": "II_selection-principal.md",
+   "title": "2. Admission Following Post-Operative Observation",
+   "page": 109,
+   "keywords": [
+    "admission",
+    "following",
+    "observation",
+    "post-operative"
+   ]
+  },
+  "II.J": {
+   "file": "II_selection-principal.md",
+   "title": "J. Admission from Outpatient Surgery",
+   "page": 110,
+   "keywords": [
+    "admission",
+    "outpatient",
+    "surgery"
+   ]
+  },
+  "II.K": {
+   "file": "II_selection-principal.md",
+   "title": "K. Admissions/Encounters for Rehabilitation",
+   "page": 110,
+   "keywords": [
+    "admissions",
+    "rehabilitation"
+   ]
+  },
+  "III": {
+   "file": "III_reporting-additional.md",
+   "title": "Section III. Reporting Additional Diagnoses",
+   "page": 110,
+   "keywords": [
+    "additional",
+    "iii",
+    "reporting"
+   ]
+  },
+  "III.A": {
+   "file": "III_reporting-additional.md",
+   "title": "A. Previous conditions",
+   "page": 111,
+   "keywords": [
+    "previous"
+   ]
+  },
+  "III.B": {
+   "file": "III_reporting-additional.md",
+   "title": "B. Abnormal findings",
+   "page": 111,
+   "keywords": [
+    "abnormal",
+    "findings"
+   ]
+  },
+  "III.C": {
+   "file": "III_reporting-additional.md",
+   "title": "C. Uncertain Diagnosis",
+   "page": 111,
+   "keywords": [
+    "uncertain"
+   ]
+  },
+  "IV": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "Section IV. Diagnostic Coding and Reporting Guidelines for Outpatient Services",
+   "page": 112,
+   "keywords": [
+    "diagnostic",
+    "outpatient",
+    "reporting",
+    "services"
+   ]
+  },
+  "IV.A": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "A. Selection of first-listed condition",
+   "page": 112,
+   "keywords": [
+    "first-listed",
+    "selection"
+   ]
+  },
+  "IV.A.1": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "1. Outpatient Surgery",
+   "page": 112,
+   "keywords": [
+    "outpatient",
+    "surgery"
+   ]
+  },
+  "IV.A.2": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "2. Observation Stay",
+   "page": 113,
+   "keywords": [
+    "observation",
+    "stay"
+   ]
+  },
+  "IV.B": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "B. Codes from A00.0 through T88.9, Z00-Z99, U00-U85",
+   "page": 113,
+   "keywords": [
+    "a00",
+    "t88",
+    "through",
+    "u00-u85",
+    "z00-z99"
+   ]
+  },
+  "IV.C": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "C. Accurate reporting of ICD-10-CM diagnosis codes",
+   "page": 113,
+   "keywords": [
+    "accurate",
+    "icd-10-cm",
+    "reporting"
+   ]
+  },
+  "IV.D": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "D. Codes that describe symptoms and signs",
+   "page": 113,
+   "keywords": [
+    "describe",
+    "signs",
+    "symptoms"
+   ]
+  },
+  "IV.E": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "E. Encounters for circumstances other than a disease or injury",
+   "page": 113,
+   "keywords": [
+    "circumstances",
+    "disease",
+    "injury"
+   ]
+  },
+  "IV.F": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "F. Level of Detail in Coding",
+   "page": 113,
+   "keywords": [
+    "detail",
+    "level"
+   ]
+  },
+  "IV.F.1": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "1. ICD-10-CM codes with 3, 4, 5, 6 or 7 characters",
+   "page": 113,
+   "keywords": [
+    "characters",
+    "icd-10-cm"
+   ]
+  },
+  "IV.F.2": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "2. Use of full number of characters required for a code",
+   "page": 113,
+   "keywords": [
+    "characters",
+    "full",
+    "number",
+    "required"
+   ]
+  },
+  "IV.F.3": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "3. Highest level of specificity",
+   "page": 114,
+   "keywords": [
+    "highest",
+    "level",
+    "specificity"
+   ]
+  },
+  "IV.G": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "G. ICD-10-CM code for the diagnosis, condition, problem, or other reason for encounter/visit",
+   "page": 114,
+   "keywords": [
+    "icd-10-cm",
+    "problem",
+    "reason",
+    "visit"
+   ]
+  },
+  "IV.H": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "H. Uncertain diagnosis",
+   "page": 114,
+   "keywords": [
+    "uncertain"
+   ]
+  },
+  "IV.I": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "I. Chronic diseases",
+   "page": 114,
+   "keywords": [
+    "chronic",
+    "diseases"
+   ]
+  },
+  "IV.J": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "J. Code all documented conditions that coexist",
+   "page": 114,
+   "keywords": [
+    "coexist",
+    "documented"
+   ]
+  },
+  "IV.K": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "K. Patients receiving diagnostic services only",
+   "page": 114,
+   "keywords": [
+    "diagnostic",
+    "receiving",
+    "services"
+   ]
+  },
+  "IV.L": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "L. Patients receiving therapeutic services only",
+   "page": 115,
+   "keywords": [
+    "receiving",
+    "services",
+    "therapeutic"
+   ]
+  },
+  "IV.M": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "M. Patients receiving preoperative evaluations only",
+   "page": 115,
+   "keywords": [
+    "evaluations",
+    "preoperative",
+    "receiving"
+   ]
+  },
+  "IV.N": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "N. Ambulatory surgery",
+   "page": 115,
+   "keywords": [
+    "ambulatory",
+    "surgery"
+   ]
+  },
+  "IV.O": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "O. Routine outpatient prenatal visits",
+   "page": 115,
+   "keywords": [
+    "outpatient",
+    "prenatal",
+    "routine",
+    "visits"
+   ]
+  },
+  "IV.P": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "P. Encounters for general medical examinations with abnormal findings",
+   "page": 115,
+   "keywords": [
+    "abnormal",
+    "examinations",
+    "findings",
+    "general",
+    "medical"
+   ]
+  },
+  "IV.Q": {
+   "file": "IV_diagnostic-reporting-outpatient-services.md",
+   "title": "Q. Encounters for routine health screenings",
+   "page": 115,
+   "keywords": [
+    "health",
+    "routine",
+    "screenings"
+   ]
+  },
+  "AppI": {
+   "file": "AppI_present-on-admission-reporting-guidelines.md",
+   "title": "Appendix I",
+   "page": 116,
+   "keywords": []
+  }
+ },
+ "extraction_check": {
+  "pdf_pages": 121,
+  "pdf_words_all_pages": 44815,
+  "excluded_table_of_contents_pages": "2-6",
+  "excluded_table_of_contents_words": 2011,
+  "excluded_running_header_words": 1495,
+  "pdf_words_body": 41309,
+  "markdown_words_body": 41291,
+  "word_difference": -18,
+  "pdf_alphanumeric_chars_body": 223103,
+  "markdown_alphanumeric_chars_body": 223103,
+  "alphanumeric_difference": 0,
+  "pdf_lines_not_found_in_output": 0,
+  "missing_line_samples": [],
+  "bookmarks": 492,
+  "bookmarks_without_matching_heading_text": []
+ }
+}

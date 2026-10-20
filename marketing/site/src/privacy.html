@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How SOLIS handles data</title>
+<meta name="description" content="A plain summary of how SOLIS handles recordings, notes, card photos and keys, and how to get a Business Associate Agreement.">
+<link rel="canonical" href="{{SITE}}/privacy">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SOLIS">
+<meta property="og:title" content="How SOLIS handles data">
+<meta property="og:description" content="Consent first, on-device mode, card photos deleted after reading, keys never in the app, BAA available.">
+<meta property="og:url" content="{{SITE}}/privacy">
+<meta property="og:image" content="{{SITE}}/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<x-header active="privacy"></x-header>
+<main id="main">
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Privacy</span>
+      <h1>How SOLIS handles data</h1>
+      <p class="lead">A plain summary for physicians, practice managers and compliance leads. SOLIS is built for HIPAA workflows, and a Business Associate Agreement is available.</p>
+    </div>
+  </section>
+
+  <div class="container doc-layout" style="grid-template-columns:minmax(0,1fr)">
+    <article class="prose" style="margin:0 auto">
+      <section id="consent">
+        <h2>Consent comes first</h2>
+        <p>Before anything is recorded, SOLIS shows a short script for the patient, in English or Spanish. The patient agrees out loud, or signs on the phone. The time and location of that consent are saved with the visit.</p>
+        <p>If the patient declines, nothing is recorded and you can type the note instead.</p>
+      </section>
+
+      <section id="audio">
+        <h2>Where the audio goes</h2>
+        <p>Your practice chooses the engine.</p>
+        <dl class="kv">
+          <dt>On-device mode</dt><dd>Audio stays on the phone. Speech recognition and speaker separation run on the phone after a one-time download of about 150 MB. Works offline.</dd>
+          <dt>Cloud mode</dt><dd>Used only when the practice turns it on. Transcription uses the Deepgram medical model, and Claude writes the note.</dd>
+        </dl>
+        <p>In either mode, the note contains only what was said. SOLIS does not add vitals or exam findings that were not said, and every diagnosis links to the words it came from.</p>
+      </section>
+
+      <section id="cards">
+        <h2>Insurance cards and IDs</h2>
+        <ul class="plain">
+          <li><x-icon id="check"></x-icon>Cards are read on the phone with Google ML Kit.</li>
+          <li><x-icon id="check"></x-icon>Card photos are deleted after reading.</li>
+          <li><x-icon id="check"></x-icon>From an SSN card, only the last 4 digits are kept. The full SSN is never stored.</li>
+        </ul>
+      </section>
+
+      <section id="keys">
+        <h2>Keys and vendors</h2>
+        <p>Vendor keys never ship inside the app. They live on the SOLIS server, and the app reaches vendors through it. Eligibility checks, claims and claim status go through the Stedi clearinghouse.</p>
+      </section>
+
+      <section id="location">
+        <h2>Location</h2>
+        <p>The visit record carries the real street address where the visit took place. If location is not available, the visit is saved without one rather than with a guessed address.</p>
+      </section>
+
+      <section id="baa">
+        <h2>Business Associate Agreement</h2>
+        <p>A BAA template is available for practices. Ask for it when you request early access, and we will send it with the pilot details.</p>
+        <p><a class="btn btn-primary" href="index.html#access">Request early access</a></p>
+      </section>
+
+      <section id="status">
+        <h2>What we do not claim</h2>
+        <p>SOLIS is an Android app at version 1.0.0, in its pilot stage. We describe it as built for HIPAA workflows. We do not claim certifications it does not have.</p>
+        <p class="callout tip"><x-icon id="info"></x-icon><span>About this website: the early-access form stores the details you send so we can reply. Please do not put patient information in the form.</span></p>
+      </section>
+    </article>
+  </div>
+</main>
+<x-footer></x-footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

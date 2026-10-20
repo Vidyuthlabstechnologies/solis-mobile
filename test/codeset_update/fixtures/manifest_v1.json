@@ -1,0 +1,58 @@
+{
+ "format": "solis-codesets/1",
+ "serial": 2026101701,
+ "generated_at": "2026-10-17T12:00:00Z",
+ "previous_serial": null,
+ "publisher": "SOLIS code-set updater (test vector)",
+ "license_note": "Test data with \"quotes\", back\\slash and / slash.",
+ "sources": {
+  "hcpcs": "october-2026-alpha-numeric-hcpcs-file",
+  "icd10cm-2026": "2026-04-01",
+  "icd10cm-2027": "2026-10-01"
+ },
+ "releases": [],
+ "files": [
+  {
+   "name": "icd10cm_2026.tsv.gz",
+   "sha256": "94616537e7fdc723da93893d4b16f9f84a6524abf02eb383728d9e41069ac05f",
+   "size": 75,
+   "rows": 2,
+   "path": "files/94616537e7fdc723da93893d4b16f9f84a6524abf02eb383728d9e41069ac05f/icd10cm_2026.tsv.gz",
+   "set": "icd10cm",
+   "release": "icd10cm-2026",
+   "edition": "FY2026",
+   "effective_from": "2025-10-01",
+   "effective_to": "2026-09-30",
+   "select": "date_of_service"
+  },
+  {
+   "name": "icd10cm_2027.tsv.gz",
+   "sha256": "dd17933b6d65a1652bf0828d56a612f21ee4b9f6e3c67ecda09c787b707bf75e",
+   "size": 112,
+   "rows": 3,
+   "path": "files/dd17933b6d65a1652bf0828d56a612f21ee4b9f6e3c67ecda09c787b707bf75e/icd10cm_2027.tsv.gz",
+   "set": "icd10cm",
+   "release": "icd10cm-2027",
+   "edition": "FY2027",
+   "effective_from": "2026-10-01",
+   "effective_to": "2027-09-30",
+   "select": "date_of_service"
+  },
+  {
+   "name": "hcpcs.tsv.gz",
+   "sha256": "ecc0c3f2da531b2ac6a36b16f7f788f31ce888f0985a519a54742c075948aae9",
+   "size": 73,
+   "rows": 1,
+   "path": "files/ecc0c3f2da531b2ac6a36b16f7f788f31ce888f0985a519a54742c075948aae9/hcpcs.tsv.gz",
+   "set": "hcpcs",
+   "release": "hcpcs",
+   "effective_from": "2026-10-01",
+   "select": "latest"
+  }
+ ],
+ "signature": {
+  "alg": "Ed25519",
+  "key_id": "solis-codesets-65b60673",
+  "value": "4cqrSl2/3fXR/pArrRGGFjzSzVRDVHDreq9+qAbYk/9bfEKHrM+BxnxsaeStMMy05ULHuxO8pgA8QWZJfgQUDw=="
+ }
+}

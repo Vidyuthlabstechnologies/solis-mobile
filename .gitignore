@@ -1,0 +1,97 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Secrets: vendor keys live only in secrets/ and in Cloudflare Worker secrets (tool/keyvault)
+secrets/
+keys.local.json
+**/keys.local.json
+.dev.vars
+**/.dev.vars
+.dev.vars.*
+
+# Licensed data kept on this computer only (AMA CPT click-through: internal use)
+local_data/
+
+# Signing keys and credentials (never commit)
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+key.properties
+**/key.properties
+local.properties
+**/local.properties
+.env
+.env.*
+**/.env
+**/.env.*
+google-services.json
+GoogleService-Info.plist
+*token*.txt
+
+# Build and release output
+*.apk
+*.aab
+*.ipa
+build/
+**/build/
+dist/
+**/dist/
+node_modules/
+**/node_modules/
+.wrangler/
+**/.wrangler/
+__pycache__/
+**/__pycache__/
+android/.gradle/
+android/app/.cxx/
+
+# Rendered marketing videos (rebuild from marketing/video/src)
+*.mp4
+
+# Raw audio mixes for the video (large; kept locally)
+*.wav

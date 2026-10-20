@@ -1,0 +1,15 @@
+L01	af_heart	It's nine forty at night. And you're still charting.
+L02	af_heart	For every hour with patients, doctors spend nearly two more on the EHR and desk work.
+L03	af_heart	Then one to two more hours at night. And the claim can still come back denied.
+L04	af_heart	SOLIS listens to the visit, writes the note, and builds a clean claim, on your phone.
+L05	af_heart	Consent comes first. The patient hears a short script, in English or Spanish, and agrees out loud, or signs on the screen.
+L06	af_heart	Then you just talk. SOLIS tells your voice from the patient's.
+D01	am_michael	So, what brings you in today?
+D02	af_bella	I have this deep cough. I'm coughing up thick green phlegm, and my fever spiked to a hundred and one point five last night.
+D03	am_michael	Any pain when you breathe?
+D04	af_bella	Yes. A sharp pain, on the right side.
+L07	af_heart	When you finish, the note writes itself. Nothing invented. Every diagnosis links to the words it came from.
+L08	af_heart	Codes come from the patient's own words. Then every claim is checked against the official CMS code sets, so a denial gets caught before it goes out.
+L09	af_heart	Scan the insurance card. Send the claim in one tap.
+L10	af_heart	Need the audio to stay on the phone? Use on-device mode. And a BAA is available for your practice.
+L11	af_heart	SOLIS. Your visit, documented and billed. Request early access.

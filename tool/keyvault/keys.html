@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>SOLIS Key Vault</title>
+<style nonce="{{NONCE}}">
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --text: #16191d; --muted: #5f6873; --line: #dde1e6;
+    --accent: #1f5fd1; --ok: #18794e; --ok-bg: #e7f5ee; --bad: #b42318; --bad-bg: #fdecea;
+    --warn: #8a5a00; --warn-bg: #fff4d6; --input: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101317; --card: #171b21; --text: #e7eaee; --muted: #9aa3ad; --line: #2a3038;
+      --accent: #6b9dff; --ok: #5fd39a; --ok-bg: #15301f; --bad: #ff8a80; --bad-bg: #3a1714;
+      --warn: #ffcf66; --warn-bg: #3a2c0a; --input: #0f1216;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 12px; }
+  p.lead { color: var(--muted); margin: 0 0 20px; }
+  .banner { padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; }
+  .banner.warn { background: var(--warn-bg); color: var(--warn); }
+  .banner.bad { background: var(--bad-bg); color: var(--bad); }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .field { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 12px 0; border-top: 1px solid var(--line); }
+  .field:first-of-type { border-top: 0; padding-top: 0; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  label { font-weight: 600; font-size: 14px; }
+  code { font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; color: var(--muted); }
+  .help { color: var(--muted); font-size: 13px; }
+  input, select { flex: 1; min-width: 0; padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--input); color: var(--text); font: 14px ui-monospace, Consolas, monospace; }
+  input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+  button { padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--card);
+    color: var(--text); font: 600 14px system-ui, sans-serif; cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button:disabled { opacity: .55; cursor: default; }
+  .pill { font-size: 12px; padding: 2px 8px; border-radius: 99px; background: var(--bg); color: var(--muted); border: 1px solid var(--line); white-space: nowrap; }
+  .pill.set { background: var(--ok-bg); color: var(--ok); border-color: transparent; }
+  .pill.test { background: var(--warn-bg); color: var(--warn); border-color: transparent; }
+  .pill.prod { background: var(--bad-bg); color: var(--bad); border-color: transparent; }
+  .actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .actions label { font-weight: 400; display: flex; gap: 6px; align-items: center; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  td, th { text-align: left; padding: 8px 6px; border-top: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; border-top: 0; }
+  td.ok { color: var(--ok); font-weight: 600; } td.bad { color: var(--bad); font-weight: 600; }
+  pre { margin: 0; white-space: pre-wrap; word-break: break-word; font: 12.5px ui-monospace, Consolas, monospace; }
+  .err { color: var(--bad); font-size: 13px; }
+  #tokenBox { display: none; }
+  .mb { margin-bottom: 8px; } .mt { margin-top: 10px; } .nogrow { flex: none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>SOLIS Key Vault</h1>
+  <p class="lead">Keys stay on this computer and in Cloudflare Worker secrets. They are never put in the Android app or in git.
+    Leave a field blank to keep its saved value.</p>
+
+  <div id="dry" class="banner warn" hidden>Dry run: files are written, but nothing is sent to Cloudflare.</div>
+  <div id="msg" class="banner bad" hidden></div>
+
+  <section id="tokenBox">
+    <h2>Session</h2>
+    <div class="field">
+      <label for="sessionToken">Session token</label>
+      <div class="help">Paste the token printed in the terminal where keyvault.py is running.</div>
+      <div class="row"><input id="sessionToken" type="password" autocomplete="off" spellcheck="false"><button id="useToken" type="button">Continue</button></div>
+    </div>
+  </section>
+
+  <form id="form" autocomplete="off" hidden>
+    <section>
+      <h2>App access</h2>
+      <div class="field" data-name="SOLIS_APP_TOKEN">
+        <div class="row"><label for="SOLIS_APP_TOKEN">SOLIS_APP_TOKEN</label><span class="pill" data-pill></span></div>
+        <div class="help">Shared secret the app sends as <code>Authorization: Bearer</code> to the Worker. Not a vendor key. Rotate it if a build leaks.</div>
+        <div class="row"><input id="SOLIS_APP_TOKEN" type="password" spellcheck="false"><button type="button" data-show>Show</button><button type="button" id="gen">Generate</button></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Note AI and speech</h2>
+      <div class="field" data-name="ANTHROPIC_API_KEY">
+        <div class="row"><label for="ANTHROPIC_API_KEY">ANTHROPIC_API_KEY</label><span class="pill" data-pill></span></div>
+        <div class="help">Claude, used to write the SOAP note. Without it the Worker falls back to Workers AI.</div>
+        <div class="row"><input id="ANTHROPIC_API_KEY" type="password" spellcheck="false" placeholder="sk-ant-..."><button type="button" data-show>Show</button></div>
+      </div>
+      <div class="field" data-name="ANTHROPIC_WORKSPACE_ID">
+        <div class="row"><label for="ANTHROPIC_WORKSPACE_ID">ANTHROPIC_WORKSPACE_ID</label><span class="pill" data-pill></span></div>
+        <div class="help">Only for an organization-level key that is not scoped to a workspace: the workspace ID from the Claude Console (starts with wrkspc_). Leave empty for a workspace key.</div>
+        <div class="row"><input id="ANTHROPIC_WORKSPACE_ID" type="text" spellcheck="false" placeholder="wrkspc_..."></div>
+      </div>
+      <div class="field" data-name="DEEPGRAM_API_KEY">
+        <div class="row"><label for="DEEPGRAM_API_KEY">DEEPGRAM_API_KEY</label><span class="pill" data-pill></span></div>
+        <div class="help">Live transcription. The app only ever receives short-lived tokens minted by the Worker.</div>
+        <div class="row"><input id="DEEPGRAM_API_KEY" type="password" spellcheck="false"><button type="button" data-show>Show</button></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Stedi (eligibility, claims, claim status)</h2>
+      <div class="field" data-name="STEDI_API_KEY">
+        <div class="row"><label for="STEDI_API_KEY">STEDI_API_KEY</label><span class="pill" data-pill></span><span class="pill" id="modePill"></span></div>
+        <div class="help">Create test keys in Stedi's test mode; production keys send real transactions to payers.</div>
+        <div class="row"><input id="STEDI_API_KEY" type="password" spellcheck="false"><button type="button" data-show>Show</button></div>
+      </div>
+      <div class="field" data-name="STEDI_MODE">
+        <div class="row"><label for="STEDI_MODE">STEDI_MODE</label><span class="pill" data-pill></span></div>
+        <div class="help">Which kind of key this is. In test mode the Worker marks claims with usage indicator T.</div>
+        <div class="row"><select id="STEDI_MODE"><option value="">Keep saved value</option><option value="test">test</option><option value="production">production</option></select></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>837P submitter and receiver (not secret)</h2>
+      <div class="help mb">Defaults the Worker adds to a claim when the app does not send them.</div>
+      <div class="field" data-name="SOLIS_SUBMITTER_ORG_NAME">
+        <div class="row"><label for="SOLIS_SUBMITTER_ORG_NAME">Submitter organization name</label><span class="pill" data-pill></span></div>
+        <div class="row"><input id="SOLIS_SUBMITTER_ORG_NAME" type="text"></div>
+      </div>
+      <div class="field" data-name="SOLIS_SUBMITTER_ID">
+        <div class="row"><label for="SOLIS_SUBMITTER_ID">Submitter ID</label><span class="pill" data-pill></span></div>
+        <div class="help">Loop 1000A NM109 (submitterIdentification). Leave blank to let Stedi use its default.</div>
+        <div class="row"><input id="SOLIS_SUBMITTER_ID" type="text"></div>
+      </div>
+      <div class="field" data-name="SOLIS_SUBMITTER_CONTACT_NAME">
+        <div class="row"><label for="SOLIS_SUBMITTER_CONTACT_NAME">Submitter contact name</label><span class="pill" data-pill></span></div>
+        <div class="row"><input id="SOLIS_SUBMITTER_CONTACT_NAME" type="text"></div>
+      </div>
+      <div class="field" data-name="SOLIS_SUBMITTER_PHONE">
+        <div class="row"><label for="SOLIS_SUBMITTER_PHONE">Submitter phone</label><span class="pill" data-pill></span></div>
+        <div class="help">Digits only, for example 5551234567. A phone or an email is required by Stedi.</div>
+        <div class="row"><input id="SOLIS_SUBMITTER_PHONE" type="text"></div>
+      </div>
+      <div class="field" data-name="SOLIS_SUBMITTER_EMAIL">
+        <div class="row"><label for="SOLIS_SUBMITTER_EMAIL">Submitter email</label><span class="pill" data-pill></span></div>
+        <div class="row"><input id="SOLIS_SUBMITTER_EMAIL" type="text"></div>
+      </div>
+      <div class="field" data-name="SOLIS_RECEIVER_ORG_NAME">
+        <div class="row"><label for="SOLIS_RECEIVER_ORG_NAME">Default receiver (payer) name</label><span class="pill" data-pill></span></div>
+        <div class="help">Used only when a claim has no receiver. The payer ID itself goes in each claim as tradingPartnerServiceId.</div>
+        <div class="row"><input id="SOLIS_RECEIVER_ORG_NAME" type="text"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>AWS (optional, Bedrock or Transcribe)</h2>
+      <div class="field" data-name="AWS_ACCESS_KEY_ID">
+        <div class="row"><label for="AWS_ACCESS_KEY_ID">AWS_ACCESS_KEY_ID</label><span class="pill" data-pill></span></div>
+        <div class="row"><input id="AWS_ACCESS_KEY_ID" type="password" spellcheck="false"><button type="button" data-show>Show</button></div>
+      </div>
+      <div class="field" data-name="AWS_SECRET_ACCESS_KEY">
+        <div class="row"><label for="AWS_SECRET_ACCESS_KEY">AWS_SECRET_ACCESS_KEY</label><span class="pill" data-pill></span></div>
+        <div class="row"><input id="AWS_SECRET_ACCESS_KEY" type="password" spellcheck="false"><button type="button" data-show>Show</button></div>
+      </div>
+      <div class="field" data-name="AWS_REGION">
+        <div class="row"><label for="AWS_REGION">AWS_REGION</label><span class="pill" data-pill></span></div>
+        <div class="row"><input id="AWS_REGION" type="text" placeholder="us-east-1"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="actions">
+        <button class="primary" id="save" type="submit">Save</button>
+        <label><input type="checkbox" id="pushAll" class="nogrow"> Re-push every saved key, not only the ones changed</label>
+      </div>
+      <div class="help mt" id="where"></div>
+    </section>
+
+    <section id="results" hidden>
+      <h2>Result</h2>
+      <table><thead><tr><th>Key</th><th>Saved as</th><th>Production</th><th>Detail</th></tr></thead><tbody id="rows"></tbody></table>
+      <div class="help mt" id="files"></div>
+    </section>
+  </form>
+</main>
+
+<script nonce="{{NONCE}}">
+(function () {
+  "use strict";
+  var token = "";
+  var m = /(?:^|[#&])token=([^&]+)/.exec(location.hash);
+  if (m) { token = decodeURIComponent(m[1]); history.replaceState(null, "", location.pathname); }
+
+  var $ = function (id) { return document.getElementById(id); };
+  var fields = Array.prototype.map.call(document.querySelectorAll("[data-name]"), function (el) { return el.getAttribute("data-name"); });
+
+  function showError(text) { var b = $("msg"); b.textContent = text; b.hidden = !text; }
+
+  function api(path, body) {
+    var opts = { method: body ? "POST" : "GET", headers: { "X-Session-Token": token }, cache: "no-store" };
+    if (body) { opts.headers["Content-Type"] = "application/json"; opts.body = JSON.stringify(body); }
+    return fetch(path, opts).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { j.__status = r.status; return j; });
+    });
+  }
+
+  function render(status) {
+    $("dry").hidden = !status.dryRun;
+    $("where").textContent = "Local copy: " + status.keysFile + "   Worker dev vars: " + status.devVarsFile +
+      (status.backendFound ? "" : "   (Worker project not found: production push will fail)");
+    fields.forEach(function (name) {
+      var f = status.fields[name] || {};
+      var pill = document.querySelector('[data-name="' + name + '"] [data-pill]');
+      if (!pill) return;
+      if (!f.set) { pill.textContent = "not set"; pill.className = "pill"; }
+      else if (f.kind === "secret") { pill.textContent = f.last4 ? "saved, ends in " + f.last4 : "saved"; pill.className = "pill set"; }
+      else { pill.textContent = "saved: " + f.value; pill.className = "pill set"; }
+    });
+    var mode = (status.fields.STEDI_MODE || {}).value || "";
+    var mp = $("modePill");
+    mp.textContent = mode === "production" ? "PRODUCTION" : mode === "test" ? "TEST" : "mode not set";
+    mp.className = "pill " + (mode === "production" ? "prod" : mode === "test" ? "test" : "");
+  }
+
+  function load() {
+    api("/api/status").then(function (s) {
+      if (s.__status === 401) { token = ""; $("tokenBox").style.display = "block"; $("form").hidden = true; showError("Session token missing or wrong."); return; }
+      showError(""); $("tokenBox").style.display = "none"; $("form").hidden = false; render(s);
+    }).catch(function () { showError("The key vault server is not reachable. Is keyvault.py still running?"); });
+  }
+
+  $("useToken").addEventListener("click", function () { token = $("sessionToken").value.trim(); $("sessionToken").value = ""; load(); });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-show]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var input = btn.parentNode.querySelector("input");
+      var hidden = input.type === "password";
+      input.type = hidden ? "text" : "password";
+      btn.textContent = hidden ? "Hide" : "Show";
+    });
+  });
+
+  $("gen").addEventListener("click", function () {
+    var bytes = new Uint8Array(32);
+    crypto.getRandomValues(bytes);
+    var s = btoa(String.fromCharCode.apply(null, bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    var input = $("SOLIS_APP_TOKEN");
+    input.value = s; input.type = "text";
+    document.querySelector('[data-name="SOLIS_APP_TOKEN"] [data-show]').textContent = "Hide";
+  });
+
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var values = {};
+    fields.forEach(function (name) { var el = $(name); if (el && el.value.trim()) values[name] = el.value.trim(); });
+    var pushAll = $("pushAll").checked;
+    if (!Object.keys(values).length && !pushAll) { showError("Nothing to save. Type a value, or tick re-push."); return; }
+    $("save").disabled = true; $("save").textContent = "Saving...";
+    document.querySelectorAll(".err").forEach(function (el) { el.remove(); });
+    api("/api/save", { values: values, pushAll: pushAll }).then(function (r) {
+      if (r.errors) {
+        showError("Nothing was saved. Fix the highlighted fields.");
+        Object.keys(r.errors).forEach(function (name) {
+          var box = document.querySelector('[data-name="' + name + '"]');
+          if (box) { var d = document.createElement("div"); d.className = "err"; d.textContent = r.errors[name]; box.appendChild(d); }
+        });
+        return;
+      }
+      if (r.__status === 401) { showError("Session token rejected."); return; }
+      if (!r.pushed) { showError(r.error || "Save failed."); return; }
+      fields.forEach(function (name) { var el = $(name); if (el) { el.value = ""; if (el.type === "text" && el.closest("[data-name]").querySelector("[data-show]")) el.type = "password"; } });
+      showError(r.ok ? "" : "Saved locally, but some keys did not reach production. See the table.");
+      var rows = $("rows"); rows.textContent = "";
+      r.pushed.forEach(function (p) {
+        var tr = document.createElement("tr");
+        [p.name, p.last4 ? "ends in " + p.last4 : "", p.ok ? (p.dryRun ? "dry run" : "updated") : "failed", p.message || ""].forEach(function (v, i) {
+          var td = document.createElement("td");
+          if (i === 2) td.className = p.ok ? "ok" : "bad";
+          if (i === 3) { var pre = document.createElement("pre"); pre.textContent = v; td.appendChild(pre); } else td.textContent = v;
+          tr.appendChild(td);
+        });
+        rows.appendChild(tr);
+      });
+      if (!r.pushed.length) { var tr = document.createElement("tr"); var td = document.createElement("td"); td.colSpan = 4; td.textContent = "No keys needed pushing."; tr.appendChild(td); rows.appendChild(tr); }
+      $("files").textContent = r.files.map(function (f) { return f.path + " (" + f.permissions + ")"; }).join("   ");
+      $("results").hidden = false;
+      render(r.status);
+    }).catch(function () { showError("Save failed: server not reachable."); })
+      .finally(function () { $("save").disabled = false; $("save").textContent = "Save"; });
+  });
+
+  if (token) load(); else { $("tokenBox").style.display = "block"; }
+})();
+</script>
+</body>
+</html>

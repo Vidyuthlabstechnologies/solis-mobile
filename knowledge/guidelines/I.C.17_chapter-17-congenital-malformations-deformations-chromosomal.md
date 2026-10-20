@@ -1,0 +1,10 @@
+<!-- Source: ICD-10-CM Official Guidelines for Coding and Reporting FY 2027 (October 1, 2026 - September 30, 2027). https://www.cms.gov/files/document/fy-2027-icd-10-cm-coding-guidelines.pdf -->
+<!-- Public domain (US Government). Extracted by tool/build_knowledge_base.py; do not edit by hand. -->
+
+# [I.C.17] 17. Chapter 17: Congenital malformations, deformations, chromosomal abnormalities, and genetic disorders (Q00-QA1)
+
+Assign an appropriate code(s) from categories Q00-QA1, Congenital malformations, deformations, chromosomal abnormalities, and genetic disorders when a malformation/deformation, chromosomal abnormality, or genetic disorder is documented. A malformation/deformation/chromosomal abnormality, or genetic disorder may be the principal/first-listed diagnosis or secondary diagnosis on a record. When a malformation/deformation, chromosomal abnormality, or genetic disorder does not have a unique code assignment, assign additional code(s) for any manifestations that may be present.
+
+When the code assignment specifically identifies the malformation/deformation, chromosomal abnormality, or genetic disorder, manifestations that are an inherent component of the anomaly should not be coded separately. Additional codes should be assigned for manifestations that are not an inherent component.
+
+Codes from Chapter 17 may be used throughout the life of the patient. If a congenital malformation or deformity has been corrected, a personal history code should be used to identify the history of the malformation or deformity. Although present at birth, a malformation/deformation, chromosomal abnormality, or genetic disorder may not be identified until later in life. Whenever the condition is diagnosed by the provider, it is appropriate to assign a code from categories Q00-QA1. For the birth admission, the appropriate code from category Z38, Liveborn infants, according to place of birth and type of delivery, should be sequenced as the principal diagnosis, followed by any congenital anomaly codes in categories Q00-QA1.

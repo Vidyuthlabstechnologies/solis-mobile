@@ -1,0 +1,29 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700;800&display=swap">
+<link rel="stylesheet" href="../src/assets/site.css">
+<style>
+  html, body { width: 1200px; height: 630px; overflow: hidden; margin: 0; background: #fff; }
+  .og { position: relative; width: 1200px; height: 630px; display: grid; grid-template-columns: 1fr 430px; padding: 0 0 0 80px; overflow: hidden;
+        background: radial-gradient(520px 380px at 85% 40%, rgba(152,15,134,.16), transparent 70%), radial-gradient(400px 300px at 0% 0%, rgba(78,0,68,.06), transparent 70%), #fff; }
+  .og::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(#e5e9f0 1px, transparent 1px), linear-gradient(90deg, #e5e9f0 1px, transparent 1px); background-size: 56px 56px; opacity: .45; -webkit-mask-image: radial-gradient(ellipse 70% 70% at 40% 30%, #000 10%, transparent 75%); }
+  .txt { position: relative; z-index: 2; align-self: center; }
+  .lock { display: flex; align-items: center; gap: 14px; margin-bottom: 44px; color: #0f172a; }
+  .lock img { width: 52px; height: 52px; border-radius: 13px; }
+  .lock svg { height: 24px; width: auto; }
+  h1 { font: 800 68px/1.0 Manrope, sans-serif; letter-spacing: -0.045em; color: #0f172a; margin: 0; }
+  h1 span { color: #980f86; }
+  p { font: 400 24px/1.45 Inter, sans-serif; color: #556074; margin: 26px 0 0; max-width: 30ch; }
+  .ph { position: relative; z-index: 2; }
+  .ph .phone { --pw: 330px; position: absolute; top: 70px; left: 30px; }
+</style></head>
+<body class="">
+<div class="og">
+  <div class="txt">
+    <div class="lock"><img src="../src/assets/img/solis-mark.svg" alt=""><svg viewBox="312 72 373 96"><path fill="currentColor" fill-rule="evenodd" d="M340.32 128.64A28.32 28.32 0 0 1 340.32 72L340.32 89.28A11.04 11.04 0 0 0 340.32 111.36ZM354.01 111.36A28.32 28.32 0 0 1 354.01 168L354.01 150.72A11.04 11.04 0 0 0 354.01 128.64ZM340.32 72H382.33V89.28H340.32ZM340.32 111.36H354.01V128.64H340.32ZM312 150.72H354.01V168H312ZM397.69 120A48 48 0 1 1 493.69 120A48 48 0 1 1 397.69 120ZM414.97 120A30.72 30.72 0 1 0 476.41 120A30.72 30.72 0 1 0 414.97 120ZM509.05 72H526.33V168H509.05ZM509.05 150.72H566.65V168H509.05ZM582.01 72H599.29V168H582.01ZM642.97 128.64A28.32 28.32 0 0 1 642.97 72L642.97 89.28A11.04 11.04 0 0 0 642.97 111.36ZM656.661 111.36A28.32 28.32 0 0 1 656.661 168L656.661 150.72A11.04 11.04 0 0 0 656.661 128.64ZM642.97 72H684.981V89.28H642.97ZM642.97 111.36H656.661V128.64H642.97ZM614.65 150.72H656.661V168H614.65Z"/></svg></div>
+    <h1>Look at your patient.<br><span>SOLIS writes the note.</span></h1>
+    <p>Listens to the visit, writes the note and builds a clean claim, on the doctor's phone.</p>
+  </div>
+  <div class="ph"><div class="phone"><div class="screen"><div class="sb"><span>9:41</span></div><img src="../src/assets/img/08_note-720.webp" alt=""></div></div></div>
+</div>
+</body></html>

@@ -1,0 +1,835 @@
+{
+ "edition": "Medicare NCCI Policy Manual 2026",
+ "source": {
+  "title": "Medicare NCCI Policy Manual 2026, all chapters (effective January 1, 2026, posted December 24, 2025)",
+  "url": "https://www.cms.gov/files/document/2026-ncci-medicare-policy-manual-all-chapters.pdf",
+  "publisher": "CMS"
+ },
+ "note": "Chapter and section titles only, for citations. The manual text is not copied: it quotes CPT descriptors (AMA copyright). Cite as \"NCCI Policy Manual 2026, Ch. I, Sec. E\".",
+ "chapters": [
+  {
+   "chapter": "Intro",
+   "title": "Introduction",
+   "pdf_pages": [
+    8,
+    16
+   ],
+   "sections": []
+  },
+  {
+   "chapter": "I",
+   "title": "General Correct Coding Policies",
+   "pdf_pages": [
+    17,
+    52
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "I-3"
+    },
+    {
+     "section": "B",
+     "title": "Coding Based on Standards of Medical/Surgical Practice",
+     "page_label": "I-6"
+    },
+    {
+     "section": "C",
+     "title": "Medical/Surgical Package",
+     "page_label": "I-9"
+    },
+    {
+     "section": "D",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "I-12"
+    },
+    {
+     "section": "E",
+     "title": "Modifiers and Modifier Indicators",
+     "page_label": "I-14"
+    },
+    {
+     "section": "F",
+     "title": "Standard Preparation/Monitoring Services for Anesthesia",
+     "page_label": "I-20"
+    },
+    {
+     "section": "G",
+     "title": "Anesthesia Service Included in the Surgical Procedure",
+     "page_label": "I-20"
+    },
+    {
+     "section": "H",
+     "title": "HCPCS/CPT Procedure Code Definition",
+     "page_label": "I-21"
+    },
+    {
+     "section": "I",
+     "title": "CPT Professional Codebook and CMS Coding Manual Instructions",
+     "page_label": "I-22"
+    },
+    {
+     "section": "J",
+     "title": "CPT “Separate Procedure” Definition",
+     "page_label": "I-23"
+    },
+    {
+     "section": "K",
+     "title": "Family of Codes",
+     "page_label": "I-23"
+    },
+    {
+     "section": "L",
+     "title": "More Extensive Procedure",
+     "page_label": "I-23"
+    },
+    {
+     "section": "M",
+     "title": "Sequential Procedure",
+     "page_label": "I-24"
+    },
+    {
+     "section": "N",
+     "title": "Laboratory Panel",
+     "page_label": "I-25"
+    },
+    {
+     "section": "O",
+     "title": "Misuse of Column Two Code with Column One Code (Misuse of Code Edit Rationale)…………..",
+     "page_label": "I-25"
+    },
+    {
+     "section": "P",
+     "title": "Mutually Exclusive Procedures",
+     "page_label": "I-26"
+    },
+    {
+     "section": "Q",
+     "title": "Reserved for future use",
+     "page_label": "I-26"
+    },
+    {
+     "section": "R",
+     "title": "Add-on Codes",
+     "page_label": "I-26"
+    },
+    {
+     "section": "S",
+     "title": "Excluded Service",
+     "page_label": "I-27"
+    },
+    {
+     "section": "T",
+     "title": "Unlisted Procedure Codes",
+     "page_label": "I-27"
+    },
+    {
+     "section": "U",
+     "title": "Reserved for future use",
+     "page_label": "I-27"
+    },
+    {
+     "section": "V",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "I-28"
+    },
+    {
+     "section": "W",
+     "title": "Add-on Code Edits",
+     "page_label": "I-35"
+    }
+   ]
+  },
+  {
+   "chapter": "II",
+   "title": "Anesthesia Services (CPT 00000-01999)",
+   "pdf_pages": [
+    53,
+    66
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "II-3"
+    },
+    {
+     "section": "B",
+     "title": "Standard Anesthesia Coding",
+     "page_label": "II-4"
+    },
+    {
+     "section": "C",
+     "title": "Radiologic Anesthesia Coding",
+     "page_label": "II-11"
+    },
+    {
+     "section": "D",
+     "title": "Monitored Anesthesia Care",
+     "page_label": "II-12"
+    },
+    {
+     "section": "E",
+     "title": "General Policy Statements",
+     "page_label": "II-12"
+    }
+   ]
+  },
+  {
+   "chapter": "III",
+   "title": "Surgery: Integumentary System (CPT 10000-19999)",
+   "pdf_pages": [
+    67,
+    82
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "III-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "III-3"
+    },
+    {
+     "section": "C",
+     "title": "Anesthesia",
+     "page_label": "III-5"
+    },
+    {
+     "section": "D",
+     "title": "Incision and Drainage",
+     "page_label": "III-6"
+    },
+    {
+     "section": "E",
+     "title": "Lesion Removal",
+     "page_label": "III-6"
+    },
+    {
+     "section": "F",
+     "title": "Mohs Micrographic Surgery",
+     "page_label": "III-8"
+    },
+    {
+     "section": "G",
+     "title": "Intralesional Injections",
+     "page_label": "III-8"
+    },
+    {
+     "section": "H",
+     "title": "Repair and Tissue Transfer",
+     "page_label": "III-9"
+    },
+    {
+     "section": "I",
+     "title": "Grafts and Flaps",
+     "page_label": "III-9"
+    },
+    {
+     "section": "J",
+     "title": "Breast (Incision, Excision, Introduction, Repair and Reconstruction)",
+     "page_label": "III-10"
+    },
+    {
+     "section": "K",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "III-12"
+    },
+    {
+     "section": "L",
+     "title": "General Policy Statements",
+     "page_label": "III-13"
+    }
+   ]
+  },
+  {
+   "chapter": "IV",
+   "title": "Surgery: Musculoskeletal System (CPT 20000-29999)",
+   "pdf_pages": [
+    83,
+    102
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "IV-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "IV-3"
+    },
+    {
+     "section": "C",
+     "title": "Anesthesia",
+     "page_label": "IV-5"
+    },
+    {
+     "section": "D",
+     "title": "Biopsy",
+     "page_label": "IV-5"
+    },
+    {
+     "section": "E",
+     "title": "Arthroscopy",
+     "page_label": "IV-5"
+    },
+    {
+     "section": "F",
+     "title": "Spine (Vertebral Column)",
+     "page_label": "IV-7"
+    },
+    {
+     "section": "G",
+     "title": "Fractures, Dislocations, and Casting/Splinting/Strapping",
+     "page_label": "IV-10"
+    },
+    {
+     "section": "H",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "IV-13"
+    },
+    {
+     "section": "I",
+     "title": "General Policy Statements",
+     "page_label": "IV-15"
+    }
+   ]
+  },
+  {
+   "chapter": "V",
+   "title": "Surgery: Respiratory, Cardiovascular, Hemic and Lymphatic Systems (CPT 30000-39999)",
+   "pdf_pages": [
+    103,
+    125
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "V-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "V-3"
+    },
+    {
+     "section": "C",
+     "title": "Respiratory System",
+     "page_label": "V-4"
+    },
+    {
+     "section": "D",
+     "title": "Cardiovascular System",
+     "page_label": "V-10"
+    },
+    {
+     "section": "E",
+     "title": "Hemic and Lymphatic Systems",
+     "page_label": "V-17"
+    },
+    {
+     "section": "F",
+     "title": "Mediastinum",
+     "page_label": "V-18"
+    },
+    {
+     "section": "G",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "V-18"
+    },
+    {
+     "section": "H",
+     "title": "General Policy Statements",
+     "page_label": "V-19"
+    }
+   ]
+  },
+  {
+   "chapter": "VI",
+   "title": "Surgery: Digestive System (CPT 40000-49999)",
+   "pdf_pages": [
+    126,
+    141
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "VI-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "VI-3"
+    },
+    {
+     "section": "C",
+     "title": "Endoscopic Services",
+     "page_label": "VI-4"
+    },
+    {
+     "section": "D",
+     "title": "Esophageal Procedures",
+     "page_label": "VI-7"
+    },
+    {
+     "section": "E",
+     "title": "Abdominal Procedures",
+     "page_label": "VI-7"
+    },
+    {
+     "section": "F",
+     "title": "Laparoscopy",
+     "page_label": "VI-9"
+    },
+    {
+     "section": "G",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "VI-10"
+    },
+    {
+     "section": "H",
+     "title": "General Policy Statements",
+     "page_label": "VI-11"
+    }
+   ]
+  },
+  {
+   "chapter": "VII",
+   "title": "Surgery: Urinary, Male Genital, Female Genital, Maternity Care and Delivery Systems (CPT 50000-59999)",
+   "pdf_pages": [
+    142,
+    157
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "VII-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "VII-3"
+    },
+    {
+     "section": "C",
+     "title": "Urinary System",
+     "page_label": "VII-4"
+    },
+    {
+     "section": "D",
+     "title": "Male Genital System",
+     "page_label": "VII-9"
+    },
+    {
+     "section": "E",
+     "title": "Female Genital System",
+     "page_label": "VII-9"
+    },
+    {
+     "section": "F",
+     "title": "Laparoscopy",
+     "page_label": "VII-11"
+    },
+    {
+     "section": "G",
+     "title": "Maternity Care and Delivery",
+     "page_label": "VII-12"
+    },
+    {
+     "section": "H",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "VII-12"
+    },
+    {
+     "section": "I",
+     "title": "General Policy Statements",
+     "page_label": "VII-13"
+    }
+   ]
+  },
+  {
+   "chapter": "VIII",
+   "title": "Surgery: Endocrine, Nervous, Eye and Ocular Adnexa, and Auditory Systems (CPT 60000-69999)",
+   "pdf_pages": [
+    158,
+    179
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "VIII-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "VIII-3"
+    },
+    {
+     "section": "C",
+     "title": "Nervous System",
+     "page_label": "VIII-4"
+    },
+    {
+     "section": "D",
+     "title": "Ophthalmology",
+     "page_label": "VIII-11"
+    },
+    {
+     "section": "E",
+     "title": "Auditory System",
+     "page_label": "VIII-15"
+    },
+    {
+     "section": "F",
+     "title": "Operating Microscope",
+     "page_label": "VIII-15"
+    },
+    {
+     "section": "G",
+     "title": "Laparoscopy",
+     "page_label": "VIII-16"
+    },
+    {
+     "section": "H",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "VIII-17"
+    },
+    {
+     "section": "I",
+     "title": "General Policy Statements",
+     "page_label": "VIII-19"
+    }
+   ]
+  },
+  {
+   "chapter": "IX",
+   "title": "Radiology Services (CPT 70000-79999)",
+   "pdf_pages": [
+    180,
+    199
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "IX-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "IX-3"
+    },
+    {
+     "section": "C",
+     "title": "Non-interventional Diagnostic Imaging",
+     "page_label": "IX-5"
+    },
+    {
+     "section": "D",
+     "title": "Interventional/Invasive Diagnostic Imaging",
+     "page_label": "IX-8"
+    },
+    {
+     "section": "E",
+     "title": "Nuclear Medicine",
+     "page_label": "IX-11"
+    },
+    {
+     "section": "F",
+     "title": "Radiation Oncology",
+     "page_label": "IX-13"
+    },
+    {
+     "section": "G",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "IX-15"
+    },
+    {
+     "section": "H",
+     "title": "General Policy Statements",
+     "page_label": "IX-16"
+    }
+   ]
+  },
+  {
+   "chapter": "X",
+   "title": "Pathology/Laboratory Services (CPT 80000-89999)",
+   "pdf_pages": [
+    200,
+    221
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "X-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "X-4"
+    },
+    {
+     "section": "C",
+     "title": "Organ or Disease Oriented Panels",
+     "page_label": "X-6"
+    },
+    {
+     "section": "D",
+     "title": "Evocative/Suppression Testing",
+     "page_label": "X-6"
+    },
+    {
+     "section": "E",
+     "title": "Drug Testing",
+     "page_label": "X-6"
+    },
+    {
+     "section": "F",
+     "title": "Molecular Pathology",
+     "page_label": "X-7"
+    },
+    {
+     "section": "G",
+     "title": "Chemistry",
+     "page_label": "X-8"
+    },
+    {
+     "section": "H",
+     "title": "Hematology and Coagulation",
+     "page_label": "X-9"
+    },
+    {
+     "section": "I",
+     "title": "Immunology",
+     "page_label": "X-10"
+    },
+    {
+     "section": "J",
+     "title": "Transfusion Medicine",
+     "page_label": "X-10"
+    },
+    {
+     "section": "K",
+     "title": "Microbiology",
+     "page_label": "X-11"
+    },
+    {
+     "section": "L",
+     "title": "Anatomic Pathology (Cytopathology and Surgical Pathology)",
+     "page_label": "X-12"
+    },
+    {
+     "section": "M",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "X-15"
+    },
+    {
+     "section": "N",
+     "title": "General Policy Statements",
+     "page_label": "X-20"
+    }
+   ]
+  },
+  {
+   "chapter": "XI",
+   "title": "Medicine, Evaluation and Management Services (CPT 90000-99999)",
+   "pdf_pages": [
+    222,
+    261
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "XI-3"
+    },
+    {
+     "section": "B",
+     "title": "Therapeutic or Diagnostic Infusions/Injections and Immunizations",
+     "page_label": "XI-3"
+    },
+    {
+     "section": "C",
+     "title": "Psychiatric Services",
+     "page_label": "XI-7"
+    },
+    {
+     "section": "D",
+     "title": "Biofeedback",
+     "page_label": "XI-8"
+    },
+    {
+     "section": "E",
+     "title": "Dialysis",
+     "page_label": "XI-8"
+    },
+    {
+     "section": "F",
+     "title": "Gastroenterology",
+     "page_label": "XI-9"
+    },
+    {
+     "section": "G",
+     "title": "Ophthalmology",
+     "page_label": "XI-10"
+    },
+    {
+     "section": "H",
+     "title": "Otorhinolaryngologic Services",
+     "page_label": "XI-10"
+    },
+    {
+     "section": "I",
+     "title": "Cardiovascular Services",
+     "page_label": "XI-12"
+    },
+    {
+     "section": "J",
+     "title": "Pulmonary Services",
+     "page_label": "XI-18"
+    },
+    {
+     "section": "K",
+     "title": "Allergy Testing and Immunotherapy",
+     "page_label": "XI-21"
+    },
+    {
+     "section": "L",
+     "title": "Neurology and Neuromuscular Procedures",
+     "page_label": "XI-21"
+    },
+    {
+     "section": "M",
+     "title": "Central Nervous System (CNS) Assessments/Tests",
+     "page_label": "XI-23"
+    },
+    {
+     "section": "N",
+     "title": "Chemotherapy Administration",
+     "page_label": "XI-23"
+    },
+    {
+     "section": "O",
+     "title": "Special Dermatological Procedures",
+     "page_label": "XI-25"
+    },
+    {
+     "section": "P",
+     "title": "Physical Medicine and Rehabilitation",
+     "page_label": "XI-25"
+    },
+    {
+     "section": "Q",
+     "title": "Medical Nutrition Therapy",
+     "page_label": "XI-27"
+    },
+    {
+     "section": "R",
+     "title": "Osteopathic Manipulative Treatment",
+     "page_label": "XI-28"
+    },
+    {
+     "section": "S",
+     "title": "Chiropractic Manipulative Treatment",
+     "page_label": "XI-28"
+    },
+    {
+     "section": "T",
+     "title": "Miscellaneous Services",
+     "page_label": "XI-28"
+    },
+    {
+     "section": "U",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "XI-29"
+    },
+    {
+     "section": "V",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "XI-33"
+    },
+    {
+     "section": "W",
+     "title": "General Policy Statements",
+     "page_label": "XI-37"
+    }
+   ]
+  },
+  {
+   "chapter": "XII",
+   "title": "Supplemental Services (HCPCS Level II A0000-V9999)",
+   "pdf_pages": [
+    262,
+    276
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "XII-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "XII-3"
+    },
+    {
+     "section": "C",
+     "title": "NCCI Procedure-to-Procedure (PTP) Edit Specific Issues",
+     "page_label": "XII-5"
+    },
+    {
+     "section": "D",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "XII-9"
+    }
+   ]
+  },
+  {
+   "chapter": "XIII",
+   "title": "Category III Codes (CPT 0001T-0999T)",
+   "pdf_pages": [
+    277,
+    287
+   ],
+   "sections": [
+    {
+     "section": "A",
+     "title": "Introduction",
+     "page_label": "XIII-3"
+    },
+    {
+     "section": "B",
+     "title": "Evaluation & Management (E&M) Services",
+     "page_label": "XIII-3"
+    },
+    {
+     "section": "C",
+     "title": "NCCI Procedure-to-Procedure (PTP) Edit Specific Issues",
+     "page_label": "XIII-5"
+    },
+    {
+     "section": "D",
+     "title": "Medically Unlikely Edits (MUEs)",
+     "page_label": "XIII-5"
+    },
+    {
+     "section": "E",
+     "title": "General Policy Statements",
+     "page_label": "XIII-5"
+    }
+   ]
+  }
+ ]
+}

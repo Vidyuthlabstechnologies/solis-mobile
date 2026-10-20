@@ -1,0 +1,3 @@
+# SOLIS code-set manifest signing key: Ed25519, raw 32-byte public key, base64.
+# Format: one key per line, '<key_id> <base64>'. The app trusts every key listed here.
+solis-codesets-ad12fdbd VMYNKgjZgvq2gtoIfFPnLQ1f9Mui+Gwg9we8dsF9WGM=

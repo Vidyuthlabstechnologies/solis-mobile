@@ -1,0 +1,2 @@
+# TEST key only (seed 01..20). Never trust this in the app.
+solis-codesets-65b60673 ebVWLo/mVPlAeLES6KmLp5AfhTrmlb7X4OORC60ElmQ=

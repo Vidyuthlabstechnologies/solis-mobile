@@ -1,0 +1,3141 @@
+{
+ "version": "FY2027 ICD-10-CM / MCE v44 / NCCI manual 2026",
+ "severity_levels": {
+  "error": "claim is expected to reject or deny",
+  "warning": "review: guideline violation, audit risk or payer-specific edit",
+  "info": "guidance"
+ },
+ "implemented_levels": {
+  "yes": "enforced in the app",
+  "partial": "partly enforced or heuristic",
+  "no": "not enforced"
+ },
+ "counts": {
+  "rules": 63,
+  "implemented": {
+   "yes": 59,
+   "partial": 4
+  }
+ },
+ "rules": [
+  {
+   "id": "ICD-VALID-01",
+   "title": "Code must exist in the ICD-10-CM edition for the date of service",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.3",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.3",
+     "title": "3. Use of codes for reporting purposes",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "IV.F.2",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.F.2",
+     "title": "2. Use of full number of characters required for a code",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    },
+    {
+     "type": "mce",
+     "ref": 1,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 1",
+     "title": "Invalid diagnosis or procedure code",
+     "status": "active"
+    }
+   ],
+   "rule": "Every diagnosis code must be a code in the ICD-10-CM edition in effect on the date of service (FY2027 covers October 1, 2026 through September 30, 2027).",
+   "inputs": [
+    "diagnosis codes",
+    "date of service"
+   ],
+   "check": "Look the code up in the order file of the edition for the DOS.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "assets/codes/icd10cm_2027.tsv.gz"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/icd_catalog.dart"
+    ],
+    "evidence": "icd\\.isValid\\(",
+    "note": "",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 5,
+   "hint": "",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "ICD-BILLABLE-01",
+   "title": "Report codes to the full number of characters (no categories or subcategories)",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.3",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.3",
+     "title": "3. Use of codes for reporting purposes",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "IV.F.1",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.F.1",
+     "title": "1. ICD-10-CM codes with 3, 4, 5, 6 or 7 characters",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "IV.F.2",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.F.2",
+     "title": "2. Use of full number of characters required for a code",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    }
+   ],
+   "rule": "Only codes are reportable, not categories or subcategories; a code is invalid if it is not coded to the full number of characters required, including an applicable 7th character.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "billable flag = 1 in icd10cm_order_<FY>.txt (billable=true in the JSONL).",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "assets/codes/icd10cm_2027.tsv.gz",
+    "rules/icd10cm_code_notes_2027.jsonl"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/icd_catalog.dart"
+    ],
+    "evidence": "isBillable\\(",
+    "note": "",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/icd_catalog.dart"
+    ]
+   },
+   "impact": 5,
+   "hint": "",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "ICD-7TH-01",
+   "title": "7th character required where the Tabular defines one, and must be a defined value",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.5",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.5",
+     "title": "5. 7th Characters",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "sevenChrDef",
+     "citation": "ICD-10-CM Tabular List FY2027, \"sevenChrDef\" instructional notes"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.19.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.19.a",
+     "title": "a. Application of 7th Characters in Chapter 19",
+     "file": "guidelines/I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md"
+    }
+   ],
+   "rule": "Codes in categories or subcategories that carry a 7th character definition need a 7th character, and it must be one of the values listed for that category (for example A, D, S for most injuries).",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Find the longest prefix in icd10cm_seventh_character_<FY>.json; the code must have 7 characters and its 7th must be a key of \"chars\".",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_seventh_character_2027.json"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/seventh_character.dart"
+    ],
+    "evidence": "seventhCharacterIssue\\(",
+    "note": "ClaimScrubber names the missing or invalid 7th character, lists the allowed values from icd_7th_2027.tsv.gz and gives a corrected code. The coder still defaults injuries to A (see CH19-INJ-01).",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 5,
+   "hint": "In ClaimScrubber, when isValid/isBillable fails, look up the seventh-character prefix and list the allowed characters (and the X padding) in the issue text.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "ICD-PLACEHOLDER-01",
+   "title": "Placeholder X fills empty positions before a 7th character",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.4",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.4",
+     "title": "4. Placeholder character",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.A.5",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.5",
+     "title": "5. 7th Characters",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    }
+   ],
+   "rule": "Where a placeholder exists the X must be used; a code that needs a 7th character but has fewer than 6 characters is padded with X (for example T36.0X1A).",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "If the code is invalid and inserting X up to 6 characters makes it valid, suggest the padded code.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_seventh_character_2027.json",
+    "rules/icd10cm_code_notes_2027.jsonl (placeholder=true)"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/coding/code_rules.dart"
+    ],
+    "evidence": "Missing placeholder X",
+    "note": "withSeventhCharacter() pads with X to 6 characters; the scrubber suggests the padded code when it is billable.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Add a helper in code_rules.dart that pads with X to 6 characters and re-checks IcdCatalog.isBillable; offer the fix in the scrubber issue.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "ICD-EXCL1-01",
+   "title": "Excludes1: the two codes are not reported together",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.12.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.12.a",
+     "title": "a. Excludes1",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "excludes1",
+     "citation": "ICD-10-CM Tabular List FY2027, \"excludes1\" instructional notes"
+    }
+   ],
+   "rule": "An Excludes1 note means the excluded condition is never coded with the code above the note. Exception: when the two conditions are unrelated to each other both may be reported; if unclear, query the provider.",
+   "inputs": [
+    "all diagnosis codes on the claim"
+   ],
+   "check": "For each code, collect excludes1 refs at the code and at every ancestor (subcategory, category, block, chapter); flag any other claim code that matches a ref.",
+   "severity": "error",
+   "severity_basis": "coding convention; commercial claim editors deny Excludes1 pairs; allow a documented override for unrelated conditions",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_excludes1_2027.tsv",
+    "rules/icd10cm_code_notes_2027.jsonl"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/excludes1.dart"
+    ],
+    "evidence": "excludes1Issues\\(",
+    "note": "Pairwise check over the claim diagnoses using icd10cm_excludes1_2027.tsv.gz (notes at the code and every ancestor, prefix and range refs). Error by default; a diagnosis note saying the conditions are unrelated turns it into a warning (I.A.12.a exception).",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Bundle icd10cm_excludes1_<FY>.tsv as an asset, load it in ReferenceData, and add a pairwise check in ClaimScrubber over claim.billable (prefix/range match as in ref_matches)."
+  },
+  {
+   "id": "ICD-EXCL2-01",
+   "title": "Excludes2: both codes may be reported",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.12.b",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.12.b",
+     "title": "b. Excludes2",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "excludes2",
+     "citation": "ICD-10-CM Tabular List FY2027, \"excludes2\" instructional notes"
+    }
+   ],
+   "rule": "An Excludes2 note means the excluded condition is not part of the code, but the patient may have both; both codes may be reported together when appropriate.",
+   "inputs": [
+    "all diagnosis codes"
+   ],
+   "check": "Never block on an Excludes2 match; at most show it as information.",
+   "severity": "info",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_code_notes_2027.jsonl"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "class ClaimScrubber",
+    "note": "Nothing to enforce: the scrubber does not block Excludes2 pairs. Keep it that way when Excludes1 checks are added.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 1,
+   "hint": "",
+   "severity_basis": "guidance"
+  },
+  {
+   "id": "ICD-MANIF-01",
+   "title": "Manifestation codes are never first-listed and follow their etiology",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.13",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.13",
+     "title": "13. Etiology/manifestation convention (“code first”, “use additional code” and “in diseases classified elsewhere” notes)",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "codeFirst",
+     "citation": "ICD-10-CM Tabular List FY2027, \"codeFirst\" instructional notes"
+    },
+    {
+     "type": "mce",
+     "ref": 6,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 6",
+     "title": "Manifestation code as principal diagnosis",
+     "status": "active"
+    }
+   ],
+   "rule": "\"In diseases classified elsewhere\" codes (and other manifestation codes with a \"code first\" note) are never the first-listed or principal diagnosis; they are listed after the underlying condition.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "First-listed code must not be in MCE list manifestation_not_principal and must not have \"in diseases classified elsewhere\" in its title; when such a code is present the etiology code must precede it.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/mce_edits_v44.json",
+    "rules/icd10cm_code_notes_2027.jsonl"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/coding/clinical_coder.dart"
+    ],
+    "evidence": "'ICD-MANIF-01'",
+    "note": "Error when the first-listed code is on the MCE manifestation list or its title says \"in diseases classified elsewhere\"; warning when the etiology its code-first note names is listed after it (icd_notes_2027.tsv.gz); finalizeDiagnoses moves that etiology ahead.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 5,
+   "hint": "Remaining: read the codeFirst refs of the manifestation code (icd10cm_code_notes JSONL) and warn when no matching etiology code precedes it.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "ICD-CODEFIRST-01",
+   "title": "\"Code first\" notes: sequence the underlying condition first when present",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.13",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.13",
+     "title": "13. Etiology/manifestation convention (“code first”, “use additional code” and “in diseases classified elsewhere” notes)",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.B.7",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.7",
+     "title": "7. Multiple coding for a single condition",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "codeFirst",
+     "citation": "ICD-10-CM Tabular List FY2027, \"codeFirst\" instructional notes"
+    }
+   ],
+   "rule": "When a code has a \"code first\" note and the underlying condition is present, the underlying condition is sequenced first. \"Code, if applicable, any causal condition first\" allows the code first-listed only when the cause is unknown or not applicable.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "If a codeFirst ref matches another claim code that is listed later, warn and offer to reorder.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_code_notes_2027.jsonl"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/coding/clinical_coder.dart"
+    ],
+    "evidence": "'ICD-CODEFIRST-01'",
+    "note": "KnowledgeChecks.codeFirstIssues warns when a code named in a code-first note is listed after the code; ClinicalCoder.finalizeDiagnoses reorders (a physician-pinned primary stays first). Lines qualified with a character (\"with .42\") are not used.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Use refs.codeFirst from the JSONL (asset or generated Dart map) in finalizeDiagnoses ordering.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "ICD-USEADD-01",
+   "title": "\"Use additional code\" notes: add the secondary code when known",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.B.7",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.7",
+     "title": "7. Multiple coding for a single condition",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.A.13",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.13",
+     "title": "13. Etiology/manifestation convention (“code first”, “use additional code” and “in diseases classified elsewhere” notes)",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "useAdditionalCode",
+     "citation": "ICD-10-CM Tabular List FY2027, \"useAdditionalCode\" instructional notes"
+    }
+   ],
+   "rule": "A \"use additional code\" note indicates that a secondary code should be added, if known, to fully describe the condition (for example the organism B95-B97 for an infection, Z79.4 for insulin use).",
+   "inputs": [
+    "diagnosis codes",
+    "documentation"
+   ],
+   "check": "If a code (or its ancestors) has useAdditionalCode refs and no claim code matches them, suggest them for review.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_code_notes_2027.jsonl"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'ICD-USEADD-01'",
+    "note": "Info suggestion per code when no claim code satisfies a category- or code-level use-additional-code note group; never auto-added. The notes are also shown in the claim tab.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Show as a suggestion chip in claim_tab.dart; never auto-add without documentation.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "ICD-CODEALSO-01",
+   "title": "\"Code also\" notes: a second code may be needed, sequencing is discretionary",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.17",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.17",
+     "title": "17. “Code also” note",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "codeAlso",
+     "citation": "ICD-10-CM Tabular List FY2027, \"codeAlso\" instructional notes"
+    }
+   ],
+   "rule": "A \"code also\" note says two codes may be needed to fully describe a condition; it does not set the order.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Informational prompt only.",
+   "severity": "info",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_code_notes_2027.jsonl"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'ICD-CODEALSO-01'",
+    "note": "Info prompt when no claim code satisfies a code-also note.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 1,
+   "hint": "Suggestion only.",
+   "severity_basis": "guidance"
+  },
+  {
+   "id": "ICD-SYMPTOM-01",
+   "title": "Signs and symptoms integral to a confirmed diagnosis are not coded",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.B.5",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.5",
+     "title": "5. Conditions that are an integral part of a disease process",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.18.b",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.18.b",
+     "title": "b. Use of a symptom code with a definitive diagnosis code",
+     "file": "guidelines/I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md"
+    }
+   ],
+   "rule": "Signs and symptoms routinely associated with a disease process are not assigned as additional codes unless the classification instructs otherwise. Symptoms not routinely associated may be coded.",
+   "inputs": [
+    "confirmed diagnoses",
+    "symptom codes"
+   ],
+   "check": "Drop Chapter 18 symptom codes that are routinely part of a confirmed diagnosis; definitive diagnosis is sequenced before any symptom code.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "guidelines/I.B_general.md"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart"
+    ],
+    "evidence": "ICD-SYMPTOM-01",
+    "note": "ClinicalCoder folds a symptom into a confirmed diagnosis when an Excludes1 note of the diagnosis names the symptom, plus the body-system heuristic; the scrubber flags hand-entered pairs through Excludes1 and ICD-SYMPTOM-02.",
+    "evidence_found_in": [
+     "lib/services/coding/clinical_coder.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Keep the heuristic but also check Excludes1 notes of the confirmed code that point at the symptom.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "ICD-SYMPTOM-02",
+   "title": "Symptom codes when no definitive diagnosis is established",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.B.4",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.4",
+     "title": "4. Signs and symptoms",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "IV.D",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.D",
+     "title": "D. Codes that describe symptoms and signs",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "II.A",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section II.A",
+     "title": "A. Codes for symptoms, signs, and ill-defined conditions",
+     "file": "guidelines/II_selection-principal.md"
+    }
+   ],
+   "rule": "Symptom and sign codes are acceptable when a related definitive diagnosis has not been established. They are not the principal/first-listed diagnosis when a related definitive diagnosis has been established.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "Warn when the first-listed code is in Chapter 18 (R00-R99) and a related confirmed diagnosis is also on the claim.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'ICD-SYMPTOM-02'",
+    "note": "Warning when an R00-R99 code is first-listed and a confirmed diagnosis of the same body system is on the claim.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Promote the scrubber info to a warning when dx.first is R00-R99 and a confirmed diagnosis is present.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "ICD-COMBO-01",
+   "title": "Use a combination code when one code captures all elements",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.B.9",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.9",
+     "title": "9. Combination Code",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.18.c",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.18.c",
+     "title": "c. Combination codes that include symptoms",
+     "file": "guidelines/I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md"
+    }
+   ],
+   "rule": "When a combination code fully identifies the conditions (two diagnoses, a diagnosis with its manifestation, or with a complication), assign only the combination code; add a secondary code only when the combination code lacks needed specificity.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Flag pairs that a combination code covers (Index \"with\" subterms, Excludes1 notes and inclusion terms of the combination code).",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_code_notes_2027.jsonl"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/coding/clinical_coder.dart"
+    ],
+    "evidence": "'ICD-COMBO-01'",
+    "note": "Alphabetic Index \"with\" subterms and \"acute and chronic\" entries give the combination code: warning in the scrubber; ClinicalCoder.combineFromIndex replaces confirmed pairs (keeps the second code when the combination code asks for it). Excludes1 pairs are errors (ICD-EXCL1-01).",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Derive candidate pairs from Excludes1 notes of combination codes rather than hard-coded families.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "ICD-ACUTECHRONIC-01",
+   "title": "Acute and chronic forms: code both, acute first",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.B.8",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.8",
+     "title": "8. Acute and Chronic Conditions",
+     "file": "guidelines/I.B_general.md"
+    }
+   ],
+   "rule": "If the same condition is described as both acute (subacute) and chronic and separate Index subentries exist at the same level, code both and sequence the acute code first.",
+   "inputs": [
+    "diagnosis codes",
+    "documentation"
+   ],
+   "check": "Requires Index data; warn when both forms are present in the wrong order.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "assets/codes/icd10cm_index_2027.tsv.gz"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'ICD-ACUTECHRONIC-01'",
+    "note": "Index subentries acute and chronic under the same term: warning when the chronic code is listed first; a combination entry becomes ICD-COMBO-01.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Use IcdIndex paths containing \"acute\" and \"chronic\" under the same main term.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "ICD-SEQUELA-01",
+   "title": "Sequela: condition first, sequela code second",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.B.10",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.10",
+     "title": "10. Sequela (Late Effects)",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.19.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.19.a",
+     "title": "a. Application of 7th Characters in Chapter 19",
+     "file": "guidelines/I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md"
+    }
+   ],
+   "rule": "Coding a sequela generally needs two codes: the residual condition first, then the sequela code (7th character S for injuries). The acute-phase code is never used with a code for the late effect.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "If a code with 7th character S is first-listed, or no residual condition code accompanies it, warn.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_seventh_character_2027.json"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'ICD-SEQUELA-01'",
+    "note": "Warning when a 7th character S (sequela) code is first-listed or has no residual condition code.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "In ClaimScrubber detect 7th character S on injury/poisoning codes (chapter 19) and check position.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "ICD-DUP-01",
+   "title": "Report each code only once per encounter",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.B.12",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.12",
+     "title": "12. Reporting Same Diagnosis Code More than Once",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "mce",
+     "ref": 3,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 3",
+     "title": "Duplicate of PDX",
+     "status": "active"
+    }
+   ],
+   "rule": "Each unique ICD-10-CM code may be reported only once for an encounter, including bilateral conditions without distinct laterality codes.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "No duplicate codes in the diagnosis list.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/screens/claim_tab.dart"
+    ],
+    "evidence": "'ICD-DUP-01'",
+    "note": "Error in the scrubber; the claim tab also prevents adding a duplicate.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "One-line check in ClaimScrubber: dx.map(code).toSet().length != dx.length.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "ICD-LAT-01",
+   "title": "Laterality and bilateral codes",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.B.13",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.13",
+     "title": "13. Laterality",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.13.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.13.a",
+     "title": "a. Site and laterality",
+     "file": "guidelines/I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md"
+    }
+   ],
+   "rule": "If no bilateral code exists and the condition is bilateral, assign separate left and right codes; when a bilateral code exists use it. Laterality may be taken from other clinicians; unspecified side codes should rarely be used.",
+   "inputs": [
+    "diagnosis codes",
+    "documented side"
+   ],
+   "check": "Warn when right and left codes of the same family are both on the claim and a bilateral code exists in that family.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "assets/codes/icd10cm_2027.tsv.gz"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'ICD-LAT-01'",
+    "note": "Warning when right and left codes of the same condition are reported and the category has a bilateral code.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Use IcdCatalog.billableChildren on the shared parent to find a \"bilateral\" sibling.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "ICD-LAT-02",
+   "title": "Unspecified side when a sided code exists (MCE unspecified code edit)",
+   "sources": [
+    {
+     "type": "mce",
+     "ref": 20,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 20",
+     "title": "Unspecified code",
+     "status": "active"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.B.13",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.13",
+     "title": "13. Laterality",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.B.18",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.18",
+     "title": "18. Use of Sign/Symptom/Unspecified Codes",
+     "file": "guidelines/I.B_general.md"
+    }
+   ],
+   "rule": "MCE edit 20 lists unspecified codes for which a more specific code identifies laterality. Unspecified side codes are acceptable only when documentation is insufficient.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Warn when a code is in MCE list unspecified_with_laterality_available.",
+   "severity": "warning",
+   "severity_basis": "payer specificity edits; MCE edit 20 is informational for inpatient",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/mce_edits_v44.json"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/codesets/mce.dart"
+    ],
+    "evidence": "'ICD-LAT-02'",
+    "note": "Warning for every code on the MCE v44 edit 20 list (3,476 codes in mce_v44.tsv.gz).",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Replace isUnspecifiedIcd with the official 3,476-code MCE list."
+  },
+  {
+   "id": "ICD-SECONDARY-ONLY-01",
+   "title": "Codes that are only reported as secondary diagnoses",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.B.14",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.14",
+     "title": "14. Documentation by Clinicians Other than the Patient's Provider",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.21.c.17",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.21.c.17",
+     "title": "17) Social Determinants of Health",
+     "file": "guidelines/I.C.21_chapter-21-factors-influencing-health-status-contact-health.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.18.e.1",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.18.e.1",
+     "title": "1) Coma Scale",
+     "file": "guidelines/I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.18.i",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.18.i",
+     "title": "i. NIHSS Stroke Scale",
+     "file": "guidelines/I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md"
+    }
+   ],
+   "rule": "BMI, coma scale, NIHSS, blood alcohol level, social determinants of health and underimmunization status codes are reported only as secondary diagnoses, and the associated condition must be documented by the patient's provider.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "First-listed code must not match the resolved code list in \"official_list\".",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rule_catalog.json official_list"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/code_rules.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "secondaryOnlyIcdPrefixes",
+    "note": "Const prefix list in code_rules.dart; error in ClaimScrubber.sequencingIssues; finalizeDiagnoses ranks them last.",
+    "evidence_found_in": [
+     "lib/services/coding/code_rules.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Add a const prefix list to code_rules.dart (generated from official_list) and an error in ClaimScrubber when dx.first matches.",
+   "official_list": [
+    {
+     "concept": "BMI",
+     "codes": [
+      "Z68"
+     ],
+     "titles": [
+      "Body mass index [BMI]"
+     ],
+     "resolved_from": "Tabular List titles"
+    },
+    {
+     "concept": "coma scale",
+     "codes": [
+      "R40.21",
+      "R40.22",
+      "R40.23",
+      "R40.24"
+     ],
+     "titles": [
+      "Coma scale, eyes open",
+      "Coma scale, best verbal response",
+      "Coma scale, best motor response",
+      "Glasgow coma scale, total score"
+     ],
+     "resolved_from": "Tabular List titles"
+    },
+    {
+     "concept": "NIHSS",
+     "codes": [
+      "R29.7"
+     ],
+     "titles": [
+      "National Institutes of Health Stroke Scale (NIHSS) score"
+     ],
+     "resolved_from": "Tabular List titles"
+    },
+    {
+     "concept": "blood alcohol level",
+     "codes": [
+      "Y90"
+     ],
+     "titles": [
+      "Evidence of alcohol involvement determined by blood alcohol level"
+     ],
+     "resolved_from": "Tabular List titles"
+    },
+    {
+     "concept": "underimmunization status",
+     "codes": [
+      "Z28.3"
+     ],
+     "titles": [
+      "Underimmunization status"
+     ],
+     "resolved_from": "Tabular List titles"
+    },
+    {
+     "concept": "social determinants of health",
+     "codes": [
+      "Z55",
+      "Z56",
+      "Z57",
+      "Z58",
+      "Z59",
+      "Z60",
+      "Z62",
+      "Z63",
+      "Z64",
+      "Z65"
+     ],
+     "titles": [
+      "Problems related to education and literacy",
+      "Problems related to employment and unemployment",
+      "Occupational exposure to risk factors",
+      "Problems related to physical environment",
+      "Problems related to housing and economic circumstances",
+      "Problems related to social environment",
+      "Problems related to upbringing",
+      "Other problems related to primary support group, including family circumstances",
+      "Problems related to certain psychosocial circumstances",
+      "Problems related to other psychosocial circumstances"
+     ],
+     "resolved_from": "Guideline I.C.21.c.17 list"
+    }
+   ],
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "ICD-UNSPEC-01",
+   "title": "Unspecified codes are allowed when documentation lacks detail",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.A.9.b",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.A.9.b",
+     "title": "b. “Unspecified” codes",
+     "file": "guidelines/I.A_conventions-icd-10-cm.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.B.18",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.B.18",
+     "title": "18. Use of Sign/Symptom/Unspecified Codes",
+     "file": "guidelines/I.B_general.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "IV.F.3",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.F.3",
+     "title": "3. Highest level of specificity",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    }
+   ],
+   "rule": "Code to the highest specificity the documentation supports; signs, symptoms and unspecified codes are acceptable when the record does not provide more detail.",
+   "inputs": [
+    "diagnosis codes",
+    "documentation"
+   ],
+   "check": "Information prompt to document specificity.",
+   "severity": "info",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "Unspecified primary diagnosis",
+    "note": "",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 1,
+   "hint": "",
+   "severity_basis": "guidance"
+  },
+  {
+   "id": "OP-UNCERTAIN-01",
+   "title": "Outpatient: do not code uncertain diagnoses",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "IV.H",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.H",
+     "title": "H. Uncertain diagnosis",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    }
+   ],
+   "rule": "In the outpatient setting do not code diagnoses documented as probable, suspected, questionable, rule out, compatible with, consistent with, working diagnosis or similar; code the signs, symptoms or other reasons for the visit instead.",
+   "inputs": [
+    "diagnosis certainty from documentation",
+    "setting"
+   ],
+   "check": "Uncertain diagnoses are not billed on outpatient/professional claims.",
+   "severity": "warning",
+   "severity_basis": "coding-guideline violation (overcoding; audit and recoupment risk)",
+   "settings": [
+    "outpatient",
+    "professional"
+   ],
+   "data": [
+    "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "_hedge",
+    "note": "",
+    "evidence_found_in": [
+     "lib/services/coding/clinical_coder.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": ""
+  },
+  {
+   "id": "INPT-UNCERTAIN-01",
+   "title": "Inpatient: uncertain diagnoses at discharge are coded as if established",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "II.H",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section II.H",
+     "title": "H. Uncertain Diagnosis",
+     "file": "guidelines/II_selection-principal.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "III.C",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section III.C",
+     "title": "C. Uncertain Diagnosis",
+     "file": "guidelines/III_reporting-additional.md"
+    }
+   ],
+   "rule": "For inpatient admissions (short-term, acute, long-term care and psychiatric hospitals), a diagnosis documented as uncertain at discharge is coded as if it existed. This does not apply to outpatients.",
+   "inputs": [
+    "setting",
+    "certainty"
+   ],
+   "check": "Apply only for inpatient place of service.",
+   "severity": "info",
+   "settings": [
+    "inpatient"
+   ],
+   "data": [
+    "guidelines/II_selection-principal.md",
+    "guidelines/III_reporting-additional.md"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart"
+    ],
+    "evidence": "!inpatient",
+    "note": "",
+    "evidence_found_in": [
+     "lib/services/coding/clinical_coder.dart"
+    ]
+   },
+   "impact": 1,
+   "hint": "",
+   "severity_basis": "guidance"
+  },
+  {
+   "id": "OP-FIRSTLISTED-01",
+   "title": "Outpatient first-listed diagnosis is the reason chiefly responsible for the visit",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "IV.A",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.A",
+     "title": "A. Selection of first-listed condition",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "IV.G",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.G",
+     "title": "G. ICD-10-CM code for the diagnosis, condition, problem, or other reason for encounter/visit",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "IV.J",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.J",
+     "title": "J. Code all documented conditions that coexist",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    }
+   ],
+   "rule": "List first the code for the condition chiefly responsible for the services; list additional codes for coexisting conditions that affect care. Do not code conditions previously treated that no longer exist.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "Review ordering; history codes Z80-Z87 only as secondary information.",
+   "severity": "info",
+   "settings": [
+    "outpatient",
+    "professional"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/coding/clinical_coder.dart"
+    ],
+    "evidence": "'OP-FIRSTLISTED-01'",
+    "note": "finalizeDiagnoses ranking with a physician-pinned primary; warning when a Z80-Z87 history code is first-listed.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Keep the finalizeDiagnoses ranking; let the physician pin the first-listed code (pinnedOrder exists).",
+   "severity_basis": "guidance"
+  },
+  {
+   "id": "ICD-EXTCAUSE-01",
+   "title": "External cause codes are never first-listed",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.20.a.6",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.20.a.6",
+     "title": "6) External cause code can never be a principal diagnosis",
+     "file": "guidelines/I.C.20_chapter-20-external-causes-morbidity.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "IV.B",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.B",
+     "title": "B. Codes from A00.0 through T88.9, Z00-Z99, U00-U85",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    },
+    {
+     "type": "mce",
+     "ref": 2,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 2",
+     "title": "External causes of morbidity codes as principal diagnosis",
+     "status": "active"
+    }
+   ],
+   "rule": "External cause of morbidity codes (V00-Y99) are never the principal or first-listed diagnosis; the first-listed code comes from A00.0-T88.9, Z00-Z99 or U00-U85.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "Error when dx.first starts with V, W, X or Y.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_chapters_2027.json"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/coding/code_rules.dart"
+    ],
+    "evidence": "External cause listed first",
+    "note": "Error in ClaimScrubber.sequencingIssues; finalizeDiagnoses ranks V00-Y99 codes last.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 5,
+   "hint": "Two lines in ClaimScrubber: if dx.first.code starts with V/W/X/Y raise an error and offer to reorder.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "ICD-EXTCAUSE-02",
+   "title": "Place of occurrence (Y92) and external cause status (Y99) are reported once",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.20.b",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.20.b",
+     "title": "b. Place of Occurrence Guideline",
+     "file": "guidelines/I.C.20_chapter-20-external-causes-morbidity.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.20.k",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.20.k",
+     "title": "k. External Cause Status",
+     "file": "guidelines/I.C.20_chapter-20-external-causes-morbidity.md"
+    }
+   ],
+   "rule": "Y92 and Y99 are secondary codes used with other external cause codes, generally only at the initial encounter; only one Y99 per record; do not use Y92.9 or Y99.9 when not stated; Y99 is not used for poisonings, adverse effects, misadventures or late effects.",
+   "inputs": [
+    "diagnosis codes",
+    "encounter (initial or subsequent)"
+   ],
+   "check": "Warn on more than one Y99, Y92.9/Y99.9, or Y92/Y99 without another external cause code.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'ICD-EXTCAUSE-02'",
+    "note": "Warnings on more than one Y99 or Y92, on Y92.9/Y99.9, and on Y92/Y99 without another external cause code.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Count Y92/Y99 codes in ClaimScrubber; warn on duplicates and on Y92.9/Y99.9.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "OP-DIAGSERVICES-01",
+   "title": "Outpatient diagnostic services: code the interpreted result",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "IV.K",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.K",
+     "title": "K. Patients receiving diagnostic services only",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    }
+   ],
+   "rule": "For diagnostic services only, sequence first the reason for the test; when a physician has interpreted the test and the report is available, code confirmed diagnoses from the interpretation and not the related signs and symptoms.",
+   "inputs": [
+    "test interpretation"
+   ],
+   "check": "Workflow rule.",
+   "severity": "info",
+   "settings": [
+    "outpatient"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'OP-DIAGSERVICES-01'",
+    "note": "Info reminder when a diagnostic test (PFS PC/TC indicator 1, 2, 4, 6 or 8) is billed with a symptom first-listed.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 1,
+   "hint": "Workflow hint in the encounter screen when a test interpretation is signed.",
+   "severity_basis": "guidance"
+  },
+  {
+   "id": "OP-PREOP-01",
+   "title": "Preoperative evaluation: Z01.81- first",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "IV.M",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.M",
+     "title": "M. Patients receiving preoperative evaluations only",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    }
+   ],
+   "rule": "For preoperative evaluations only, sequence first a code from Z01.81-, then the reason for surgery and any findings.",
+   "inputs": [
+    "visit type"
+   ],
+   "check": "Warn when a pre-op visit is not led by Z01.81-.",
+   "severity": "warning",
+   "settings": [
+    "outpatient",
+    "professional"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "OP-PREOP-01",
+    "note": "ClinicalCoder adds Z01.810/Z01.811/Z01.818 for a documented preoperative evaluation and ranks it first; error when Z01.81- is not first.",
+    "evidence_found_in": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "When the visit reason is pre-op, prepend Z01.81- in ClinicalCoder.finalizeDiagnoses.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "OP-THERAPY-01",
+   "title": "Encounter for chemotherapy, immunotherapy or radiation therapy: Z51.- first",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "IV.L",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.L",
+     "title": "L. Patients receiving therapeutic services only",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.2.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.2.a",
+     "title": "a. Admission/Encounter for treatment of primary site",
+     "file": "guidelines/I.C.02_chapter-2-neoplasms.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.2.e.2",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.2.e.2",
+     "title": "2) Patient admission/encounter chiefly for administration of antineoplastic chemotherapy, immunotherapy and radiation therapy",
+     "file": "guidelines/I.C.02_chapter-2-neoplasms.md"
+    }
+   ],
+   "rule": "When the encounter is chiefly for antineoplastic chemotherapy, immunotherapy or radiation therapy, the Z51.0 / Z51.1- code is listed first and the malignancy second.",
+   "inputs": [
+    "services",
+    "diagnoses"
+   ],
+   "check": "Warn when chemo/radiation administration services are billed and Z51.0/Z51.1- is not first.",
+   "severity": "warning",
+   "settings": [
+    "outpatient"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'OP-THERAPY-01'",
+    "note": "Warning when chemotherapy administration (96401-96549) or radiation treatment delivery (77401-77525) is billed and Z51.0/Z51.1- is not first.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "When chemo/radiation administration lines are billed, require Z51.0/Z51.1- first.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "POA-01",
+   "title": "Present on admission indicator: inpatient institutional claims only",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "AppI",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section AppI",
+     "title": "Appendix I",
+     "file": "guidelines/AppI_present-on-admission-reporting-guidelines.md"
+    }
+   ],
+   "rule": "The POA indicator is assigned to diagnoses on inpatient claims (UB-04 / 837 Institutional) subject to POA reporting. It is not reported on outpatient or professional (837P / CMS-1500) claims.",
+   "inputs": [
+    "claim type"
+   ],
+   "check": "Do not send POA on 837P; require it only on inpatient 837I.",
+   "severity": "info",
+   "settings": [
+    "inpatient"
+   ],
+   "data": [
+    "guidelines/AppI_present-on-admission-reporting-guidelines.md"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_builder.dart"
+    ],
+    "evidence": "'transaction': '837P'",
+    "note": "The app builds 837P only; no POA is sent.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_builder.dart"
+    ]
+   },
+   "impact": 1,
+   "hint": "",
+   "severity_basis": "guidance"
+  },
+  {
+   "id": "CH1-SEPSIS-01",
+   "title": "Severe sepsis R65.2- is never first-listed; the systemic infection comes first",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.1.d.1.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.1.d.1.a",
+     "title": "(a) Sepsis",
+     "file": "guidelines/I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.1.d.2",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.1.d.2",
+     "title": "2) Septic shock",
+     "file": "guidelines/I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.1.d.3",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.1.d.3",
+     "title": "3) Sequencing of severe sepsis",
+     "file": "guidelines/I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md"
+    },
+    {
+     "type": "mce",
+     "ref": 9,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 9",
+     "title": "Unacceptable principal diagnosis",
+     "status": "active"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "codeFirst",
+     "citation": "ICD-10-CM Tabular List FY2027, \"codeFirst\" instructional notes"
+    }
+   ],
+   "rule": "Code the underlying systemic infection first; R65.2- (severe sepsis, with or without septic shock) can never be the principal diagnosis and is assigned only when severe sepsis or an associated acute organ dysfunction is documented.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "Error when dx.first starts with R65.2; warn when R65.2- has no infection code before it.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/mce_edits_v44.json (unacceptable_principal)"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/coding/code_rules.dart"
+    ],
+    "evidence": "Severe sepsis listed first",
+    "note": "Error when R65.2- is first-listed; warning when no systemic infection code precedes it.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Error in ClaimScrubber when dx.first starts with R65.2 (MCE unacceptable principal list).",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "CH2-NEO-01",
+   "title": "Current malignancy versus personal history (Z85)",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.2.m",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.2.m",
+     "title": "m. Current malignancy versus personal history of malignancy",
+     "file": "guidelines/I.C.02_chapter-2-neoplasms.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.2.d",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.2.d",
+     "title": "d. Primary malignancy previously excised",
+     "file": "guidelines/I.C.02_chapter-2-neoplasms.md"
+    }
+   ],
+   "rule": "Use the malignancy code while treatment is directed at the site; use Z85 when the malignancy was excised or eradicated, no further treatment is directed to the site and there is no evidence of disease.",
+   "inputs": [
+    "diagnoses",
+    "treatment status"
+   ],
+   "check": "Warn when a C code and the Z85 code for the same site are both present.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'CH2-NEO-01'",
+    "note": "Warning when a C code (not C77-C79) matches the site of a Z85 code; the site comes from the Index entries History, personal, malignant neoplasm.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Warn when C-code and Z85 code of the same site are both present.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "CH2-NEO-02",
+   "title": "Neoplasm symptoms do not replace the malignancy as first-listed",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.2.g",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.2.g",
+     "title": "g. Symptoms, signs, and abnormal findings listed in Chapter 18 associated with neoplasms",
+     "file": "guidelines/I.C.02_chapter-2-neoplasms.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.2.l",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.2.l",
+     "title": "l. Sequencing of neoplasm codes",
+     "file": "guidelines/I.C.02_chapter-2-neoplasms.md"
+    }
+   ],
+   "rule": "Chapter 18 symptoms associated with an existing malignancy are not used in place of the malignancy as principal/first-listed diagnosis.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "Warn when dx.first is R00-R99 and a C code is present.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'CH2-NEO-02'",
+    "note": "Warning when an R code is first-listed and a malignancy is on the claim.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Warn when dx.first is R00-R99 and any C00-C96 code is present.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "CH4-DM-01",
+   "title": "Diabetes: default type, combination codes, long-term drug codes",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.4.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.4.a",
+     "title": "a. Diabetes mellitus",
+     "file": "guidelines/I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.4.a.2",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.4.a.2",
+     "title": "2) Type of diabetes mellitus not documented",
+     "file": "guidelines/I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.4.a.3",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.4.a.3",
+     "title": "3) Diabetes mellitus and the use of insulin, oral hypoglycemics, and injectable non-insulin drugs",
+     "file": "guidelines/I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "useAdditionalCode",
+     "citation": "ICD-10-CM Tabular List FY2027, \"useAdditionalCode\" instructional notes"
+    }
+   ],
+   "rule": "If the type is not documented the default is E11 (type 2). Use as many E08-E13 codes as needed for all complications. Add Z79.4 (insulin), Z79.84 (oral hypoglycemics) and/or Z79.85 (injectable non-insulin) for long-term use; not Z79.4 for temporary insulin in a type 2 patient.",
+   "inputs": [
+    "diabetes codes",
+    "medications"
+   ],
+   "check": "Warn when an E08-E13 code is present with documented insulin, oral or injectable antidiabetic use and no matching Z79 code.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_code_notes_2027.jsonl (E11 useAdditionalCode)"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "addLongTermDrugCodes",
+    "note": "Defaults to E11; ClinicalCoder adds Z79.4/Z79.84/Z79.85 for documented current use (not for temporary insulin); the scrubber suggests the Z79 group from the E08-E13 use-additional-code note when none is present.",
+    "evidence_found_in": [
+     "lib/services/coding/clinical_coder.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "In ClinicalCoder add Z79.4/Z79.84/Z79.85 when the management regex matches insulin/oral agents.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "CH9-HTN-01",
+   "title": "Hypertension with heart disease: I11 plus the heart failure code",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.9.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.9.a",
+     "title": "a. Hypertension",
+     "file": "guidelines/I.C.09_chapter-9-diseases-circulatory-system.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.9.a.1",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.9.a.1",
+     "title": "1) Hypertension with Heart Disease",
+     "file": "guidelines/I.C.09_chapter-9-diseases-circulatory-system.md"
+    }
+   ],
+   "rule": "The classification presumes a causal relationship between hypertension and heart involvement. Hypertension with heart conditions in I50.-, I51.4, I51.89 or I51.9 is coded to I11 with an additional I50/I51 code (I51.5 and I51.7 need no additional code), unless the provider documents they are unrelated.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Warn when I10 is on the claim with I50.-, I51.4-I51.7, I51.89 or I51.9.",
+   "severity": "warning",
+   "severity_basis": "guideline violation; affects risk adjustment and audits",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "guidelines/I.C.09_chapter-9-diseases-circulatory-system.md"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "combineHypertension\\(",
+    "note": "ClinicalCoder replaces I10 with I11.0 when heart failure is confirmed unless the physician says they are unrelated; ClaimScrubber.combinationIssues warns on hand-entered I10 with I50/I51.4-I51.7/I51.89/I51.9.",
+    "evidence_found_in": [
+     "lib/services/coding/clinical_coder.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "In ClinicalCoder.finalizeDiagnoses replace I10 + I50.x by I11.0 + I50.x unless documentation says unrelated."
+  },
+  {
+   "id": "CH9-HTN-02",
+   "title": "Hypertension with chronic kidney disease: I12 plus N18",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.9.a.2",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.9.a.2",
+     "title": "2) Hypertensive Chronic Kidney Disease",
+     "file": "guidelines/I.C.09_chapter-9-diseases-circulatory-system.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.14.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.14.a",
+     "title": "a. Chronic kidney disease",
+     "file": "guidelines/I.C.14_chapter-14-diseases-genitourinary-system.md"
+    }
+   ],
+   "rule": "Hypertension with a condition in N18 is coded to I12 (presumed causal), with the N18 code as a secondary code for the stage, unless the provider says the CKD is not related.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Warn when I10 and N18.- are both on the claim.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "I12\\.9",
+    "note": "ClinicalCoder codes CKD stages and uses I12.0/I12.9; the scrubber warns on I10 with N18.",
+    "evidence_found_in": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Same place as CH9-HTN-01.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "CH9-HTN-03",
+   "title": "Hypertension with heart disease and CKD: I13",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.9.a.3",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.9.a.3",
+     "title": "3) Hypertensive Heart and Chronic Kidney Disease",
+     "file": "guidelines/I.C.09_chapter-9-diseases-circulatory-system.md"
+    }
+   ],
+   "rule": "Hypertension with both heart disease and CKD is coded to I13 (not I11 or I12), with N18 for the stage and I50 for heart failure when present.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Warn when I11 and I12 are both present, or I10 with both heart and CKD codes.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "I13\\.0",
+    "note": "ClinicalCoder uses I13.0/I13.2 when both are confirmed; the scrubber warns on I10 with both, and on I11 with I12.",
+    "evidence_found_in": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Extend the CH9-HTN-01 replacement to I13.x when both heart and CKD codes are present.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "CH14-CKD-01",
+   "title": "CKD stage and ESRD both documented: N18.6 only",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.14.a.1",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.14.a.1",
+     "title": "1) Stages of chronic kidney disease (CKD)",
+     "file": "guidelines/I.C.14_chapter-14-diseases-genitourinary-system.md"
+    }
+   ],
+   "rule": "If both a CKD stage and ESRD are documented, assign N18.6 only.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Warn when N18.6 and another N18 code are both present.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "ESRD replaces the CKD stage",
+    "note": "The coder keeps N18.6 only; the scrubber warns when N18.6 is reported with another N18 code.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Drop other N18 codes when N18.6 is present (finalizeDiagnoses).",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "CH15-OB-01",
+   "title": "Pregnancy (Chapter 15) codes: maternal record only, maternity age 9-64",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.15.a.2",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.15.a.2",
+     "title": "2) Chapter 15 codes used only on the maternal record",
+     "file": "guidelines/I.C.15_chapter-15-pregnancy-childbirth-puerperium.md"
+    },
+    {
+     "type": "mce",
+     "ref": 4,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 4",
+     "title": "Age conflict",
+     "status": "active"
+    }
+   ],
+   "rule": "Chapter 15 codes are used only on the maternal record, never on the newborn record. The MCE maternity age edit lists the codes (Chapter 15 and related Z/other codes) valid for ages 9 through 64.",
+   "inputs": [
+    "diagnosis codes",
+    "patient age",
+    "patient sex"
+   ],
+   "check": "Error when a code in MCE list age_maternity is reported for an age outside 9-64 or for a newborn.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/mce_edits_v44.json (age_maternity, 2,587 codes)"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/code_rules.dart",
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/mce.dart"
+    ],
+    "evidence": "mce\\.ageFor\\(",
+    "note": "icdAgeRange uses the MCE v44 age_maternity list (2,587 codes); O codes 9-64 as fallback without the asset.",
+    "evidence_found_in": [
+     "lib/services/coding/code_rules.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Replace the O-prefix test in icdAgeRange with the MCE age_maternity list.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "CH15-OB-02",
+   "title": "Chapter 15 codes have sequencing priority; Z33.1 when pregnancy is incidental",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.15.a.1",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.15.a.1",
+     "title": "1) Codes from chapter 15 and sequencing priority",
+     "file": "guidelines/I.C.15_chapter-15-pregnancy-childbirth-puerperium.md"
+    }
+   ],
+   "rule": "Obstetric cases use Chapter 15 codes, which are sequenced before codes from other chapters; when the provider documents the pregnancy is incidental, Z33.1 replaces Chapter 15 codes.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "Warn when an O code is present but not first-listed.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/coding/clinical_coder.dart"
+    ],
+    "evidence": "'CH15-OB-02'",
+    "note": "Warning when an O code is present but not first; finalizeDiagnoses ranks O codes first.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Rank O codes first in finalizeDiagnoses.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "CH15-OB-03",
+   "title": "Routine prenatal visit: Z34 first-listed and not with Chapter 15 codes",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.15.b.1",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.15.b.1",
+     "title": "1) Routine outpatient prenatal visits",
+     "file": "guidelines/I.C.15_chapter-15-pregnancy-childbirth-puerperium.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "IV.O",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section IV.O",
+     "title": "O. Routine outpatient prenatal visits",
+     "file": "guidelines/IV_diagnostic-reporting-outpatient-services.md"
+    }
+   ],
+   "rule": "For routine outpatient prenatal visits without complications, a Z34 code is first-listed; Z34 codes are not used together with Chapter 15 codes.",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Error when Z34.- and any O code are on the same claim; warn when Z34.- is not first.",
+   "severity": "error",
+   "settings": [
+    "outpatient",
+    "professional"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/coding/code_rules.dart"
+    ],
+    "evidence": "'CH15-OB-03'",
+    "note": "Error when Z34 and an O code are reported together; Z34 not first is a CH21-Z-01 error.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Error in ClaimScrubber when Z34.- and any O code are both present.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "CH15-OB-04",
+   "title": "Weeks of gestation (Z3A) only on the maternal record, after the obstetric code",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.15.a.7",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.15.a.7",
+     "title": "7) Completed weeks of gestation",
+     "file": "guidelines/I.C.15_chapter-15-pregnancy-childbirth-puerperium.md"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "codeFirst",
+     "citation": "ICD-10-CM Tabular List FY2027, \"codeFirst\" instructional notes"
+    },
+    {
+     "type": "tabular_note",
+     "ref": "notes",
+     "citation": "ICD-10-CM Tabular List FY2027, \"notes\" instructional notes"
+    }
+   ],
+   "rule": "Z3A codes indicate weeks of gestation, only on the maternal record; code first the obstetric condition.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "Warn when Z3A is first-listed or used without an O code.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_code_notes_2027.jsonl (Z3A)"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'CH15-OB-04'",
+    "note": "Warning when Z3A is first-listed or has no obstetric code.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Warn when Z3A is first-listed or present without an O code.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "CH16-PERI-01",
+   "title": "Perinatal (Chapter 16) codes may be used after the perinatal period",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.16.a.4",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.16.a.4",
+     "title": "4) Use of Chapter 16 Codes after the Perinatal Period",
+     "file": "guidelines/I.C.16_chapter-16-certain-originating-perinatal-period.md"
+    },
+    {
+     "type": "mce",
+     "ref": 4,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 4",
+     "title": "Age conflict",
+     "status": "active"
+    }
+   ],
+   "rule": "A condition that originates in the perinatal period and continues through life keeps its P code regardless of age. The MCE newborn age edit (age 0) applies only to its specific list of 42 codes (for example Z38, Z05, Z00.11-, A33), not to all P codes.",
+   "inputs": [
+    "diagnosis codes",
+    "patient age"
+   ],
+   "check": "Age-0 error only for codes in MCE list age_newborn.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/mce_edits_v44.json (age_newborn)"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/code_rules.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "isPerinatalCode\\(",
+    "note": "P codes are no longer age-limited; age-0 errors come only from the MCE age_newborn list, and a P code after age 0 gets a warning to confirm perinatal onset.",
+    "evidence_found_in": [
+     "lib/services/coding/code_rules.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Replace the P-prefix rule in icdAgeRange with the MCE age_newborn list.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "CH19-INJ-01",
+   "title": "Injury 7th characters: A active treatment, D healing phase, S sequela",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.19.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.19.a",
+     "title": "a. Application of 7th Characters in Chapter 19",
+     "file": "guidelines/I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.19.c.1",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.19.c.1",
+     "title": "1) Initial vs. subsequent encounter for fractures",
+     "file": "guidelines/I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md"
+    }
+   ],
+   "rule": "7th character A is for each encounter with active treatment, D for routine care during healing or recovery, S for sequelae. Fractures use their own initial (A/B/C), subsequent (D-H), nonunion (K/M/N), malunion (P/Q/R) and sequela (S) values. Aftercare Z codes are not used for injuries; use D instead.",
+   "inputs": [
+    "diagnosis codes",
+    "encounter type"
+   ],
+   "check": "Warn on Z47/Z48 aftercare with a current injury; warn when a follow-up visit uses A.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/icd10cm_seventh_character_2027.json"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "CH19-INJ-01",
+    "note": "ClinicalCoder picks D when the injury was coded on an earlier visit and no active treatment is documented (CodingContext.priorDiagnosisCodes); warnings on Z47/Z48 aftercare with an injury and on A for an injury coded on an earlier visit.",
+    "evidence_found_in": [
+     "lib/services/coding/clinical_coder.dart",
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Pass newPatient/visit history into _withLaterality to choose A or D.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "CH19-POIS-01",
+   "title": "Poisoning, adverse effect and underdosing sequencing",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.19.e.5",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.19.e.5",
+     "title": "5) The occurrence of drug toxicity is classified in ICD-10-CM as follows:",
+     "file": "guidelines/I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.19.e.5.c",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.19.e.5.c",
+     "title": "(c) Underdosing",
+     "file": "guidelines/I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md"
+    }
+   ],
+   "rule": "Poisoning: the T36-T65 poisoning code first, then the manifestations. Adverse effect of a correctly prescribed drug: the nature of the effect first, then the T36-T50 adverse-effect code. Underdosing codes are never principal or first-listed.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "Error when an underdosing code (T36-T50 with 5th/6th character 6) is first-listed; warn when an adverse-effect code (character 5) is first-listed.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'CH19-POIS-01'",
+    "note": "Error when underdosing (6th character 6) is first; warning when an adverse effect (5) is first or a poisoning code is not first.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Use the 6th character of T36-T50 codes (5 = adverse effect, 6 = underdosing) to check position.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "CH21-Z-01",
+   "title": "Z codes that may only be first-listed",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.21.c.15",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.21.c.15",
+     "title": "15) Z Codes That May Only be Principal/First-Listed Diagnosis",
+     "file": "guidelines/I.C.21_chapter-21-factors-influencing-health-status-contact-health.md"
+    },
+    {
+     "type": "guideline",
+     "ref": "I.C.21.a",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.21.a",
+     "title": "a. Use of Z Codes in Any Healthcare Setting",
+     "file": "guidelines/I.C.21_chapter-21-factors-influencing-health-status-contact-health.md"
+    }
+   ],
+   "rule": "The listed Z codes/categories may only be reported as the principal/first-listed diagnosis, except when there are multiple encounters on the same day and the records are combined.",
+   "inputs": [
+    "ordered diagnosis list"
+   ],
+   "check": "Error when a code in \"official_list\" (minus its exceptions) is not first.",
+   "severity": "error",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rule_catalog.json official_list"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/code_rules.dart",
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/coding/clinical_coder.dart"
+    ],
+    "evidence": "firstListedOnlyZPrefixes",
+    "note": "Const list with exceptions in code_rules.dart; error when one is not first; finalizeDiagnoses ranks them first.",
+    "evidence_found_in": [
+     "lib/services/coding/code_rules.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Generate a const list in code_rules.dart from official_list; check in ClaimScrubber.",
+   "official_list": [
+    {
+     "code": "Z00",
+     "title": "Encounter for general examination without complaint, suspected or reported diagnosis",
+     "except": [
+      "Z00.6"
+     ]
+    },
+    {
+     "code": "Z01",
+     "title": "Encounter for other special examination without complaint, suspected or reported diagnosis",
+     "except": []
+    },
+    {
+     "code": "Z02",
+     "title": "Encounter for administrative examination",
+     "except": []
+    },
+    {
+     "code": "Z04",
+     "title": "Encounter for examination and observation for other reasons",
+     "except": []
+    },
+    {
+     "code": "Z33.2",
+     "title": "Encounter for elective termination of pregnancy",
+     "except": []
+    },
+    {
+     "code": "Z31.81",
+     "title": "Encounter for male factor infertility in female patient",
+     "except": []
+    },
+    {
+     "code": "Z31.83",
+     "title": "Encounter for assisted reproductive fertility procedure cycle",
+     "except": []
+    },
+    {
+     "code": "Z31.84",
+     "title": "Encounter for fertility preservation procedure",
+     "except": []
+    },
+    {
+     "code": "Z34",
+     "title": "Encounter for supervision of normal pregnancy",
+     "except": []
+    },
+    {
+     "code": "Z39",
+     "title": "Encounter for maternal postpartum care and examination",
+     "except": []
+    },
+    {
+     "code": "Z38",
+     "title": "Liveborn infants according to place of birth and type of delivery",
+     "except": []
+    },
+    {
+     "code": "Z40",
+     "title": "Encounter for prophylactic surgery",
+     "except": []
+    },
+    {
+     "code": "Z42",
+     "title": "Encounter for plastic and reconstructive surgery following medical procedure or healed injury",
+     "except": []
+    },
+    {
+     "code": "Z51.0",
+     "title": "Encounter for antineoplastic radiation therapy",
+     "except": []
+    },
+    {
+     "code": "Z51.1-",
+     "title": "Encounter for antineoplastic chemotherapy and immunotherapy",
+     "except": []
+    },
+    {
+     "code": "Z52",
+     "title": "Donors of organs and tissues",
+     "except": [
+      "Z52.9"
+     ]
+    },
+    {
+     "code": "Z76.1",
+     "title": "Encounter for health supervision and care of foundling",
+     "except": []
+    },
+    {
+     "code": "Z76.2",
+     "title": "Encounter for health supervision and care of other healthy infant and child",
+     "except": []
+    },
+    {
+     "code": "Z99.12",
+     "title": "Encounter for respirator [ventilator] dependence during power failure",
+     "except": []
+    }
+   ],
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "CH21-Z-02",
+   "title": "Status Z codes are not used when the diagnosis code already includes the status",
+   "sources": [
+    {
+     "type": "guideline",
+     "ref": "I.C.21.c.3",
+     "citation": "ICD-10-CM Official Guidelines FY2027, Section I.C.21.c.3",
+     "title": "3) Status",
+     "file": "guidelines/I.C.21_chapter-21-factors-influencing-health-status-contact-health.md"
+    }
+   ],
+   "rule": "A status code is not used with a body-system diagnosis code that already includes the status information (for example Z94.1 heart transplant status with T86.2- complications of heart transplant).",
+   "inputs": [
+    "diagnosis codes"
+   ],
+   "check": "Warn on known redundant pairs.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'CH21-Z-02'",
+    "note": "Warning for Z94.- transplant status with the T86.- complication of the same organ, and Z93.- opening status with the Z43.- attention code (the guideline examples and their same-organ equivalents).",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Start with the pairs named in the guideline (Z94.1 with T86.2-); extend from Excludes1 notes.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "MCE-AGE-01",
+   "title": "Diagnosis age conflict (MCE edit 4)",
+   "sources": [
+    {
+     "type": "mce",
+     "ref": 4,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 4",
+     "title": "Age conflict",
+     "status": "active"
+    }
+   ],
+   "rule": "A diagnosis on the MCE newborn (age 0), pediatric (0-17), maternity (9-64) or adult (15-124) list conflicts with a patient age outside that range.",
+   "inputs": [
+    "diagnosis codes",
+    "age on date of service"
+   ],
+   "check": "Look up the code in the four MCE age lists.",
+   "severity": "error",
+   "severity_basis": "MCE edit for inpatient claims; outpatient editors apply equivalent age edits",
+   "settings": [
+    "all"
+   ],
+   "data": [
+    "rules/mce_edits_v44.json"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/code_rules.dart",
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/mce.dart"
+    ],
+    "evidence": "ReferenceData\\.mce",
+    "note": "icdAgeRange reads the four MCE v44 age lists from mce_v44.tsv.gz; a small hand-written fallback applies only when the asset is missing.",
+    "evidence_found_in": [
+     "lib/services/coding/code_rules.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Load the four MCE lists (3,612 codes) as a const map code -> [min,max] and use it in icdAgeRange."
+  },
+  {
+   "id": "MCE-SEX-01",
+   "title": "Diagnosis sex conflict",
+   "sources": [
+    {
+     "type": "mce",
+     "ref": 5,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 5",
+     "title": "Sex conflict",
+     "status": "deactivated as of 10/01/2024"
+    }
+   ],
+   "rule": "The MCE sex conflict edit is deactivated as of 10/01/2024 (MCE v44 publishes no sex lists). Sex-specific diagnosis and procedure edits are still applied by many payers and by the outpatient code editor.",
+   "inputs": [
+    "diagnosis codes",
+    "patient sex"
+   ],
+   "check": "Use a payer-configurable warning, not a hard error, unless the payer publishes a sex edit.",
+   "severity": "warning",
+   "settings": [
+    "all"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/code_rules.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "enforceSexEdits",
+    "note": "Payer-configurable: warning by default, error when the provider turns on enforceSexEdits for a payer that publishes a sex edit. MCE v44 publishes no sex lists, so the ranges follow the sex-specific Tabular chapters and categories.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Keep provider.enforceSexEdits default off; cite the payer source when on.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "MCE-UNACC-01",
+   "title": "Unacceptable principal diagnosis (inpatient)",
+   "sources": [
+    {
+     "type": "mce",
+     "ref": 9,
+     "citation": "Definitions of Medicare Code Edits v44.0, edit 9",
+     "title": "Unacceptable principal diagnosis",
+     "status": "active"
+    }
+   ],
+   "rule": "MCE edit 9 lists codes that describe circumstances rather than a current illness and are unacceptable as inpatient principal diagnosis (Z51.89 is acceptable when a secondary diagnosis is present).",
+   "inputs": [
+    "principal diagnosis",
+    "claim type"
+   ],
+   "check": "Inpatient claims only: error when the principal diagnosis is on the list.",
+   "severity": "error",
+   "settings": [
+    "inpatient"
+   ],
+   "data": [
+    "rules/mce_edits_v44.json"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/mce.dart"
+    ],
+    "evidence": "isUnacceptablePrincipal\\(",
+    "note": "Error on hospital inpatient visits; Z codes the guidelines allow first (I.C.21.c.15) and Z51.89 with a secondary diagnosis are exempt.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/mce.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Make it an error if the app ever builds inpatient institutional (837I) claims.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "NCCI-PTP-01",
+   "title": "Procedure-to-procedure (unbundling) edits",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.A",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section A",
+     "title": "Introduction"
+    },
+    {
+     "type": "ncci_manual",
+     "ref": "I.B",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section B",
+     "title": "Coding Based on Standards of Medical/Surgical Practice"
+    },
+    {
+     "type": "ncci_manual",
+     "ref": "I.C",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section C",
+     "title": "Medical/Surgical Package"
+    }
+   ],
+   "rule": "When the same provider reports two codes of an NCCI PTP pair for the same beneficiary and date of service, the column two code is denied unless the edit allows an NCCI PTP-associated modifier and the clinical circumstances justify it. Component services integral to a comprehensive service are not reported separately.",
+   "inputs": [
+    "procedure codes",
+    "modifiers",
+    "same provider/patient/DOS"
+   ],
+   "check": "Look up each ordered pair in the PTP table; deny column two unless modifier indicator 1 and an associated modifier is present.",
+   "severity": "error",
+   "settings": [
+    "professional",
+    "outpatient"
+   ],
+   "data": [
+    "ptp_practitioner.tsv.gz (not bundled: AMA license gate)"
+   ],
+   "implemented": {
+    "status": "partial",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/ptp.dart"
+    ],
+    "evidence": "ptpIssues\\(",
+    "note": "ClaimScrubber.ptpIssues checks every line pair when ReferenceData.ptp is set, but the table is not bundled because CMS serves it behind the AMA CPT license click-through.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 5,
+   "hint": "Code is in place (ClaimScrubber.ptpIssues); bundle the table with --ship-ptp once the owner holds an AMA CPT distribution license.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "NCCI-MUTEX-01",
+   "title": "Mutually exclusive procedures",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.P",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section P",
+     "title": "Mutually Exclusive Procedures"
+    }
+   ],
+   "rule": "Procedures that cannot reasonably be performed at the same anatomic site or encounter (for example two methods of the same repair, or \"initial\" and \"subsequent\" versions) are PTP pairs and are not paid together.",
+   "inputs": [
+    "procedure codes",
+    "modifiers"
+   ],
+   "check": "Same PTP table lookup.",
+   "severity": "error",
+   "settings": [
+    "professional",
+    "outpatient"
+   ],
+   "data": [
+    "ptp_practitioner.tsv.gz (not bundled)"
+   ],
+   "implemented": {
+    "status": "partial",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/ptp.dart"
+    ],
+    "evidence": "ptpIssues\\(",
+    "note": "Covered by ClaimScrubber.ptpIssues when the PTP table is available (not bundled).",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Same as NCCI-PTP-01.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "NCCI-MOD-01",
+   "title": "Only NCCI PTP-associated modifiers bypass a PTP edit, and only when the indicator allows",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.E",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section E",
+     "title": "Modifiers and Modifier Indicators"
+    }
+   ],
+   "rule": "PTP-associated modifiers: anatomic (E1-E4, FA, F1-F9, TA, T1-T9, LT, RT, LC, LD, RC, LM, RI), global surgery (24, 25, 57, 58, 78, 79) and others (27, 59, 91, XE, XS, XP, XU). Modifier indicator 0 = no bypass; 1 = bypass allowed when clinically justified; 9 = not applicable. Modifiers 22, 76 and 77 do not bypass a PTP edit. A modifier is never added only to bypass an edit.",
+   "inputs": [
+    "procedure codes",
+    "modifiers",
+    "PTP modifier indicator"
+   ],
+   "check": "When a PTP pair exists, accept the column two line only if indicator = 1 and one of the listed modifiers is present.",
+   "severity": "error",
+   "settings": [
+    "professional",
+    "outpatient"
+   ],
+   "data": [
+    "rules/ncci_policy_manual_sections_2026.json"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "ncciModifiers",
+    "note": "ClaimScrubber.ncciModifiers; modifier indicator 0 never bypasses, 1 needs one of the listed modifiers. Applies when the PTP table is available.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Put the modifier list in a Dart const next to Ptp.modifierAllowed.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "NCCI-MOD-02",
+   "title": "Modifier 59 and X{EPSU}: separate encounter, structure, practitioner or non-overlapping service",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.E",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section E",
+     "title": "Modifiers and Modifier Indicators"
+    }
+   ],
+   "rule": "Modifier 59 is used only when no more descriptive modifier applies; XE, XS, XP, XU are preferred where they fit. It is not appended to E/M services (use 25). Different diagnoses alone do not justify 59/XS; the procedures must be at different anatomic sites or separate encounters. Not used with 77427.",
+   "inputs": [
+    "modifiers",
+    "procedure codes",
+    "documentation"
+   ],
+   "check": "Error on 59/X modifiers on an E/M code; warn on 59 when an X modifier fits.",
+   "severity": "warning",
+   "settings": [
+    "professional",
+    "outpatient"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart"
+    ],
+    "evidence": "'NCCI-MOD-02'",
+    "note": "Error on 59/XE/XS/XP/XU on an E/M code and on 59 with 77427; warning on 59 without an X modifier.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Add modifier validation per line in ClaimScrubber using emSettingOf().",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "NCCI-EM-01",
+   "title": "E/M on the day of a minor procedure (global 000/010) needs modifier 25 and a separate service",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.D",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section D",
+     "title": "Evaluation & Management (E&M) Services"
+    },
+    {
+     "type": "ncci_manual",
+     "ref": "I.E",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section E",
+     "title": "Modifiers and Modifier Indicators"
+    }
+   ],
+   "rule": "E/M services on the same day as a minor surgical procedure (global 000 or 010) are included, including the decision to perform it, unless a significant, separately identifiable E/M service is performed, reported with modifier 25. Different diagnoses are not required. Being a new patient alone does not justify it.",
+   "inputs": [
+    "E/M line",
+    "procedure lines",
+    "PFS global days",
+    "modifiers"
+   ],
+   "check": "When an E/M line and a procedure with global 000/010 share the DOS, require modifier 25 on the E/M and documentation of the separate service.",
+   "severity": "error",
+   "settings": [
+    "professional"
+   ],
+   "data": [
+    "assets/codes/pfs_rvu.tsv.gz (global days)"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/fee_schedule.dart"
+    ],
+    "evidence": "E/M needs modifier 25",
+    "note": "Error when an E/M without modifier 25 is billed with a 000/010 global procedure. The coder does not add 25 itself: the physician decides whether the E/M was separately identifiable.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 5,
+   "hint": "FeeSchedule.lookup(code).globalDays is already loaded; add the check in ClaimScrubber and default modifier 25 in ClinicalCoder when a separate E/M is documented.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "NCCI-EM-02",
+   "title": "E/M on the day before or of a major procedure (global 090): modifier 57 for the decision",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.D",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section D",
+     "title": "Evaluation & Management (E&M) Services"
+    }
+   ],
+   "rule": "For a major procedure (global 090), an E/M on the same day to decide to perform the surgery is separately reportable with modifier 57; other preoperative E/M services that day are included. MACs, not NCCI, edit this.",
+   "inputs": [
+    "E/M line",
+    "procedure global days",
+    "modifiers"
+   ],
+   "check": "Warn when an E/M and a 090 procedure share the DOS without modifier 57.",
+   "severity": "warning",
+   "settings": [
+    "professional"
+   ],
+   "data": [
+    "assets/codes/pfs_rvu.tsv.gz"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/codesets/fee_schedule.dart"
+    ],
+    "evidence": "'NCCI-EM-02'",
+    "note": "Warning when an E/M without 57 is billed on the day of a 090 procedure, or the day before one recorded on the next visit.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Use FeeSchedule.globalDays == \"090\" in ClaimScrubber to suggest modifier 57.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "NCCI-EM-03",
+   "title": "E/M with XXX procedures",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.D",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section D",
+     "title": "Evaluation & Management (E&M) Services"
+    }
+   ],
+   "rule": "Global indicator XXX procedures are outside global surgery rules, but their inherent pre/post work, supervision and interpretation are not reported as E/M; a significant, separately identifiable E/M may be reported with modifier 25.",
+   "inputs": [
+    "E/M line",
+    "procedure global days"
+   ],
+   "check": "Warn when an E/M and an XXX procedure with physician work share the DOS without modifier 25.",
+   "severity": "warning",
+   "settings": [
+    "professional"
+   ],
+   "data": [
+    "assets/codes/pfs_rvu.tsv.gz"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/codesets/fee_schedule.dart"
+    ],
+    "evidence": "'NCCI-EM-03'",
+    "note": "Warning when an E/M without 25 is billed with an XXX procedure that has work RVUs and PC/TC indicator 0 or 5 (diagnostic tests excluded); pfs_rvu.tsv.gz keeps the work RVU and PC/TC columns.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Use FeeSchedule.globalDays == \"XXX\" and work RVU > 0 to require modifier 25 on the E/M.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "NCCI-GLOBAL-01",
+   "title": "Postoperative visits in the global period",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.D",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section D",
+     "title": "Evaluation & Management (E&M) Services"
+    }
+   ],
+   "rule": "E/M services related to recovery from surgery, including complications, are included in the global package; unrelated E/M services during the postoperative period are reported with modifier 24.",
+   "inputs": [
+    "prior procedures with global days and dates",
+    "E/M line"
+   ],
+   "check": "Warn when an E/M falls inside the global period of a prior procedure by the same provider without modifier 24.",
+   "severity": "warning",
+   "settings": [
+    "professional"
+   ],
+   "data": [
+    "assets/codes/pfs_rvu.tsv.gz"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/codesets/fee_schedule.dart"
+    ],
+    "evidence": "'NCCI-GLOBAL-01'",
+    "note": "Warning when an E/M without 24 falls within 10 or 90 days after a 010/090 procedure billed on an earlier visit of the patient account.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Needs the patient account visit history (PatientAccount.visits) with billed procedures.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "NCCI-ADDON-01",
+   "title": "Add-on codes require an acceptable primary code",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.R",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section R",
+     "title": "Add-on Codes"
+    },
+    {
+     "type": "ncci_manual",
+     "ref": "I.W",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section W",
+     "title": "Add-on Code Edits"
+    }
+   ],
+   "rule": "An add-on code is reported only with its primary procedure. Type 1: only the listed primary codes; Type 2: the MAC defines primaries; Type 3: listed primaries plus MAC-defined. If the primary is denied, the add-on is not paid.",
+   "inputs": [
+    "procedure codes on the claim"
+   ],
+   "check": "For each add-on code in the AOC file, require one of its primary codes on the same claim/DOS (type 1 error, types 2/3 warning).",
+   "severity": "error",
+   "settings": [
+    "professional",
+    "outpatient"
+   ],
+   "data": [
+    "rules/ncci_addon_code_edits_v2026q4.tsv"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/addon_codes.dart"
+    ],
+    "evidence": "addOnIssues\\(",
+    "note": "ncci_addon.tsv.gz; type 1 error, type 3 warning; type 2 primaries are contractor-defined and cannot be checked.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Bundle the AOC TSV as an asset (bare codes), load it in ReferenceData, and check in ClaimScrubber.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "NCCI-MUE-01",
+   "title": "Medically unlikely edits: units per line (MAI 1)",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.V",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section V",
+     "title": "Medically Unlikely Edits (MUEs)"
+    }
+   ],
+   "rule": "Units of service above the MUE value for a code on one claim line are denied (MAI 1 = claim line edit).",
+   "inputs": [
+    "code",
+    "units"
+   ],
+   "check": "units <= MUE value.",
+   "severity": "error",
+   "settings": [
+    "professional",
+    "outpatient"
+   ],
+   "data": [
+    "assets/codes/mue_practitioner.tsv.gz"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/mue.dart"
+    ],
+    "evidence": "maxUnits\\(",
+    "note": "",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/mue.dart"
+    ]
+   },
+   "impact": 5,
+   "hint": "",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "NCCI-MUE-02",
+   "title": "Medically unlikely edits: date-of-service totals (MAI 2 and 3)",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.V",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section V",
+     "title": "Medically Unlikely Edits (MUEs)"
+    }
+   ],
+   "rule": "For MAI 2 (policy) and MAI 3 (clinical) edits, units for the same code on all lines for the date of service are summed and compared with the MUE; all units are denied if exceeded. MAI 2 denials cannot be overridden on appeal.",
+   "inputs": [
+    "all lines with the same code and DOS"
+   ],
+   "check": "Sum units by code across lines before comparing when adjudicationIndicator is 2 or 3.",
+   "severity": "error",
+   "settings": [
+    "professional",
+    "outpatient"
+   ],
+   "data": [
+    "assets/codes/mue_practitioner.tsv.gz"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/mue.dart"
+    ],
+    "evidence": "unitsByCode",
+    "note": "Units of the same code are summed across lines when the MAI is 2 or 3.",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 4,
+   "hint": "Group claim.lines by code and compare the sum when Mue.adjudicationIndicator(code) is 2 or 3.",
+   "severity_basis": "claim edit rejection or denial expected"
+  },
+  {
+   "id": "NCCI-MUE-03",
+   "title": "Bilateral procedures: units and modifier 50 follow the PFS bilateral indicator",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.V",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section V",
+     "title": "Medically Unlikely Edits (MUEs)"
+    }
+   ],
+   "rule": "With bilateral indicator 1 or 3 a bilateral surgical procedure is one unit with modifier 50; indicator 0 or 2 is one unit without 50 (see the manual for diagnostic procedures with RT/LT lines).",
+   "inputs": [
+    "code",
+    "modifiers",
+    "units",
+    "PFS bilateral indicator"
+   ],
+   "check": "Units and modifiers consistent with the indicator.",
+   "severity": "warning",
+   "settings": [
+    "professional"
+   ],
+   "data": [
+    "assets/codes/pfs_rvu.tsv.gz (bilateral surgery indicator)"
+   ],
+   "implemented": {
+    "status": "yes",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/codesets/fee_schedule.dart"
+    ],
+    "evidence": "'NCCI-MUE-03'",
+    "note": "pfs_rvu.tsv.gz keeps the bilateral surgery indicator: warnings on modifier 50 with indicator 0/2/9, on 50 with more than one unit, on indicator 2 with more than one unit, and on indicator 1 codes billed as RT and LT lines.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 3,
+   "hint": "Keep the BILAT SURG column when building pfs_rvu.tsv.gz.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "NCCI-LAB-01",
+   "title": "Laboratory panels and repeat tests",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.N",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section N",
+     "title": "Laboratory Panel"
+    },
+    {
+     "type": "ncci_manual",
+     "ref": "X.C",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter X, Section C",
+     "title": "Organ or Disease Oriented Panels"
+    }
+   ],
+   "rule": "When all tests of an organ or disease panel are performed, report the panel code; a medically necessary repeat of a component test on the same day is reported with modifier 91.",
+   "inputs": [
+    "lab codes",
+    "modifiers"
+   ],
+   "check": "Warn when all components of a panel are billed separately.",
+   "severity": "warning",
+   "settings": [
+    "professional",
+    "outpatient"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "partial",
+    "files": [
+     "lib/services/coding/knowledge_checks.dart",
+     "lib/services/coding/claim_scrubber.dart"
+    ],
+    "evidence": "'NCCI-LAB-01'",
+    "note": "Repeat tests: warning when a lab code is repeated without modifier 91. Panel composition is CPT (AMA) content, so panels are enforced only through ptpIssues when the PTP table is loaded.",
+    "evidence_found_in": [
+     "lib/services/coding/knowledge_checks.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Needs a panel-to-component map; panel definitions are AMA CPT content, so rely on PTP edits.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  },
+  {
+   "id": "NCCI-FAMILY-01",
+   "title": "Report the most comprehensive code; a code means all its components were done",
+   "sources": [
+    {
+     "type": "ncci_manual",
+     "ref": "I.H",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section H",
+     "title": "HCPCS/CPT Procedure Code Definition"
+    },
+    {
+     "type": "ncci_manual",
+     "ref": "I.K",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section K",
+     "title": "Family of Codes"
+    },
+    {
+     "type": "ncci_manual",
+     "ref": "I.L",
+     "citation": "Medicare NCCI Policy Manual 2026, Chapter I, Section L",
+     "title": "More Extensive Procedure"
+    }
+   ],
+   "rule": "A code is reported only if all services it describes were performed; report the most comprehensive code that describes the services rather than component codes; a more extensive and a less extensive version of the same procedure are not reported together.",
+   "inputs": [
+    "procedure codes"
+   ],
+   "check": "Mostly enforced through PTP pairs.",
+   "severity": "warning",
+   "settings": [
+    "professional",
+    "outpatient"
+   ],
+   "data": [],
+   "implemented": {
+    "status": "partial",
+    "files": [
+     "lib/services/coding/claim_scrubber.dart",
+     "lib/services/codesets/ptp.dart"
+    ],
+    "evidence": "ptpIssues\\(",
+    "note": "Enforced through ClaimScrubber.ptpIssues (comprehensive/component and more/less extensive pairs) whenever the NCCI PTP table is loaded; the table is not bundled (AMA CPT license).",
+    "evidence_found_in": [
+     "lib/services/coding/claim_scrubber.dart"
+    ]
+   },
+   "impact": 2,
+   "hint": "Covered by PTP edits once the PTP table is available.",
+   "severity_basis": "coding-guideline violation or payer-specific edit; review"
+  }
+ ]
+}

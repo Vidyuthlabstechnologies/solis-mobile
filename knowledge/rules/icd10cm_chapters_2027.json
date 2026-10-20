@@ -1,0 +1,2727 @@
+{
+ "edition": "FY2027",
+ "source": {
+  "title": "2027 ICD-10-CM Code Tables, Tabular and Index (XML)",
+  "url": "https://www.cms.gov/files/zip/2027-code-tables-tabular-index.zip"
+ },
+ "chapters": [
+  {
+   "chapter": 1,
+   "range": "A00-B99",
+   "title": "Certain infectious and parasitic diseases",
+   "notes": {
+    "includes": [
+     "diseases generally recognized as communicable or transmissible"
+    ],
+    "excludes2": [
+     "carrier or suspected carrier of infectious disease (Z22.-)",
+     "certain localized infections - see body system-related chapters",
+     "infectious and parasitic diseases complicating pregnancy, childbirth and the puerperium (O98.-)",
+     "infectious and parasitic diseases specific to the perinatal period (P35-P39)",
+     "influenza and other acute respiratory infections (J00-J22)"
+    ],
+    "useAdditionalCode": [
+     "code to identify resistance to antimicrobial drugs (Z16.-)"
+    ]
+   },
+   "refs": {
+    "includes": [
+     []
+    ],
+    "excludes2": [
+     [
+      "Z22.-"
+     ],
+     [],
+     [
+      "O98.-"
+     ],
+     [
+      "P35-P39"
+     ],
+     [
+      "J00-J22"
+     ]
+    ],
+    "useAdditionalCode": [
+     [
+      "Z16.-"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "A00-A09",
+     "first": "A00",
+     "last": "A09",
+     "title": "Intestinal infectious diseases"
+    },
+    {
+     "id": "A15-A19",
+     "first": "A15",
+     "last": "A19",
+     "title": "Tuberculosis"
+    },
+    {
+     "id": "A20-A28",
+     "first": "A20",
+     "last": "A28",
+     "title": "Certain zoonotic bacterial diseases"
+    },
+    {
+     "id": "A30-A49",
+     "first": "A30",
+     "last": "A49",
+     "title": "Other bacterial diseases"
+    },
+    {
+     "id": "A50-A64",
+     "first": "A50",
+     "last": "A64",
+     "title": "Infections with a predominantly sexual mode of transmission"
+    },
+    {
+     "id": "A65-A69",
+     "first": "A65",
+     "last": "A69",
+     "title": "Other spirochetal diseases"
+    },
+    {
+     "id": "A70-A74",
+     "first": "A70",
+     "last": "A74",
+     "title": "Other diseases caused by chlamydiae"
+    },
+    {
+     "id": "A75-A79",
+     "first": "A75",
+     "last": "A79",
+     "title": "Rickettsioses"
+    },
+    {
+     "id": "A80-A89",
+     "first": "A80",
+     "last": "A89",
+     "title": "Viral and prion infections of the central nervous system"
+    },
+    {
+     "id": "A90-A99",
+     "first": "A90",
+     "last": "A99",
+     "title": "Arthropod-borne viral fevers and viral hemorrhagic fevers"
+    },
+    {
+     "id": "B00-B09",
+     "first": "B00",
+     "last": "B09",
+     "title": "Viral infections characterized by skin and mucous membrane lesions"
+    },
+    {
+     "id": "B10",
+     "first": "B10",
+     "last": "B10",
+     "title": "Other human herpesviruses"
+    },
+    {
+     "id": "B15-B19",
+     "first": "B15",
+     "last": "B19",
+     "title": "Viral hepatitis"
+    },
+    {
+     "id": "B20",
+     "first": "B20",
+     "last": "B20",
+     "title": "Human immunodeficiency virus [HIV] disease"
+    },
+    {
+     "id": "B25-B34",
+     "first": "B25",
+     "last": "B34",
+     "title": "Other viral diseases"
+    },
+    {
+     "id": "B35-B49",
+     "first": "B35",
+     "last": "B49",
+     "title": "Mycoses"
+    },
+    {
+     "id": "B50-B64",
+     "first": "B50",
+     "last": "B64",
+     "title": "Protozoal diseases"
+    },
+    {
+     "id": "B65-B83",
+     "first": "B65",
+     "last": "B83",
+     "title": "Helminthiases"
+    },
+    {
+     "id": "B85-B89",
+     "first": "B85",
+     "last": "B89",
+     "title": "Pediculosis, acariasis and other infestations"
+    },
+    {
+     "id": "B90-B94",
+     "first": "B90",
+     "last": "B94",
+     "title": "Sequelae of infectious and parasitic diseases"
+    },
+    {
+     "id": "B95-B97",
+     "first": "B95",
+     "last": "B97",
+     "title": "Bacterial and viral infectious agents"
+    },
+    {
+     "id": "B99",
+     "first": "B99",
+     "last": "B99",
+     "title": "Other infectious diseases"
+    }
+   ]
+  },
+  {
+   "chapter": 2,
+   "range": "C00-D49",
+   "title": "Neoplasms",
+   "notes": {
+    "notes": [
+     "Functional activity",
+     "All neoplasms are classified in this chapter, whether they are functionally active or not. An additional code from Chapter 4 may be used, to identify functional activity associated with any neoplasm.",
+     "Morphology [Histology]",
+     "Chapter 2 classifies neoplasms primarily by site (topography), with broad groupings for behavior, malignant, in situ, benign, etc. The Table of Neoplasms should be used to identify the correct topography code. In a few cases, such as for malignant melanoma and certain neuroendocrine tumors, the morphology (histologic type) is included in the category and codes.",
+     "Primary malignant neoplasms overlapping site boundaries",
+     "A primary malignant neoplasm that overlaps two or more contiguous (next to each other) sites should be classified to the subcategory/code .8 ('overlapping lesion'), unless the combination is specifically indexed elsewhere. For multiple neoplasms of the same site that are not contiguous, such as tumors in different quadrants of the same breast, codes for each site should be assigned.",
+     "Malignant neoplasm of ectopic tissue",
+     "Malignant neoplasms of ectopic tissue are to be coded to the site mentioned, e.g., ectopic pancreatic malignant neoplasms are coded to pancreas, unspecified (C25.9)."
+    ]
+   },
+   "refs": {
+    "notes": [
+     [],
+     [],
+     [],
+     [],
+     [],
+     [],
+     [],
+     [
+      "C25.9"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "C00-C14",
+     "first": "C00",
+     "last": "C14",
+     "title": "Malignant neoplasms of lip, oral cavity and pharynx"
+    },
+    {
+     "id": "C15-C26",
+     "first": "C15",
+     "last": "C26",
+     "title": "Malignant neoplasms of digestive organs"
+    },
+    {
+     "id": "C30-C39",
+     "first": "C30",
+     "last": "C39",
+     "title": "Malignant neoplasms of respiratory and intrathoracic organs"
+    },
+    {
+     "id": "C40-C41",
+     "first": "C40",
+     "last": "C41",
+     "title": "Malignant neoplasms of bone and articular cartilage"
+    },
+    {
+     "id": "C43-C44",
+     "first": "C43",
+     "last": "C44",
+     "title": "Melanoma and other malignant neoplasms of skin"
+    },
+    {
+     "id": "C45-C49",
+     "first": "C45",
+     "last": "C49",
+     "title": "Malignant neoplasms of mesothelial and soft tissue"
+    },
+    {
+     "id": "C50",
+     "first": "C50",
+     "last": "C50",
+     "title": "Malignant neoplasms of breast"
+    },
+    {
+     "id": "C51-C58",
+     "first": "C51",
+     "last": "C58",
+     "title": "Malignant neoplasms of female genital organs"
+    },
+    {
+     "id": "C60-C63",
+     "first": "C60",
+     "last": "C63",
+     "title": "Malignant neoplasms of male genital organs"
+    },
+    {
+     "id": "C64-C68",
+     "first": "C64",
+     "last": "C68",
+     "title": "Malignant neoplasms of urinary tract"
+    },
+    {
+     "id": "C69-C72",
+     "first": "C69",
+     "last": "C72",
+     "title": "Malignant neoplasms of eye, brain and other parts of central nervous system"
+    },
+    {
+     "id": "C73-C75",
+     "first": "C73",
+     "last": "C75",
+     "title": "Malignant neoplasms of thyroid and other endocrine glands"
+    },
+    {
+     "id": "C7A",
+     "first": "C7A",
+     "last": "C7A",
+     "title": "Malignant neuroendocrine tumors"
+    },
+    {
+     "id": "C7B",
+     "first": "C7B",
+     "last": "C7B",
+     "title": "Secondary neuroendocrine tumors"
+    },
+    {
+     "id": "C76-C80",
+     "first": "C76",
+     "last": "C80",
+     "title": "Malignant neoplasms of ill-defined, other secondary and unspecified sites"
+    },
+    {
+     "id": "C81-C96",
+     "first": "C81",
+     "last": "C96",
+     "title": "Malignant neoplasms of lymphoid, hematopoietic and related tissue"
+    },
+    {
+     "id": "D00-D09",
+     "first": "D00",
+     "last": "D09",
+     "title": "In situ neoplasms"
+    },
+    {
+     "id": "D10-D36",
+     "first": "D10",
+     "last": "D36",
+     "title": "Benign neoplasms, except benign neuroendocrine tumors"
+    },
+    {
+     "id": "D3A",
+     "first": "D3A",
+     "last": "D3A",
+     "title": "Benign neuroendocrine tumors"
+    },
+    {
+     "id": "D37-D48",
+     "first": "D37",
+     "last": "D48",
+     "title": "Neoplasms of uncertain behavior, polycythemia vera and myelodysplastic syndromes"
+    },
+    {
+     "id": "D49",
+     "first": "D49",
+     "last": "D49",
+     "title": "Neoplasms of unspecified behavior"
+    }
+   ]
+  },
+  {
+   "chapter": 3,
+   "range": "D50-D89",
+   "title": "Diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism",
+   "notes": {
+    "excludes2": [
+     "autoimmune disease (systemic) NOS (M35.9)",
+     "certain conditions originating in the perinatal period (P00-P96)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "human immunodeficiency virus [HIV] disease (B20)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "M35.9"
+     ],
+     [
+      "P00-P96"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "B20"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "R00-R94"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "D50-D53",
+     "first": "D50",
+     "last": "D53",
+     "title": "Nutritional anemias"
+    },
+    {
+     "id": "D55-D59",
+     "first": "D55",
+     "last": "D59",
+     "title": "Hemolytic anemias"
+    },
+    {
+     "id": "D60-D64",
+     "first": "D60",
+     "last": "D64",
+     "title": "Aplastic and other anemias and other bone marrow failure syndromes"
+    },
+    {
+     "id": "D65-D69",
+     "first": "D65",
+     "last": "D69",
+     "title": "Coagulation defects, purpura and other hemorrhagic conditions"
+    },
+    {
+     "id": "D70-D77",
+     "first": "D70",
+     "last": "D77",
+     "title": "Other disorders of blood and blood-forming organs"
+    },
+    {
+     "id": "D78",
+     "first": "D78",
+     "last": "D78",
+     "title": "Intraoperative and postprocedural complications of the spleen"
+    },
+    {
+     "id": "D80-D89",
+     "first": "D80",
+     "last": "D89",
+     "title": "Certain disorders involving the immune mechanism"
+    }
+   ]
+  },
+  {
+   "chapter": 4,
+   "range": "E00-E89",
+   "title": "Endocrine, nutritional and metabolic diseases",
+   "notes": {
+    "excludes1": [
+     "transitory endocrine and metabolic disorders specific to newborn (P70-P74)"
+    ],
+    "notes": [
+     "All neoplasms, whether functionally active or not, are classified in Chapter 2. Appropriate codes in this chapter (i.e. E05.8, E07.0, E16-E31, E34.-) may be used as additional codes to indicate either functional activity by neoplasms and ectopic endocrine tissue or hyperfunction and hypofunction of endocrine glands associated with neoplasms and other conditions classified elsewhere."
+    ]
+   },
+   "refs": {
+    "excludes1": [
+     [
+      "P70-P74"
+     ]
+    ],
+    "notes": [
+     [
+      "E05.8",
+      "E07.0",
+      "E16-E31",
+      "E34.-"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "E00-E07",
+     "first": "E00",
+     "last": "E07",
+     "title": "Disorders of thyroid gland"
+    },
+    {
+     "id": "E08-E13",
+     "first": "E08",
+     "last": "E13",
+     "title": "Diabetes mellitus"
+    },
+    {
+     "id": "E15-E16",
+     "first": "E15",
+     "last": "E16",
+     "title": "Other disorders of glucose regulation and pancreatic internal secretion"
+    },
+    {
+     "id": "E20-E35",
+     "first": "E20",
+     "last": "E35",
+     "title": "Disorders of other endocrine glands"
+    },
+    {
+     "id": "E36",
+     "first": "E36",
+     "last": "E36",
+     "title": "Intraoperative complications of endocrine system"
+    },
+    {
+     "id": "E40-E46",
+     "first": "E40",
+     "last": "E46",
+     "title": "Malnutrition"
+    },
+    {
+     "id": "E50-E64",
+     "first": "E50",
+     "last": "E64",
+     "title": "Other nutritional deficiencies"
+    },
+    {
+     "id": "E65-E68",
+     "first": "E65",
+     "last": "E68",
+     "title": "Overweight, obesity and other hyperalimentation"
+    },
+    {
+     "id": "E70-E88",
+     "first": "E70",
+     "last": "E88",
+     "title": "Metabolic disorders"
+    },
+    {
+     "id": "E89",
+     "first": "E89",
+     "last": "E89",
+     "title": "Postprocedural endocrine and metabolic complications and disorders, not elsewhere classified"
+    }
+   ]
+  },
+  {
+   "chapter": 5,
+   "range": "F01-F99",
+   "title": "Mental, Behavioral and Neurodevelopmental disorders",
+   "notes": {
+    "includes": [
+     "disorders of psychological development"
+    ],
+    "excludes2": [
+     "symptoms, signs and abnormal clinical laboratory findings, not elsewhere classified (R00-R99)"
+    ]
+   },
+   "refs": {
+    "includes": [
+     []
+    ],
+    "excludes2": [
+     [
+      "R00-R99"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "F01-F09",
+     "first": "F01",
+     "last": "F09",
+     "title": "Mental disorders due to known physiological conditions"
+    },
+    {
+     "id": "F10-F19",
+     "first": "F10",
+     "last": "F19",
+     "title": "Mental and behavioral disorders due to psychoactive substance use"
+    },
+    {
+     "id": "F20-F29",
+     "first": "F20",
+     "last": "F29",
+     "title": "Schizophrenia, schizotypal, delusional, and other non-mood psychotic disorders"
+    },
+    {
+     "id": "F30-F39",
+     "first": "F30",
+     "last": "F39",
+     "title": "Mood [affective] disorders"
+    },
+    {
+     "id": "F40-F48",
+     "first": "F40",
+     "last": "F48",
+     "title": "Anxiety, dissociative, stress-related, somatoform and other nonpsychotic mental disorders"
+    },
+    {
+     "id": "F50-F59",
+     "first": "F50",
+     "last": "F59",
+     "title": "Behavioral syndromes associated with physiological disturbances and physical factors"
+    },
+    {
+     "id": "F60-F69",
+     "first": "F60",
+     "last": "F69",
+     "title": "Disorders of adult personality and behavior"
+    },
+    {
+     "id": "F70-F79",
+     "first": "F70",
+     "last": "F79",
+     "title": "Intellectual disabilities"
+    },
+    {
+     "id": "F80-F89",
+     "first": "F80",
+     "last": "F89",
+     "title": "Pervasive and specific developmental disorders"
+    },
+    {
+     "id": "F90-F98",
+     "first": "F90",
+     "last": "F98",
+     "title": "Behavioral and emotional disorders with onset usually occurring in childhood and adolescence"
+    },
+    {
+     "id": "F99",
+     "first": "F99",
+     "last": "F99",
+     "title": "Unspecified mental disorder"
+    }
+   ]
+  },
+  {
+   "chapter": 6,
+   "range": "G00-G99",
+   "title": "Diseases of the nervous system",
+   "notes": {
+    "excludes2": [
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "certain infectious and parasitic diseases (A00-B99)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations, and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "P04-P96"
+     ],
+     [
+      "A00-B99"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "R00-R94"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "G00-G09",
+     "first": "G00",
+     "last": "G09",
+     "title": "Inflammatory diseases of the central nervous system"
+    },
+    {
+     "id": "G10-G14",
+     "first": "G10",
+     "last": "G14",
+     "title": "Systemic atrophies primarily affecting the central nervous system"
+    },
+    {
+     "id": "G20-G26",
+     "first": "G20",
+     "last": "G26",
+     "title": "Extrapyramidal and movement disorders"
+    },
+    {
+     "id": "G30-G32",
+     "first": "G30",
+     "last": "G32",
+     "title": "Other degenerative diseases of the nervous system"
+    },
+    {
+     "id": "G35-G37",
+     "first": "G35",
+     "last": "G37",
+     "title": "Demyelinating diseases of the central nervous system"
+    },
+    {
+     "id": "G40-G47",
+     "first": "G40",
+     "last": "G47",
+     "title": "Episodic and paroxysmal disorders"
+    },
+    {
+     "id": "G50-G59",
+     "first": "G50",
+     "last": "G59",
+     "title": "Nerve, nerve root and plexus disorders"
+    },
+    {
+     "id": "G60-G65",
+     "first": "G60",
+     "last": "G65",
+     "title": "Polyneuropathies and other disorders of the peripheral nervous system"
+    },
+    {
+     "id": "G70-G73",
+     "first": "G70",
+     "last": "G73",
+     "title": "Diseases of myoneural junction and muscle"
+    },
+    {
+     "id": "G80-G83",
+     "first": "G80",
+     "last": "G83",
+     "title": "Cerebral palsy and other paralytic syndromes"
+    },
+    {
+     "id": "G89-G99",
+     "first": "G89",
+     "last": "G99",
+     "title": "Other disorders of the nervous system"
+    }
+   ]
+  },
+  {
+   "chapter": 7,
+   "range": "H00-H59",
+   "title": "Diseases of the eye and adnexa",
+   "notes": {
+    "excludes2": [
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "certain infectious and parasitic diseases (A00-B99)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations, and chromosomal abnormalities (Q00-Q99)",
+     "diabetes mellitus related eye conditions (E09.3-, E10.3-, E11.3-, E13.3-)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "injury (trauma) of eye and orbit (S05.-)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)",
+     "syphilis related eye disorders (A50.01, A50.3-, A51.43, A52.71)"
+    ],
+    "notes": [
+     "Use an external cause code following the code for the eye condition, if applicable, to identify the cause of the eye condition"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "P04-P96"
+     ],
+     [
+      "A00-B99"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E09.3-",
+      "E10.3-",
+      "E11.3-",
+      "E13.3-"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "S05.-"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "R00-R94"
+     ],
+     [
+      "A50.01",
+      "A50.3-",
+      "A51.43",
+      "A52.71"
+     ]
+    ],
+    "notes": [
+     []
+    ]
+   },
+   "sections": [
+    {
+     "id": "H00-H05",
+     "first": "H00",
+     "last": "H05",
+     "title": "Disorders of eyelid, lacrimal system and orbit"
+    },
+    {
+     "id": "H10-H11",
+     "first": "H10",
+     "last": "H11",
+     "title": "Disorders of conjunctiva"
+    },
+    {
+     "id": "H15-H22",
+     "first": "H15",
+     "last": "H22",
+     "title": "Disorders of sclera, cornea, iris and ciliary body"
+    },
+    {
+     "id": "H25-H28",
+     "first": "H25",
+     "last": "H28",
+     "title": "Disorders of lens"
+    },
+    {
+     "id": "H30-H36",
+     "first": "H30",
+     "last": "H36",
+     "title": "Disorders of choroid and retina"
+    },
+    {
+     "id": "H40-H42",
+     "first": "H40",
+     "last": "H42",
+     "title": "Glaucoma"
+    },
+    {
+     "id": "H43-H44",
+     "first": "H43",
+     "last": "H44",
+     "title": "Disorders of vitreous body and globe"
+    },
+    {
+     "id": "H46-H47",
+     "first": "H46",
+     "last": "H47",
+     "title": "Disorders of optic nerve and visual pathways"
+    },
+    {
+     "id": "H49-H52",
+     "first": "H49",
+     "last": "H52",
+     "title": "Disorders of ocular muscles, binocular movement, accommodation and refraction"
+    },
+    {
+     "id": "H53-H54",
+     "first": "H53",
+     "last": "H54",
+     "title": "Visual disturbances and blindness"
+    },
+    {
+     "id": "H55-H57",
+     "first": "H55",
+     "last": "H57",
+     "title": "Other disorders of eye and adnexa"
+    },
+    {
+     "id": "H59",
+     "first": "H59",
+     "last": "H59",
+     "title": "Intraoperative and postprocedural complications and disorders of eye and adnexa, not elsewhere classified"
+    }
+   ]
+  },
+  {
+   "chapter": 8,
+   "range": "H60-H95",
+   "title": "Diseases of the ear and mastoid process",
+   "notes": {
+    "excludes2": [
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "certain infectious and parasitic diseases (A00-B99)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)"
+    ],
+    "notes": [
+     "Use an external cause code following the code for the ear condition, if applicable, to identify the cause of the ear condition"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "P04-P96"
+     ],
+     [
+      "A00-B99"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "R00-R94"
+     ]
+    ],
+    "notes": [
+     []
+    ]
+   },
+   "sections": [
+    {
+     "id": "H60-H62",
+     "first": "H60",
+     "last": "H62",
+     "title": "Diseases of external ear"
+    },
+    {
+     "id": "H65-H75",
+     "first": "H65",
+     "last": "H75",
+     "title": "Diseases of middle ear and mastoid"
+    },
+    {
+     "id": "H80-H83",
+     "first": "H80",
+     "last": "H83",
+     "title": "Diseases of inner ear"
+    },
+    {
+     "id": "H90-H94",
+     "first": "H90",
+     "last": "H94",
+     "title": "Other disorders of ear"
+    },
+    {
+     "id": "H95",
+     "first": "H95",
+     "last": "H95",
+     "title": "Intraoperative and postprocedural complications and disorders of ear and mastoid process, not elsewhere classified"
+    }
+   ]
+  },
+  {
+   "chapter": 9,
+   "range": "I00-I99",
+   "title": "Diseases of the circulatory system",
+   "notes": {
+    "excludes2": [
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "certain infectious and parasitic diseases (A00-B99)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations, and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)",
+     "systemic connective tissue disorders (M30-M36)",
+     "transient cerebral ischemic attacks and related syndromes (G45.-)"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "P04-P96"
+     ],
+     [
+      "A00-B99"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "R00-R94"
+     ],
+     [
+      "M30-M36"
+     ],
+     [
+      "G45.-"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "I00-I02",
+     "first": "I00",
+     "last": "I02",
+     "title": "Acute rheumatic fever"
+    },
+    {
+     "id": "I05-I09",
+     "first": "I05",
+     "last": "I09",
+     "title": "Chronic rheumatic heart diseases"
+    },
+    {
+     "id": "I10-I1A",
+     "first": "I10",
+     "last": "I1A",
+     "title": "Hypertensive diseases"
+    },
+    {
+     "id": "I20-I25",
+     "first": "I20",
+     "last": "I25",
+     "title": "Ischemic heart diseases"
+    },
+    {
+     "id": "I26-I28",
+     "first": "I26",
+     "last": "I28",
+     "title": "Pulmonary heart disease and diseases of pulmonary circulation"
+    },
+    {
+     "id": "I30-I5A",
+     "first": "I30",
+     "last": "I5A",
+     "title": "Other forms of heart disease"
+    },
+    {
+     "id": "I60-I69",
+     "first": "I60",
+     "last": "I69",
+     "title": "Cerebrovascular diseases"
+    },
+    {
+     "id": "I70-I79",
+     "first": "I70",
+     "last": "I79",
+     "title": "Diseases of arteries, arterioles and capillaries"
+    },
+    {
+     "id": "I80-I89",
+     "first": "I80",
+     "last": "I89",
+     "title": "Diseases of veins, lymphatic vessels and lymph nodes, not elsewhere classified"
+    },
+    {
+     "id": "I95-I99",
+     "first": "I95",
+     "last": "I99",
+     "title": "Other and unspecified disorders of the circulatory system"
+    }
+   ]
+  },
+  {
+   "chapter": 10,
+   "range": "J00-J99",
+   "title": "Diseases of the respiratory system",
+   "notes": {
+    "excludes2": [
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "certain infectious and parasitic diseases (A00-B99)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "smoke inhalation (T59.81-)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)"
+    ],
+    "useAdditionalCode": [
+     "code, where applicable, to identify:",
+     "exposure to environmental tobacco smoke (Z77.22)",
+     "exposure to tobacco smoke in the perinatal period (P96.81)",
+     "history of tobacco dependence (Z87.891)",
+     "occupational exposure to environmental tobacco smoke (Z57.31)",
+     "tobacco dependence (F17.-)",
+     "tobacco use (Z72.0)"
+    ],
+    "notes": [
+     "When a respiratory condition is described as occurring in more than one site and is not specifically indexed, it should be classified to the lower anatomic site (e.g. tracheobronchitis to bronchitis in J40)."
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "P04-P96"
+     ],
+     [
+      "A00-B99"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "T59.81-"
+     ],
+     [
+      "R00-R94"
+     ]
+    ],
+    "useAdditionalCode": [
+     [],
+     [
+      "Z77.22"
+     ],
+     [
+      "P96.81"
+     ],
+     [
+      "Z87.891"
+     ],
+     [
+      "Z57.31"
+     ],
+     [
+      "F17.-"
+     ],
+     [
+      "Z72.0"
+     ]
+    ],
+    "notes": [
+     [
+      "J40"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "J00-J06",
+     "first": "J00",
+     "last": "J06",
+     "title": "Acute upper respiratory infections"
+    },
+    {
+     "id": "J09-J18",
+     "first": "J09",
+     "last": "J18",
+     "title": "Influenza and pneumonia"
+    },
+    {
+     "id": "J20-J22",
+     "first": "J20",
+     "last": "J22",
+     "title": "Other acute lower respiratory infections"
+    },
+    {
+     "id": "J30-J39",
+     "first": "J30",
+     "last": "J39",
+     "title": "Other diseases of upper respiratory tract"
+    },
+    {
+     "id": "J40-J4B",
+     "first": "J40",
+     "last": "J4B",
+     "title": "Chronic lower respiratory diseases"
+    },
+    {
+     "id": "J60-J70",
+     "first": "J60",
+     "last": "J70",
+     "title": "Lung diseases due to external agents"
+    },
+    {
+     "id": "J80-J84",
+     "first": "J80",
+     "last": "J84",
+     "title": "Other respiratory diseases principally affecting the interstitium"
+    },
+    {
+     "id": "J85-J86",
+     "first": "J85",
+     "last": "J86",
+     "title": "Suppurative and necrotic conditions of the lower respiratory tract"
+    },
+    {
+     "id": "J90-J94",
+     "first": "J90",
+     "last": "J94",
+     "title": "Other diseases of the pleura"
+    },
+    {
+     "id": "J95",
+     "first": "J95",
+     "last": "J95",
+     "title": "Intraoperative and postprocedural complications and disorders of respiratory system, not elsewhere classified"
+    },
+    {
+     "id": "J96-J99",
+     "first": "J96",
+     "last": "J99",
+     "title": "Other diseases of the respiratory system"
+    }
+   ]
+  },
+  {
+   "chapter": 11,
+   "range": "K00-K95",
+   "title": "Diseases of the digestive system",
+   "notes": {
+    "excludes2": [
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "certain infectious and parasitic diseases (A00-B99)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "P04-P96"
+     ],
+     [
+      "A00-B99"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "R00-R94"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "K00-K14",
+     "first": "K00",
+     "last": "K14",
+     "title": "Diseases of oral cavity and salivary glands"
+    },
+    {
+     "id": "K20-K31",
+     "first": "K20",
+     "last": "K31",
+     "title": "Diseases of esophagus, stomach and duodenum"
+    },
+    {
+     "id": "K35-K38",
+     "first": "K35",
+     "last": "K38",
+     "title": "Diseases of appendix"
+    },
+    {
+     "id": "K40-K46",
+     "first": "K40",
+     "last": "K46",
+     "title": "Hernia"
+    },
+    {
+     "id": "K50-K52",
+     "first": "K50",
+     "last": "K52",
+     "title": "Noninfective enteritis and colitis"
+    },
+    {
+     "id": "K55-K64",
+     "first": "K55",
+     "last": "K64",
+     "title": "Other diseases of intestines"
+    },
+    {
+     "id": "K65-K6A",
+     "first": "K65",
+     "last": "K6A",
+     "title": "Diseases of peritoneum and retroperitoneum"
+    },
+    {
+     "id": "K70-K77",
+     "first": "K70",
+     "last": "K77",
+     "title": "Diseases of liver"
+    },
+    {
+     "id": "K80-K87",
+     "first": "K80",
+     "last": "K87",
+     "title": "Disorders of gallbladder, biliary tract and pancreas"
+    },
+    {
+     "id": "K90-K95",
+     "first": "K90",
+     "last": "K95",
+     "title": "Other diseases of the digestive system"
+    }
+   ]
+  },
+  {
+   "chapter": 12,
+   "range": "L00-L99",
+   "title": "Diseases of the skin and subcutaneous tissue",
+   "notes": {
+    "excludes2": [
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "certain infectious and parasitic diseases (A00-B99)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations, and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "lipomelanotic reticulosis (I89.8)",
+     "neoplasms (C00-D49)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)",
+     "systemic connective tissue disorders (M30-M36)",
+     "viral warts (B07.-)"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "P04-P96"
+     ],
+     [
+      "A00-B99"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "I89.8"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "R00-R94"
+     ],
+     [
+      "M30-M36"
+     ],
+     [
+      "B07.-"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "L00-L08",
+     "first": "L00",
+     "last": "L08",
+     "title": "Infections of the skin and subcutaneous tissue"
+    },
+    {
+     "id": "L10-L14",
+     "first": "L10",
+     "last": "L14",
+     "title": "Bullous disorders"
+    },
+    {
+     "id": "L20-L30",
+     "first": "L20",
+     "last": "L30",
+     "title": "Dermatitis and eczema"
+    },
+    {
+     "id": "L40-L45",
+     "first": "L40",
+     "last": "L45",
+     "title": "Papulosquamous disorders"
+    },
+    {
+     "id": "L49-L54",
+     "first": "L49",
+     "last": "L54",
+     "title": "Urticaria and erythema"
+    },
+    {
+     "id": "L55-L59",
+     "first": "L55",
+     "last": "L59",
+     "title": "Radiation-related disorders of the skin and subcutaneous tissue"
+    },
+    {
+     "id": "L60-L75",
+     "first": "L60",
+     "last": "L75",
+     "title": "Disorders of skin appendages"
+    },
+    {
+     "id": "L76",
+     "first": "L76",
+     "last": "L76",
+     "title": "Intraoperative and postprocedural complications of skin and subcutaneous tissue"
+    },
+    {
+     "id": "L80-L99",
+     "first": "L80",
+     "last": "L99",
+     "title": "Other disorders of the skin and subcutaneous tissue"
+    }
+   ]
+  },
+  {
+   "chapter": 13,
+   "range": "M00-M99",
+   "title": "Diseases of the musculoskeletal system and connective tissue",
+   "notes": {
+    "excludes2": [
+     "arthropathic psoriasis (L40.5-)",
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "certain infectious and parasitic diseases (A00-B99)",
+     "compartment syndrome (traumatic) (T79.A-)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations, and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)"
+    ],
+    "notes": [
+     "Use an external cause code following the code for the musculoskeletal condition, if applicable, to identify the cause of the musculoskeletal condition"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "L40.5-"
+     ],
+     [
+      "P04-P96"
+     ],
+     [
+      "A00-B99"
+     ],
+     [
+      "T79.A-"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "R00-R94"
+     ]
+    ],
+    "notes": [
+     []
+    ]
+   },
+   "sections": [
+    {
+     "id": "M00-M02",
+     "first": "M00",
+     "last": "M02",
+     "title": "Infectious arthropathies"
+    },
+    {
+     "id": "M04",
+     "first": "M04",
+     "last": "M04",
+     "title": "Autoinflammatory syndromes"
+    },
+    {
+     "id": "M05-M14",
+     "first": "M05",
+     "last": "M14",
+     "title": "Inflammatory polyarthropathies"
+    },
+    {
+     "id": "M15-M19",
+     "first": "M15",
+     "last": "M19",
+     "title": "Osteoarthritis"
+    },
+    {
+     "id": "M20-M25",
+     "first": "M20",
+     "last": "M25",
+     "title": "Other joint disorders"
+    },
+    {
+     "id": "M26-M27",
+     "first": "M26",
+     "last": "M27",
+     "title": "Dentofacial anomalies [including malocclusion] and other disorders of jaw"
+    },
+    {
+     "id": "M30-M36",
+     "first": "M30",
+     "last": "M36",
+     "title": "Systemic connective tissue disorders"
+    },
+    {
+     "id": "M40-M43",
+     "first": "M40",
+     "last": "M43",
+     "title": "Deforming dorsopathies"
+    },
+    {
+     "id": "M45-M49",
+     "first": "M45",
+     "last": "M49",
+     "title": "Spondylopathies"
+    },
+    {
+     "id": "M50-M54",
+     "first": "M50",
+     "last": "M54",
+     "title": "Other dorsopathies"
+    },
+    {
+     "id": "M60-M63",
+     "first": "M60",
+     "last": "M63",
+     "title": "Disorders of muscles"
+    },
+    {
+     "id": "M65-M67",
+     "first": "M65",
+     "last": "M67",
+     "title": "Disorders of synovium and tendon"
+    },
+    {
+     "id": "M70-M79",
+     "first": "M70",
+     "last": "M79",
+     "title": "Other soft tissue disorders"
+    },
+    {
+     "id": "M80-M85",
+     "first": "M80",
+     "last": "M85",
+     "title": "Disorders of bone density and structure"
+    },
+    {
+     "id": "M86-M90",
+     "first": "M86",
+     "last": "M90",
+     "title": "Other osteopathies"
+    },
+    {
+     "id": "M91-M94",
+     "first": "M91",
+     "last": "M94",
+     "title": "Chondropathies"
+    },
+    {
+     "id": "M95",
+     "first": "M95",
+     "last": "M95",
+     "title": "Other disorders of the musculoskeletal system and connective tissue"
+    },
+    {
+     "id": "M96",
+     "first": "M96",
+     "last": "M96",
+     "title": "Intraoperative and postprocedural complications and disorders of musculoskeletal system, not elsewhere classified"
+    },
+    {
+     "id": "M97",
+     "first": "M97",
+     "last": "M97",
+     "title": "Periprosthetic fracture around internal prosthetic joint"
+    },
+    {
+     "id": "M99",
+     "first": "M99",
+     "last": "M99",
+     "title": "Biomechanical lesions, not elsewhere classified"
+    }
+   ]
+  },
+  {
+   "chapter": 14,
+   "range": "N00-N99",
+   "title": "Diseases of the genitourinary system",
+   "notes": {
+    "excludes2": [
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "certain infectious and parasitic diseases (A00-B99)",
+     "complications of pregnancy, childbirth and the puerperium (O00-O9A)",
+     "congenital malformations, deformations and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified (R00-R94)"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "P04-P96"
+     ],
+     [
+      "A00-B99"
+     ],
+     [
+      "O00-O9A"
+     ],
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "R00-R94"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "N00-N08",
+     "first": "N00",
+     "last": "N08",
+     "title": "Glomerular diseases"
+    },
+    {
+     "id": "N10-N16",
+     "first": "N10",
+     "last": "N16",
+     "title": "Renal tubulo-interstitial diseases"
+    },
+    {
+     "id": "N17-N19",
+     "first": "N17",
+     "last": "N19",
+     "title": "Acute kidney failure and chronic kidney disease"
+    },
+    {
+     "id": "N20-N23",
+     "first": "N20",
+     "last": "N23",
+     "title": "Urolithiasis"
+    },
+    {
+     "id": "N25-N29",
+     "first": "N25",
+     "last": "N29",
+     "title": "Other disorders of kidney and ureter"
+    },
+    {
+     "id": "N30-N39",
+     "first": "N30",
+     "last": "N39",
+     "title": "Other diseases of the urinary system"
+    },
+    {
+     "id": "N40-N53",
+     "first": "N40",
+     "last": "N53",
+     "title": "Diseases of male genital organs"
+    },
+    {
+     "id": "N60-N65",
+     "first": "N60",
+     "last": "N65",
+     "title": "Disorders of breast"
+    },
+    {
+     "id": "N70-N77",
+     "first": "N70",
+     "last": "N77",
+     "title": "Inflammatory diseases of female pelvic organs"
+    },
+    {
+     "id": "N80-N98",
+     "first": "N80",
+     "last": "N98",
+     "title": "Noninflammatory disorders of female genital tract"
+    },
+    {
+     "id": "N99",
+     "first": "N99",
+     "last": "N99",
+     "title": "Intraoperative and postprocedural complications and disorders of genitourinary system, not elsewhere classified"
+    }
+   ]
+  },
+  {
+   "chapter": 15,
+   "range": "O00-O9A",
+   "title": "Pregnancy, childbirth and the puerperium",
+   "notes": {
+    "excludes1": [
+     "supervision of normal pregnancy (Z34.-)"
+    ],
+    "excludes2": [
+     "mental and behavioral disorders associated with the puerperium (F53.-)",
+     "obstetrical tetanus (A34)",
+     "postpartum necrosis of pituitary gland (E23.0)",
+     "puerperal osteomalacia (M83.0)"
+    ],
+    "useAdditionalCode": [
+     "code, if applicable, from category Z3A, Weeks of gestation, to identify the specific week of the pregnancy, if known."
+    ],
+    "notes": [
+     "CODES FROM THIS CHAPTER ARE FOR USE ONLY ON MATERNAL RECORDS, NEVER ON NEWBORN RECORDS",
+     "Codes from this chapter are for use for conditions related to or aggravated by the pregnancy, childbirth, or by the puerperium (maternal causes or obstetric causes)",
+     "Trimesters are counted from the first day of the last menstrual period. They are defined as follows:",
+     "1st trimester- less than 14 weeks 0 days",
+     "2nd trimester- 14 weeks 0 days to less than 28 weeks 0 days",
+     "3rd trimester- 28 weeks 0 days until delivery"
+    ]
+   },
+   "refs": {
+    "excludes1": [
+     [
+      "Z34.-"
+     ]
+    ],
+    "excludes2": [
+     [
+      "F53.-"
+     ],
+     [
+      "A34"
+     ],
+     [
+      "E23.0"
+     ],
+     [
+      "M83.0"
+     ]
+    ],
+    "useAdditionalCode": [
+     []
+    ],
+    "notes": [
+     [],
+     [],
+     [],
+     [],
+     [],
+     []
+    ]
+   },
+   "sections": [
+    {
+     "id": "O00-O08",
+     "first": "O00",
+     "last": "O08",
+     "title": "Pregnancy with abortive outcome"
+    },
+    {
+     "id": "O09",
+     "first": "O09",
+     "last": "O09",
+     "title": "Supervision of high risk pregnancy"
+    },
+    {
+     "id": "O10-O16",
+     "first": "O10",
+     "last": "O16",
+     "title": "Edema, proteinuria and hypertensive disorders in pregnancy, childbirth and the puerperium"
+    },
+    {
+     "id": "O20-O29",
+     "first": "O20",
+     "last": "O29",
+     "title": "Other maternal disorders predominantly related to pregnancy"
+    },
+    {
+     "id": "O30-O48",
+     "first": "O30",
+     "last": "O48",
+     "title": "Maternal care related to the fetus and amniotic cavity and possible delivery problems"
+    },
+    {
+     "id": "O60-O77",
+     "first": "O60",
+     "last": "O77",
+     "title": "Complications of labor and delivery"
+    },
+    {
+     "id": "O80-O82",
+     "first": "O80",
+     "last": "O82",
+     "title": "Encounter for delivery"
+    },
+    {
+     "id": "O85-O92",
+     "first": "O85",
+     "last": "O92",
+     "title": "Complications predominantly related to the puerperium"
+    },
+    {
+     "id": "O94-O9A",
+     "first": "O94",
+     "last": "O9A",
+     "title": "Other obstetric conditions, not elsewhere classified"
+    }
+   ]
+  },
+  {
+   "chapter": 16,
+   "range": "P00-P96",
+   "title": "Certain conditions originating in the perinatal period",
+   "notes": {
+    "includes": [
+     "conditions that have their origin in the fetal or perinatal period (before birth through the first 28 days after birth) even if morbidity occurs later"
+    ],
+    "excludes2": [
+     "congenital malformations, deformations and chromosomal abnormalities (Q00-Q99)",
+     "endocrine, nutritional and metabolic diseases (E00-E88)",
+     "injury, poisoning and certain other consequences of external causes (S00-T88)",
+     "neoplasms (C00-D49)",
+     "tetanus neonatorum (A33)"
+    ],
+    "notes": [
+     "Codes from this chapter are for use on newborn records only, never on maternal records"
+    ]
+   },
+   "refs": {
+    "includes": [
+     []
+    ],
+    "excludes2": [
+     [
+      "Q00-Q99"
+     ],
+     [
+      "E00-E88"
+     ],
+     [
+      "S00-T88"
+     ],
+     [
+      "C00-D49"
+     ],
+     [
+      "A33"
+     ]
+    ],
+    "notes": [
+     []
+    ]
+   },
+   "sections": [
+    {
+     "id": "P00-P04",
+     "first": "P00",
+     "last": "P04",
+     "title": "Newborn affected by maternal factors and by complications of pregnancy, labor, and delivery"
+    },
+    {
+     "id": "P05-P08",
+     "first": "P05",
+     "last": "P08",
+     "title": "Disorders of newborn related to length of gestation and fetal growth"
+    },
+    {
+     "id": "P09",
+     "first": "P09",
+     "last": "P09",
+     "title": "Abnormal findings on neonatal screening"
+    },
+    {
+     "id": "P10-P15",
+     "first": "P10",
+     "last": "P15",
+     "title": "Birth trauma"
+    },
+    {
+     "id": "P19-P29",
+     "first": "P19",
+     "last": "P29",
+     "title": "Respiratory and cardiovascular disorders specific to the perinatal period"
+    },
+    {
+     "id": "P35-P39",
+     "first": "P35",
+     "last": "P39",
+     "title": "Infections specific to the perinatal period"
+    },
+    {
+     "id": "P50-P61",
+     "first": "P50",
+     "last": "P61",
+     "title": "Hemorrhagic and hematological disorders of newborn"
+    },
+    {
+     "id": "P70-P74",
+     "first": "P70",
+     "last": "P74",
+     "title": "Transitory endocrine and metabolic disorders specific to newborn"
+    },
+    {
+     "id": "P76-P78",
+     "first": "P76",
+     "last": "P78",
+     "title": "Digestive system disorders of newborn"
+    },
+    {
+     "id": "P80-P83",
+     "first": "P80",
+     "last": "P83",
+     "title": "Conditions involving the integument and temperature regulation of newborn"
+    },
+    {
+     "id": "P84",
+     "first": "P84",
+     "last": "P84",
+     "title": "Other problems with newborn"
+    },
+    {
+     "id": "P90-P96",
+     "first": "P90",
+     "last": "P96",
+     "title": "Other disorders originating in the perinatal period"
+    }
+   ]
+  },
+  {
+   "chapter": 17,
+   "range": "Q00-QA1",
+   "title": "Congenital malformations, deformations, chromosomal abnormalities, and genetic disorders",
+   "notes": {
+    "excludes2": [
+     "inborn errors of metabolism (E70-E88)"
+    ],
+    "notes": [
+     "Codes from this chapter are not for use on maternal records"
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "E70-E88"
+     ]
+    ],
+    "notes": [
+     []
+    ]
+   },
+   "sections": [
+    {
+     "id": "Q00-Q07",
+     "first": "Q00",
+     "last": "Q07",
+     "title": "Congenital malformations of the nervous system"
+    },
+    {
+     "id": "Q10-Q18",
+     "first": "Q10",
+     "last": "Q18",
+     "title": "Congenital malformations of eye, ear, face and neck"
+    },
+    {
+     "id": "Q20-Q28",
+     "first": "Q20",
+     "last": "Q28",
+     "title": "Congenital malformations of the circulatory system"
+    },
+    {
+     "id": "Q30-Q34",
+     "first": "Q30",
+     "last": "Q34",
+     "title": "Congenital malformations of the respiratory system"
+    },
+    {
+     "id": "Q35-Q37",
+     "first": "Q35",
+     "last": "Q37",
+     "title": "Cleft lip and cleft palate"
+    },
+    {
+     "id": "Q38-Q45",
+     "first": "Q38",
+     "last": "Q45",
+     "title": "Other congenital malformations of the digestive system"
+    },
+    {
+     "id": "Q50-Q56",
+     "first": "Q50",
+     "last": "Q56",
+     "title": "Congenital malformations of genital organs"
+    },
+    {
+     "id": "Q60-Q64",
+     "first": "Q60",
+     "last": "Q64",
+     "title": "Congenital malformations of the urinary system"
+    },
+    {
+     "id": "Q65-Q79",
+     "first": "Q65",
+     "last": "Q79",
+     "title": "Congenital malformations and deformations of the musculoskeletal system"
+    },
+    {
+     "id": "Q80-Q89",
+     "first": "Q80",
+     "last": "Q89",
+     "title": "Other congenital malformations"
+    },
+    {
+     "id": "Q90-Q99",
+     "first": "Q90",
+     "last": "Q99",
+     "title": "Chromosomal abnormalities, not elsewhere classified"
+    },
+    {
+     "id": "QA0-QA1",
+     "first": "QA0",
+     "last": "QA1",
+     "title": "Genetic disorders, not elsewhere classified"
+    }
+   ]
+  },
+  {
+   "chapter": 18,
+   "range": "R00-R99",
+   "title": "Symptoms, signs and abnormal clinical and laboratory findings, not elsewhere classified",
+   "notes": {
+    "excludes2": [
+     "abnormal findings on antenatal screening of mother (O28.-)",
+     "certain conditions originating in the perinatal period (P04-P96)",
+     "signs and symptoms classified in the body system chapters",
+     "signs and symptoms of breast (N63, N64.5)"
+    ],
+    "notes": [
+     "This chapter includes symptoms, signs, abnormal results of clinical or other investigative procedures, and ill-defined conditions regarding which no diagnosis classifiable elsewhere is recorded.",
+     "Signs and symptoms that point rather definitely to a given diagnosis have been assigned to a category in other chapters of the classification. In general, categories in this chapter include the less well-defined conditions and symptoms that, without the necessary study of the case to establish a final diagnosis, point perhaps equally to two or more diseases or to two or more systems of the body. Practically all categories in the chapter could be designated 'not otherwise specified', 'unknown etiology' or 'transient'. The Alphabetical Index should be consulted to determine which symptoms and signs are to be allocated here and which to other chapters. The residual subcategories, numbered .8, are generally provided for other relevant symptoms that cannot be allocated elsewhere in the classification.",
+     "The conditions and signs or symptoms included in categories R00-R94 consist of:",
+     "(a) cases for which no more specific diagnosis can be made even after all the facts bearing on the case have been investigated;",
+     "(b) signs or symptoms existing at the time of initial encounter that proved to be transient and whose causes could not be determined;",
+     "(c) provisional diagnosis in a patient who failed to return for further investigation or care;",
+     "(d) cases referred elsewhere for investigation or treatment before the diagnosis was made;",
+     "(e) cases in which a more precise diagnosis was not available for any other reason;",
+     "(f) certain symptoms, for which supplementary information is provided, that represent important problems in medical care in their own right."
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "O28.-"
+     ],
+     [
+      "P04-P96"
+     ],
+     [],
+     [
+      "N63",
+      "N64.5"
+     ]
+    ],
+    "notes": [
+     [],
+     [],
+     [],
+     [],
+     [],
+     [],
+     [],
+     [],
+     []
+    ]
+   },
+   "sections": [
+    {
+     "id": "R00-R09",
+     "first": "R00",
+     "last": "R09",
+     "title": "Symptoms and signs involving the circulatory and respiratory systems"
+    },
+    {
+     "id": "R10-R19",
+     "first": "R10",
+     "last": "R19",
+     "title": "Symptoms and signs involving the digestive system and abdomen"
+    },
+    {
+     "id": "R20-R23",
+     "first": "R20",
+     "last": "R23",
+     "title": "Symptoms and signs involving the skin and subcutaneous tissue"
+    },
+    {
+     "id": "R25-R29",
+     "first": "R25",
+     "last": "R29",
+     "title": "Symptoms and signs involving the nervous and musculoskeletal systems"
+    },
+    {
+     "id": "R30-R39",
+     "first": "R30",
+     "last": "R39",
+     "title": "Symptoms and signs involving the genitourinary system"
+    },
+    {
+     "id": "R40-R46",
+     "first": "R40",
+     "last": "R46",
+     "title": "Symptoms and signs involving cognition, perception, emotional state and behavior"
+    },
+    {
+     "id": "R47-R49",
+     "first": "R47",
+     "last": "R49",
+     "title": "Symptoms and signs involving speech and voice"
+    },
+    {
+     "id": "R50-R69",
+     "first": "R50",
+     "last": "R69",
+     "title": "General symptoms and signs"
+    },
+    {
+     "id": "R70-R79",
+     "first": "R70",
+     "last": "R79",
+     "title": "Abnormal findings on examination of blood, without diagnosis"
+    },
+    {
+     "id": "R80-R82",
+     "first": "R80",
+     "last": "R82",
+     "title": "Abnormal findings on examination of urine, without diagnosis"
+    },
+    {
+     "id": "R83-R89",
+     "first": "R83",
+     "last": "R89",
+     "title": "Abnormal findings on examination of other body fluids, substances and tissues, without diagnosis"
+    },
+    {
+     "id": "R90-R94",
+     "first": "R90",
+     "last": "R94",
+     "title": "Abnormal findings on diagnostic imaging and in function studies, without diagnosis"
+    },
+    {
+     "id": "R97",
+     "first": "R97",
+     "last": "R97",
+     "title": "Abnormal tumor markers"
+    },
+    {
+     "id": "R99",
+     "first": "R99",
+     "last": "R99",
+     "title": "Ill-defined and unknown cause of mortality"
+    }
+   ]
+  },
+  {
+   "chapter": 19,
+   "range": "S00-T88",
+   "title": "Injury, poisoning and certain other consequences of external causes",
+   "notes": {
+    "excludes2": [
+     "birth trauma (P10-P15)",
+     "obstetric trauma (O70-O71)"
+    ],
+    "useAdditionalCode": [
+     "code to identify any retained foreign body, if applicable (Z18.-)"
+    ],
+    "notes": [
+     "Use secondary code(s) from Chapter 20, External causes of morbidity, to indicate cause of injury. Codes within the T section that include the external cause do not require an additional external cause code",
+     "The chapter uses the S-section for coding different types of injuries related to single body regions and the T-section to cover injuries to unspecified body regions as well as poisoning and certain other consequences of external causes."
+    ]
+   },
+   "refs": {
+    "excludes2": [
+     [
+      "P10-P15"
+     ],
+     [
+      "O70-O71"
+     ]
+    ],
+    "useAdditionalCode": [
+     [
+      "Z18.-"
+     ]
+    ],
+    "notes": [
+     [],
+     []
+    ]
+   },
+   "sections": [
+    {
+     "id": "S00-S09",
+     "first": "S00",
+     "last": "S09",
+     "title": "Injuries to the head"
+    },
+    {
+     "id": "S10-S19",
+     "first": "S10",
+     "last": "S19",
+     "title": "Injuries to the neck"
+    },
+    {
+     "id": "S20-S29",
+     "first": "S20",
+     "last": "S29",
+     "title": "Injuries to the thorax"
+    },
+    {
+     "id": "S30-S39",
+     "first": "S30",
+     "last": "S39",
+     "title": "Injuries to the abdomen, lower back, lumbar spine, pelvis and external genitals"
+    },
+    {
+     "id": "S40-S49",
+     "first": "S40",
+     "last": "S49",
+     "title": "Injuries to the shoulder and upper arm"
+    },
+    {
+     "id": "S50-S59",
+     "first": "S50",
+     "last": "S59",
+     "title": "Injuries to the elbow and forearm"
+    },
+    {
+     "id": "S60-S69",
+     "first": "S60",
+     "last": "S69",
+     "title": "Injuries to the wrist, hand and fingers"
+    },
+    {
+     "id": "S70-S79",
+     "first": "S70",
+     "last": "S79",
+     "title": "Injuries to the hip and thigh"
+    },
+    {
+     "id": "S80-S89",
+     "first": "S80",
+     "last": "S89",
+     "title": "Injuries to the knee and lower leg"
+    },
+    {
+     "id": "S90-S99",
+     "first": "S90",
+     "last": "S99",
+     "title": "Injuries to the ankle and foot"
+    },
+    {
+     "id": "T07",
+     "first": "T07",
+     "last": "T07",
+     "title": "Injuries involving multiple body regions"
+    },
+    {
+     "id": "T14",
+     "first": "T14",
+     "last": "T14",
+     "title": "Injury of unspecified body region"
+    },
+    {
+     "id": "T15-T19",
+     "first": "T15",
+     "last": "T19",
+     "title": "Effects of foreign body entering through natural orifice"
+    },
+    {
+     "id": "T20-T25",
+     "first": "T20",
+     "last": "T25",
+     "title": "Burns and corrosions of external body surface, specified by site"
+    },
+    {
+     "id": "T26-T28",
+     "first": "T26",
+     "last": "T28",
+     "title": "Burns and corrosions confined to eye and internal organs"
+    },
+    {
+     "id": "T30-T32",
+     "first": "T30",
+     "last": "T32",
+     "title": "Burns and corrosions of multiple and unspecified body regions"
+    },
+    {
+     "id": "T33-T34",
+     "first": "T33",
+     "last": "T34",
+     "title": "Frostbite"
+    },
+    {
+     "id": "T36-T50",
+     "first": "T36",
+     "last": "T50",
+     "title": "Poisoning by, adverse effect of and underdosing of drugs, medicaments and biological substances"
+    },
+    {
+     "id": "T51-T65",
+     "first": "T51",
+     "last": "T65",
+     "title": "Toxic effects of substances chiefly nonmedicinal as to source"
+    },
+    {
+     "id": "T66-T78",
+     "first": "T66",
+     "last": "T78",
+     "title": "Other and unspecified effects of external causes"
+    },
+    {
+     "id": "T79",
+     "first": "T79",
+     "last": "T79",
+     "title": "Certain early complications of trauma"
+    },
+    {
+     "id": "T80-T88",
+     "first": "T80",
+     "last": "T88",
+     "title": "Complications of surgical and medical care, not elsewhere classified"
+    }
+   ]
+  },
+  {
+   "chapter": 20,
+   "range": "V00-Y99",
+   "title": "External causes of morbidity",
+   "notes": {
+    "notes": [
+     "This chapter permits the classification of environmental events and circumstances as the cause of injury, and other adverse effects. Where a code from this section is applicable, it is intended that it shall be used secondary to a code from another chapter of the Classification indicating the nature of the condition. Most often, the condition will be classifiable to Chapter 19, Injury, poisoning and certain other consequences of external causes (S00-T88). Other conditions that may be stated to be due to external causes are classified in Chapters I to XVIII. For these conditions, codes from Chapter 20 should be used to provide additional information as to the cause of the condition."
+    ]
+   },
+   "refs": {
+    "notes": [
+     [
+      "S00-T88"
+     ]
+    ]
+   },
+   "sections": [
+    {
+     "id": "V00-X58",
+     "first": "V00",
+     "last": "X58",
+     "title": "Accidents"
+    },
+    {
+     "id": "V00-V99",
+     "first": "V00",
+     "last": "V99",
+     "title": "Transport accidents"
+    },
+    {
+     "id": "V00-V09",
+     "first": "V00",
+     "last": "V09",
+     "title": "Pedestrian injured in transport accident"
+    },
+    {
+     "id": "V10-V19",
+     "first": "V10",
+     "last": "V19",
+     "title": "Pedal cycle rider injured in transport accident"
+    },
+    {
+     "id": "V20-V29",
+     "first": "V20",
+     "last": "V29",
+     "title": "Motorcycle rider injured in transport accident"
+    },
+    {
+     "id": "V30-V39",
+     "first": "V30",
+     "last": "V39",
+     "title": "Occupant of three-wheeled motor vehicle injured in transport accident"
+    },
+    {
+     "id": "V40-V49",
+     "first": "V40",
+     "last": "V49",
+     "title": "Car occupant injured in transport accident"
+    },
+    {
+     "id": "V50-V59",
+     "first": "V50",
+     "last": "V59",
+     "title": "Occupant of pick-up truck or van injured in transport accident"
+    },
+    {
+     "id": "V60-V69",
+     "first": "V60",
+     "last": "V69",
+     "title": "Occupant of heavy transport vehicle injured in transport accident"
+    },
+    {
+     "id": "V70-V79",
+     "first": "V70",
+     "last": "V79",
+     "title": "Bus occupant injured in transport accident"
+    },
+    {
+     "id": "V80-V89",
+     "first": "V80",
+     "last": "V89",
+     "title": "Other land transport accidents"
+    },
+    {
+     "id": "V90-V94",
+     "first": "V90",
+     "last": "V94",
+     "title": "Water transport accidents"
+    },
+    {
+     "id": "V95-V97",
+     "first": "V95",
+     "last": "V97",
+     "title": "Air and space transport accidents"
+    },
+    {
+     "id": "V98-V99",
+     "first": "V98",
+     "last": "V99",
+     "title": "Other and unspecified transport accidents"
+    },
+    {
+     "id": "W00-X58",
+     "first": "W00",
+     "last": "X58",
+     "title": "Other external causes of accidental injury"
+    },
+    {
+     "id": "W00-W19",
+     "first": "W00",
+     "last": "W19",
+     "title": "Slipping, tripping, stumbling and falls"
+    },
+    {
+     "id": "W20-W49",
+     "first": "W20",
+     "last": "W49",
+     "title": "Exposure to inanimate mechanical forces"
+    },
+    {
+     "id": "W50-W64",
+     "first": "W50",
+     "last": "W64",
+     "title": "Exposure to animate mechanical forces"
+    },
+    {
+     "id": "W65-W74",
+     "first": "W65",
+     "last": "W74",
+     "title": "Accidental non-transport drowning and submersion"
+    },
+    {
+     "id": "W85-W99",
+     "first": "W85",
+     "last": "W99",
+     "title": "Exposure to electric current, radiation and extreme ambient air temperature and pressure"
+    },
+    {
+     "id": "X00-X08",
+     "first": "X00",
+     "last": "X08",
+     "title": "Exposure to smoke, fire and flames"
+    },
+    {
+     "id": "X10-X19",
+     "first": "X10",
+     "last": "X19",
+     "title": "Contact with heat and hot substances"
+    },
+    {
+     "id": "X30-X39",
+     "first": "X30",
+     "last": "X39",
+     "title": "Exposure to forces of nature"
+    },
+    {
+     "id": "X50",
+     "first": "X50",
+     "last": "X50",
+     "title": "Overexertion and strenuous or repetitive movements"
+    },
+    {
+     "id": "X52-X58",
+     "first": "X52",
+     "last": "X58",
+     "title": "Accidental exposure to other specified factors"
+    },
+    {
+     "id": "X71-X83",
+     "first": "X71",
+     "last": "X83",
+     "title": "Intentional self-harm"
+    },
+    {
+     "id": "X92-Y09",
+     "first": "X92",
+     "last": "Y09",
+     "title": "Assault"
+    },
+    {
+     "id": "Y21-Y33",
+     "first": "Y21",
+     "last": "Y33",
+     "title": "Event of undetermined intent"
+    },
+    {
+     "id": "Y35-Y38",
+     "first": "Y35",
+     "last": "Y38",
+     "title": "Legal intervention, operations of war, military operations, and terrorism"
+    },
+    {
+     "id": "Y62-Y84",
+     "first": "Y62",
+     "last": "Y84",
+     "title": "Complications of medical and surgical care"
+    },
+    {
+     "id": "Y62-Y69",
+     "first": "Y62",
+     "last": "Y69",
+     "title": "Misadventures to patients during surgical and medical care"
+    },
+    {
+     "id": "Y70-Y82",
+     "first": "Y70",
+     "last": "Y82",
+     "title": "Medical devices associated with adverse incidents in diagnostic and therapeutic use"
+    },
+    {
+     "id": "Y83-Y84",
+     "first": "Y83",
+     "last": "Y84",
+     "title": "Surgical and other medical procedures as the cause of abnormal reaction of the patient, or of later complication, without mention of misadventure at the time of the procedure"
+    },
+    {
+     "id": "Y90-Y99",
+     "first": "Y90",
+     "last": "Y99",
+     "title": "Supplementary factors related to causes of morbidity classified elsewhere"
+    }
+   ]
+  },
+  {
+   "chapter": 21,
+   "range": "Z00-Z99",
+   "title": "Factors influencing health status and contact with health services",
+   "notes": {
+    "notes": [
+     "Z codes represent reasons for encounters. A corresponding procedure code must accompany a Z code if a procedure is performed. Categories Z00-Z99 are provided for occasions when circumstances other than a disease, injury or external cause classifiable to categories A00-Y89 are recorded as 'diagnoses' or 'problems'. This can arise in two main ways:",
+     "(a) When a person who may or may not be sick encounters the health services for some specific purpose, such as to receive limited care or service for a current condition, to donate an organ or tissue, to receive prophylactic vaccination (immunization), or to discuss a problem which is in itself not a disease or injury.",
+     "(b) When some circumstance or problem is present which influences the person's health status but is not in itself a current illness or injury."
+    ]
+   },
+   "refs": {
+    "notes": [
+     [],
+     [],
+     []
+    ]
+   },
+   "sections": [
+    {
+     "id": "Z00-Z13",
+     "first": "Z00",
+     "last": "Z13",
+     "title": "Persons encountering health services for examinations"
+    },
+    {
+     "id": "Z14-Z15",
+     "first": "Z14",
+     "last": "Z15",
+     "title": "Genetic carrier and genetic susceptibility to disease"
+    },
+    {
+     "id": "Z16",
+     "first": "Z16",
+     "last": "Z16",
+     "title": "Resistance to antimicrobial drugs"
+    },
+    {
+     "id": "Z17",
+     "first": "Z17",
+     "last": "Z17",
+     "title": "Estrogen, and other hormones and factors receptor status"
+    },
+    {
+     "id": "Z18",
+     "first": "Z18",
+     "last": "Z18",
+     "title": "Retained foreign body fragments"
+    },
+    {
+     "id": "Z19",
+     "first": "Z19",
+     "last": "Z19",
+     "title": "Hormone sensitivity malignancy status"
+    },
+    {
+     "id": "Z20-Z29",
+     "first": "Z20",
+     "last": "Z29",
+     "title": "Persons with potential health hazards related to communicable diseases"
+    },
+    {
+     "id": "Z30-Z39",
+     "first": "Z30",
+     "last": "Z39",
+     "title": "Persons encountering health services in circumstances related to reproduction"
+    },
+    {
+     "id": "Z40-Z53",
+     "first": "Z40",
+     "last": "Z53",
+     "title": "Encounters for other specific health care"
+    },
+    {
+     "id": "Z55-Z65",
+     "first": "Z55",
+     "last": "Z65",
+     "title": "Persons with potential health hazards related to socioeconomic and psychosocial circumstances"
+    },
+    {
+     "id": "Z66",
+     "first": "Z66",
+     "last": "Z66",
+     "title": "Do not resuscitate status"
+    },
+    {
+     "id": "Z67",
+     "first": "Z67",
+     "last": "Z67",
+     "title": "Blood type"
+    },
+    {
+     "id": "Z68",
+     "first": "Z68",
+     "last": "Z68",
+     "title": "Body mass index (BMI)"
+    },
+    {
+     "id": "Z69-Z76",
+     "first": "Z69",
+     "last": "Z76",
+     "title": "Persons encountering health services in other circumstances"
+    },
+    {
+     "id": "Z77-Z99",
+     "first": "Z77",
+     "last": "Z99",
+     "title": "Persons with potential health hazards related to family and personal history and certain conditions influencing health status"
+    }
+   ]
+  },
+  {
+   "chapter": 22,
+   "range": "U00-U85",
+   "title": "Codes for special purposes",
+   "notes": {},
+   "refs": {},
+   "sections": [
+    {
+     "id": "U00-U49",
+     "first": "U00",
+     "last": "U49",
+     "title": "Provisional assignment of new diseases of uncertain etiology or emergency use"
+    }
+   ]
+  }
+ ]
+}

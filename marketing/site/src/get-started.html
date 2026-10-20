@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get started with SOLIS</title>
+<meta name="description" content="From the website to your first visit: request access, install the Android app, set up your provider profile with a live NPI lookup, download the on-device engine and try a sample visit.">
+<link rel="canonical" href="{{SITE}}/get-started">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SOLIS">
+<meta property="og:title" content="Get started with SOLIS">
+<meta property="og:description" content="Install the Android pilot, set up your provider profile and try a sample visit before your first real one.">
+<meta property="og:url" content="{{SITE}}/get-started">
+<meta property="og:image" content="{{SITE}}/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<x-header active="get-started"></x-header>
+<main id="main">
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Get started</span>
+      <h1>From this page to your first visit.</h1>
+      <p class="lead">Set up on a computer or straight from your phone. Every step works on both. Try every screen with demo patients before a real visit.</p>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container journey">
+      <div>
+        <h2 class="sr-only">Steps</h2>
+        <ol class="timeline">
+          <li>
+            <h3>Request early access <span class="state now">Now</span></h3>
+            <p>Tell us about your practice with the <a href="index.html#access">early-access form</a>. We reply by email with the pilot details and the BAA template. At general availability this becomes a sign-up with email verification.</p>
+          </li>
+          <li>
+            <h3>Install the Android app <span class="state now">Now</span></h3>
+            <p><b>On a computer:</b> scan the QR code with your phone's camera. <b>On your phone:</b> tap Download for Android. Open the file and tap Install. If Android asks, allow installs from this source, then tap Install again. Android 8 or later. iOS is not yet released.</p>
+          </li>
+          <li>
+            <h3>Sign in, or use the demo account <span class="state now">Now</span></h3>
+            <p>Tap <b>Use demo account</b> to explore with fictional patients and nothing on a server. When your pilot account is ready, sign in with it to use your own practice data.</p>
+          </li>
+          <li>
+            <h3>Set up your provider profile <span class="state now">Now</span></h3>
+            <p>Enter your NPI and SOLIS looks it up live in the national NPI registry. Add your tax ID, specialty and the insurers you accept, once. At general availability the practice profile you enter on the website fills this for you.</p>
+          </li>
+          <li>
+            <h3>Download the on-device engine on Wi-Fi <span class="state now">Now</span></h3>
+            <p>A one-time download of about 150 MB. After that, recording and speaker separation run on the phone and work offline. Downloads resume if interrupted.</p>
+          </li>
+          <li>
+            <h3>Try the sample card and a sample visit <span class="state now">Now</span></h3>
+            <p>Scan the built-in sample card for the fictional patient Jordan A Rivera, then walk through a visit: consent, recording, the note, the codes and a test-mode claim.</p>
+          </li>
+          <li>
+            <h3>Your first real visit <span class="state">After the pilot paperwork</span></h3>
+            <p>Ask for consent, put the phone between you and the patient, and talk as you normally would. Claims stay in test mode until your payer enrollment through the clearinghouse is complete and the Business Associate Agreements are signed.</p>
+          </li>
+          <li>
+            <h3>Choose a plan and pay on this website <span class="state">At general availability</span></h3>
+            <p>Practice profile, BAA acceptance and payment by card or bank transfer, all on the website. The app has no in-app purchases. See <a href="pricing.html">pricing</a>.</p>
+          </li>
+        </ol>
+        <p class="fine">The <a href="guide.html">user guide</a> walks through every screen, for doctors and front-desk staff.</p>
+      </div>
+
+      <aside class="get-app" id="download" aria-labelledby="get-app-h">
+        <h2 id="get-app-h">Get the Android app</h2>
+        <p>SOLIS {{APK_VERSION}}, pilot build, release-signed.</p>
+        <figure class="qr">
+          <img src="assets/img/qr-apk.svg" width="168" height="168" alt="QR code that opens the SOLIS for Android download">
+          <figcaption><b>On a computer?</b> Point your phone's camera at the code to open the download on the phone.</figcaption>
+        </figure>
+        <div class="phone-dl">
+          <a class="btn btn-primary" href="{{APK_URL}}" download><x-icon id="download" class="icon-sm"></x-icon>Download for Android</a>
+        </div>
+        <p class="apk-meta">{{APK_SIZE}} &middot; Android 8+ &middot; iOS not yet released</p>
+        <p class="apk-sha">SHA-256 <code>{{APK_SHA256}}</code></p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-tight section-soft" aria-labelledby="modes-h">
+    <div class="container">
+      <div class="section-head" style="margin-bottom:32px">
+        <span class="eyebrow">Choose where the audio goes</span>
+        <h2 id="modes-h" style="font-size:clamp(1.8rem,3.4vw,2.6rem)">Your practice picks the engine.</h2>
+      </div>
+      <div class="mode-cards">
+        <div class="card"><span class="ic"><x-icon id="cpu"></x-icon></span><h3>On-device</h3><p>No audio leaves the phone. One-time download of about 150 MB, then it works offline. Included on every plan.</p></div>
+        <div class="card"><span class="ic"><x-icon id="settings"></x-icon></span><h3>Cloud</h3><p>The Deepgram medical model transcribes and Claude writes the note, only when the practice turns it on.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="cta-h">
+    <div class="container" style="text-align:center">
+      <h2 id="cta-h" style="font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-0.03em">Ready when you are.</h2>
+      <p class="lead" style="margin:14px auto 26px;max-width:46ch">Join the pilot and we will reply by email.</p>
+      <a class="btn btn-primary" href="index.html#access">Request early access <x-icon id="arrow-right" class="icon-sm"></x-icon></a>
+    </div>
+  </section>
+</main>
+<x-footer></x-footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

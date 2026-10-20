@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOLIS user guide</title>
+<meta name="description" content="Step-by-step guide to SOLIS for doctors and front-desk staff: install, sign in, provider profile, scanning cards, consent, recording, the note, orders, the claim, eligibility, sending claims and troubleshooting.">
+<link rel="canonical" href="{{SITE}}/guide">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SOLIS">
+<meta property="og:title" content="SOLIS user guide">
+<meta property="og:description" content="Everything a doctor or front-desk team needs to run a visit in SOLIS, from scanning the cards to sending the claim.">
+<meta property="og:url" content="{{SITE}}/guide">
+<meta property="og:image" content="{{SITE}}/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<x-header active="guide"></x-header>
+
+<main id="main">
+  <section class="doc-hero">
+    <div class="container">
+      <img class="print-only" src="assets/img/solis-mark.svg" width="56" height="56" alt="" style="border-radius:14px;margin-bottom:22pt">
+      <span class="eyebrow">User guide, SOLIS 1.0 for Android</span>
+      <h1>Run your first visit in SOLIS</h1>
+      <p class="lead">For doctors and front-desk staff. Each part is short and numbered, so you can follow along with the phone in your hand. The screens shown use fictional demo patients.</p>
+      <div class="doc-meta no-print">
+        <a class="btn btn-primary btn-sm" href="media/SOLIS-User-Guide.pdf"><x-icon id="download" class="icon-sm"></x-icon>Download the PDF</a>
+        <a class="btn btn-secondary btn-sm" href="#troubleshooting">Troubleshooting</a>
+      </div>
+      <div class="print-only print-cover">
+        <h2>Contents</h2>
+        <ol class="print-toc">
+        <li><a href="#start">Before you start</a></li>
+        <li><a href="#install">Install the app</a></li>
+        <li><a href="#sign-in">Sign in</a></li>
+        <li><a href="#profile">Set up your provider profile</a></li>
+        <li><a href="#integrations">Integrations</a></li>
+        <li><a href="#add-patient">Add a patient by scanning cards</a></li>
+        <li><a href="#chart">The patient chart</a></li>
+        <li><a href="#start-visit">Start a visit</a></li>
+        <li><a href="#consent">Ask for consent</a></li>
+        <li><a href="#recording">Record, pause, finish</a></li>
+        <li><a href="#note">Review and sign the note</a></li>
+        <li><a href="#talk">The Talk tab</a></li>
+        <li><a href="#orders">The Orders tab</a></li>
+        <li><a href="#claim">The Claim tab</a></li>
+        <li><a href="#why">Why a check fired, and coding notes</a></li>
+        <li><a href="#eligibility">Eligibility</a></li>
+        <li><a href="#send">Send a claim and check status</a></li>
+        <li><a href="#export">Export</a></li>
+        <li><a href="#visits">Visits 1, 2, 3 by date</a></li>
+        <li><a href="#offline">Offline and on-device mode</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#faq">Questions</a></li>
+      </ol>
+        <p class="print-note">SOLIS 1.0 for Android, pilot edition, October 2026. Screens show fictional demo patients. The latest version of this guide is at {{SITE}}/guide.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container doc-layout">
+    <nav class="toc" aria-label="Guide contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#start">Before you start</a></li>
+        <li><a href="#install">Install the app</a></li>
+        <li><a href="#sign-in">Sign in</a></li>
+        <li><a href="#profile">Set up your provider profile</a></li>
+        <li><a href="#integrations">Integrations</a></li>
+        <li><a href="#add-patient">Add a patient by scanning cards</a></li>
+        <li><a href="#chart">The patient chart</a></li>
+        <li><a href="#start-visit">Start a visit</a></li>
+        <li><a href="#consent">Ask for consent</a></li>
+        <li><a href="#recording">Record, pause, finish</a></li>
+        <li><a href="#note">Review and sign the note</a></li>
+        <li><a href="#talk">The Talk tab</a></li>
+        <li><a href="#orders">The Orders tab</a></li>
+        <li><a href="#claim">The Claim tab</a></li>
+        <li><a href="#why">Why a check fired, and coding notes</a></li>
+        <li><a href="#eligibility">Eligibility</a></li>
+        <li><a href="#send">Send a claim and check status</a></li>
+        <li><a href="#export">Export</a></li>
+        <li><a href="#visits">Visits 1, 2, 3 by date</a></li>
+        <li><a href="#offline">Offline and on-device mode</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#faq">Questions</a></li>
+      </ol>
+    </nav>
+
+    <article class="prose">
+      <details class="toc-mobile">
+        <summary>Contents <x-icon id="chevron-down" class="icon-sm"></x-icon></summary>
+        <ol>
+          <li><a href="#start">Before you start</a></li>
+          <li><a href="#install">Install the app</a></li>
+          <li><a href="#sign-in">Sign in</a></li>
+          <li><a href="#profile">Set up your provider profile</a></li>
+          <li><a href="#integrations">Integrations</a></li>
+          <li><a href="#add-patient">Add a patient by scanning cards</a></li>
+          <li><a href="#chart">The patient chart</a></li>
+          <li><a href="#start-visit">Start a visit</a></li>
+          <li><a href="#consent">Ask for consent</a></li>
+          <li><a href="#recording">Record, pause, finish</a></li>
+          <li><a href="#note">Review and sign the note</a></li>
+          <li><a href="#talk">The Talk tab</a></li>
+          <li><a href="#orders">The Orders tab</a></li>
+          <li><a href="#claim">The Claim tab</a></li>
+          <li><a href="#why">Why a check fired, and coding notes</a></li>
+          <li><a href="#eligibility">Eligibility</a></li>
+          <li><a href="#send">Send a claim and check status</a></li>
+          <li><a href="#export">Export</a></li>
+          <li><a href="#visits">Visits 1, 2, 3 by date</a></li>
+          <li><a href="#offline">Offline and on-device mode</a></li>
+          <li><a href="#troubleshooting">Troubleshooting</a></li>
+          <li><a href="#faq">Questions</a></li>
+        </ol>
+      </details>
+
+      <!-- 1 -->
+      <section id="start">
+        <h2><span class="n">01</span>Before you start</h2>
+        <p>SOLIS listens to the visit, writes the note, and builds a clean claim, on your phone. A visit always follows the same path:</p>
+        <ol class="steps">
+          <li><strong>Front desk:</strong> scan the patient's cards to create or update their account.</li>
+          <li><strong>Doctor:</strong> start today's visit, ask for consent, and record the conversation.</li>
+          <li><strong>Doctor:</strong> review the note, confirm any uncertain diagnoses, and sign.</li>
+          <li><strong>Doctor or billing:</strong> fix anything the claim checks flag, then send the claim and track its status.</li>
+        </ol>
+        <h3>What you need</h3>
+        <ul class="plain">
+          <li><x-icon id="phone"></x-icon>An Android phone. SOLIS 1.0 is Android only; iOS is not yet released.</li>
+          <li><x-icon id="wifi"></x-icon>Wi-Fi for the first install and for the one-time voice model download (about 150 MB).</li>
+          <li><x-icon id="key"></x-icon>Your sign-in details from your organization, or the demo account to practice.</li>
+          <li><x-icon id="note"></x-icon>Your NPI, tax ID (EIN) and practice address for the provider profile.</li>
+        </ul>
+        <div class="callout tip"><x-icon id="info"></x-icon><div><p><b>Practice first with the demo account.</b> It is filled with fictional patients, so you can try every screen, including scanning a sample card and sending a test claim, before you see a real patient.</p></div></div>
+      </section>
+
+      <!-- 2 -->
+      <section id="install">
+        <h2><span class="n">02</span>Install the app</h2>
+        <p>During the pilot, SOLIS is installed from an APK file, not from the Play Store.</p>
+        <div class="apk-card">
+          <a class="btn btn-primary no-print" href="{{APK_URL}}" download><x-icon id="download" class="icon-sm"></x-icon>Download for Android</a>
+          <p class="apk-meta">SOLIS {{APK_VERSION}} &middot; {{APK_SIZE}} &middot; Pilot build. Android 8+.</p>
+          <p class="apk-sha print-only">Download: {{APK_URL}}</p>
+          <p class="apk-sha">SHA-256 <code>{{APK_SHA256}}</code></p>
+        </div>
+        <ol class="steps">
+          <li>On the phone, open this page and tap <span class="ui">Download for Android</span>, or open the link your SOLIS contact sent you. Use Wi-Fi: the file is large because the card reader and the on-device speech engine are built in.</li>
+          <li>When the download finishes, tap the file to open it.</li>
+          <li>If Android asks, allow your browser or file app to install apps. The wording is usually <span class="ui">Install unknown apps</span> or <span class="ui">Allow from this source</span>. You can turn this back off after installing.</li>
+          <li>Tap <span class="ui">Install</span>, then <span class="ui">Open</span>.</li>
+        </ol>
+        <div class="callout warn"><x-icon id="alert"></x-icon><div><p><b>Only install a file from this page or from your SOLIS contact.</b> If Android shows a warning about an app from outside the Play Store, check where the file came from before you continue. To check the file on a computer, compare its SHA-256 with the one above.</p></div></div>
+        <p>To update later, install the new APK the same way. Your patients and visits stay on the phone.</p>
+      </section>
+
+      <!-- 3 -->
+      <section id="sign-in">
+        <h2><span class="n">03</span>Sign in</h2>
+        <div class="figure-row">
+          <div>
+            <ol class="steps">
+              <li>Enter your <span class="ui">Work email or NPI</span>, your <span class="ui">Password</span> and your <span class="ui">Organization code</span>.</li>
+              <li>Choose where notes are processed with <span class="ui">Process notes on this device</span>. When it is on, audio and notes stay on the phone and SOLIS works offline. See <a href="#offline">Offline and on-device mode</a>.</li>
+              <li>Tap <span class="ui">Sign in</span>.</li>
+            </ol>
+            <h3>Try the demo account</h3>
+            <p>Tap <span class="ui">Use demo account</span>. One tap signs you straight in with fictional patients such as Margaret Vance and Robert Hayes, so you can explore safely.</p>
+            <h3>New to SOLIS?</h3>
+            <p>Tap <span class="ui">Request access</span>. Enter your full name and credentials, your NPI (SOLIS checks the NPI check digit as you type), your specialty, your health system or practice and your work email. You can also turn on <span class="ui">Biometric sign-in</span> (fingerprint or face unlock before notes open) and <span class="ui">Encrypted cloud backup</span>. Tap <span class="ui">Send request</span>. Your organization approves every account.</p>
+          </div>
+          <figure><x-phone src="01_sign_in" alt="Sign-in screen with work email, password, organization code, the on-device switch and Use demo account" sizes="236px"></x-phone><figcaption class="cap">The sign-in screen</figcaption></figure>
+        </div>
+        <div class="figure-pair">
+          <figure><x-phone src="15_request_access" alt="Request access form with clinician, organization and security options" sizes="236px"></x-phone><figcaption class="cap">Request access, with the NPI check</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section id="profile">
+        <h2><span class="n">04</span>Set up your provider profile</h2>
+        <p>The profile goes on every claim: rendering provider (box 24J), tax ID (box 25) and billing provider (box 33). Set it once before your first real visit.</p>
+        <div class="figure-row">
+          <div>
+            <ol class="steps">
+              <li>On the <span class="ui">Patients</span> screen, tap the three-dot menu, then <span class="ui">Provider profile</span>.</li>
+              <li>Under <strong>Clinician</strong>, type your <span class="ui">Individual NPI</span> and tap <span class="ui">Look up</span>. SOLIS checks the national NPI registry (NPPES) and fills in your name and details. If it says no provider was found, check the number.</li>
+              <li>Check <span class="ui">Full name</span>, <span class="ui">Credentials</span> and <span class="ui">Specialty</span>. The specialty list shows its taxonomy code, for example Family Medicine (207Q00000X).</li>
+              <li>Under <strong>Practice and billing</strong>, enter the practice name, <span class="ui">Tax ID (EIN)</span> in the form 12-3456789, the <span class="ui">Group NPI (optional)</span>, street address, city, state, ZIP and phone.</li>
+              <li>Pick your <span class="ui">Usual place of service</span>, for example Office (11). You can still change it on any visit.</li>
+              <li>Add the insurers you accept with <span class="ui">Add payer</span>.</li>
+              <li>Decide on the two switches below, then tap <span class="ui">Save profile</span>. You will see "Provider profile saved. New claims use it."</li>
+            </ol>
+          </div>
+          <figure><x-phone src="05_provider" alt="Provider profile with NPI look up, specialty, tax ID, address and usual place of service" sizes="236px"></x-phone><figcaption class="cap">Provider profile</figcaption></figure>
+        </div>
+        <h3>The two switches</h3>
+        <dl class="kv">
+          <dt>Block sex-specific code conflicts</dt><dd>On by default. Most commercial payers deny these. Turn it off to show them as warnings instead of errors.</dd>
+          <dt>Block screenshots</dt><dd>Stops screenshots, screen recording and app previews on this phone. Recommended once you see real patients. While it is off, the visit's session details remind you that screenshots are allowed.</dd>
+        </dl>
+      </section>
+
+      <!-- 5 -->
+      <section id="integrations">
+        <h2><span class="n">05</span>Integrations</h2>
+        <p>Open the three-dot menu on the <span class="ui">Patients</span> screen and tap <span class="ui">Integrations</span>. Keys entered here are kept in encrypted storage on this phone only and are never shown again in full. For a whole practice, your administrator can keep keys on the SOLIS server instead, so nobody types them on a phone.</p>
+
+        <h3>Clearinghouse (Stedi)</h3>
+        <p>Connecting Stedi lets SOLIS send claims, check eligibility at check-in, and track claim status.</p>
+        <ol class="steps">
+          <li>Paste the Stedi <span class="ui">API key</span> into the key field.</li>
+          <li>Leave <span class="ui">Test claims</span> selected while you learn. Test claims are marked T: the clearinghouse checks them, but they are not paid.</li>
+          <li>Fill in <span class="ui">Submitter name</span>, <span class="ui">Submitter ID</span>, <span class="ui">Receiver ID</span> (STEDITEST in test mode), <span class="ui">Billing contact</span> and <span class="ui">Contact phone</span>.</li>
+          <li>Tap <span class="ui">Save</span>. The card shows <span class="ui">Connected</span> with the last characters of the key.</li>
+          <li>Switch to <span class="ui">Production</span> only after your payer enrollment is complete. Production claims go to payers for payment.</li>
+        </ol>
+
+        <h3>Cloud transcription (Deepgram)</h3>
+        <p>Cloud transcription separates doctor and patient by voice in the cloud. Use it only after a BAA with Deepgram is signed. Without a key, the card says <span class="ui">On-device only</span> and SOLIS uses the on-device engine.</p>
+
+        <h3>On-device voice separation</h3>
+        <p>This engine tells doctor and patient apart by voice on the phone. No audio leaves the device.</p>
+        <ol class="steps">
+          <li>Connect to Wi-Fi.</li>
+          <li>Tap <span class="ui">Download speech models</span>. The button shows the size, about 150 MB.</li>
+          <li>Wait for <span class="ui">Downloading ... of ...</span> to finish. If the connection drops, the download resumes where it stopped.</li>
+        </ol>
+        <p>You only need to do this once per phone.</p>
+      </section>
+
+      <!-- 6 -->
+      <section id="add-patient">
+        <h2><span class="n">06</span>Add a patient by scanning cards</h2>
+        <p>This is usually the front desk's job. Everything is read on the phone, and card photos are deleted after reading.</p>
+        <div class="figure-row">
+          <div>
+            <ol class="steps">
+              <li>On the <span class="ui">Patients</span> screen, tap <span class="ui">Scan card</span>.</li>
+              <li>Choose the card type at the top: <span class="ui">Insurance</span>, <span class="ui">License</span> or <span class="ui">SSN</span>.</li>
+              <li>Tap <span class="ui">Scan</span>. For an insurance card, scan the front, then the back: the back usually has the Rx BIN, PCN and payer ID. The scanner finds the card edges and straightens the image. To use pictures you already took, tap <span class="ui">From photos</span>.</li>
+              <li>Repeat for the driver's license (SOLIS reads the barcode on the back) and, if needed, the SSN card. Green tags such as <span class="ui">Insurance card</span> and <span class="ui">Driver's license barcode</span> show what has been read.</li>
+              <li>Check every field. First and last name are required. Set <span class="ui">Sex (as on the insurance record)</span> to match the insurance card, and the <span class="ui">Patient relationship to subscriber</span> (Self, Spouse, Child or Other).</li>
+              <li>Tap <span class="ui">Create account</span>.</li>
+            </ol>
+          </div>
+          <figure><x-phone src="03_scan_review" alt="Scan card screen with Insurance, License and SSN tabs, Try a sample card, and the filled patient fields" sizes="236px"></x-phone><figcaption class="cap">Fields filled from the cards</figcaption></figure>
+        </div>
+        <div class="callout tip"><x-icon id="info"></x-icon><div><p><b>Try a sample card.</b> Tap <span class="ui">Try a sample card</span> to run the real card reader on built-in sample cards for the fictional patient Jordan A Rivera. It is the quickest way to see scanning work without a real card.</p></div></div>
+        <h3>When the patient may already have an account</h3>
+        <p>If the details match someone already in SOLIS, you will see "This may be an existing patient". Choose their account to update it, so each person keeps one chart, or choose to create a new account. The button then reads <span class="ui">Update existing account</span> or <span class="ui">Create account</span>.</p>
+        <h3>No card?</h3>
+        <p>Tap the add-person icon at the top of the <span class="ui">Patients</span> screen (<span class="ui">Add patient without a card</span>) and type the details.</p>
+        <h3>What is kept from an SSN card</h3>
+        <p>Only the name and the last 4 digits. The full number is never stored. The account shows "SSN on file: last 4 digits" and nothing more.</p>
+        <div class="callout"><x-icon id="scan"></x-icon><div><p><b>Getting a clean read:</b> hold the card flat, fill the frame, and avoid glare from overhead lights.</p></div></div>
+      </section>
+
+      <!-- 7 -->
+      <section id="chart">
+        <h2><span class="n">07</span>The patient chart</h2>
+        <div class="figure-row">
+          <div>
+            <p>Tap any patient in the list to open their chart. Search at the top of the list by name, account number or member ID.</p>
+            <dl class="kv">
+              <dt>Patient</dt><dd>Account number (SOL- followed by eight digits, with a check digit), date of birth with age, sex and address. Tap the copy icon to copy the account number.</dd>
+              <dt>Insurance</dt><dd>Payer and plan, member ID, group, payer ID, pharmacy BIN and PCN, and copays from the card. The eligibility line sits at the bottom of this card.</dd>
+              <dt>Visits</dt><dd>Every visit by number and date, with its place of service and status.</dd>
+            </dl>
+            <p>Tap the scan icon at the top to scan a new card for this patient, or the pencil to edit their details.</p>
+            <h3>Visit status tags</h3>
+            <table class="status-table">
+              <thead><tr><th scope="col">Tag</th><th scope="col">Meaning</th></tr></thead>
+              <tbody>
+                <tr><td>In progress</td><td>The visit is open; the note is not signed yet.</td></tr>
+                <tr><td>Signed</td><td>The note is signed.</td></tr>
+                <tr><td>Claim ready</td><td>The claim passed its checks and is marked ready to bill.</td></tr>
+                <tr><td>Submitted</td><td>The claim was accepted by the clearinghouse and is with the payer.</td></tr>
+                <tr><td>Rejected</td><td>The clearinghouse rejected it before it reached the payer. Fix and resend.</td></tr>
+                <tr><td>Paid</td><td>The payer paid the claim.</td></tr>
+                <tr><td>Denied</td><td>The payer denied the claim.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <figure><x-phone src="04_chart" alt="Patient chart with account number, insurance, eligibility line and visits" sizes="236px"></x-phone><figcaption class="cap">A chart with three visits</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 8 -->
+      <section id="start-visit">
+        <h2><span class="n">08</span>Start a visit</h2>
+        <div class="figure-row">
+          <div>
+            <ol class="steps">
+              <li>In the patient's chart, tap <span class="ui">Start today's visit</span>. If a visit from today is still open, the button reads <span class="ui">Continue visit</span> with its number instead.</li>
+              <li>Check the <span class="ui">Date of service</span> and the <span class="ui">Place of service</span>. The place of service decides which visit codes are valid and how the claim pays, so pick where you actually see the patient: office, nursing facility, and so on.</li>
+              <li>Tap <span class="ui">Start visit</span>. If a clearinghouse is connected, SOLIS checks eligibility in the background while you work.</li>
+            </ol>
+            <h3>The Ready screen</h3>
+            <p>You will see <strong>Ready to record</strong>: put the phone between you and the patient, then talk as you normally would. SOLIS writes the note when you finish.</p>
+            <p>The line under the patient's name shows the session at a glance: the engine (<span class="ui">Cloud</span> or <span class="ui">On device</span>), consent (<span class="ui">No consent yet</span> until the patient agrees) and location (<span class="ui">Locating</span>, then the address). Tap it to open <strong>Session details</strong>, where you can set:</p>
+            <dl class="kv">
+              <dt>Note engine</dt><dd>Cloud model, or on-device engine. The cloud model falls back to the device when offline.</dd>
+              <dt>Room noise filter</dt><dd>Suppresses monitor alarms, HVAC hum and hallway voices.</dd>
+              <dt>Language and accent</dt><dd>US English (all accents), Southern / regional US, Indian English, or bilingual Spanish and English.</dd>
+              <dt>Background capture</dt><dd>Turns on automatically while recording, so recording continues with the screen off.</dd>
+              <dt>Location</dt><dd>Refresh it if the address is wrong. If location is not allowed, the visit is saved without a location rather than a guessed one.</dd>
+            </dl>
+            <p>No recording today? Tap <span class="ui">Type instead</span> to type or paste the conversation. To practice, <span class="ui">Sample conversation</span> inserts a sample visit.</p>
+          </div>
+          <figure><x-phone src="06_ready" alt="Ready to record screen with the record button, Type instead and Sample conversation" sizes="236px"></x-phone><figcaption class="cap">Ready to record</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 9 -->
+      <section id="consent">
+        <h2><span class="n">09</span>Ask for consent</h2>
+        <div class="figure-row">
+          <div>
+            <p>SOLIS asks before the first recording of every visit. Tap the microphone and the <strong>Ask for consent to record</strong> sheet opens.</p>
+            <ol class="steps">
+              <li>Choose <span class="ui">English</span> or <span class="ui">Espanol</span>.</li>
+              <li>Read the script to the patient, or hand them the phone. In English it says: "This visit will be recorded to help your doctor write your note. The recording is not part of your medical record and is deleted after the note is written. You can ask to pause or stop at any time, and saying no does not change your care."</li>
+              <li>Record the answer:
+                <ul>
+                  <li><span class="ui">Patient agreed, start recording</span> for verbal consent. Recording starts right away.</li>
+                  <li><span class="ui">Patient signs on screen</span> for a signature. The patient, or a parent, legal guardian or authorized representative, types their name, picks the relationship and signs with a finger. Tap <span class="ui">Save signature and start</span>.</li>
+                  <li><span class="ui">Patient declined</span>. Nothing is recorded; you can type the note instead.</li>
+                </ul>
+              </li>
+            </ol>
+            <p>The consent, its method and its time and location are saved with the visit, and the status line changes to <span class="ui">Consent</span>.</p>
+          </div>
+          <figure><x-phone src="16_consent" alt="Consent sheet with English and Espanol, the script, and the three choices" sizes="236px"></x-phone><figcaption class="cap">The consent sheet</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 10 -->
+      <section id="recording">
+        <h2><span class="n">10</span>Record, pause, finish</h2>
+        <div class="figure-row">
+          <div>
+            <p>While recording, the screen shows a red <span class="ui">Recording</span> tag, a timer and the live transcript.</p>
+            <ol class="steps">
+              <li>Talk with the patient as you normally would. You do not need to dictate or use special phrases.</li>
+              <li>To stop for a sensitive topic, or when you step out, tap the <strong>pause</strong> button on the left. The screen says "Paused. Nothing is being captured." Tap it again to resume.</li>
+              <li>When the visit is done, tap <span class="ui">Finish and write note</span>. SOLIS shows <strong>Writing the note</strong> and then opens the review.</li>
+            </ol>
+            <p><span class="ui">Discard recording</span> is for a recording started by accident, or one that captured a conversation that is not about care. It asks before deleting.</p>
+            <div class="callout"><x-icon id="info"></x-icon><div><p>You cannot leave the visit while it is recording. Finish or discard first, so nothing is captured by mistake.</p></div></div>
+            <p>Forgot something? After the note is written, tap <span class="ui">Add</span> at the bottom to record more of the same visit.</p>
+          </div>
+          <figure><x-phone src="07_recording" alt="Recording screen with timer, waveform, live transcript, pause and Finish and write note" sizes="236px"></x-phone><figcaption class="cap">Recording, with the live transcript</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 11 -->
+      <section id="note">
+        <h2><span class="n">11</span>Review and sign the note</h2>
+        <div class="figure-row">
+          <div>
+            <p>The review has four tabs: <span class="ui">Note</span>, <span class="ui">Talk</span>, <span class="ui">Orders</span> and <span class="ui">Claim</span>. It opens on the note, marked <strong>Draft for your review</strong>.</p>
+            <ol class="steps">
+              <li>Check the <strong>Vitals</strong> card. Only vitals that were said out loud appear. An abnormal value carries a warning icon next to it, never color alone.</li>
+              <li>Read each section: <strong>Subjective</strong>, <strong>Objective</strong>, <strong>Assessment</strong> and the plan. Nothing is invented: no exam findings that were not said.</li>
+              <li>Tap <span class="ui">Sources</span> on any section to see what was said in the room that supports it.</li>
+              <li>Tap the pencil to edit a section. Save your edits before signing.</li>
+              <li>Tap <span class="ui">Sign note</span>. Read the attestation, which begins "I personally performed this encounter and reviewed this note for accuracy", and confirm.</li>
+              <li>The button changes to <span class="ui">Signed. Copy note</span>. Tap it to copy the formatted note and paste it into your EHR.</li>
+            </ol>
+            <div class="callout"><x-icon id="pen"></x-icon><div><p>Editing any section after signing reopens the note as a draft, so the signature always matches the text.</p></div></div>
+          </div>
+          <figure><x-phone src="08_note" alt="Draft note with vitals, Subjective and Objective sections, Sources and edit buttons" sizes="236px"></x-phone><figcaption class="cap">The draft note</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 12 -->
+      <section id="talk">
+        <h2><span class="n">12</span>The Talk tab</h2>
+        <div class="figure-row">
+          <div>
+            <p>The Talk tab is the conversation, split by speaker: each turn is labeled <strong>Doctor</strong> or <strong>Patient</strong> with its time from the start of the recording.</p>
+            <ul class="plain">
+              <li><x-icon id="users"></x-icon>The count at the top shows how many turns were captured.</li>
+              <li><x-icon id="eye-off"></x-icon><span class="ui">Hide small talk</span> folds away the greetings and chat that are not about care, so you can read the clinical part quickly.</li>
+              <li><x-icon id="note"></x-icon><span class="ui">Open full transcript</span> shows the unedited capture that is archived with the note.</li>
+            </ul>
+            <p>Use it to check a detail before you sign, or when a code's quote on the Claim tab needs more context.</p>
+          </div>
+          <figure><x-phone src="12_talk" alt="Talk tab with Doctor and Patient turns and timestamps, and Hide small talk" sizes="236px"></x-phone><figcaption class="cap">Doctor and patient, turn by turn</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 13 -->
+      <section id="orders">
+        <h2><span class="n">13</span>The Orders tab</h2>
+        <div class="figure-row">
+          <div>
+            <p>Orders, prescriptions and referrals mentioned in the visit appear here, grouped under <strong>Labs and imaging</strong>, <strong>Prescriptions</strong>, <strong>Referrals</strong> and <strong>Prior authorization</strong>. Urgent items carry a <span class="ui">STAT</span> tag with an icon.</p>
+            <ol class="steps">
+              <li>Read each order and its details, such as dose, sig and quantity for a prescription.</li>
+              <li>Check the orders you want. Uncheck anything that does not apply.</li>
+              <li>Tap <span class="ui">Send</span> with the count, for example <span class="ui">Send 6 orders</span>, then confirm the list. SOLIS marks them as sent on the visit, and the button changes to <span class="ui">All orders sent</span>.</li>
+            </ol>
+            <p>SOLIS does not connect to an EHR, lab or pharmacy, so marking orders as sent keeps a record on the visit. Place them in your usual system as well.</p>
+            <p>If nothing was ordered, the tab says so. Nothing is ever added that was not said.</p>
+          </div>
+          <figure><x-phone src="17_orders" alt="Orders tab with labs and prescriptions, STAT tags, checkboxes and Send 6 orders" sizes="236px"></x-phone><figcaption class="cap">Orders from the conversation</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 14 -->
+      <section id="claim">
+        <h2><span class="n">14</span>The Claim tab</h2>
+        <p>The claim is built when the note is written. The Claim tab shows it the way a payer will read it, and tells you exactly what needs attention.</p>
+        <div class="figure-row">
+          <div>
+            <h3 style="margin-top:0">Read it top to bottom</h3>
+            <ol class="steps">
+              <li><strong>The banner.</strong> "1 issue to fix before billing" means something would get the claim rejected or denied. The details are in Checks, at the bottom.</li>
+              <li><strong>Visit.</strong> Date of service, place of service (tap <span class="ui">Change</span> if it is wrong), patient, payer and member ID, and the rendering NPI from your profile.</li>
+              <li><strong>Diagnoses (ICD-10-CM).</strong> Lettered A, B, C and so on. Each shows the code, its description, where it came from (<span class="ui">Patient reported</span> or <span class="ui">Physician</span>), a <span class="ui">Primary</span> tag on the first-listed diagnosis, and the patient's or your own words in quotes.</li>
+              <li><strong>Services (CPT / HCPCS).</strong> Each service shows which diagnosis letters support it, the units and the charge, then the total charge.</li>
+              <li><strong>Checks.</strong> Every finding, with the reason in plain words.</li>
+            </ol>
+          </div>
+          <figure><x-phone src="09_claim_uncertain" alt="Claim tab with the issue banner, visit details and patient-reported diagnoses with quotes" sizes="236px"></x-phone><figcaption class="cap">Diagnoses from the patient's words</figcaption></figure>
+        </div>
+
+        <h3>Confirm uncertain diagnoses</h3>
+        <div class="figure-row">
+          <div>
+            <p>When a diagnosis was said with uncertain wording, such as "sounds like" or "probably", it appears under <strong>Waiting for your confirmation</strong>. Until you confirm it, the official outpatient rule (section IV.H) codes the symptoms instead. A patient who says "my feet burn at night" gets a symptom code, not a diagnosis.</p>
+            <ol class="steps">
+              <li>Read the quote under the suggested code.</li>
+              <li>If the diagnosis is established, tap <span class="ui">Confirm diagnosis</span>. It moves into the diagnosis list.</li>
+              <li>If not, leave it. The visit stays coded to symptoms, which is correct.</li>
+            </ol>
+            <p>Once a diagnosis is confirmed, symptoms that are part of it move to <strong>Not coded separately</strong>, so they are not billed twice. Tap that row to see them.</p>
+          </div>
+          <figure><x-phone src="10_claim_checks" alt="Waiting for your confirmation with Confirm diagnosis, services and checks" sizes="236px"></x-phone><figcaption class="cap">Waiting for your confirmation</figcaption></figure>
+        </div>
+
+        <h3>Change codes</h3>
+        <ul class="plain">
+          <li><x-icon id="settings"></x-icon>Tap the three-dot menu on a diagnosis to <span class="ui">Make primary</span> or <span class="ui">Remove from claim</span>. Removing offers Undo.</li>
+          <li><x-icon id="search"></x-icon>Tap <span class="ui">Add</span> on Diagnoses and search by condition or ICD-10 code, then <span class="ui">Code it</span>.</li>
+          <li><x-icon id="receipt"></x-icon>Tap <span class="ui">Add</span> on Services to add a CPT or HCPCS code with modifiers and a charge per unit. Tap the X on a service to remove it.</li>
+        </ul>
+
+        <h3>Read the checks</h3>
+        <div class="figure-row">
+          <div>
+            <p>Each check has an icon and a plain sentence, so you never have to rely on color.</p>
+            <dl class="kv">
+              <dt>Error (circle with !)</dt><dd>Must be fixed before billing. Example: <em>Note not signed. Sign the note before the claim can be sent.</em></dd>
+              <dt>Information (circle with i)</dt><dd>Worth a look, does not block. Example: <em>Primary diagnosis is a symptom. Confirm it if it is established, or the visit is coded to symptoms.</em></dd>
+            </dl>
+            <p>The checks use the official code sets for the date of service, and fully enforce 59 of 63 official coding rules. Typical findings: sex or age conflicts, diagnoses that exclude each other (Excludes1), a missing 7th character, an external-cause code listed first, modifier 25 needed, an add-on code without its primary, or units over the daily limit.</p>
+            <p>When there are no errors, the Checks card says "No coding conflicts found. Mark it ready to bill." Tap <span class="ui">Why</span> under any check to see the rule behind it (next section).</p>
+          </div>
+          <figure><x-phone src="11_claim_stemi_ed" alt="Claim for an emergency visit with a physician-coded diagnosis, symptoms not coded separately, two services and checks" sizes="236px"></x-phone><figcaption class="cap">An emergency department claim</figcaption></figure>
+        </div>
+        <div class="callout tip"><x-icon id="info"></x-icon><div><p><b>The most common fix is the simplest:</b> sign the note. A claim cannot go out until the note it is built from is signed.</p></div></div>
+      </section>
+
+      <!-- 15 -->
+      <section id="why">
+        <h2><span class="n">15</span>Why a check fired, and coding notes</h2>
+        <p>Every check on the Claim tab has a <span class="ui">Why</span> button. It explains the rule behind the check, so you can fix the claim without guessing. It works offline: the rules and the guideline text are built into the app.</p>
+        <div class="figure-row">
+          <div>
+            <ol class="steps">
+              <li>Under a check, tap <span class="ui">Why</span>. A sheet opens from the bottom.</li>
+              <li><strong>The rule</strong> says what the official rule requires, in plain English, with its rule number.</li>
+              <li><strong>On this claim</strong> says what it means for this visit, naming the codes involved.</li>
+              <li><strong>Official source</strong> gives the citation, for example ICD-10-CM Guidelines IV.H or the Medicare Program Integrity Manual.</li>
+              <li>Below it, the official guideline text is quoted, so you can read the source without leaving the claim.</li>
+              <li>Swipe the sheet down to close it.</li>
+            </ol>
+          </div>
+          <figure><x-phone src="19_claim_why" alt="Why sheet: Outpatient, do not code uncertain diagnoses, with the rule, what it means on this claim, the official source and the guideline text" sizes="236px"></x-phone><figcaption class="cap">The Why sheet for an uncertain diagnosis</figcaption></figure>
+        </div>
+        <div class="figure-pair">
+          <figure><x-phone src="18_claim_kb_checks" alt="Checks card with four checks, each with a Why button" sizes="236px"></x-phone><figcaption class="cap">Every check has a Why button</figcaption></figure>
+          <figure><x-phone src="21_claim_why_dark" alt="Why sheet in the dark theme for Note not signed, citing the Medicare Program Integrity Manual" sizes="236px" dark></x-phone><figcaption class="cap">A blocking check, explained</figcaption></figure>
+        </div>
+        <h3>Coding notes on each diagnosis</h3>
+        <div class="figure-row">
+          <div>
+            <p>Each diagnosis on the Claim tab shows its official ICD-10-CM coding notes. Tap <span class="ui">Coding notes</span> under the diagnosis to open them. Each note says which code it comes from, for example <em>(at E11)</em>.</p>
+            <dl class="kv">
+              <dt>Excludes1</dt><dd>The two conditions are not coded together.</dd>
+              <dt>Excludes2</dt><dd>The other condition is not part of this one; both may be coded when both are present.</dd>
+              <dt>Code first</dt><dd>An underlying condition is listed before this code.</dd>
+              <dt>Use additional code</dt><dd>Add a second code for more detail, such as long-term use of a medicine.</dd>
+              <dt>Code also</dt><dd>A second code may be needed; either may be listed first.</dd>
+              <dt>7th character</dt><dd>The character this code needs to be complete.</dd>
+            </dl>
+          </div>
+          <figure><x-phone src="20_claim_coding_notes" alt="Coding notes under a type 2 diabetes diagnosis, with Excludes1 and Use additional code entries, and the next diagnosis Z79.84" sizes="236px"></x-phone><figcaption class="cap">Coding notes for type 2 diabetes</figcaption></figure>
+        </div>
+        <div class="callout tip"><x-icon id="info"></x-icon><div><p><b>What is not checked.</b> SOLIS fully enforces 59 of 63 official coding rules. The other 4, NCCI procedure-to-procedure pairs, mutually exclusive pairs, the most comprehensive code, and lab panels, need the AMA CPT license and are not in the app. Review those with your billing software or coder.</p></div></div>
+      </section>
+
+      <!-- 16 -->
+      <section id="eligibility">
+        <h2><span class="n">16</span>Eligibility</h2>
+        <p>With a clearinghouse connected, SOLIS checks coverage when you start a visit, and you can check any time from the chart.</p>
+        <ol class="steps">
+          <li>Make sure the insurance card has a <strong>payer ID</strong>. It is usually on the back of the card; without it SOLIS asks you to add it.</li>
+          <li>In the chart's Insurance card, tap <span class="ui">Check</span> on the eligibility line, or <span class="ui">Recheck</span> after an earlier check.</li>
+          <li>Read the result, which is saved on the visit.</li>
+        </ol>
+        <table class="status-table">
+          <thead><tr><th scope="col">The line says</th><th scope="col">What to do</th></tr></thead>
+          <tbody>
+            <tr><td>Eligibility: Active</td><td>Coverage is active. When the payer returns them, you also see the copay, coinsurance and deductible left.</td></tr>
+            <tr><td>Not active for the date of service</td><td>Ask the patient for current insurance and scan the new card.</td></tr>
+            <tr><td>Last check failed</td><td>The reason follows. Check the member ID and payer ID, then Recheck.</td></tr>
+            <tr><td>Not checked yet</td><td>Tap Check.</td></tr>
+            <tr><td>Connect a clearinghouse in Integrations</td><td>Set up Stedi first. See <a href="#integrations">Integrations</a>.</td></tr>
+          </tbody>
+        </table>
+        <p>In test mode, results are marked "test mode".</p>
+      </section>
+
+      <!-- 17 -->
+      <section id="send">
+        <h2><span class="n">17</span>Send a claim and check status</h2>
+        <p>The large button at the bottom of the Claim tab always shows the next step.</p>
+        <ol class="steps">
+          <li>While errors remain, it reads <span class="ui">Fix 1 issue first</span> (or the number of issues) and is disabled.</li>
+          <li>When there are none, tap <span class="ui">Mark ready to bill</span>. The visit becomes <span class="ui">Claim ready</span>.</li>
+          <li>With a clearinghouse connected, the button becomes <span class="ui">Send claim</span>. Tap it. SOLIS builds the 837P file and shows the claim ID and total. In test mode it says "Send test claim?" and reminds you test claims are checked but not paid. Tap <span class="ui">Send</span>.</li>
+          <li>If something is missing, such as submitter details, SOLIS lists what to fix before sending.</li>
+        </ol>
+        <h3>After sending</h3>
+        <table class="status-table">
+          <thead><tr><th scope="col">Result</th><th scope="col">What happens next</th></tr></thead>
+          <tbody>
+            <tr><td>Accepted</td><td>The visit is <span class="ui">Submitted</span> and the button becomes <span class="ui">Check claim status</span>.</td></tr>
+            <tr><td>Rejected</td><td>The clearinghouse rejected the claim before it reached the payer, with the reason. Fix it, then tap <span class="ui">Fix and resend</span>.</td></tr>
+          </tbody>
+        </table>
+        <p>Tap <span class="ui">Check claim status</span> to ask the payer. You may see "Waiting for the payer", "The payer has no status for this claim yet", paid, or "Denied by the payer". The visit's tag in the chart follows along.</p>
+        <div class="callout"><x-icon id="info"></x-icon><div><p><b>No clearinghouse?</b> The button reads <span class="ui">Ready. Copy claim</span>. It copies the claim for your billing software. See <a href="#export">Export</a>.</p></div></div>
+      </section>
+
+      <!-- 18 -->
+      <section id="export">
+        <h2><span class="n">18</span>Export</h2>
+        <p>On the Claim tab, tap <span class="ui">Export</span> at the bottom left.</p>
+        <dl class="kv">
+          <dt>Copy 837P file</dt><dd>The HIPAA 5010 837P file for this visit, ready for a clearinghouse or billing system. If it cannot be built yet, SOLIS lists what is missing.</dd>
+          <dt>Copy JSON</dt><dd>The claim as JSON with the CMS-1500 and 837P fields, for billing software.</dd>
+        </dl>
+        <p>For the note, use <span class="ui">Signed. Copy note</span> on the Note tab, or the copy icon at the top of the visit. The visit menu (three dots) also has <span class="ui">Export FHIR R4</span>, which copies a FHIR bundle.</p>
+      </section>
+
+      <!-- 19 -->
+      <section id="visits">
+        <h2><span class="n">19</span>Visits 1, 2, 3 by date</h2>
+        <div class="figure-row">
+          <div>
+            <p>Each patient has one account and as many visits as you need. Every visit has its own number, date of service and place of service, so a nursing-home visit and an office visit for the same patient each get the right codes.</p>
+            <ul class="plain">
+              <li><x-icon id="calendar"></x-icon>The <span class="ui">Patients</span> list shows each patient's latest visit and its date, or <span class="ui">No visits</span>.</li>
+              <li><x-icon id="layers"></x-icon>Open the chart to see every visit, newest first, with its status.</li>
+              <li><x-icon id="refresh"></x-icon>Tap an earlier visit to reopen its note, talk, orders and claim.</li>
+            </ul>
+            <p>To remove a visit created by mistake, open it and tap the delete icon at the top. SOLIS asks before it discards the visit.</p>
+          </div>
+          <figure><x-phone src="02_patients" alt="Patients list with account numbers, payers and latest visit" sizes="236px"></x-phone><figcaption class="cap">The Patients list</figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 20 -->
+      <section id="offline">
+        <h2><span class="n">20</span>Offline and on-device mode</h2>
+        <p>On-device mode keeps the audio on the phone and works without a connection, for rounds, rural clinics and ambulances.</p>
+        <ol class="steps">
+          <li>Download the speech models once over Wi-Fi in <a href="#integrations">Integrations</a> (about 150 MB).</li>
+          <li>Turn on <span class="ui">Process notes on this device</span> on the sign-in screen, or choose the on-device engine in a visit's <span class="ui">Session details</span>.</li>
+          <li>Record as usual. The status line shows <span class="ui">On device</span>.</li>
+        </ol>
+        <dl class="kv">
+          <dt>On device</dt><dd>Notes are written on this phone. Nothing leaves the device until backup.</dd>
+          <dt>Cloud</dt><dd>Notes are written by the cloud model, and fall back to the device when offline.</dd>
+        </dl>
+        <p>Sending claims and checking eligibility need a connection. Do them when you are back online.</p>
+        <figure class="figure-pair"><x-phone src="13_claim_dark" alt="The Claim tab in the dark theme" sizes="236px" dark></x-phone><figcaption class="cap" style="align-self:end">SOLIS follows the phone's dark theme too.</figcaption></figure>
+      </section>
+
+      <!-- 21 -->
+      <section id="troubleshooting">
+        <h2><span class="n">21</span>Troubleshooting</h2>
+        <div class="trouble">
+          <div><b><x-icon id="alert"></x-icon>"Nothing was captured."</b><p>Check that SOLIS has microphone permission and that nothing covers the microphone. Or type the conversation instead with <span class="ui">Type instead</span>.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"Speech recognition is not available on this device."</b><p>Download the on-device speech models in Integrations, or type the conversation instead.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"Voice separation stopped. Recording continues with basic recognition."</b><p>Recording did not stop. The rest of the visit is captured without speaker labels. Check speaker labels on the Talk tab before signing.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"Nothing readable on that card."</b><p>Hold the card flat, fill the frame and avoid glare. Try <span class="ui">From photos</span> with a sharper picture, or type the fields.</p></div>
+          <div><b><x-icon id="alert"></x-icon>Location shows "Location not allowed" or "No location".</b><p>Allow location for SOLIS in Android settings to tag visits, then tap Refresh location in Session details. The visit is saved without a location rather than a guessed one.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"Add the payer ID from the back of the card to check eligibility."</b><p>Scan the back of the insurance card, or type the payer ID in the patient's details.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"Add your submitter details in Integrations before sending claims."</b><p>Fill in submitter name, submitter ID and contact in <a href="#integrations">Integrations</a>, then try again.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"The 837P file cannot be built yet" or "Fix these before sending".</b><p>SOLIS lists each missing item, often a provider detail such as tax ID or address. Complete your <a href="#profile">provider profile</a>.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"The clearinghouse rejected the claim."</b><p>Read the reason, correct it on the Claim tab or in the patient's details, and tap <span class="ui">Fix and resend</span>.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"Download failed." for speech models.</b><p>Use Wi-Fi and make sure the phone has free space, then tap Download again. It resumes where it stopped.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"Finish or discard the recording before leaving."</b><p>Tap Finish and write note, or Discard recording, then go back.</p></div>
+          <div><b><x-icon id="alert"></x-icon>"Save your edits before signing."</b><p>Save the section you were editing, then tap Sign note.</p></div>
+        </div>
+      </section>
+
+      <!-- 22 -->
+      <section id="faq">
+        <h2><span class="n">22</span>Questions</h2>
+        <div class="faq">
+          <details><summary>Does SOLIS add anything that was not said?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>No. The note includes no vitals or exam findings that were not said, and every diagnosis links to the words it came from. Use Sources on each section to check.</p></div></details>
+          <details><summary>Why is my patient's diagnosis coded as a symptom?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>Uncertain wording such as "sounds like" or "probably" is coded to the symptoms under official outpatient rule IV.H, until you confirm the diagnosis on the Claim tab.</p></div></details>
+          <details><summary>Where does the audio go?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>In on-device mode, nowhere: it stays on the phone. In cloud mode, used only when your practice turns it on, transcription uses the Deepgram medical model and Claude writes the note. See <a href="privacy.html">How SOLIS handles data</a>.</p></div></details>
+          <details><summary>What happens to card photos?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>They are read on the phone and deleted after reading. From an SSN card only the last 4 digits are kept.</p></div></details>
+          <details><summary>Can the patient consent in Spanish?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>Yes. Tap Espanol on the consent sheet. The patient can agree verbally or sign on the phone.</p></div></details>
+          <details><summary>Will test claims be paid?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>No. Test claims are checked by the clearinghouse but not paid. Switch Integrations to Production after payer enrollment is complete.</p></div></details>
+          <details><summary>Can I use SOLIS without a clearinghouse?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>Yes. Notes, coding and checks all work. Copy the claim as an 837P file or JSON for your billing software.</p></div></details>
+          <details><summary>Is there an iPhone app?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>Not yet. SOLIS 1.0 is Android only.</p></div></details>
+          <details><summary>Is a BAA available?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>Yes. A Business Associate Agreement template is available for practices. Ask for it when you <a href="index.html#access">request early access</a>.</p></div></details>
+          <details><summary>Which coding rules does SOLIS not check?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>SOLIS fully enforces 59 of 63 official coding rules. The other 4 (NCCI procedure-to-procedure pairs, mutually exclusive pairs, the most comprehensive code, and lab panels) need the AMA CPT license and are not in the app.</p></div></details>
+          <details><summary>Why does SOLIS not show full CPT descriptions?<x-icon id="chevron-down" class="icon-sm"></x-icon></summary><div><p>Official CPT descriptor text is licensed by the American Medical Association. SOLIS shows short plain-language labels instead.</p></div></details>
+        </div>
+        <div class="pdf-cta no-print">
+          <a class="btn btn-primary" href="media/SOLIS-User-Guide.pdf"><x-icon id="download" class="icon-sm"></x-icon>Download this guide as a PDF</a>
+          <a class="btn btn-secondary" href="index.html#access">Request early access</a>
+        </div>
+      </section>
+    </article>
+  </div>
+</main>
+
+<x-footer></x-footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

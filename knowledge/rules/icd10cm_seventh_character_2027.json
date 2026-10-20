@@ -1,0 +1,4336 @@
+{
+ "edition": "FY2027",
+ "how_to_use": "A code under one of these prefixes needs a 7th character from \"chars\". Pad with placeholder X to 6 characters first (Guidelines I.A.4, I.A.5). The longest matching prefix wins.",
+ "prefixes": {
+  "E08.32": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E08.32 to designate laterality of the disease:"
+  },
+  "E08.33": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E08.33 to designate laterality of the disease:"
+  },
+  "E08.34": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E08.34 to designate laterality of the disease:"
+  },
+  "E08.35": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E08.35 to designate laterality of the disease:"
+  },
+  "E08.37": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to code E08.37 to designate laterality of the disease:"
+  },
+  "E09.32": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E09.32 to designate laterality of the disease:"
+  },
+  "E09.33": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E09.33 to designate laterality of the disease:"
+  },
+  "E09.34": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E09.34 to designate laterality of the disease:"
+  },
+  "E09.35": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E09.35 to designate laterality of the disease:"
+  },
+  "E09.37": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to code E09.37 to designate laterality of the disease:"
+  },
+  "E10.32": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E10.32 to designate laterality of the disease:"
+  },
+  "E10.33": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E10.33 to designate laterality of the disease:"
+  },
+  "E10.34": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E10.34 to designate laterality of the disease:"
+  },
+  "E10.35": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E10.35 to designate laterality of the disease:"
+  },
+  "E10.37": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to code E10.37 to designate laterality of the disease:"
+  },
+  "E11.32": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E11.32 to designate laterality of the disease:"
+  },
+  "E11.33": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E11.33 to designate laterality of the disease:"
+  },
+  "E11.34": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E11.34 to designate laterality of the disease:"
+  },
+  "E11.35": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E11.35 to designate laterality of the disease:"
+  },
+  "E11.37": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to code E11.37 to designate laterality of the disease:"
+  },
+  "E13.32": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E13.32 to designate laterality of the disease:"
+  },
+  "E13.33": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E13.33 to designate laterality of the disease:"
+  },
+  "E13.34": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E13.34 to designate laterality of the disease:"
+  },
+  "E13.35": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory E13.35 to designate laterality of the disease:"
+  },
+  "E13.37": {
+   "chars": {
+    "1": "right eye",
+    "2": "left eye",
+    "3": "bilateral",
+    "9": "unspecified eye"
+   },
+   "note": "One of the following 7th characters is to be assigned to code E13.37 to designate laterality of the disease:"
+  },
+  "H34.81": {
+   "chars": {
+    "0": "with macular edema",
+    "1": "with retinal neovascularization",
+    "2": "stable"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory H34.81 to designate the severity of the occlusion:"
+  },
+  "H34.83": {
+   "chars": {
+    "0": "with macular edema",
+    "1": "with retinal neovascularization",
+    "2": "stable"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory H34.83 to designate the severity of the occlusion:"
+  },
+  "H35.31": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "early dry stage",
+    "2": "intermediate dry stage",
+    "3": "advanced atrophic without subfoveal involvement",
+    "4": "advanced atrophic with subfoveal involvement"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory H35.31 to designate the stage of the disease:"
+  },
+  "H35.32": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "with active choroidal neovascularization",
+    "2": "with inactive choroidal neovascularization",
+    "3": "with inactive scar"
+   },
+   "note": "One of the following 7th characters is to be assigned to codes in subcategory H35.32 to designate the stage of the disease:"
+  },
+  "H40.10": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to code H40.10 to designate the stage of glaucoma"
+  },
+  "H40.11": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code in subcategory H40.11 to designate the stage of glaucoma"
+  },
+  "H40.12": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code in subcategory H40.12 to designate the stage of glaucoma"
+  },
+  "H40.13": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code in subcategory H40.13 to designate the stage of glaucoma"
+  },
+  "H40.14": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code in subcategory H40.14 to designate the stage of glaucoma"
+  },
+  "H40.20": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to code H40.20 to designate the stage of glaucoma"
+  },
+  "H40.22": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code in subcategory H40.22 to designate the stage of glaucoma"
+  },
+  "H40.3": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code in subcategory H40.3 to designate the stage of glaucoma"
+  },
+  "H40.4": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code in subcategory H40.4 to designate the stage of glaucoma"
+  },
+  "H40.5": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code in subcategory H40.5 to designate the stage of glaucoma"
+  },
+  "H40.6": {
+   "chars": {
+    "0": "stage unspecified",
+    "1": "mild stage",
+    "2": "moderate stage",
+    "3": "severe stage",
+    "4": "indeterminate stage"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code in subcategory H40.6 to designate the stage of glaucoma"
+  },
+  "M1A": {
+   "chars": {
+    "0": "without tophus (tophi)",
+    "1": "with tophus (tophi)"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category M1A"
+  },
+  "M48.4": {
+   "chars": {
+    "A": "initial encounter for fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "S": "sequela of fracture"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategory M48.4:"
+  },
+  "M48.5": {
+   "chars": {
+    "A": "initial encounter for fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "S": "sequela of fracture"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategory M48.5:"
+  },
+  "M80": {
+   "chars": {
+    "A": "initial encounter for fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category M80:"
+  },
+  "M84.3": {
+   "chars": {
+    "A": "initial encounter for fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategory M84.3:"
+  },
+  "M84.4": {
+   "chars": {
+    "A": "initial encounter for fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategory M84.4:"
+  },
+  "M84.5": {
+   "chars": {
+    "A": "initial encounter for fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategory M84.5:"
+  },
+  "M84.6": {
+   "chars": {
+    "A": "initial encounter for fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategory M84.6:"
+  },
+  "M84.75": {
+   "chars": {
+    "A": "initial encounter for fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from M84.75:"
+  },
+  "M97": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category M97"
+  },
+  "O31": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under category O31. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from category O31 that has a 7th character of 1 through 9."
+  },
+  "O32": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under category O32. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from category O32 that has a 7th character of 1 through 9."
+  },
+  "O33.3": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to code O33.3. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning code O33.3 with a 7th character of 1 through 9."
+  },
+  "O33.4": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to code O33.4. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning code O33.4 with a 7th character of 1 through 9."
+  },
+  "O33.5": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to code O33.5. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning code O33.5 with a 7th character of 1 through 9."
+  },
+  "O33.6": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to code O33.6. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning code O33.6 with a 7th character of 1 through 9."
+  },
+  "O33.7": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to code O33.7. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning code O33.7 with a 7th character of 1 through 9."
+  },
+  "O35": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under category O35. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from category O35 that has a 7th character of 1 through 9."
+  },
+  "O36": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under category O36. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from category O36 that has a 7th character of 1 through 9."
+  },
+  "O40": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under category O40. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from category O40 that has a 7th character of 1 through 9."
+  },
+  "O41": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under category O41. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from category O41 that has a 7th character of 1 through 9."
+  },
+  "O60.1": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under subcategory O60.1. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from subcategory O60.1 that has a 7th character of 1 through 9."
+  },
+  "O60.2": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under subcategory O60.2. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from subcategory O60.2 that has a 7th character of 1 through 9."
+  },
+  "O64": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under category O64. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from category O64 that has a 7th character of 1 through 9."
+  },
+  "O69": {
+   "chars": {
+    "0": "not applicable or unspecified",
+    "1": "fetus 1",
+    "2": "fetus 2",
+    "3": "fetus 3",
+    "4": "fetus 4",
+    "5": "fetus 5",
+    "9": "other fetus"
+   },
+   "note": "One of the following 7th characters is to be assigned to each code under category O69. 7th character 0 is for single gestations and multiple gestations where the fetus is unspecified. 7th characters 1 through 9 are for cases of multiple gestations to identify the fetus for which the code applies. The appropriate code from category O30, Multiple gestation, must also be assigned when assigning a code from category O69 that has a 7th character of 1 through 9."
+  },
+  "R40.21": {
+   "chars": {
+    "0": "unspecified time",
+    "1": "in the field [EMT or ambulance]",
+    "2": "at arrival to emergency department",
+    "3": "at hospital admission",
+    "4": "24 hours or more after hospital admission"
+   },
+   "note": "The following appropriate 7th character is to be added to subcategory R40.21-:"
+  },
+  "R40.22": {
+   "chars": {
+    "0": "unspecified time",
+    "1": "in the field [EMT or ambulance]",
+    "2": "at arrival to emergency department",
+    "3": "at hospital admission",
+    "4": "24 hours or more after hospital admission"
+   },
+   "note": "The following appropriate 7th character is to be added to subcategory R40.22-:"
+  },
+  "R40.23": {
+   "chars": {
+    "0": "unspecified time",
+    "1": "in the field [EMT or ambulance]",
+    "2": "at arrival to emergency department",
+    "3": "at hospital admission",
+    "4": "24 hours or more after hospital admission"
+   },
+   "note": "The following appropriate 7th character is to be added to subcategory R40.23-:"
+  },
+  "R40.24": {
+   "chars": {
+    "0": "unspecified time",
+    "1": "in the field [EMT or ambulance]",
+    "2": "at arrival to emergency department",
+    "3": "at hospital admission",
+    "4": "24 hours or more after hospital admission"
+   },
+   "note": "The following appropriate 7th character is to be added to subcategory R40.24-:"
+  },
+  "S00": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S00"
+  },
+  "S01": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S01"
+  },
+  "S02": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S02"
+  },
+  "S03": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S03"
+  },
+  "S04": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S04"
+  },
+  "S05": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S05"
+  },
+  "S06": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S06, except as noted below"
+  },
+  "S07": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S07"
+  },
+  "S08": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S08"
+  },
+  "S09": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S09"
+  },
+  "S10": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S10"
+  },
+  "S11": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S11"
+  },
+  "S12": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes from subcategories S12.0-S12.6"
+  },
+  "S12.8": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code S12.8"
+  },
+  "S12.9": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code S12.9"
+  },
+  "S13": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S13"
+  },
+  "S14": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S14"
+  },
+  "S15": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S15"
+  },
+  "S16": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S16"
+  },
+  "S17": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S17"
+  },
+  "S19": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S19"
+  },
+  "S20": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S20"
+  },
+  "S21": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S21"
+  },
+  "S22": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S22"
+  },
+  "S23": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S23"
+  },
+  "S24": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S24"
+  },
+  "S25": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S25"
+  },
+  "S26": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S26"
+  },
+  "S27": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S27"
+  },
+  "S28": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S28"
+  },
+  "S29": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S29"
+  },
+  "S30": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S30"
+  },
+  "S31": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S31"
+  },
+  "S32": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S32"
+  },
+  "S33": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S33"
+  },
+  "S34": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S34"
+  },
+  "S35": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S35"
+  },
+  "S36": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S36"
+  },
+  "S37": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S37"
+  },
+  "S38": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S38"
+  },
+  "S39": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S39"
+  },
+  "S40": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S40"
+  },
+  "S41": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S41"
+  },
+  "S42": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes from category S42"
+  },
+  "S42.27": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S42.27"
+  },
+  "S42.31": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S42.31"
+  },
+  "S42.48": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S42.48"
+  },
+  "S43": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S43"
+  },
+  "S44": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S44"
+  },
+  "S45": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S45"
+  },
+  "S46": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S46"
+  },
+  "S47": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S47"
+  },
+  "S48": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S48"
+  },
+  "S49": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategories S49.0 and S49.1"
+  },
+  "S49.8": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code in subcategory S49.8"
+  },
+  "S49.9": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code in subcategory S49.9"
+  },
+  "S50": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S50"
+  },
+  "S51": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S51"
+  },
+  "S52": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture type I or II",
+    "C": "initial encounter for open fracture type IIIA, IIIB, or IIIC",
+    "D": "subsequent encounter for closed fracture with routine healing",
+    "E": "subsequent encounter for open fracture type I or II with routine healing",
+    "F": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with routine healing",
+    "G": "subsequent encounter for closed fracture with delayed healing",
+    "H": "subsequent encounter for open fracture type I or II with delayed healing",
+    "J": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with delayed healing",
+    "K": "subsequent encounter for closed fracture with nonunion",
+    "M": "subsequent encounter for open fracture type I or II with nonunion",
+    "N": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with nonunion",
+    "P": "subsequent encounter for closed fracture with malunion",
+    "Q": "subsequent encounter for open fracture type I or II with malunion",
+    "R": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes from category S52"
+  },
+  "S52.01": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S52.01"
+  },
+  "S52.11": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S52.11"
+  },
+  "S52.21": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S52.21"
+  },
+  "S52.31": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S52.31"
+  },
+  "S52.52": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S52.52"
+  },
+  "S52.62": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S52.62"
+  },
+  "S53": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S53"
+  },
+  "S54": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S54"
+  },
+  "S55": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S55"
+  },
+  "S56": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S56"
+  },
+  "S57": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S57"
+  },
+  "S58": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S58"
+  },
+  "S59": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategories S59.0, S59.1, and S59.2"
+  },
+  "S59.8": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code in subcategory S59.8"
+  },
+  "S59.9": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code in subcategory S59.9"
+  },
+  "S60": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S60"
+  },
+  "S61": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S61"
+  },
+  "S62": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S62"
+  },
+  "S63": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S63"
+  },
+  "S64": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S64"
+  },
+  "S65": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S65"
+  },
+  "S66": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S66"
+  },
+  "S67": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S67"
+  },
+  "S68": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S68"
+  },
+  "S69": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S69"
+  },
+  "S70": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S70"
+  },
+  "S71": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S71"
+  },
+  "S72": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture type I or II",
+    "C": "initial encounter for open fracture type IIIA, IIIB, or IIIC",
+    "D": "subsequent encounter for closed fracture with routine healing",
+    "E": "subsequent encounter for open fracture type I or II with routine healing",
+    "F": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with routine healing",
+    "G": "subsequent encounter for closed fracture with delayed healing",
+    "H": "subsequent encounter for open fracture type I or II with delayed healing",
+    "J": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with delayed healing",
+    "K": "subsequent encounter for closed fracture with nonunion",
+    "M": "subsequent encounter for open fracture type I or II with nonunion",
+    "N": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with nonunion",
+    "P": "subsequent encounter for closed fracture with malunion",
+    "Q": "subsequent encounter for open fracture type I or II with malunion",
+    "R": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes from category S72"
+  },
+  "S72.47": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S72.47"
+  },
+  "S73": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S73"
+  },
+  "S74": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S74"
+  },
+  "S75": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S75"
+  },
+  "S76": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S76"
+  },
+  "S77": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S77"
+  },
+  "S78": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S78"
+  },
+  "S79": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategories S79.0 and S79.1"
+  },
+  "S79.8": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code in subcategory S79.8"
+  },
+  "S79.9": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code in subcategory S79.9"
+  },
+  "S80": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S80"
+  },
+  "S81": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S81"
+  },
+  "S82": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture type I or II",
+    "C": "initial encounter for open fracture type IIIA, IIIB, or IIIC",
+    "D": "subsequent encounter for closed fracture with routine healing",
+    "E": "subsequent encounter for open fracture type I or II with routine healing",
+    "F": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with routine healing",
+    "G": "subsequent encounter for closed fracture with delayed healing",
+    "H": "subsequent encounter for open fracture type I or II with delayed healing",
+    "J": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with delayed healing",
+    "K": "subsequent encounter for closed fracture with nonunion",
+    "M": "subsequent encounter for open fracture type I or II with nonunion",
+    "N": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with nonunion",
+    "P": "subsequent encounter for closed fracture with malunion",
+    "Q": "subsequent encounter for open fracture type I or II with malunion",
+    "R": "subsequent encounter for open fracture type IIIA, IIIB, or IIIC with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes from category S82"
+  },
+  "S82.16": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S82.16"
+  },
+  "S82.31": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S82.31"
+  },
+  "S82.81": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S82.81"
+  },
+  "S82.82": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to all codes in subcategory S82.82"
+  },
+  "S83": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S83"
+  },
+  "S84": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S84"
+  },
+  "S85": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S85"
+  },
+  "S86": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S86"
+  },
+  "S87": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S87"
+  },
+  "S88": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S88"
+  },
+  "S89": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategories S89.0, S89.1, S89.2, and S89.3"
+  },
+  "S89.8": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code in subcategory S89.8"
+  },
+  "S89.9": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code in subcategory S89.9"
+  },
+  "S90": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S90"
+  },
+  "S91": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S91"
+  },
+  "S92": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S92"
+  },
+  "S93": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S93"
+  },
+  "S94": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S94"
+  },
+  "S95": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S95"
+  },
+  "S96": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S96"
+  },
+  "S97": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S97"
+  },
+  "S98": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category S98"
+  },
+  "S99.0": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategories S99.0"
+  },
+  "S99.1": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategories S99.1"
+  },
+  "S99.2": {
+   "chars": {
+    "A": "initial encounter for closed fracture",
+    "B": "initial encounter for open fracture",
+    "D": "subsequent encounter for fracture with routine healing",
+    "G": "subsequent encounter for fracture with delayed healing",
+    "K": "subsequent encounter for fracture with nonunion",
+    "P": "subsequent encounter for fracture with malunion",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategories S99.2"
+  },
+  "S99.8": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategory S99.8"
+  },
+  "S99.9": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from subcategory S99.9"
+  },
+  "T07": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code T07"
+  },
+  "T14": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T14"
+  },
+  "T15": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T15"
+  },
+  "T16": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T16"
+  },
+  "T17": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T17"
+  },
+  "T18": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T18"
+  },
+  "T19": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T19"
+  },
+  "T20": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T20"
+  },
+  "T21": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T21"
+  },
+  "T22": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T22"
+  },
+  "T23": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T23"
+  },
+  "T24": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T24"
+  },
+  "T25": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T25"
+  },
+  "T26": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T26"
+  },
+  "T27": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T27"
+  },
+  "T28": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T28"
+  },
+  "T33": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T33"
+  },
+  "T34": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T34"
+  },
+  "T36": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T36"
+  },
+  "T37": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T37"
+  },
+  "T38": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T38"
+  },
+  "T39": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T39"
+  },
+  "T40": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T40"
+  },
+  "T41": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T41"
+  },
+  "T42": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T42"
+  },
+  "T43": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T43"
+  },
+  "T44": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T44"
+  },
+  "T45": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T45"
+  },
+  "T46": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T46"
+  },
+  "T47": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T47"
+  },
+  "T48": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T48"
+  },
+  "T49": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T49"
+  },
+  "T50": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T50"
+  },
+  "T51": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T51"
+  },
+  "T52": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T52"
+  },
+  "T53": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T53"
+  },
+  "T54": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T54"
+  },
+  "T55": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T55"
+  },
+  "T56": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T56"
+  },
+  "T57": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T57"
+  },
+  "T58": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T58"
+  },
+  "T59": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T59"
+  },
+  "T60": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T60"
+  },
+  "T61": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T61"
+  },
+  "T62": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T62"
+  },
+  "T63": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T63"
+  },
+  "T64": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T64"
+  },
+  "T65": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T65"
+  },
+  "T66": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code T66"
+  },
+  "T67": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T67"
+  },
+  "T68": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code T68"
+  },
+  "T69": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T69"
+  },
+  "T70": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T70"
+  },
+  "T71": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T71"
+  },
+  "T73": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T73"
+  },
+  "T74": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T74"
+  },
+  "T75": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T75"
+  },
+  "T76": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T76"
+  },
+  "T78": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T78"
+  },
+  "T79": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T79"
+  },
+  "T80": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T80"
+  },
+  "T81": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T81"
+  },
+  "T82": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T82"
+  },
+  "T83": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T83"
+  },
+  "T84": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T84"
+  },
+  "T85": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T85"
+  },
+  "T88": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category T88"
+  },
+  "V00": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V00"
+  },
+  "V01": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V01"
+  },
+  "V02": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V02"
+  },
+  "V03": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V03"
+  },
+  "V04": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V04"
+  },
+  "V05": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V05"
+  },
+  "V06": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V06"
+  },
+  "V09": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V09"
+  },
+  "V10": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V10"
+  },
+  "V11": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V11"
+  },
+  "V12": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V12"
+  },
+  "V13": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V13"
+  },
+  "V14": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V14"
+  },
+  "V15": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V15"
+  },
+  "V16": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V16"
+  },
+  "V17": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V17"
+  },
+  "V18": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V18"
+  },
+  "V19": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V19"
+  },
+  "V20": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V20"
+  },
+  "V21": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V21"
+  },
+  "V22": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V22"
+  },
+  "V23": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V23"
+  },
+  "V24": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V24"
+  },
+  "V25": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V25"
+  },
+  "V26": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V26"
+  },
+  "V27": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V27"
+  },
+  "V28": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V28"
+  },
+  "V29": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V29"
+  },
+  "V30": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V30"
+  },
+  "V31": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V31"
+  },
+  "V32": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V32"
+  },
+  "V33": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V33"
+  },
+  "V34": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V34"
+  },
+  "V35": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V35"
+  },
+  "V36": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V36"
+  },
+  "V37": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V37"
+  },
+  "V38": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V38"
+  },
+  "V39": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V39"
+  },
+  "V40": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V40"
+  },
+  "V41": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V41"
+  },
+  "V42": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V42"
+  },
+  "V43": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V43"
+  },
+  "V44": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V44"
+  },
+  "V45": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V45"
+  },
+  "V46": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V46"
+  },
+  "V47": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V47"
+  },
+  "V48": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V48"
+  },
+  "V49": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V49"
+  },
+  "V50": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V50"
+  },
+  "V51": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V51"
+  },
+  "V52": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V52"
+  },
+  "V53": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V53"
+  },
+  "V54": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V54"
+  },
+  "V55": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V55"
+  },
+  "V56": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V56"
+  },
+  "V57": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V57"
+  },
+  "V58": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V58"
+  },
+  "V59": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V59"
+  },
+  "V60": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V60"
+  },
+  "V61": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V61"
+  },
+  "V62": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V62"
+  },
+  "V63": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V63"
+  },
+  "V64": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V64"
+  },
+  "V65": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V65"
+  },
+  "V66": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V66"
+  },
+  "V67": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V67"
+  },
+  "V68": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V68"
+  },
+  "V69": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V69"
+  },
+  "V70": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V70"
+  },
+  "V71": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V71"
+  },
+  "V72": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V72"
+  },
+  "V73": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V73"
+  },
+  "V74": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V74"
+  },
+  "V75": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V75"
+  },
+  "V76": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V76"
+  },
+  "V77": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V77"
+  },
+  "V78": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V78"
+  },
+  "V79": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V79"
+  },
+  "V80": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V80"
+  },
+  "V81": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V81"
+  },
+  "V82": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V82"
+  },
+  "V83": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V83"
+  },
+  "V84": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V84"
+  },
+  "V85": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V85"
+  },
+  "V86": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V86"
+  },
+  "V87": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V87"
+  },
+  "V88": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V88"
+  },
+  "V89": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V89"
+  },
+  "V90": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V90"
+  },
+  "V91": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V91"
+  },
+  "V92": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V92"
+  },
+  "V93": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V93"
+  },
+  "V94": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V94"
+  },
+  "V95": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V95"
+  },
+  "V96": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V96"
+  },
+  "V97": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V97"
+  },
+  "V98": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category V98"
+  },
+  "V99": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code V99"
+  },
+  "W00": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W00"
+  },
+  "W01": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W01"
+  },
+  "W03": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W03"
+  },
+  "W04": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W04"
+  },
+  "W05": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W05"
+  },
+  "W06": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W06"
+  },
+  "W07": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W07"
+  },
+  "W08": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W08"
+  },
+  "W09": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W09"
+  },
+  "W10": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W10"
+  },
+  "W11": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W11"
+  },
+  "W12": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W12"
+  },
+  "W13": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W13"
+  },
+  "W14": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W14"
+  },
+  "W15": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W15"
+  },
+  "W16": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W16"
+  },
+  "W17": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W17"
+  },
+  "W18": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W18"
+  },
+  "W19": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W19"
+  },
+  "W20": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W20"
+  },
+  "W21": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W21"
+  },
+  "W22": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W22"
+  },
+  "W23": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W23"
+  },
+  "W24": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W24"
+  },
+  "W25": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W25"
+  },
+  "W26": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W26"
+  },
+  "W27": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W27"
+  },
+  "W28": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W28"
+  },
+  "W29": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W29"
+  },
+  "W30": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W30"
+  },
+  "W31": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W31"
+  },
+  "W32": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W32"
+  },
+  "W33": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W33"
+  },
+  "W34": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W34"
+  },
+  "W35": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W35"
+  },
+  "W36": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W36"
+  },
+  "W37": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W37"
+  },
+  "W38": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W38"
+  },
+  "W39": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W39"
+  },
+  "W40": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W40"
+  },
+  "W42": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W42"
+  },
+  "W44": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W44"
+  },
+  "W45": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W45"
+  },
+  "W46": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W46"
+  },
+  "W49": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W49"
+  },
+  "W50": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W50"
+  },
+  "W51": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W51"
+  },
+  "W52": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W52"
+  },
+  "W53": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W53"
+  },
+  "W54": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W54"
+  },
+  "W55": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W55"
+  },
+  "W56": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W56"
+  },
+  "W57": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W57"
+  },
+  "W58": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W58"
+  },
+  "W59": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W59"
+  },
+  "W60": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W60"
+  },
+  "W61": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W61"
+  },
+  "W62": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W62"
+  },
+  "W64": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W64"
+  },
+  "W65": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W65"
+  },
+  "W67": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W67"
+  },
+  "W69": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W69"
+  },
+  "W73": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W73"
+  },
+  "W74": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W74"
+  },
+  "W85": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W85"
+  },
+  "W86": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W86"
+  },
+  "W88": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W88"
+  },
+  "W89": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W89"
+  },
+  "W90": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W90"
+  },
+  "W92": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W92"
+  },
+  "W93": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W93"
+  },
+  "W94": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category W94"
+  },
+  "W99": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code W99"
+  },
+  "X00": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X00"
+  },
+  "X01": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X01"
+  },
+  "X02": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X02"
+  },
+  "X03": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X03"
+  },
+  "X04": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X04"
+  },
+  "X05": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X05"
+  },
+  "X06": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X06"
+  },
+  "X08": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X08"
+  },
+  "X10": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X10"
+  },
+  "X11": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X11"
+  },
+  "X12": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X12"
+  },
+  "X13": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X13"
+  },
+  "X14": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X14"
+  },
+  "X15": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X15"
+  },
+  "X16": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X16"
+  },
+  "X17": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X17"
+  },
+  "X18": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X18"
+  },
+  "X19": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X19"
+  },
+  "X30": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X30"
+  },
+  "X31": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X31"
+  },
+  "X32": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X32"
+  },
+  "X34": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X34"
+  },
+  "X35": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X35"
+  },
+  "X36": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X36"
+  },
+  "X37": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X37"
+  },
+  "X38": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X38"
+  },
+  "X39": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X39"
+  },
+  "X50": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X50"
+  },
+  "X52": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X52"
+  },
+  "X58": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X58"
+  },
+  "X71": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X71"
+  },
+  "X72": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X72"
+  },
+  "X73": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X73"
+  },
+  "X74": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X74"
+  },
+  "X75": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X75"
+  },
+  "X76": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X76"
+  },
+  "X77": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X77"
+  },
+  "X78": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X78"
+  },
+  "X79": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X79"
+  },
+  "X80": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X80"
+  },
+  "X81": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X81"
+  },
+  "X82": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X82"
+  },
+  "X83": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X83"
+  },
+  "X92": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X92"
+  },
+  "X93": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X93"
+  },
+  "X94": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X94"
+  },
+  "X95": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X95"
+  },
+  "X96": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X96"
+  },
+  "X97": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code X97"
+  },
+  "X98": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X98"
+  },
+  "X99": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category X99"
+  },
+  "Y00": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y00"
+  },
+  "Y01": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y01"
+  },
+  "Y02": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y02"
+  },
+  "Y03": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y03"
+  },
+  "Y04": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y04"
+  },
+  "Y08": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y08"
+  },
+  "Y21": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y21"
+  },
+  "Y22": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y22"
+  },
+  "Y23": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y23"
+  },
+  "Y24": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y24"
+  },
+  "Y25": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y25"
+  },
+  "Y26": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y26"
+  },
+  "Y27": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y27"
+  },
+  "Y28": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y28"
+  },
+  "Y29": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y29"
+  },
+  "Y30": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y30"
+  },
+  "Y31": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y31"
+  },
+  "Y32": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y32"
+  },
+  "Y33": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to code Y33"
+  },
+  "Y35": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y35"
+  },
+  "Y36": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y36"
+  },
+  "Y37": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y37"
+  },
+  "Y38": {
+   "chars": {
+    "A": "initial encounter",
+    "D": "subsequent encounter",
+    "S": "sequela"
+   },
+   "note": "The appropriate 7th character is to be added to each code from category Y38"
+  }
+ }
+}

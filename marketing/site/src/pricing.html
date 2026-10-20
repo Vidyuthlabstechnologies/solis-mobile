@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOLIS pricing: one flat price per clinician</title>
+<meta name="description" content="Planned SOLIS pricing. Solo and Practice plans per clinician, on-device notes without limits, claims and eligibility included up to a cap. Pilot practices pay nothing during the pilot.">
+<link rel="canonical" href="{{SITE}}/pricing">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SOLIS">
+<meta property="og:title" content="SOLIS pricing">
+<meta property="og:description" content="One flat price per clinician. Note, codes, checks and the claim. Billing opens with general availability; join the pilot now.">
+<meta property="og:url" content="{{SITE}}/pricing">
+<meta property="og:image" content="{{SITE}}/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<x-header active="pricing"></x-header>
+<main id="main">
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Pricing</span>
+      <h1>One flat price per clinician.</h1>
+      <p class="lead">Not a share of your collections. The note, the codes, the checks and the claim, for a fixed monthly price. Front-desk and billing staff are free.</p>
+      <div class="notice"><x-icon id="info"></x-icon><span><b>Billing opens with general availability.</b> These are the planned launch prices. Pilot practices pay nothing during the pilot, then get 50% off the first 12 months.</span></div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="plans-h">
+    <div class="container">
+      <h2 id="plans-h" class="sr-only">Plans</h2>
+      <div class="billing-toggle" role="group" aria-label="Billing period">
+        <button type="button" data-period="annual" aria-pressed="true">Annual<span class="save">save about 13%</span></button>
+        <button type="button" data-period="monthly" aria-pressed="false">Monthly</button>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <h3>Solo</h3>
+          <p class="who">One clinician who does their own billing.</p>
+          <div class="price"><b data-annual>$129</b><b data-monthly>$149</b><span>per clinician / month</span></div>
+          <p class="price-alt"><span data-annual>Billed annually. $149 if billed monthly.</span><span data-monthly>Billed monthly. $129 a month if billed annually.</span></p>
+          <a class="btn btn-primary" href="index.html#access">Request early access</a>
+          <ul class="plan-list">
+            <li><x-icon id="check"></x-icon><span><strong>Unlimited notes</strong> with on-device capture. Audio stays on the phone.</span></li>
+            <li><x-icon id="check"></x-icon><span>Diagnosis and procedure codes, claim checks with Why, official coding notes.</span></li>
+            <li><x-icon id="check"></x-icon><span>Card scanning, one account per patient, visits by date, orders list.</span></li>
+            <li><x-icon id="check"></x-icon><span><strong>200 claim visits a month</strong>: eligibility, the 837P claim and its status. $0.45 per extra claim visit.</span></li>
+            <li><x-icon id="check"></x-icon><span>Unlimited CMS-1500 data and 837P export.</span></li>
+            <li><x-icon id="check"></x-icon><span>Cloud transcription as an add-on: $39 per 2,000 minutes.</span></li>
+            <li><x-icon id="check"></x-icon><span>BAA click-through. Email support.</span></li>
+          </ul>
+        </article>
+        <article class="plan featured">
+          <span class="plan-tag">For practices</span>
+          <h3>Practice</h3>
+          <p class="who">2 to 20 clinicians sharing a front desk.</p>
+          <div class="price"><b data-annual>$299</b><b data-monthly>$349</b><span>per clinician / month</span></div>
+          <p class="price-alt"><span data-annual>Billed annually. $349 if billed monthly.</span><span data-monthly>Billed monthly. $299 a month if billed annually.</span></p>
+          <a class="btn btn-primary" href="index.html#access">Start a pilot</a>
+          <ul class="plan-list">
+            <li><x-icon id="check"></x-icon><span>Everything in Solo.</span></li>
+            <li><x-icon id="check"></x-icon><span><strong>450 claim visits per clinician a month</strong>, pooled across the practice. $0.40 per extra claim visit.</span></li>
+            <li><x-icon id="check"></x-icon><span><strong>3,000 cloud minutes per clinician a month</strong>, pooled: the Deepgram medical model with speaker separation.</span></li>
+            <li><x-icon id="check"></x-icon><span>Unlimited front-desk and billing seats.</span></li>
+            <li><x-icon id="check"></x-icon><span>Practice admin: seats, plan and invoices.</span></li>
+            <li><x-icon id="check"></x-icon><span>BAA click-through. Priority email and an onboarding call.</span></li>
+          </ul>
+        </article>
+        <article class="plan">
+          <h3>Enterprise</h3>
+          <p class="who">20+ clinicians, groups, EMS and nursing-home rounding.</p>
+          <div class="price"><b>Custom</b></div>
+          <p class="price-alt">Volume pricing on claims and cloud minutes.</p>
+          <a class="btn btn-secondary" href="index.html#access">Talk to us</a>
+          <ul class="plan-list">
+            <li><x-icon id="check"></x-icon><span>Everything in Practice.</span></li>
+            <li><x-icon id="check"></x-icon><span>Volume claim visits and cloud minutes.</span></li>
+            <li><x-icon id="check"></x-icon><span>Negotiated BAA and a security review packet.</span></li>
+            <li><x-icon id="check"></x-icon><span>A named contact for rollout across sites.</span></li>
+          </ul>
+        </article>
+      </div>
+      <p class="fine">A claim visit is one date of service: the eligibility check, the claim and its status checks, sent through the Stedi clearinghouse. Test-mode claims are free and unlimited. Prices are in US dollars, per clinician (MD, DO, NP, PA), before any sales tax. Some payers add their own transaction fees; those are passed through at cost.</p>
+    </div>
+  </section>
+
+  <section class="section-tight section-soft" aria-labelledby="pilot-h">
+    <div class="container two-col">
+      <div>
+        <span class="eyebrow">Pilot and trial</span>
+        <h2 id="pilot-h" style="font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-0.03em;line-height:1.08">Try every screen before a real visit.</h2>
+        <p class="lead" style="margin-top:18px">SOLIS is in its pilot stage on Android. Pilot practices use it free, with demo patients and test-mode claims, while the paperwork for real patient data is completed.</p>
+        <p style="margin-top:24px"><a class="btn btn-primary" href="index.html#access">Join the pilot <x-icon id="arrow-right" class="icon-sm"></x-icon></a> <a class="btn btn-secondary" href="get-started.html">See how to get started</a></p>
+      </div>
+      <dl class="kv">
+        <dt>During the pilot</dt><dd>No charge. Demo account, the sample card and unlimited test-mode claims.</dd>
+        <dt>After the pilot</dt><dd>50% off the first 12 months, and the launch price kept for 24 months.</dd>
+        <dt>Free trial at launch</dt><dd>14 days, no card. Real claims start when you choose a plan.</dd>
+        <dt>How you pay</dt><dd>On this website, by card or bank transfer (ACH). The app has no in-app purchases.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="included-h">
+    <div class="container">
+      <h2 id="included-h" style="font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:-0.025em;margin-bottom:24px">What is included</h2>
+      <div class="table-scroll">
+        <table class="include-table">
+          <thead><tr><th scope="col">Feature</th><th scope="col">Solo</th><th scope="col">Practice</th><th scope="col">Enterprise</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">On-device capture and speaker separation</th><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
+            <tr><th scope="row">Note writing (on-device engine or Claude)</th><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
+            <tr><th scope="row">Cloud transcription (Deepgram medical model)</th><td>Add-on</td><td>3,000 min / clinician, pooled</td><td>Volume</td></tr>
+            <tr><th scope="row">Codes, claim checks, Why, coding notes</th><td>Included</td><td>Included</td><td>Included</td></tr>
+            <tr><th scope="row">Claim visits through Stedi</th><td>200 / month</td><td>450 / clinician, pooled</td><td>Volume</td></tr>
+            <tr><th scope="row">CMS-1500 data and 837P export</th><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
+            <tr><th scope="row">Staff seats</th><td>Free</td><td>Free</td><td>Free</td></tr>
+            <tr><th scope="row">Business Associate Agreement</th><td>Click-through</td><td>Click-through</td><td>Negotiated</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-soft" aria-labelledby="faq-h">
+    <div class="container" style="max-width:860px">
+      <h2 id="faq-h" style="font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:-0.025em;margin-bottom:24px">Questions</h2>
+      <div class="faq">
+        <details><summary>Can I pay now?<x-icon id="chevron-down"></x-icon></summary><div><p>Not yet. Billing opens with general availability. Until then SOLIS runs as a pilot: request early access and we reply by email.</p></div></details>
+        <details><summary>Why a flat price instead of a percentage of collections?<x-icon id="chevron-down"></x-icon></summary><div><p>SOLIS writes the note, codes the visit, checks the claim and sends it. It does not work your denials or appeals, so a share of your revenue would not be fair. You pay per clinician, and you know the number in advance.</p></div></details>
+        <details><summary>What happens if we go over the included claim visits?<x-icon id="chevron-down"></x-icon></summary><div><p>Extra claim visits are $0.45 each on Solo and $0.40 on Practice, added to the next invoice. You can also export claims as CMS-1500 data or 837P for your own billing system at no charge.</p></div></details>
+        <details><summary>Does on-device mode cost extra?<x-icon id="chevron-down"></x-icon></summary><div><p>No. On-device capture and notes are included without limits on every plan. The audio stays on the phone and works offline after a one-time download of about 150 MB.</p></div></details>
+        <details><summary>Why is there no in-app purchase?<x-icon id="chevron-down"></x-icon></summary><div><p>SOLIS is sold to practices. The practice signs up and pays on this website; the app only signs in. That keeps billing in one place for the practice manager.</p></div></details>
+        <details><summary>Is there a Business Associate Agreement?<x-icon id="chevron-down"></x-icon></summary><div><p>Yes. A BAA template is available for practices. See <a href="security.html">Security and compliance</a> for what is in place today and what is in progress.</p></div></details>
+        <details><summary>Is SOLIS on iPhone?<x-icon id="chevron-down"></x-icon></summary><div><p>Not yet. SOLIS 1.0 is an Android app (Android 8 and later). iOS is not yet released.</p></div></details>
+        <details><summary>Are CPT descriptions included?<x-icon id="chevron-down"></x-icon></summary><div><p>CPT descriptions require an AMA license. The app shows short paraphrases, not AMA descriptors, and 4 of the 63 official coding rules that need the CPT license are not in the app yet.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="cta-h">
+    <div class="container" style="text-align:center">
+      <h2 id="cta-h" style="font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-0.03em">Join the pilot.</h2>
+      <p class="lead" style="margin:14px auto 26px;max-width:46ch">Tell us about your practice. We reply by email with the demo account, the BAA template and the pilot details.</p>
+      <a class="btn btn-primary" href="index.html#access">Request early access <x-icon id="arrow-right" class="icon-sm"></x-icon></a>
+    </div>
+  </section>
+</main>
+<x-footer></x-footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

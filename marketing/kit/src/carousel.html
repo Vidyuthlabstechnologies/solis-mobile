@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SOLIS carousel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { width: 1080px; height: 1350px; overflow: hidden; font-family: Inter, sans-serif; }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 84px 84px 72px; display: flex; flex-direction: column; background: #fff8fd; color: #0f172a; overflow: hidden; }
+  .slide.dark { background: radial-gradient(900px 600px at 85% 10%, rgba(152,15,134,.35), transparent 65%), #0b0e14; color: #eef1f6; }
+  .slide.deep { background: #4e0044; color: #fff; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand img.mark { width: 56px; height: 56px; }
+  .brand img.word { height: 60px; }
+  .count { font-size: 26px; font-weight: 600; opacity: .6; }
+  .eyebrow { margin-top: 64px; font-size: 26px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #980f86; }
+  .dark .eyebrow { color: #e5a3e8; } .deep .eyebrow { color: #f6c4ec; }
+  h1 { font-family: Manrope, Inter, sans-serif; font-weight: 800; font-size: 84px; line-height: 1.0; letter-spacing: -0.04em; margin: 18px 0 0; max-width: 900px; }
+  h1 span { color: #980f86; } .dark h1 span { color: #e5a3e8; } .deep h1 span { color: #f6c4ec; }
+  p.sub { font-size: 32px; line-height: 1.4; margin: 30px 0 0; max-width: 500px; color: #334155; }
+  .dark p.sub { color: #c5ccd8; } .deep p.sub { color: #fde2f6; }
+  .phone { position: absolute; width: 470px; padding: 12px; border-radius: 74px; background: linear-gradient(160deg,#2b3242,#0b0f17 40%,#151a24); box-shadow: 0 40px 90px -30px rgba(15,23,42,.6), inset 0 0 0 2px #3a4356; }
+  .phone img { display: block; width: 100%; border-radius: 62px; }
+  .phone.r { right: -30px; bottom: -190px; transform: rotate(-4deg); }
+  .phone.c { left: 50%; bottom: -380px; transform: translateX(-50%); }
+  .quote { font-size: 34px; font-style: italic; color: #4e0044; margin-top: 34px; max-width: 470px; line-height: 1.35; }
+  .dark .quote { color: #f1caf3; }
+  .note { position: absolute; left: 84px; bottom: 72px; font-size: 22px; opacity: .65; max-width: 420px; line-height: 1.4; }
+  .cta { margin-top: 44px; display: inline-flex; align-self: flex-start; padding: 24px 40px; border-radius: 999px; background: #fff; color: #4e0044; font-weight: 700; font-size: 34px; }
+  .url { margin-top: 22px; font-size: 30px; font-weight: 600; color: #fde2f6; }
+  .list { margin-top: 40px; display: grid; gap: 20px; font-size: 31px; max-width: 480px; }
+  .list div { padding-left: 34px; position: relative; line-height: 1.35; }
+  .list div::before { content: ""; position: absolute; left: 0; top: .62em; width: 18px; height: 4px; border-radius: 2px; background: currentColor; opacity: .7; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const S = new URLSearchParams(location.search).get("s") || "1";
+const shot = (n) => `../../../screenshots/out/${n}.png`;
+const brand = (dark) => `<div class="brand"><img class="word" src="../../../assets/brand/${dark ? "solis_wordmark_dark.svg" : "solis_wordmark.svg"}" alt="SOLIS"></div>`;
+const hdr = (n, dark) => `<div class="top">${brand(dark)}<span class="count">${n} / 5</span></div>`;
+const slides = {
+  "1": `<section class="slide">${hdr(1)}<div class="eyebrow">For physicians and small practices</div>
+    <h1>Look at your patient. <span>SOLIS writes the note.</span></h1>
+    <p class="sub">It listens to the visit, writes the note, and builds a clean claim, on your phone.</p>
+    <div class="phone r"><img src="${shot("08_note")}" alt=""></div>
+    <div class="note">Real screens, fictional demo patient.</div></section>`,
+  "2": `<section class="slide">${hdr(2)}<div class="eyebrow">Consent first</div>
+    <h1>Before anything is recorded, <span>the patient agrees.</span></h1>
+    <div class="list"><div>Short script in English or Spanish</div><div>Agree out loud, or sign on the phone</div><div>Time and location saved with the visit</div></div>
+    <div class="phone r"><img src="${shot("16_consent")}" alt=""></div></section>`,
+  "3": `<section class="slide dark">${hdr(3, true)}<div class="eyebrow">Coding</div>
+    <h1>Codes from the patient's <span>own words.</span></h1>
+    <div class="quote">"My feet burn at night" stays a symptom until you confirm a diagnosis.</div>
+    <p class="sub" style="max-width:480px;font-size:30px">Official outpatient rule IV.H. Every diagnosis links to the words it came from.</p>
+    <div class="phone r"><img src="${shot("09_claim_uncertain")}" alt=""></div></section>`,
+  "4": `<section class="slide">${hdr(4)}<div class="eyebrow">Claim checks</div>
+    <h1>Every check <span>explains itself.</span></h1>
+    <p class="sub" style="max-width:500px">Tap Why: the rule in plain English, its official citation and the guideline text. 59 of 63 official coding rules enforced. Works offline.</p>
+    <div class="phone r"><img src="${shot("19_claim_why")}" alt=""></div>
+    <div class="note">The other 4 rules need the AMA CPT license and are not in the app.</div></section>`,
+  "5": `<section class="slide deep">${hdr(5, true)}<div class="eyebrow">Android pilot, version 1.0</div>
+    <h1>Your practice decides <span>where the audio goes.</span></h1>
+    <div class="list"><div>On-device mode: audio stays on the phone</div><div>Eligibility and claims through Stedi</div><div>Built for HIPAA workflows. BAA available.</div></div>
+    <div class="cta">Join the pilot</div><div class="url">solis-health.pages.dev</div>
+    <div class="phone r" style="width:400px;right:-20px;bottom:-250px"><img src="${shot("07_recording")}" alt=""></div></section>`
+};
+document.getElementById("root").innerHTML = slides[S];
+</script>
+</body>
+</html>

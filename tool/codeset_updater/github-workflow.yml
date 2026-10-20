@@ -1,0 +1,97 @@
+# Template: copy to .github/workflows/codeset-update.yml once the repository is on GitHub.
+#
+# Weekly (and on demand) build, validate, sign and publish of the SOLIS code
+# sets. The daily release detection runs in the solis-codesets-worker Cron
+# Trigger; this job asks it what is pending and exits quickly when nothing is.
+#
+# Repository secrets:
+#   CODESET_SIGNING_KEY    contents of secrets/codeset_signing_ed25519.pem (PEM text)
+#   CLOUDFLARE_API_TOKEN   token with "Workers R2 Storage: Edit" on the account
+#   CLOUDFLARE_ACCOUNT_ID  Cloudflare account id
+#
+# A gate failure exits with code 2: the run fails, GitHub notifies, and the
+# report is attached as an artifact. Re-run with "allow" set to accept a
+# reviewed gate (for example change:pfs_rvu.tsv.gz).
+
+name: codeset-update
+
+on:
+  schedule:
+    - cron: "41 7 * * 2"   # Tuesdays 07:41 UTC (CMS posts quarterly files late in the prior month)
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Publish even if nothing is pending"
+        type: boolean
+        default: false
+      allow:
+        description: "Space-separated gate ids to accept after review"
+        type: string
+        default: ""
+
+concurrency:
+  group: codeset-update
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Python dependencies
+        run: pip install "pymupdf==1.27.*" "cryptography>=44"
+
+      - name: Cache CMS downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/solis_codesets
+          key: cms-downloads-${{ github.run_id }}
+          restore-keys: cms-downloads-
+
+      - name: Unit tests
+        run: python -P tool/codeset_updater/test_update.py
+
+      - name: Build, validate, sign, publish
+        env:
+          CODESET_SIGNING_KEY: ${{ secrets.CODESET_SIGNING_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER: npx --yes wrangler@4.149.0
+          FORCE: ${{ inputs.force }}
+          ALLOW: ${{ inputs.allow }}
+        run: |
+          mkdir -p ~/solis_codesets
+          set -- --cache "$HOME/solis_codesets" --staging "$RUNNER_TEMP/staging"
+          if [ "$FORCE" = "true" ]; then set -- "$@" --force; fi
+          for g in $ALLOW; do
+            case "$g" in *[!a-zA-Z0-9_.:-]*) echo "bad gate id $g"; exit 1;; esac
+            set -- "$@" --allow "$g"
+          done
+          python -P tool/codeset_updater/update.py "$@"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codeset-report
+          path: |
+            ${{ runner.temp }}/staging/report.json
+            ${{ runner.temp }}/staging/manifest.json
+            ${{ runner.temp }}/staging/*.log
+          if-no-files-found: ignore
+
+      - name: Verify the public copy
+        run: python -P tool/codeset_updater/verify_published.py

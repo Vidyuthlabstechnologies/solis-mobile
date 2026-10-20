@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SOLIS sales sheet</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&family=Roboto+Mono:wght@500&display=swap">
+<style>
+  @page { size: 8.5in 11in; margin: 0; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; }
+  body { width: 8.5in; height: 11in; font-family: Inter, sans-serif; color: #0f172a; background: #fff; font-size: 8.5pt; line-height: 1.4; overflow: hidden; }
+  .page { position: relative; width: 8.5in; height: 11in; padding: 0.42in 0.55in 0.38in; display: flex; flex-direction: column; }
+  h1, h2, h3 { font-family: Manrope, Inter, sans-serif; margin: 0; letter-spacing: -0.02em; }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 9px; }
+  .brand img.mark { width: 30px; height: 30px; }
+  .brand img.word { height: 32px; }
+  .tag { font-size: 8pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #980f86; }
+  .hero { display: grid; grid-template-columns: 1fr 2.6in; gap: 0.25in; margin-top: 0.22in; align-items: start; }
+  h1 { font-size: 28pt; line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; }
+  h1 span { color: #980f86; }
+  .lead { font-size: 10pt; color: #334155; margin: 12px 0 0; line-height: 1.5; }
+  .phones { position: relative; height: 3.05in; }
+  .phone { position: absolute; width: 1.3in; padding: 4px; border-radius: 0.24in; background: #0b0f17; box-shadow: 0 10px 24px -10px rgba(15,23,42,.45); }
+  .phone img { display: block; width: 100%; border-radius: 0.2in; }
+  .phone.a { left: 0.02in; top: 0; transform: rotate(-4deg); z-index: 1; }
+  .phone.b { right: 0; top: 0.18in; transform: rotate(4deg); z-index: 2; }
+  .steps { display: grid; gap: 5px; margin-top: 0.14in; }
+  .step { display: grid; grid-template-columns: 20px 1fr; gap: 8px; align-items: center; background: #fff8fd; border: 1px solid #f3cdea; border-radius: 9px; padding: 5px 9px; }
+  .step b { font-family: Manrope; font-size: 9pt; }
+  .step .n { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 6px; background: #980f86; color: #fff; font-size: 8pt; font-weight: 700; }
+  .step p { margin: 0; font-size: 8.4pt; color: #334155; line-height: 1.35; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.28in; margin-top: 0.16in; }
+  h2 { font-size: 11.5pt; margin-bottom: 6px; }
+  ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 3px; }
+  li { position: relative; padding-left: 14px; color: #1e293b; }
+  li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 7px; height: 1.6px; background: #980f86; }
+  .mono { font-family: "Roboto Mono", monospace; font-size: 7.4pt; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 0.14in; border-top: 1px solid #e5e9f0; padding-top: 0.14in; }
+  .stat b { font-family: Manrope; font-size: 18pt; letter-spacing: -0.03em; display: block; line-height: 1; }
+  .stat b small { font-size: 9pt; color: #556074; margin-left: 3px; letter-spacing: 0; }
+  .stat p { margin: 5px 0 3px; font-size: 8.3pt; color: #334155; line-height: 1.35; }
+  .stat .src { font-size: 6.9pt; color: #64748b; line-height: 1.3; }
+  .bottom { display: grid; grid-template-columns: 1fr 1.05in; gap: 0.25in; align-items: center; background: #4e0044; color: #fff; border-radius: 14px; padding: 12px 18px; }
+  .bottom h3 { font-size: 15pt; color: #fff; }
+  .bottom p { margin: 5px 0 0; color: #f6d9f0; font-size: 9pt; }
+  .bottom .url { font-weight: 700; color: #fff; }
+  .bottom img { width: 1in; height: 1in; background: #fff; border-radius: 8px; padding: 4px; }
+  .price { display: flex; gap: 6px 14px; margin-top: 6px; font-size: 8.8pt; color: #fde2f6; flex-wrap: wrap; }
+  .price b { color: #fff; }
+  .foot { margin-top: 8px; font-size: 6.9pt; color: #64748b; line-height: 1.35; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <div class="brand"><img class="word" src="../../../assets/brand/solis_wordmark.svg" alt="SOLIS"></div>
+    <span class="tag">Android pilot, version 1.0</span>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>Look at your patient. <span>SOLIS writes the note.</span></h1>
+      <p class="lead">SOLIS listens to the visit, writes the note, and builds a clean claim, on your phone. Made for physicians and small practices without a big billing department.</p>
+  <div class="steps">
+        <div class="step"><span class="n">1</span><p><b>Scan the cards.</b> Insurance card, license barcode, SSN card. Photos deleted after reading.</p></div>
+        <div class="step"><span class="n">2</span><p><b>Consent.</b> English or Spanish script. Agree out loud or sign.</p></div>
+        <div class="step"><span class="n">3</span><p><b>Record.</b> Your voice told apart from the patient's.</p></div>
+        <div class="step"><span class="n">4</span><p><b>Review the note.</b> Concise SOAP. Nothing invented.</p></div>
+        <div class="step"><span class="n">5</span><p><b>Send the claim.</b> Checked, then sent as 837P in one tap.</p></div>
+  </div>
+    </div>
+    <div class="phones">
+      <div class="phone a"><img src="../../../screenshots/out/08_note.png" alt=""></div>
+      <div class="phone b"><img src="../../../screenshots/out/10_claim_checks.png" alt=""></div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <h2>Codes from the patient's own words</h2>
+      <ul>
+        <li>"My feet burn at night" stays a symptom code until you confirm a diagnosis (ICD-10-CM outpatient rule IV.H). Uncertain wording waits for one tap.</li>
+        <li>Every diagnosis links to the words it came from.</li>
+        <li>E/M level by place of service, new or established patient, and medical decision making.</li>
+        <li>59 of 63 official coding rules fully enforced, each citing its guideline. The other 4 need the AMA CPT license and are not in the app.</li>
+        <li>A Why button on every check: the rule in plain English, its official citation and the guideline text. Works offline.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Checked before the claim goes out</h2>
+      <ul>
+        <li>Against the code sets for the date of service: <span class="mono">ICD-10-CM FY2026/FY2027, HCPCS Oct 2026, 2026 PFS, NCCI MUE and add-on edits, MCE v44</span>.</li>
+        <li>Eligibility at check-in, claims in one tap and claim status through the Stedi clearinghouse. Export as CMS-1500 data or 837P.</li>
+      </ul>
+      <h2 style="margin-top:12px">Your practice decides where the audio goes</h2>
+      <ul>
+        <li>On-device mode: no audio leaves the phone; works offline after a one-time download of about 150 MB.</li>
+        <li>Cloud mode, only when you turn it on: the Deepgram medical model and Claude.</li>
+        <li>Vendor keys never ship in the app. Built for HIPAA workflows. BAA available.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>2<small>hours</small></b><p>of EHR and desk work for every hour of direct patient time in the clinic day.</p><div class="src">Sinsky C, et al. Annals of Internal Medicine, 2016. doi.org/10.7326/M16-0961</div></div>
+    <div class="stat"><b>5.9<small>of 11.4 h</small></b><p>of a primary care physician's weekday spent in the EHR, 1.4 h of it after clinic hours.</p><div class="src">Arndt BG, et al. Annals of Family Medicine, 2017. doi.org/10.1370/afm.2121</div></div>
+    <div class="stat"><b>60<small>%</small></b><p>of medical group leaders saw claim denials rise in early 2024 versus 2023.</p><div class="src">MGMA Stat poll, March 5, 2024, 235 responses. mgma.com</div></div>
+  </div>
+
+  <div class="bottom" style="margin-top:0.14in">
+    <div>
+      <h3>Join the pilot.</h3>
+      <p>Demo account with fictional patients, a BAA template, and test-mode claims until your payer enrollment is done. Request early access at <span class="url">solis-health.pages.dev</span></p>
+      <div class="price"><span>Planned launch pricing per clinician / month, billed annually:</span><span><b>Solo $129</b></span><span><b>Practice $299</b></span><span>Free during the pilot.</span></div>
+    </div>
+    <img src="qr-get-started.svg" alt="QR code to solis-health.pages.dev/get-started">
+  </div>
+  <p class="foot">SOLIS is not a medical device and does not diagnose or treat; clinicians review and sign every note. No EHR, lab or pharmacy integration. Android 8+; iOS not yet released. Screens show fictional demo data. CPT is a registered trademark of the American Medical Association.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,602 @@
+[
+  {
+    "id": "w0",
+    "text": "It's",
+    "start": 0.16,
+    "end": 0.48
+  },
+  {
+    "id": "w1",
+    "text": "940",
+    "start": 0.48,
+    "end": 1.28
+  },
+  {
+    "id": "w2",
+    "text": "at",
+    "start": 1.28,
+    "end": 1.44
+  },
+  {
+    "id": "w3",
+    "text": "night,",
+    "start": 1.44,
+    "end": 1.76
+  },
+  {
+    "id": "w4",
+    "text": "and",
+    "start": 1.76,
+    "end": 1.92
+  },
+  {
+    "id": "w5",
+    "text": "you're",
+    "start": 1.92,
+    "end": 2.16
+  },
+  {
+    "id": "w6",
+    "text": "still",
+    "start": 2.16,
+    "end": 2.4
+  },
+  {
+    "id": "w7",
+    "text": "charting.",
+    "start": 2.4,
+    "end": 3.44
+  },
+  {
+    "id": "w8",
+    "text": "Soles",
+    "start": 3.44,
+    "end": 4.08
+  },
+  {
+    "id": "w9",
+    "text": "listens",
+    "start": 4.32,
+    "end": 4.64
+  },
+  {
+    "id": "w10",
+    "text": "to",
+    "start": 4.64,
+    "end": 4.72
+  },
+  {
+    "id": "w11",
+    "text": "the",
+    "start": 4.72,
+    "end": 4.8
+  },
+  {
+    "id": "w12",
+    "text": "visit,",
+    "start": 4.8,
+    "end": 5.2
+  },
+  {
+    "id": "w13",
+    "text": "writes",
+    "start": 5.36,
+    "end": 5.76
+  },
+  {
+    "id": "w14",
+    "text": "the",
+    "start": 5.76,
+    "end": 5.92
+  },
+  {
+    "id": "w15",
+    "text": "note,",
+    "start": 5.92,
+    "end": 6.24
+  },
+  {
+    "id": "w16",
+    "text": "and",
+    "start": 6.24,
+    "end": 6.48
+  },
+  {
+    "id": "w17",
+    "text": "builds",
+    "start": 6.48,
+    "end": 6.8
+  },
+  {
+    "id": "w18",
+    "text": "a",
+    "start": 6.8,
+    "end": 6.88
+  },
+  {
+    "id": "w19",
+    "text": "clean",
+    "start": 6.88,
+    "end": 7.28
+  },
+  {
+    "id": "w20",
+    "text": "claim",
+    "start": 7.28,
+    "end": 7.76
+  },
+  {
+    "id": "w21",
+    "text": "on",
+    "start": 7.76,
+    "end": 7.92
+  },
+  {
+    "id": "w22",
+    "text": "your",
+    "start": 7.92,
+    "end": 8.16
+  },
+  {
+    "id": "w23",
+    "text": "phone.",
+    "start": 8.16,
+    "end": 8.72
+  },
+  {
+    "id": "w24",
+    "text": "Then",
+    "start": 8.72,
+    "end": 9.04
+  },
+  {
+    "id": "w25",
+    "text": "you",
+    "start": 9.04,
+    "end": 9.2
+  },
+  {
+    "id": "w26",
+    "text": "just",
+    "start": 9.2,
+    "end": 9.44
+  },
+  {
+    "id": "w27",
+    "text": "talk,",
+    "start": 9.44,
+    "end": 9.92
+  },
+  {
+    "id": "w28",
+    "text": "Solis",
+    "start": 9.92,
+    "end": 10.56
+  },
+  {
+    "id": "w29",
+    "text": "tells",
+    "start": 10.72,
+    "end": 10.96
+  },
+  {
+    "id": "w30",
+    "text": "your",
+    "start": 10.96,
+    "end": 11.04
+  },
+  {
+    "id": "w31",
+    "text": "voice",
+    "start": 11.04,
+    "end": 11.36
+  },
+  {
+    "id": "w32",
+    "text": "from",
+    "start": 11.36,
+    "end": 11.52
+  },
+  {
+    "id": "w33",
+    "text": "the",
+    "start": 11.52,
+    "end": 11.6
+  },
+  {
+    "id": "w34",
+    "text": "patients.",
+    "start": 11.6,
+    "end": 12.32
+  },
+  {
+    "id": "w35",
+    "text": "So",
+    "start": 12.64,
+    "end": 12.8
+  },
+  {
+    "id": "w36",
+    "text": "what",
+    "start": 12.88,
+    "end": 13.12
+  },
+  {
+    "id": "w37",
+    "text": "brings",
+    "start": 13.12,
+    "end": 13.52
+  },
+  {
+    "id": "w38",
+    "text": "you",
+    "start": 13.52,
+    "end": 13.68
+  },
+  {
+    "id": "w39",
+    "text": "in",
+    "start": 13.68,
+    "end": 13.84
+  },
+  {
+    "id": "w40",
+    "text": "today?",
+    "start": 13.84,
+    "end": 14.48
+  },
+  {
+    "id": "w41",
+    "text": "I",
+    "start": 14.48,
+    "end": 14.64
+  },
+  {
+    "id": "w42",
+    "text": "have",
+    "start": 14.64,
+    "end": 14.8
+  },
+  {
+    "id": "w43",
+    "text": "this",
+    "start": 14.8,
+    "end": 15.04
+  },
+  {
+    "id": "w44",
+    "text": "deep",
+    "start": 15.04,
+    "end": 15.44
+  },
+  {
+    "id": "w45",
+    "text": "cough.",
+    "start": 15.44,
+    "end": 16.16
+  },
+  {
+    "id": "w46",
+    "text": "I'm",
+    "start": 16.16,
+    "end": 16.4
+  },
+  {
+    "id": "w47",
+    "text": "coughing",
+    "start": 16.4,
+    "end": 16.96
+  },
+  {
+    "id": "w48",
+    "text": "up",
+    "start": 16.96,
+    "end": 17.12
+  },
+  {
+    "id": "w49",
+    "text": "thick",
+    "start": 17.12,
+    "end": 17.44
+  },
+  {
+    "id": "w50",
+    "text": "green",
+    "start": 17.44,
+    "end": 17.68
+  },
+  {
+    "id": "w51",
+    "text": "phlegm,",
+    "start": 17.68,
+    "end": 18.4
+  },
+  {
+    "id": "w52",
+    "text": "and",
+    "start": 18.4,
+    "end": 18.56
+  },
+  {
+    "id": "w53",
+    "text": "my",
+    "start": 18.56,
+    "end": 18.72
+  },
+  {
+    "id": "w54",
+    "text": "fever",
+    "start": 18.72,
+    "end": 19.12
+  },
+  {
+    "id": "w55",
+    "text": "spiked",
+    "start": 19.12,
+    "end": 19.6
+  },
+  {
+    "id": "w56",
+    "text": "to",
+    "start": 19.6,
+    "end": 19.76
+  },
+  {
+    "id": "w57",
+    "text": "101.5",
+    "start": 19.76,
+    "end": 20.96
+  },
+  {
+    "id": "w58",
+    "text": "last",
+    "start": 21.2,
+    "end": 21.44
+  },
+  {
+    "id": "w59",
+    "text": "night.",
+    "start": 21.44,
+    "end": 22.08
+  },
+  {
+    "id": "w60",
+    "text": "Any",
+    "start": 22.08,
+    "end": 22.4
+  },
+  {
+    "id": "w61",
+    "text": "pain",
+    "start": 22.4,
+    "end": 22.8
+  },
+  {
+    "id": "w62",
+    "text": "when",
+    "start": 22.8,
+    "end": 22.96
+  },
+  {
+    "id": "w63",
+    "text": "you",
+    "start": 22.96,
+    "end": 23.12
+  },
+  {
+    "id": "w64",
+    "text": "breathe.",
+    "start": 23.12,
+    "end": 23.84
+  },
+  {
+    "id": "w65",
+    "text": "Yes,",
+    "start": 23.84,
+    "end": 24.4
+  },
+  {
+    "id": "w66",
+    "text": "a",
+    "start": 24.4,
+    "end": 24.56
+  },
+  {
+    "id": "w67",
+    "text": "sharp",
+    "start": 24.56,
+    "end": 24.96
+  },
+  {
+    "id": "w68",
+    "text": "pain",
+    "start": 24.96,
+    "end": 25.28
+  },
+  {
+    "id": "w69",
+    "text": "on",
+    "start": 25.28,
+    "end": 25.44
+  },
+  {
+    "id": "w70",
+    "text": "the",
+    "start": 25.44,
+    "end": 25.52
+  },
+  {
+    "id": "w71",
+    "text": "right",
+    "start": 25.52,
+    "end": 25.84
+  },
+  {
+    "id": "w72",
+    "text": "side.",
+    "start": 25.84,
+    "end": 26.56
+  },
+  {
+    "id": "w73",
+    "text": "When",
+    "start": 26.56,
+    "end": 26.8
+  },
+  {
+    "id": "w74",
+    "text": "you",
+    "start": 26.8,
+    "end": 26.96
+  },
+  {
+    "id": "w75",
+    "text": "finish,",
+    "start": 26.96,
+    "end": 27.52
+  },
+  {
+    "id": "w76",
+    "text": "the",
+    "start": 27.52,
+    "end": 27.68
+  },
+  {
+    "id": "w77",
+    "text": "note",
+    "start": 27.68,
+    "end": 28
+  },
+  {
+    "id": "w78",
+    "text": "writes",
+    "start": 28,
+    "end": 28.4
+  },
+  {
+    "id": "w79",
+    "text": "itself.",
+    "start": 28.4,
+    "end": 28.88
+  },
+  {
+    "id": "w80",
+    "text": "Nothing",
+    "start": 29.04,
+    "end": 29.6
+  },
+  {
+    "id": "w81",
+    "text": "invented.",
+    "start": 29.6,
+    "end": 30.48
+  },
+  {
+    "id": "w82",
+    "text": "Every",
+    "start": 30.48,
+    "end": 30.8
+  },
+  {
+    "id": "w83",
+    "text": "diagnosis",
+    "start": 30.8,
+    "end": 31.6
+  },
+  {
+    "id": "w84",
+    "text": "links",
+    "start": 31.6,
+    "end": 32
+  },
+  {
+    "id": "w85",
+    "text": "to",
+    "start": 32,
+    "end": 32.16
+  },
+  {
+    "id": "w86",
+    "text": "the",
+    "start": 32.16,
+    "end": 32.24
+  },
+  {
+    "id": "w87",
+    "text": "words",
+    "start": 32.24,
+    "end": 32.56
+  },
+  {
+    "id": "w88",
+    "text": "it",
+    "start": 32.56,
+    "end": 32.72
+  },
+  {
+    "id": "w89",
+    "text": "came",
+    "start": 32.72,
+    "end": 33.2
+  },
+  {
+    "id": "w90",
+    "text": "from.",
+    "start": 33.2,
+    "end": 36.32
+  },
+  {
+    "id": "w91",
+    "text": "Soles,",
+    "start": 36.32,
+    "end": 37.28
+  },
+  {
+    "id": "w92",
+    "text": "your",
+    "start": 37.28,
+    "end": 37.36
+  },
+  {
+    "id": "w93",
+    "text": "visit",
+    "start": 37.44,
+    "end": 37.68
+  },
+  {
+    "id": "w94",
+    "text": "documented",
+    "start": 37.76,
+    "end": 38.32
+  },
+  {
+    "id": "w95",
+    "text": "and",
+    "start": 38.4,
+    "end": 38.56
+  },
+  {
+    "id": "w96",
+    "text": "build.",
+    "start": 38.56,
+    "end": 39.12
+  },
+  {
+    "id": "w97",
+    "text": "Request",
+    "start": 39.12,
+    "end": 39.68
+  },
+  {
+    "id": "w98",
+    "text": "early",
+    "start": 39.68,
+    "end": 40.08
+  },
+  {
+    "id": "w99",
+    "text": "access.",
+    "start": 40.08,
+    "end": 42.48
+  }
+]

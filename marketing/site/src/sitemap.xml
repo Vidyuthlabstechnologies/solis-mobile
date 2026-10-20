@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{SITE}}/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>{{SITE}}/pricing</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>{{SITE}}/get-started</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>{{SITE}}/security</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>{{SITE}}/guide</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>{{SITE}}/privacy</loc><lastmod>2026-10-16</lastmod></url>
+</urlset>

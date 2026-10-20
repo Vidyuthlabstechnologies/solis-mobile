@@ -1,0 +1,731 @@
+{
+ "edition": {
+  "icd_fy": 2027,
+  "mce_version": 44,
+  "ncci_year": 2026
+ },
+ "downloads": "C:\\Users\\varsh\\AppData\\Local\\Temp\\solis_codesets",
+ "guidelines": {
+  "files": [
+   "00_introduction.md",
+   "I.A_conventions-icd-10-cm.md",
+   "I.B_general.md",
+   "I.C.00_chapter-specific-coding-guidelines.md",
+   "I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   "I.C.02_chapter-2-neoplasms.md",
+   "I.C.03_chapter-3-diseases-blood-blood-forming-organs-certain-disord.md",
+   "I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   "I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   "I.C.06_chapter-6-diseases-nervous-system.md",
+   "I.C.07_chapter-7-diseases-eye-adnexa.md",
+   "I.C.08_chapter-8-diseases-ear-mastoid-process.md",
+   "I.C.09_chapter-9-diseases-circulatory-system.md",
+   "I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   "I.C.11_chapter-11-diseases-digestive-system.md",
+   "I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   "I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   "I.C.14_chapter-14-diseases-genitourinary-system.md",
+   "I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   "I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   "I.C.17_chapter-17-congenital-malformations-deformations-chromosomal.md",
+   "I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   "I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   "I.C.20_chapter-20-external-causes-morbidity.md",
+   "I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   "I.C.22_chapter-22-special-purposes.md",
+   "II_selection-principal.md",
+   "III_reporting-additional.md",
+   "IV_diagnostic-reporting-outpatient-services.md",
+   "AppI_present-on-admission-reporting-guidelines.md"
+  ],
+  "extraction_check": {
+   "pdf_pages": 121,
+   "pdf_words_all_pages": 44815,
+   "excluded_table_of_contents_pages": "2-6",
+   "excluded_table_of_contents_words": 2011,
+   "excluded_running_header_words": 1495,
+   "pdf_words_body": 41309,
+   "markdown_words_body": 41291,
+   "word_difference": -18,
+   "pdf_alphanumeric_chars_body": 223103,
+   "markdown_alphanumeric_chars_body": 223103,
+   "alphanumeric_difference": 0,
+   "pdf_lines_not_found_in_output": 0,
+   "missing_line_samples": [],
+   "bookmarks": 492,
+   "bookmarks_without_matching_heading_text": []
+  }
+ },
+ "tabular": {
+  "records_chapter": 21,
+  "excludes1_notes": 5411,
+  "diag_elements": 47025,
+  "records_code": 6378,
+  "records_subcategory": 2280,
+  "records_category": 1524,
+  "records_section": 130,
+  "excludes1_notes_without_code_ref": 148,
+  "placeholder_flagged": 245,
+  "records_total": 10333,
+  "excludes1_pairs": 5679,
+  "codes_with_excludes1_pairs": 2613,
+  "seventh_character_prefixes": 508,
+  "order_file_codes": 98403,
+  "order_file_billable": 74879,
+  "billable_codes_with_7th_character": 51378
+ },
+ "mce": {
+  "age_newborn": 42,
+  "age_pediatric": 126,
+  "age_maternity": 2587,
+  "age_adult": 857,
+  "manifestation_not_principal": 422,
+  "questionable_admission": 30,
+  "unacceptable_principal": 2667,
+  "wrong_procedure_performed": 3,
+  "unspecified_with_laterality_available": 3476
+ },
+ "ncci_manual_sections": 137,
+ "addon_code_edits": {
+  "file": "ncci_addon_code_edits_v2026q4.tsv",
+  "rows": 7743,
+  "addon_codes": 723,
+  "by_type": {
+   "2": 42,
+   "1": 7130,
+   "3": 571
+  }
+ },
+ "catalog": {
+  "rules": 63,
+  "implemented": {
+   "yes": 59,
+   "partial": 4
+  }
+ },
+ "citation_problems": [],
+ "implementation_evidence": {
+  "ICD-VALID-01": {
+   "status": "yes",
+   "evidence": "icd\\.isValid\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "ICD-BILLABLE-01": {
+   "status": "yes",
+   "evidence": "isBillable\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart",
+    "lib/services/codesets/icd_catalog.dart"
+   ]
+  },
+  "ICD-7TH-01": {
+   "status": "yes",
+   "evidence": "seventhCharacterIssue\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "ICD-PLACEHOLDER-01": {
+   "status": "yes",
+   "evidence": "Missing placeholder X",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "ICD-EXCL1-01": {
+   "status": "yes",
+   "evidence": "excludes1Issues\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "ICD-EXCL2-01": {
+   "status": "yes",
+   "evidence": "class ClaimScrubber",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "ICD-MANIF-01": {
+   "status": "yes",
+   "evidence": "'ICD-MANIF-01'",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart",
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-CODEFIRST-01": {
+   "status": "yes",
+   "evidence": "'ICD-CODEFIRST-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-USEADD-01": {
+   "status": "yes",
+   "evidence": "'ICD-USEADD-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-CODEALSO-01": {
+   "status": "yes",
+   "evidence": "'ICD-CODEALSO-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-SYMPTOM-01": {
+   "status": "yes",
+   "evidence": "ICD-SYMPTOM-01",
+   "found_in": [
+    "lib/services/coding/clinical_coder.dart"
+   ]
+  },
+  "ICD-SYMPTOM-02": {
+   "status": "yes",
+   "evidence": "'ICD-SYMPTOM-02'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-COMBO-01": {
+   "status": "yes",
+   "evidence": "'ICD-COMBO-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-ACUTECHRONIC-01": {
+   "status": "yes",
+   "evidence": "'ICD-ACUTECHRONIC-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-SEQUELA-01": {
+   "status": "yes",
+   "evidence": "'ICD-SEQUELA-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-DUP-01": {
+   "status": "yes",
+   "evidence": "'ICD-DUP-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-LAT-01": {
+   "status": "yes",
+   "evidence": "'ICD-LAT-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-LAT-02": {
+   "status": "yes",
+   "evidence": "'ICD-LAT-02'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-SECONDARY-ONLY-01": {
+   "status": "yes",
+   "evidence": "secondaryOnlyIcdPrefixes",
+   "found_in": [
+    "lib/services/coding/code_rules.dart"
+   ]
+  },
+  "ICD-UNSPEC-01": {
+   "status": "yes",
+   "evidence": "Unspecified primary diagnosis",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "OP-UNCERTAIN-01": {
+   "status": "yes",
+   "evidence": "_hedge",
+   "found_in": [
+    "lib/services/coding/clinical_coder.dart"
+   ]
+  },
+  "INPT-UNCERTAIN-01": {
+   "status": "yes",
+   "evidence": "!inpatient",
+   "found_in": [
+    "lib/services/coding/clinical_coder.dart"
+   ]
+  },
+  "OP-FIRSTLISTED-01": {
+   "status": "yes",
+   "evidence": "'OP-FIRSTLISTED-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "ICD-EXTCAUSE-01": {
+   "status": "yes",
+   "evidence": "External cause listed first",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "ICD-EXTCAUSE-02": {
+   "status": "yes",
+   "evidence": "'ICD-EXTCAUSE-02'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "OP-DIAGSERVICES-01": {
+   "status": "yes",
+   "evidence": "'OP-DIAGSERVICES-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "OP-PREOP-01": {
+   "status": "yes",
+   "evidence": "OP-PREOP-01",
+   "found_in": [
+    "lib/services/coding/clinical_coder.dart",
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "OP-THERAPY-01": {
+   "status": "yes",
+   "evidence": "'OP-THERAPY-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "POA-01": {
+   "status": "yes",
+   "evidence": "'transaction': '837P'",
+   "found_in": [
+    "lib/services/coding/claim_builder.dart"
+   ]
+  },
+  "CH1-SEPSIS-01": {
+   "status": "yes",
+   "evidence": "Severe sepsis listed first",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "CH2-NEO-01": {
+   "status": "yes",
+   "evidence": "'CH2-NEO-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "CH2-NEO-02": {
+   "status": "yes",
+   "evidence": "'CH2-NEO-02'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "CH4-DM-01": {
+   "status": "yes",
+   "evidence": "addLongTermDrugCodes",
+   "found_in": [
+    "lib/services/coding/clinical_coder.dart"
+   ]
+  },
+  "CH9-HTN-01": {
+   "status": "yes",
+   "evidence": "combineHypertension\\(",
+   "found_in": [
+    "lib/services/coding/clinical_coder.dart"
+   ]
+  },
+  "CH9-HTN-02": {
+   "status": "yes",
+   "evidence": "I12\\.9",
+   "found_in": [
+    "lib/services/coding/clinical_coder.dart",
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "CH9-HTN-03": {
+   "status": "yes",
+   "evidence": "I13\\.0",
+   "found_in": [
+    "lib/services/coding/clinical_coder.dart",
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "CH14-CKD-01": {
+   "status": "yes",
+   "evidence": "ESRD replaces the CKD stage",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "CH15-OB-01": {
+   "status": "yes",
+   "evidence": "mce\\.ageFor\\(",
+   "found_in": [
+    "lib/services/coding/code_rules.dart"
+   ]
+  },
+  "CH15-OB-02": {
+   "status": "yes",
+   "evidence": "'CH15-OB-02'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "CH15-OB-03": {
+   "status": "yes",
+   "evidence": "'CH15-OB-03'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "CH15-OB-04": {
+   "status": "yes",
+   "evidence": "'CH15-OB-04'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "CH16-PERI-01": {
+   "status": "yes",
+   "evidence": "isPerinatalCode\\(",
+   "found_in": [
+    "lib/services/coding/code_rules.dart",
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "CH19-INJ-01": {
+   "status": "yes",
+   "evidence": "CH19-INJ-01",
+   "found_in": [
+    "lib/services/coding/clinical_coder.dart",
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "CH19-POIS-01": {
+   "status": "yes",
+   "evidence": "'CH19-POIS-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "CH21-Z-01": {
+   "status": "yes",
+   "evidence": "firstListedOnlyZPrefixes",
+   "found_in": [
+    "lib/services/coding/code_rules.dart"
+   ]
+  },
+  "CH21-Z-02": {
+   "status": "yes",
+   "evidence": "'CH21-Z-02'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "MCE-AGE-01": {
+   "status": "yes",
+   "evidence": "ReferenceData\\.mce",
+   "found_in": [
+    "lib/services/coding/code_rules.dart",
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "MCE-SEX-01": {
+   "status": "yes",
+   "evidence": "enforceSexEdits",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "MCE-UNACC-01": {
+   "status": "yes",
+   "evidence": "isUnacceptablePrincipal\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart",
+    "lib/services/codesets/mce.dart"
+   ]
+  },
+  "NCCI-PTP-01": {
+   "status": "partial",
+   "evidence": "ptpIssues\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "NCCI-MUTEX-01": {
+   "status": "partial",
+   "evidence": "ptpIssues\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "NCCI-MOD-01": {
+   "status": "yes",
+   "evidence": "ncciModifiers",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "NCCI-MOD-02": {
+   "status": "yes",
+   "evidence": "'NCCI-MOD-02'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "NCCI-EM-01": {
+   "status": "yes",
+   "evidence": "E/M needs modifier 25",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "NCCI-EM-02": {
+   "status": "yes",
+   "evidence": "'NCCI-EM-02'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "NCCI-EM-03": {
+   "status": "yes",
+   "evidence": "'NCCI-EM-03'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "NCCI-GLOBAL-01": {
+   "status": "yes",
+   "evidence": "'NCCI-GLOBAL-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "NCCI-ADDON-01": {
+   "status": "yes",
+   "evidence": "addOnIssues\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "NCCI-MUE-01": {
+   "status": "yes",
+   "evidence": "maxUnits\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart",
+    "lib/services/codesets/mue.dart"
+   ]
+  },
+  "NCCI-MUE-02": {
+   "status": "yes",
+   "evidence": "unitsByCode",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  },
+  "NCCI-MUE-03": {
+   "status": "yes",
+   "evidence": "'NCCI-MUE-03'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "NCCI-LAB-01": {
+   "status": "partial",
+   "evidence": "'NCCI-LAB-01'",
+   "found_in": [
+    "lib/services/coding/knowledge_checks.dart"
+   ]
+  },
+  "NCCI-FAMILY-01": {
+   "status": "partial",
+   "evidence": "ptpIssues\\(",
+   "found_in": [
+    "lib/services/coding/claim_scrubber.dart"
+   ]
+  }
+ },
+ "gaps": 4,
+ "files": [
+  [
+   "build_report.json",
+   13420
+  ],
+  [
+   "GAP_REPORT.md",
+   3034
+  ],
+  [
+   "guidelines/00_introduction.md",
+   3990
+  ],
+  [
+   "guidelines/AppI_present-on-admission-reporting-guidelines.md",
+   12523
+  ],
+  [
+   "guidelines/I.A_conventions-icd-10-cm.md",
+   14613
+  ],
+  [
+   "guidelines/I.B_general.md",
+   21624
+  ],
+  [
+   "guidelines/I.C.00_chapter-specific-coding-guidelines.md",
+   637
+  ],
+  [
+   "guidelines/I.C.01_chapter-1-certain-infectious-parasitic-diseases-u07-1-u09-9.md",
+   29006
+  ],
+  [
+   "guidelines/I.C.02_chapter-2-neoplasms.md",
+   17034
+  ],
+  [
+   "guidelines/I.C.03_chapter-3-diseases-blood-blood-forming-organs-certain-disord.md",
+   475
+  ],
+  [
+   "guidelines/I.C.04_chapter-4-endocrine-nutritional-metabolic-diseases.md",
+   8469
+  ],
+  [
+   "guidelines/I.C.05_chapter-5-mental-behavioral-neurodevelopmental-disorders.md",
+   6411
+  ],
+  [
+   "guidelines/I.C.06_chapter-6-diseases-nervous-system.md",
+   7134
+  ],
+  [
+   "guidelines/I.C.07_chapter-7-diseases-eye-adnexa.md",
+   3368
+  ],
+  [
+   "guidelines/I.C.08_chapter-8-diseases-ear-mastoid-process.md",
+   415
+  ],
+  [
+   "guidelines/I.C.09_chapter-9-diseases-circulatory-system.md",
+   14773
+  ],
+  [
+   "guidelines/I.C.10_chapter-10-diseases-respiratory-system-u07-0.md",
+   6335
+  ],
+  [
+   "guidelines/I.C.11_chapter-11-diseases-digestive-system.md",
+   411
+  ],
+  [
+   "guidelines/I.C.12_chapter-12-diseases-skin-subcutaneous-tissue.md",
+   5144
+  ],
+  [
+   "guidelines/I.C.13_chapter-13-diseases-musculoskeletal-system-connective-tissue.md",
+   4344
+  ],
+  [
+   "guidelines/I.C.14_chapter-14-diseases-genitourinary-system.md",
+   2094
+  ],
+  [
+   "guidelines/I.C.15_chapter-15-pregnancy-childbirth-puerperium.md",
+   21552
+  ],
+  [
+   "guidelines/I.C.16_chapter-16-certain-originating-perinatal-period.md",
+   7856
+  ],
+  [
+   "guidelines/I.C.17_chapter-17-congenital-malformations-deformations-chromosomal.md",
+   2045
+  ],
+  [
+   "guidelines/I.C.18_chapter-18-symptoms-signs-abnormal-clinical-laboratory-findi.md",
+   5907
+  ],
+  [
+   "guidelines/I.C.19_chapter-19-injury-poisoning-certain-consequences-external-ca.md",
+   23258
+  ],
+  [
+   "guidelines/I.C.20_chapter-20-external-causes-morbidity.md",
+   12548
+  ],
+  [
+   "guidelines/I.C.21_chapter-21-factors-influencing-health-status-contact-health.md",
+   36222
+  ],
+  [
+   "guidelines/I.C.22_chapter-22-special-purposes.md",
+   583
+  ],
+  [
+   "guidelines/II_selection-principal.md",
+   8221
+  ],
+  [
+   "guidelines/III_reporting-additional.md",
+   3915
+  ],
+  [
+   "guidelines/index.json",
+   150774
+  ],
+  [
+   "guidelines/IV_diagnostic-reporting-outpatient-services.md",
+   11161
+  ],
+  [
+   "README.md",
+   12479
+  ],
+  [
+   "rules/icd10cm_chapters_2027.json",
+   65469
+  ],
+  [
+   "rules/icd10cm_code_notes_2027.jsonl",
+   6111236
+  ],
+  [
+   "rules/icd10cm_excludes1_2027.tsv",
+   68221
+  ],
+  [
+   "rules/icd10cm_seventh_character_2027.json",
+   126864
+  ],
+  [
+   "rules/mce_edits_v44.json",
+   118727
+  ],
+  [
+   "rules/ncci_addon_code_edits_v2026q4.tsv",
+   108855
+  ],
+  [
+   "rules/ncci_policy_manual_sections_2026.json",
+   17092
+  ],
+  [
+   "rules/rule_catalog.json",
+   111100
+  ]
+ ]
+}

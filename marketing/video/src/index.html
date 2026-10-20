@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<title>SOLIS launch film 16:9</title>
+<script src="assets/vendor/gsap.min.js"></script>
+<link rel="stylesheet" href="assets/solis.css" />
+<style>
+  html, body { width: 1920px; height: 1080px; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+  .col-left { position: absolute; left: 150px; width: 820px; }
+  .col-right { position: absolute; left: 960px; width: 840px; }
+  #phone { left: 742px; top: 35.5px; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="79.5" data-width="1920" data-height="1080" data-fps="30">
+  <audio id="soundtrack" src="assets/audio/soundtrack_16x9.wav" data-start="0" data-duration="79.5" data-volume="1"></audio>
+
+  <div id="stage" class="stage clip" data-start="0" data-duration="79.5" data-track-index="0">
+    <!-- Background -->
+    <div class="bg" id="bg">
+      <div class="grid"></div>
+      <div class="blob b3" style="left:900px;top:-200px"></div>
+      <div class="blob b1" id="blob1" style="left:-300px;top:200px"></div>
+      <div class="blob b2" id="blob2" style="left:1200px;top:500px"></div>
+    </div>
+    <div class="vignette"></div>
+    <div id="sweep" style="position:absolute;top:-300px;left:-900px;width:520px;height:1700px;transform:rotate(18deg);background:linear-gradient(90deg,rgba(229,163,232,0) 0%,rgba(229,163,232,0.22) 50%,rgba(229,163,232,0) 100%);z-index:40;opacity:0"></div>
+
+    <!-- S1 HOOK -->
+    <div id="s1" class="layer">
+      <div id="ehr" class="glass" style="left:460px;top:120px;width:1000px;height:560px;opacity:0;padding:30px 36px">
+        <div style="display:flex;gap:10px;margin-bottom:26px"><span style="width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.25)"></span><span style="width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.25)"></span><span style="width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.25)"></span><span style="margin-left:18px;font-size:18px;color:rgba(255,255,255,.55);font-weight:600">Progress note, unsigned</span></div>
+        <div class="ehr-line" style="height:16px;border-radius:8px;background:rgba(255,255,255,.18);margin:16px 0;width:86%"></div>
+        <div class="ehr-line" style="height:16px;border-radius:8px;background:rgba(255,255,255,.18);margin:16px 0;width:72%"></div>
+        <div class="ehr-line" style="height:16px;border-radius:8px;background:rgba(255,255,255,.18);margin:16px 0;width:91%"></div>
+        <div class="ehr-line" style="height:16px;border-radius:8px;background:rgba(255,255,255,.18);margin:16px 0;width:64%"></div>
+        <div class="ehr-line" style="height:16px;border-radius:8px;background:rgba(255,255,255,.18);margin:16px 0;width:80%"></div>
+        <div class="ehr-line" style="height:16px;border-radius:8px;background:rgba(255,255,255,.18);margin:16px 0;width:55%"></div>
+      </div>
+      <div id="clock" style="position:absolute;left:0;right:0;top:230px;text-align:center;font-size:250px;font-weight:800;letter-spacing:-0.04em;line-height:1">
+        <span>9:</span><span style="display:inline-block;overflow:hidden;height:250px;vertical-align:top"><span id="mins" style="display:inline-block"><span style="display:block">39</span><span style="display:block">40</span></span></span><span style="font-size:90px;font-weight:700;color:var(--orchid-80);margin-left:24px;letter-spacing:0">PM</span>
+      </div>
+      <div id="hookline" class="h1" style="position:absolute;left:0;right:0;top:560px;text-align:center">You're still charting.</div>
+    </div>
+
+    <!-- S2 PAIN -->
+    <div id="s2" class="layer" style="opacity:0">
+      <div style="position:absolute;left:160px;top:150px;width:1600px">
+        <div class="kicker" id="p-kick">Time and motion study, 57 US physicians</div>
+        <div class="h2" id="p-h" style="margin-top:18px">For every hour with patients&hellip;</div>
+      </div>
+      <div id="bars" style="position:absolute;left:160px;top:400px;width:1600px">
+        <div id="row1" style="display:flex;align-items:center;gap:30px;margin-bottom:34px">
+          <div style="width:380px" class="h3">With patients</div>
+          <div style="flex:1;position:relative;height:64px"><div id="bar1" style="position:absolute;left:0;top:0;height:64px;width:300px;border-radius:14px;background:rgba(255,255,255,.85)"></div></div>
+          <div class="h3" style="width:230px;text-align:right">1 hr</div>
+        </div>
+        <div id="row2" style="display:flex;align-items:center;gap:30px;margin-bottom:34px">
+          <div style="width:380px" class="h3">EHR and desk work</div>
+          <div style="flex:1;position:relative;height:64px"><div id="bar2" style="position:absolute;left:0;top:0;height:64px;width:570px;border-radius:14px;background:linear-gradient(90deg,#980F86,#CA58B5)"></div></div>
+          <div class="h3" style="width:230px;text-align:right">nearly 2 hrs</div>
+        </div>
+        <div id="row3" style="display:flex;align-items:center;gap:30px">
+          <div style="width:380px" class="h3">Then, each night</div>
+          <div style="flex:1;position:relative;height:64px"><div id="bar3" style="position:absolute;left:0;top:0;height:64px;width:450px;border-radius:14px;background:repeating-linear-gradient(135deg,#4E0044 0 14px,#6F0061 14px 28px);border:2px solid #CA58B5"></div></div>
+          <div class="h3" style="width:230px;text-align:right">1 to 2 hrs</div>
+        </div>
+      </div>
+      <div id="p-src" class="src" style="position:absolute;left:160px;top:790px;width:1500px">Source: Sinsky C, et al. Allocation of Physician Time in Ambulatory Practice: A Time and Motion Study in 4 Specialties. Ann Intern Med. 2016;165(11):753-760. Office-day observation; after-hours from self-reported diaries (21 physicians).</div>
+      <div id="claimcard" class="lightcard" style="left:660px;top:170px;width:600px;height:620px;padding:40px;opacity:0">
+        <div style="font-size:18px;font-weight:700;letter-spacing:.12em;color:#64748B">CLAIM</div>
+        <div style="font-size:34px;font-weight:750;margin-top:8px;color:#0F172A">Office visit</div>
+        <div style="margin-top:30px">
+          <div style="height:14px;border-radius:7px;background:#E2E8F0;margin:18px 0;width:90%"></div>
+          <div style="height:14px;border-radius:7px;background:#E2E8F0;margin:18px 0;width:70%"></div>
+          <div style="height:14px;border-radius:7px;background:#E2E8F0;margin:18px 0;width:82%"></div>
+          <div style="height:14px;border-radius:7px;background:#E2E8F0;margin:18px 0;width:60%"></div>
+          <div style="height:14px;border-radius:7px;background:#E2E8F0;margin:18px 0;width:76%"></div>
+          <div style="height:14px;border-radius:7px;background:#E2E8F0;margin:18px 0;width:50%"></div>
+        </div>
+        <div id="stamp" style="position:absolute;left:110px;top:270px;padding:14px 34px;border:8px solid #B42318;border-radius:18px;color:#B42318;font-size:96px;font-weight:900;letter-spacing:.08em;opacity:0">DENIED</div>
+      </div>
+    </div>
+
+    <!-- S3 INTRO -->
+    <div id="s3" class="layer" style="opacity:0">
+      <div id="flash" style="position:absolute;inset:0;background:radial-gradient(circle at 50% 36%,rgba(229,163,232,0.85) 0%,rgba(152,15,134,0.4) 30%,rgba(11,14,20,0) 65%);opacity:0"></div>
+      <div id="tile1" class="mark-tile" style="left:600px;top:250px;width:240px;height:240px"></div>
+      <img id="letters1" src="assets/brand/solis_letters_white.svg" style="position:absolute;left:920px;top:322px;width:400px;height:103px" alt="SOLIS" />
+      <div id="trio" style="position:absolute;left:0;right:0;top:600px;display:flex;justify-content:center;gap:28px">
+        <div class="chip t3" style="font-size:34px;padding:18px 32px"><span style="color:var(--orchid-80);font-weight:800">1</span> Listens to the visit</div>
+        <div class="chip t3" style="font-size:34px;padding:18px 32px"><span style="color:var(--orchid-80);font-weight:800">2</span> Writes the note</div>
+        <div class="chip t3" style="font-size:34px;padding:18px 32px"><span style="color:var(--orchid-80);font-weight:800">3</span> Builds a clean claim</div>
+      </div>
+      <div id="onphone" class="h2" style="position:absolute;left:0;right:0;top:760px;text-align:center"><span class="grad">On your phone.</span></div>
+    </div>
+
+    <!-- S4 CONSENT text -->
+    <div id="s4" class="layer" style="opacity:0">
+      <div class="col-left" style="top:200px">
+        <div class="kicker" id="c-kick">Step 1 &middot; Consent first</div>
+        <div class="h2" id="c-h" style="margin-top:22px">The patient hears a short script.</div>
+        <div id="c-chips" style="margin-top:40px"><span class="chip" id="chipEn" style="font-size:30px">English</span><span class="chip" id="chipEs" style="font-size:30px">Espa&ntilde;ol</span></div>
+        <div class="h3" id="c-h3" style="margin-top:30px;color:#fff">Agrees out loud, or signs on the screen.</div>
+        <div class="body" id="c-body" style="margin-top:26px">Time and location are saved with the visit.</div>
+      </div>
+    </div>
+
+    <!-- S5 TALK text + lanes -->
+    <div id="s5" class="layer" style="opacity:0">
+      <div class="col-right" style="top:130px">
+        <div class="kicker" id="t-kick">Step 2 &middot; Ambient capture</div>
+        <div class="h2" id="t-h" style="margin-top:20px">Just talk. SOLIS knows who is speaking.</div>
+      </div>
+      <div class="lane-label" id="lblDoc" style="left:980px;top:360px;color:var(--orchid-80)"><span class="dot" style="background:#CA58B5"></span>DOCTOR</div>
+      <div class="lane-label" id="lblPat" style="left:980px;top:615px;color:var(--teal-l)"><span class="dot" style="background:#14B8A6"></span>PATIENT</div>
+      <div class="lane doc" id="laneDoc" style="left:980px;top:500px"></div>
+      <div class="lane pat" id="lanePat" style="left:980px;top:500px"></div>
+    </div>
+
+    <!-- S6 NOTE text -->
+    <div id="s6" class="layer" style="opacity:0">
+      <div class="col-right" style="top:150px">
+        <div class="kicker" id="n-kick">Step 3 &middot; The note</div>
+        <div class="h2" id="n-h" style="margin-top:20px">The note writes itself.</div>
+        <div id="n-chip" style="margin-top:34px"><span class="chip" style="font-size:28px;background:rgba(229,163,232,.16);border-color:rgba(229,163,232,.5)">Nothing invented</span></div>
+        <div class="body" id="n-body" style="margin-top:6px;width:760px">No vitals or exam findings that were not said.</div>
+      </div>
+      <div id="quote" class="lightcard" style="left:1080px;top:640px;width:640px;padding:24px 28px">
+        <div style="font-size:16px;font-weight:800;letter-spacing:.12em;color:#0F766E">PATIENT &middot; 00:05</div>
+        <div style="font-size:30px;line-height:1.3;margin-top:8px;color:#0F172A">&ldquo;I&rsquo;m coughing up thick green phlegm&hellip;&rdquo;</div>
+      </div>
+      <svg id="link" width="1920" height="1080" style="position:absolute;left:0;top:0;overflow:visible"><path id="linkPath" d="M0 0" fill="none" stroke="#E5A3E8" stroke-width="5" stroke-linecap="round"/><circle id="linkDot" r="10" fill="#E5A3E8" cx="-50" cy="-50"/></svg>
+    </div>
+
+    <!-- S7 CODES + CHECKS text -->
+    <div id="s7" class="layer" style="opacity:0">
+      <div class="col-left" id="k-a" style="top:170px">
+        <div class="kicker">Step 4 &middot; Codes</div>
+        <div class="h2" id="k-h" style="margin-top:20px">Codes from the patient&rsquo;s own words.</div>
+        <div class="body" id="k-body" style="margin-top:24px;width:700px">Uncertain wording is coded as a symptom until you confirm the diagnosis.</div>
+      </div>
+      <div class="col-left" id="k-b" style="top:140px;opacity:0">
+        <div class="kicker">Checks before the claim goes out</div>
+        <div class="h3" style="margin-top:18px">Against the official CMS code sets for the date of service</div>
+        <div id="k-chips" style="margin-top:28px;width:800px">
+          <span class="chip kc">ICD-10-CM FY2026</span><span class="chip kc">HCPCS Oct 2026</span><span class="chip kc">2026 Physician Fee Schedule</span><span class="chip kc">NCCI edits</span><span class="chip kc">Medicare Code Editor v44</span>
+        </div>
+        <div id="k-count" style="margin-top:22px;display:flex;align-items:center;gap:26px"><span id="cnt26" class="grad" style="font-size:150px;font-weight:850;letter-spacing:-0.05em;line-height:1;width:180px">0</span><span class="h3" style="width:620px">official coding rules enforced.<br><span style="font-size:0.78em;opacity:0.72">4 more need the AMA license.</span></span></div>
+      </div>
+      <div class="col-left" id="k-c" style="top:200px;opacity:0">
+        <div class="kicker" style="color:#FDA29B">Caught before billing</div>
+        <div class="h2" style="margin-top:18px">A denial, stopped before it goes out.</div>
+        <div id="chk" class="lightcard" style="position:relative;margin-top:40px;width:760px;padding:28px 30px;display:flex;gap:22px;align-items:flex-start">
+          <div style="position:relative;width:52px;height:52px;flex:none">
+            <svg id="chkBad" viewBox="0 0 52 52" width="52" height="52" style="position:absolute;left:0;top:0"><circle cx="26" cy="26" r="23" fill="none" stroke="#B42318" stroke-width="4"/><path d="M26 14v15M26 36v2" stroke="#B42318" stroke-width="5" stroke-linecap="round"/></svg>
+            <svg id="chkGood" viewBox="0 0 52 52" width="52" height="52" style="position:absolute;left:0;top:0;opacity:0"><circle cx="26" cy="26" r="24" fill="#15803D"/><path id="tick" d="M15 27l8 8 15-17" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div style="position:relative;flex:1;height:84px">
+            <div id="chkT1" style="position:absolute;left:0;top:0"><div style="font-size:30px;font-weight:750;color:#0F172A">Note not signed</div><div style="font-size:23px;color:#475569;margin-top:6px">Sign the note before the claim can be sent.</div></div>
+            <div id="chkT2" style="position:absolute;left:0;top:0;opacity:0"><div style="font-size:30px;font-weight:750;color:#15803D">Note signed</div><div style="font-size:23px;color:#475569;margin-top:6px">Issue fixed before the claim went out.</div></div>
+          </div>
+        </div>
+      </div>
+      <div id="popRow" class="popout" style="left:240px;top:600px;opacity:0"></div>
+    </div>
+
+    <!-- S8 SCAN + SEND -->
+    <div id="s8" class="layer" style="opacity:0;z-index:5">
+      <div class="col-left" style="top:170px">
+        <div class="kicker">Step 5 &middot; Bill</div>
+        <div class="h2" id="b-h1" style="margin-top:20px">Scan the insurance card.</div>
+        <div class="h2" id="b-h2" style="margin-top:10px;opacity:0"><span class="grad">Send the claim in one tap.</span></div>
+      </div>
+      <div id="inscard" style="position:absolute;left:200px;top:560px;width:560px;height:340px;border-radius:26px;background:linear-gradient(135deg,#ffffff 0%,#F1F5F9 100%);color:#0F172A;box-shadow:0 40px 90px rgba(0,0,0,.5);padding:28px 32px;opacity:0;overflow:hidden">
+        <div style="display:flex;justify-content:space-between"><div style="font-size:22px;font-weight:800;color:#334155">SAMPLE HEALTH PLAN</div><div style="font-size:16px;font-weight:700;color:#64748B">PPO</div></div>
+        <div style="font-size:15px;color:#64748B;margin-top:34px">MEMBER</div><div style="font-size:28px;font-weight:700">JORDAN A RIVERA</div>
+        <div style="display:flex;gap:40px;margin-top:20px"><div><div style="font-size:15px;color:#64748B">MEMBER ID</div><div class="mono" style="font-size:22px">SMP 0000 1234</div></div><div><div style="font-size:15px;color:#64748B">GROUP</div><div class="mono" style="font-size:22px">000-DEMO</div></div></div>
+        <div style="position:absolute;right:24px;bottom:18px;font-size:13px;color:#94A3B8;font-weight:600">SAMPLE CARD &middot; DEMO DATA</div>
+        <div id="scanline" style="position:absolute;left:0;right:0;top:0;height:6px;background:#E5A3E8;box-shadow:0 0 30px 8px rgba(229,163,232,.8);opacity:0"></div>
+      </div>
+      <div id="chNode" class="glass" style="left:150px;top:600px;width:600px;padding:22px 28px;opacity:0;display:flex;align-items:center;gap:18px">
+        <div style="width:56px;height:56px;border-radius:16px;background:rgba(229,163,232,.18);display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M3 12h13M12 5l7 7-7 7" fill="none" stroke="#E5A3E8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><div style="font-size:28px;font-weight:700">Clearinghouse</div><div class="mono" style="font-size:21px;color:rgba(255,255,255,.75)">837P claim &middot; <span id="sentTxt">sending</span></div></div>
+      </div>
+      <div id="token" style="position:absolute;left:0;top:0;width:90px;height:110px;border-radius:12px;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;padding:14px">
+        <div style="height:8px;border-radius:4px;background:#980F86;width:60%"></div><div style="height:6px;border-radius:3px;background:#CBD5E1;margin-top:10px"></div><div style="height:6px;border-radius:3px;background:#CBD5E1;margin-top:8px;width:80%"></div><div style="height:6px;border-radius:3px;background:#CBD5E1;margin-top:8px;width:70%"></div>
+      </div>
+    </div>
+
+    <!-- S9 PRIVACY text -->
+    <div id="s9" class="layer" style="opacity:0">
+      <div class="col-left" style="top:190px">
+        <div class="kicker">Privacy</div>
+        <div class="h2" id="v-h" style="margin-top:20px">On-device mode keeps the audio on the phone.</div>
+        <div id="v-list" style="margin-top:44px">
+          <div class="vrow h3" style="display:flex;gap:18px;align-items:center;margin-bottom:22px;font-weight:600"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="rgba(229,163,232,.18)"/><path d="M12 20.5l5.5 5.5 11-12" fill="none" stroke="#E5A3E8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Works offline</div>
+          <div class="vrow h3" style="display:flex;gap:18px;align-items:center;margin-bottom:22px;font-weight:600"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="rgba(229,163,232,.18)"/><path d="M12 20.5l5.5 5.5 11-12" fill="none" stroke="#E5A3E8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Card photos deleted after reading</div>
+          <div class="vrow h3" style="display:flex;gap:18px;align-items:center;font-weight:600"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="rgba(229,163,232,.18)"/><path d="M12 20.5l5.5 5.5 11-12" fill="none" stroke="#E5A3E8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>BAA available for your practice</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHONE (persistent from 18.2 to 72.7) -->
+    <div id="phone" class="phone" style="opacity:0">
+      <div class="body"></div>
+      <div class="btn-side" style="top:200px;height:70px"></div>
+      <div class="btn-side" style="top:300px;height:120px"></div>
+      <div class="screen" id="screen">
+        <div class="scr" id="scrConsent"><img class="shot" src="assets/shots/16_consent.png" alt="" />
+          <div class="ring" id="ringConsent" style="left:20px;top:735px;width:372px;height:56px"></div>
+          <div class="ripple" id="ripConsent" style="left:206px;top:763px"></div>
+        </div>
+        <div class="scr" id="scrRec" style="opacity:0">
+          <div class="statusbar"><span>9:41</span><span>5G</span></div>
+          <div class="appbar"><div class="name">Elena Rostova</div><div class="meta">52F &nbsp;|&nbsp; Visit 1 &nbsp;|&nbsp; Oct 15, 2026</div></div>
+          <div class="chiprow"><span>Cloud</span><span>Consent</span><span>Office (11)</span></div>
+          <div style="position:absolute;left:0;right:0;top:136px;text-align:center"><span class="rec-chip"><span class="rec-dot" id="recDot"></span>Recording</span></div>
+          <div id="recTimer" style="position:absolute;left:0;right:0;top:170px;text-align:center;font-size:46px;font-weight:500;color:#0F172A;font-variant-numeric:tabular-nums">00:00</div>
+          <div class="lane doc" id="miniLane" style="left:71px;top:226px;height:44px;gap:4px"></div>
+          <div class="card" style="top:290px;height:530px;overflow:hidden">
+            <div style="font-size:14px;font-weight:600;color:#0F172A;margin-bottom:12px">Live transcript</div>
+            <div class="bubble" id="bub1"><div class="who doc">Doctor &nbsp;00:01</div><div class="txt">So, what brings you in today?</div></div>
+            <div class="bubble" id="bub2"><div class="who pat">Patient &nbsp;00:03</div><div class="txt">I have this deep cough. I'm coughing up thick green phlegm, and my fever spiked to 101.5 last night.</div></div>
+            <div class="bubble" id="bub3"><div class="who doc">Doctor &nbsp;00:11</div><div class="txt">Any pain when you breathe?</div></div>
+            <div class="bubble" id="bub4"><div class="who pat">Patient &nbsp;00:12</div><div class="txt">Yes. A sharp pain, on the right side.</div></div>
+          </div>
+          <div class="btn-primary" id="finishBtn" style="left:16px;right:16px;top:838px">Finish and write note</div>
+          <div class="ripple" id="ripFinish" style="left:206px;top:862px"></div>
+        </div>
+        <div class="scr" id="scrNote" style="opacity:0">
+          <div class="statusbar"><span>9:42</span><span>5G</span></div>
+          <div class="appbar"><div class="name">Elena Rostova</div><div class="meta">52F &nbsp;|&nbsp; Visit 1 &nbsp;|&nbsp; Oct 15, 2026</div></div>
+          <div class="tabs" style="top:100px"><div class="on">Note</div><div>Talk</div><div>Orders</div><div>Claim</div></div>
+          <div class="card" style="top:152px;background:#E0EAFF;border-color:#C7D7FE;padding:12px 14px"><div style="font-size:14px;font-weight:600;color:#1E3A8A">Draft for your review</div><div style="font-size:13px;color:#1E293B;margin-top:3px">Check each section against what was said.</div></div>
+          <div class="card" style="top:232px">
+            <div class="sec-title"><span>Subjective</span><span style="font-size:12.5px">Sources</span></div>
+            <div class="note-line" id="nl1">Productive cough with thick green sputum.</div>
+            <div class="note-line" id="nl2">Fever to 101.5 F last night.</div>
+            <div class="note-line" id="nl3">Sharp right-sided pain with breathing.</div>
+          </div>
+          <div class="card" id="dxCard" style="top:424px">
+            <div class="sec-title"><span>Diagnoses (ICD-10-CM)</span></div>
+            <div class="code-row" id="dx1"><div class="code-badge">A</div><div><div><span class="code">R05.9</span><span class="pill">Patient reported</span></div><div style="font-size:14px">Cough, unspecified</div><div class="quote">"I'm coughing up thick green phlegm"</div></div></div>
+            <div class="code-row" id="dx2"><div class="code-badge">B</div><div><div><span class="code">R50.9</span><span class="pill">Patient reported</span></div><div style="font-size:14px">Fever, unspecified</div><div class="quote">"my fever spiked to 101.5 last night"</div></div></div>
+            <div class="code-row" id="dx3"><div class="code-badge">C</div><div><div><span class="code">R07.81</span><span class="pill">Patient reported</span></div><div style="font-size:14px">Pleurodynia</div><div class="quote">"A sharp pain, on the right side"</div></div></div>
+          </div>
+          <div class="ring" id="ringDx1" style="left:18px;top:462px;width:376px;height:90px"></div>
+        </div>
+        <div class="scr" id="scrClaim" style="opacity:0"><img class="shot" src="assets/shots/09_claim_uncertain.png" alt="" />
+          <div class="ring" id="ringBanner" style="left:12px;top:163px;width:388px;height:104px;border-color:#FDA29B"></div>
+          <div class="ring" id="ringFix" style="left:132px;top:852px;width:268px;height:54px"></div>
+        </div>
+        <div class="scr" id="scrScan" style="opacity:0"><img class="shot" src="assets/shots/03_scan_review.png" alt="" />
+          <div class="ring" id="ringChips" style="left:10px;top:362px;width:322px;height:34px"></div>
+        </div>
+        <div class="scr" id="scrSend" style="opacity:0">
+          <div class="statusbar"><span>9:43</span><span>5G</span></div>
+          <div class="appbar"><div class="name">Elena Rostova</div><div class="meta">52F &nbsp;|&nbsp; Visit 1 &nbsp;|&nbsp; Oct 15, 2026</div></div>
+          <div class="tabs" style="top:100px"><div>Note</div><div>Talk</div><div>Orders</div><div class="on">Claim</div></div>
+          <div class="card" style="top:156px;background:#DCFCE7;border-color:#BBF7D0;padding:12px 14px"><div style="font-size:14px;font-weight:600;color:#14532D">Note signed. No issues before billing.</div></div>
+          <div class="card" style="top:222px">
+            <div class="sec-title"><span>Claim</span></div>
+            <div style="display:grid;grid-template-columns:120px 1fr;row-gap:10px;font-size:14.5px"><span style="color:#475569">Date of service</span><span>Oct 15, 2026</span><span style="color:#475569">Place of service</span><span>Office (11)</span><span style="color:#475569">Diagnoses</span><span class="code" style="font-size:13.5px">R05.9 &middot; R50.9 &middot; R07.81</span><span style="color:#475569">Service</span><span class="code" style="font-size:13.5px">99204</span><span style="color:#475569">Format</span><span>837P</span></div>
+          </div>
+          <div class="btn-primary" id="sendBtn" style="left:16px;right:16px;top:838px"><span id="sendLbl">Send claim</span></div>
+          <div class="ripple" id="ripSend" style="left:206px;top:862px"></div>
+        </div>
+        <div class="scr" id="scrDevice" style="opacity:0">
+          <div class="statusbar"><span>9:44</span><span>5G</span></div>
+          <div class="appbar"><div class="name">Transcription engine</div><div class="meta">Where the visit audio is processed</div></div>
+          <div class="card" id="optDevice" style="top:120px;padding:18px">
+            <div style="display:flex;gap:12px;align-items:center"><div style="width:22px;height:22px;border-radius:50%;border:2px solid #980F86;position:relative"><div id="radioDot" style="position:absolute;left:4px;top:4px;width:10px;height:10px;border-radius:50%;background:#980F86;opacity:0"></div></div><div style="font-size:17px;font-weight:600">On-device</div></div>
+            <div style="font-size:14px;color:#475569;margin:8px 0 0 34px;line-height:1.45">No audio leaves the phone. Works offline. One-time model download, about 150 MB.</div>
+          </div>
+          <div class="card" style="top:262px;padding:18px">
+            <div style="display:flex;gap:12px;align-items:center"><div style="width:22px;height:22px;border-radius:50%;border:2px solid #94A3B8"></div><div style="font-size:17px;font-weight:600">Cloud</div></div>
+            <div style="font-size:14px;color:#475569;margin:8px 0 0 34px;line-height:1.45">Medical speech model, when your practice turns it on.</div>
+          </div>
+          <div id="devShield" style="position:absolute;left:106px;top:450px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,#FDE2F6 0%,rgba(253,226,246,0) 70%);display:flex;align-items:center;justify-content:center;opacity:0">
+            <svg width="96" height="96" viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3z" fill="#980F86"/><path d="M8.5 12.2l2.4 2.4 4.6-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="ripple" id="ripDevice" style="left:60px;top:150px"></div>
+        </div>
+      </div>
+      <div class="glare"></div>
+      <div class="punch"></div>
+    </div>
+
+    <!-- S10 CTA -->
+    <div id="s10" class="layer" style="opacity:0">
+      <div id="flash2" style="position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(229,163,232,0.9) 0%,rgba(152,15,134,0.45) 30%,rgba(11,14,20,0) 68%);opacity:0"></div>
+      <div id="tile2" class="mark-tile" style="left:840px;top:150px;width:240px;height:240px"></div>
+      <img id="letters2" src="assets/brand/solis_letters_white.svg" style="position:absolute;left:760px;top:440px;width:400px;height:103px" alt="SOLIS" />
+      <div id="tagline" class="h2" style="position:absolute;left:0;right:0;top:590px;text-align:center">Your visit, documented and billed.</div>
+      <div id="ctaWrap" style="position:absolute;left:0;right:0;top:720px;text-align:center"><span class="cta-btn" id="ctaBtn">Request early access<svg width="30" height="30" viewBox="0 0 24 24"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="#4E0044" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+      <div id="pilot" class="src" style="position:absolute;left:0;right:0;top:850px;text-align:center;font-size:24px;color:rgba(255,248,253,0.8)">Now in pilot on Android</div>
+    </div>
+
+    <div id="captions" class="captions"></div>
+  </div>
+
+  <script src="assets/data_16x9.js"></script>
+  <script src="assets/solis-kit.js"></script>
+  <script src="assets/film-16x9.js"></script>
+  <script>
+    window.__timelines = window.__timelines || {};
+    window.__timelines["main"] = window.buildSolisFilm();
+  </script>
+</div>
+</body>
+</html>

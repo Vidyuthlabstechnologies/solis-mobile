@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOLIS for Physicians</title>
+<style>
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; src: url('fonts/Inter-400.ttf') format('truetype'); }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; src: url('fonts/Inter-500.ttf') format('truetype'); }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; src: url('fonts/Inter-600.ttf') format('truetype'); }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; src: url('fonts/Inter-700.ttf') format('truetype'); }
+  @font-face { font-family: 'Roboto Mono'; font-style: normal; font-weight: 400; src: url('fonts/RobotoMono-400.ttf') format('truetype'); }
+  @font-face { font-family: 'Roboto Mono'; font-style: normal; font-weight: 500; src: url('fonts/RobotoMono-500.ttf') format('truetype'); }
+  @page { size: 8.5in 11in; margin: 0; }
+
+  :root {
+    --orchid: #980F86;
+    --deep: #4E0044;
+    --deeper: #2F0029;
+    --container: #FDE2F6;
+    --nearwhite: #FFF8FD;
+    --lilac: #F1CAF3;
+    --ink: #0F172A;
+    --ink2: #334155;
+    --muted: #64748B;
+    --line: #E9E3EC;
+    --soft: #FAF6FA;
+    --mono: 'Roboto Mono', ui-monospace, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #E9E4EC;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-feature-settings: 'cv11', 'ss01', 'tnum' 0;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    width: 8.5in; height: 11in; position: relative; overflow: hidden;
+    background: #fff; margin: 0.4in auto; box-shadow: 0 10px 40px rgba(47,0,41,.12);
+    padding: 0.62in 0.65in 0.9in;
+    break-after: page; page-break-after: always;
+  }
+  .page:last-child { break-after: auto; page-break-after: auto; }
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; }
+  }
+
+  /* ---------- type ---------- */
+  .eyebrow {
+    display: flex; align-items: center; gap: 0.12in;
+    font-size: 8pt; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--orchid); margin: 0 0 0.16in;
+  }
+  .eyebrow .num { font-family: var(--mono); font-weight: 500; letter-spacing: 0.04em; color: var(--orchid); }
+  .eyebrow .bar { width: 0.28in; height: 1.2px; background: currentColor; opacity: .5; }
+  h1, h2, h3, h4 { margin: 0; font-weight: 700; color: var(--ink); }
+  h2 { font-size: 29pt; line-height: 1.08; letter-spacing: -0.028em; max-width: 6.6in; }
+  h2 .soft { color: #94869A; }
+  h3 { font-size: 12pt; line-height: 1.25; letter-spacing: -0.01em; font-weight: 600; }
+  h4 { font-size: 10pt; line-height: 1.3; font-weight: 600; }
+  p { margin: 0; font-size: 9.6pt; line-height: 1.55; color: var(--ink2); }
+  .lead { font-size: 12pt; line-height: 1.5; color: var(--ink2); max-width: 5.6in; margin-top: 0.16in; letter-spacing: -0.005em; }
+  .small { font-size: 8.4pt; line-height: 1.5; color: var(--muted); }
+  .src { font-size: 6.9pt; line-height: 1.45; color: var(--muted); }
+  .src b { font-weight: 600; color: #475569; }
+  .mono { font-family: var(--mono); }
+  .chip {
+    display: inline-flex; align-items: center; font-family: var(--mono); font-size: 7.6pt; font-weight: 500;
+    color: var(--deep); background: #FBF0F9; border: 1px solid #F0D4EA; border-radius: 5px;
+    padding: 0.028in 0.07in; white-space: nowrap; letter-spacing: 0;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.06in; }
+
+  /* ---------- icons ---------- */
+  .ic { width: 0.2in; height: 0.2in; flex: none; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .ic-tile {
+    width: 0.38in; height: 0.38in; border-radius: 0.1in; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    background: #FBF0F9; color: var(--orchid); border: 1px solid #F3DDEE;
+  }
+
+  /* ---------- footer ---------- */
+  .foot {
+    position: absolute; left: 0.65in; right: 0.65in; bottom: 0.42in;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 7.4pt; color: var(--muted); letter-spacing: 0.02em;
+    border-top: 1px solid var(--line); padding-top: 0.12in;
+  }
+  .foot .brand { display: flex; align-items: center; gap: 0.07in; font-weight: 700; letter-spacing: 0.16em; color: var(--ink); font-size: 7.4pt; }
+  .foot .brand svg { width: 0.16in; height: 0.16in; }
+  .foot .pg { font-family: var(--mono); color: var(--ink2); }
+
+  /* ---------- phone frame ---------- */
+  .phone {
+    --w: 2.2in;
+    width: var(--w); flex: none; position: relative;
+    padding: calc(var(--w) * 0.034);
+    background: linear-gradient(145deg, #2B3245 0%, #0F1320 45%, #1C2233 100%);
+    border-radius: calc(var(--w) * 0.155);
+    box-shadow:
+      0 0 0 1px rgba(15,23,42,.9),
+      inset 0 0 0 1.4px rgba(255,255,255,.10),
+      0 0.28in 0.5in -0.12in rgba(47,0,41,.30),
+      0 0.06in 0.14in rgba(15,23,42,.14);
+  }
+  .phone::before { /* side button */
+    content: ''; position: absolute; right: calc(var(--w) * -0.012); top: 22%;
+    width: calc(var(--w) * 0.014); height: 9%; border-radius: 0 2px 2px 0; background: #1C2233;
+  }
+  .phone .scr { position: relative; overflow: hidden; border-radius: calc(var(--w) * 0.122); background: #F8FAFC; }
+  .phone .sb {
+    height: calc(var(--w) * 0.088); display: flex; align-items: center; justify-content: space-between;
+    padding: 0 calc(var(--w) * 0.075) 0 calc(var(--w) * 0.085);
+    font-size: calc(var(--w) * 0.037); font-weight: 600; color: #0F172A; position: relative;
+  }
+  .phone .sb::after { /* camera */
+    content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -45%);
+    width: calc(var(--w) * 0.04); height: calc(var(--w) * 0.04); border-radius: 50%; background: #0B0E14;
+  }
+  .phone .sb svg { height: calc(var(--w) * 0.036); width: auto; fill: currentColor; }
+  .phone .sb .r { display: flex; gap: calc(var(--w) * 0.018); align-items: center; }
+  .phone img { display: block; width: 100%; height: auto; }
+  .phone .crop { overflow: hidden; }
+  .phone.dark .scr { background: #0B0E14; }
+  .phone.dark .sb { color: #E6E9EF; }
+
+  /* ================= COVER ================= */
+  .cover { padding: 0.32in; background: #fff; }
+  .cover .panel {
+    position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 0.3in;
+    background:
+      radial-gradient(ellipse 60% 45% at 78% 78%, rgba(152,15,134,.42), rgba(152,15,134,0) 70%),
+      radial-gradient(ellipse 50% 40% at 10% 0%, rgba(111,0,97,.55), rgba(111,0,97,0) 70%),
+      linear-gradient(165deg, #4E0044 0%, #3A0033 55%, #2F0029 100%);
+    color: #fff; padding: 0.5in 0.55in;
+  }
+  .cover .ghost { position: absolute; right: -1.3in; top: 3.0in; width: 5.6in; height: 5.6in; opacity: .06; color: #fff; }
+  .cover .top { display: flex; justify-content: space-between; align-items: center; position: relative; }
+  .cover .wm { height: 0.42in; width: auto; }
+  .cover .pill {
+    font-size: 7.6pt; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--lilac); border: 1px solid rgba(241,202,243,.35); border-radius: 99px; padding: 0.06in 0.14in;
+  }
+  .cover h1 {
+    color: #fff; font-size: 47pt; line-height: 1.0; letter-spacing: -0.04em; font-weight: 700;
+    margin-top: 1.0in; position: relative;
+  }
+  .cover h1 .l2 { color: #E5A3E8; }
+  .cover .sub { font-size: 13.5pt; line-height: 1.45; color: #F6E3F5; max-width: 3.7in; margin-top: 0.3in; letter-spacing: -0.005em; position: relative; text-wrap: balance; }
+  .cover .feats { position: absolute; left: 0.55in; bottom: 1.55in; width: 2.85in; display: grid; gap: 0.17in; }
+  .cover .feat { display: flex; gap: 0.13in; align-items: flex-start; font-size: 9.4pt; line-height: 1.4; color: #F1E4F1; }
+  .cover .feat .ic { color: #E5A3E8; width: 0.21in; height: 0.21in; margin-top: 0.01in; }
+  .cover .feat b { color: #fff; font-weight: 600; display: block; }
+  .cover .cta { position: absolute; left: 0.55in; bottom: 0.5in; display: flex; flex-direction: column; gap: 0.06in; }
+  .cover .cta .k { font-size: 7.4pt; letter-spacing: 0.14em; text-transform: uppercase; color: #D9A9D8; font-weight: 600; }
+  .cover .cta .u { font-size: 12pt; font-weight: 600; color: #fff; letter-spacing: -0.005em; display: flex; align-items: center; gap: 0.08in; }
+  .cover .phones { position: absolute; right: 0.35in; top: 4.05in; width: 4.0in; height: 7in; }
+  .cover .phones .back { position: absolute; left: 0; top: 0.75in; --w: 2.45in; opacity: .97; }
+  .cover .phones .front { position: absolute; right: 0; top: 0; --w: 2.85in; }
+
+  /* ================= PROBLEM ================= */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.32in; margin-top: 0.5in; }
+  .stat { border-top: 1.5px solid var(--ink); padding-top: 0.16in; }
+  .stat .n { font-size: 46pt; font-weight: 700; letter-spacing: -0.045em; line-height: 1; color: var(--ink); }
+  .stat .n small { font-size: 18pt; letter-spacing: -0.02em; font-weight: 600; margin-left: 0.04in; color: var(--ink2); }
+  .stat .d { font-size: 10pt; line-height: 1.45; color: var(--ink2); margin-top: 0.12in; min-height: 0.9in; }
+  .stat .d b { color: var(--ink); font-weight: 600; }
+  .stat .src { margin-top: 0.1in; }
+  .compare { margin-top: 0.5in; }
+  .compare .hd { display: grid; grid-template-columns: 0.38in 2.55in 1fr; gap: 0.2in; padding-bottom: 0.1in; border-bottom: 1px solid var(--line); }
+  .compare .hd span { font-size: 7.6pt; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .compare .hd span.w { color: var(--orchid); }
+  .compare .row { display: grid; grid-template-columns: 0.38in 2.55in 1fr; gap: 0.2in; align-items: center; padding: 0.15in 0; border-bottom: 1px solid var(--line); }
+  .compare .row .was { font-size: 9.4pt; line-height: 1.45; color: var(--muted); }
+  .compare .row .now { font-size: 9.8pt; line-height: 1.45; color: var(--ink); }
+  .compare .row .now b { font-weight: 600; }
+
+  /* ================= STEPS ================= */
+  .steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.3in; margin-top: 0.42in; }
+  .step .phone { --w: 2.1in; margin: 0 auto; }
+  .step .cap { margin-top: 0.32in; }
+  .stepno { font-family: var(--mono); font-size: 8.4pt; font-weight: 500; color: var(--orchid); letter-spacing: 0.04em; display: flex; align-items: center; gap: 0.08in; margin-bottom: 0.07in; }
+  .stepno::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .step h3 { margin-bottom: 0.07in; }
+  .step p { font-size: 9.1pt; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.05in; margin-top: 0.1in; }
+
+  .steps2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.45in; margin-top: 0.3in; }
+  .steps2 .step .phone { --w: 2.05in; }  .steps2 .step .cap { margin-top: 0.26in; }
+  .flow { margin-top: 0.3in; border: 1px solid var(--line); border-radius: 0.14in; background: var(--soft); padding: 0.2in 0.24in; }
+  .flow .t { font-size: 7.6pt; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.13in; }
+  .flow .line { display: grid; grid-template-columns: 1fr 0.16in 1fr 0.16in 1fr 0.16in 1fr; align-items: start; gap: 0.06in; }
+  .flow .node h4 { font-size: 9.2pt; }
+  .flow .node p { font-size: 8pt; line-height: 1.4; margin-top: 0.03in; color: var(--muted); }
+  .flow .arr { color: #C9A3C4; padding-top: 0.02in; }
+  .flow .arr .ic { width: 0.16in; height: 0.16in; }
+
+  /* ================= ENGINE ================= */
+  .engine { display: grid; grid-template-columns: 1fr 2.2in; gap: 0.5in; margin-top: 0.3in; align-items: start; }
+  .engine .phone { --w: 2.2in; }
+  .quote {
+    border-left: 2px solid var(--orchid); padding: 0.04in 0 0.04in 0.18in; margin: 0.1in 0 0.1in;
+  }
+  .quote .q { font-size: 15pt; line-height: 1.3; letter-spacing: -0.015em; font-weight: 600; color: var(--ink); }
+  .quote .a { font-size: 9.2pt; line-height: 1.5; color: var(--ink2); margin-top: 0.08in; }
+  .bign { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2in; margin: 0.2in 0 0.18in; }
+  .bign .n { font-size: 36pt; font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--deep); }
+  .bign .l { font-size: 8.8pt; line-height: 1.4; color: var(--ink2); margin-top: 0.06in; }
+  .setlist { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .setlist .r { display: grid; grid-template-columns: 1.55in 1fr; gap: 0.12in; padding: 0.06in 0; border-bottom: 1px solid var(--line); align-items: center; }
+  .setlist .r > span:first-child { font-size: 8.4pt; color: var(--muted); }
+  .catches { margin-top: 0.3in; }
+  .catches .t { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.13in; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.12in; }
+  .ccard { border: 1px solid var(--line); border-radius: 0.12in; padding: 0.11in 0.13in 0.12in; background: #fff; }
+  .ccard .no { font-family: var(--mono); font-size: 7.4pt; color: var(--orchid); font-weight: 500; }
+  .ccard h4 { margin-top: 0.06in; font-size: 9pt; line-height: 1.3; }
+  .ccard p { font-size: 7.8pt; line-height: 1.4; margin-top: 0.04in; color: var(--muted); }
+
+  /* ================= PRIVACY ================= */
+  .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 0.2in; margin-top: 0.5in; }
+  .mode { border: 1px solid var(--line); border-radius: 0.16in; padding: 0.22in 0.24in; }
+  .mode.on { background: linear-gradient(180deg, #FFF8FD, #FDF0FA); border-color: #F0D4EA; }
+  .mode .hd { display: flex; align-items: center; gap: 0.12in; margin-bottom: 0.14in; }
+  .mode .kv { display: grid; grid-template-columns: 1.05in 1fr; row-gap: 0.075in; column-gap: 0.1in; font-size: 8.8pt; line-height: 1.4; }
+  .mode .kv span:nth-child(odd) { color: var(--muted); }
+  .mode .kv span:nth-child(even) { color: var(--ink); font-weight: 500; }
+  .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4in 0.4in; margin-top: 0.55in; }
+  .pitem { display: flex; gap: 0.16in; align-items: flex-start; }
+  .pitem h3 { font-size: 11pt; margin-bottom: 0.05in; }
+  .pitem p { font-size: 9.1pt; }
+  .callout {
+    margin-top: 0.6in; display: flex; gap: 0.2in; align-items: center;
+    background: var(--deep); color: #fff; border-radius: 0.16in; padding: 0.24in 0.28in;
+  }
+  .callout .big { font-size: 15pt; font-weight: 600; letter-spacing: -0.015em; line-height: 1.25; }
+  .callout p { color: #EBD3EA; font-size: 9pt; margin-top: 0.05in; }
+  .callout .ic { color: #E5A3E8; width: 0.34in; height: 0.34in; stroke-width: 1.4; }
+
+  /* ================= WHO ================= */
+  .who { display: grid; grid-template-columns: 1fr 2.1in; gap: 0.5in; margin-top: 0.34in; align-items: start; }
+  .who .phone { --w: 2.1in; }
+  .who .cap { margin-top: 0.2in; }
+  .settings { border-top: 1px solid var(--line); }
+  .setting { display: flex; gap: 0.17in; padding: 0.19in 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+  .setting h3 { font-size: 11pt; margin-bottom: 0.04in; }
+  .setting p { font-size: 9pt; line-height: 1.5; }
+  .spec { margin-top: 0.3in; }
+  .spec .t { font-size: 7.6pt; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.1in; }
+  .spec .g { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 0.14in; overflow: hidden; }
+  .spec .c { padding: 0.11in 0.16in; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .spec .c:nth-child(3n) { border-right: 0; }
+  .spec .c:nth-child(n+4) { border-bottom: 0; }
+  .spec .c .k { font-size: 7.6pt; color: var(--muted); }
+  .spec .c .v { font-size: 9pt; font-weight: 600; color: var(--ink); margin-top: 0.04in; line-height: 1.35; }
+
+  /* ================= BACK ================= */
+  .back { padding: 0.32in; }
+  .back .panel {
+    position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 0.3in;
+    background:
+      radial-gradient(ellipse 55% 40% at 100% 100%, rgba(152,15,134,.35), rgba(152,15,134,0) 70%),
+      linear-gradient(165deg, #4E0044 0%, #3A0033 60%, #2F0029 100%);
+    color: #fff; padding: 0.55in 0.6in;
+  }
+  .back .eyebrow { color: #E5A3E8; }
+  .back .eyebrow .num { color: #E5A3E8; }
+  .back h2 { color: #fff; font-size: 40pt; letter-spacing: -0.04em; }
+  .back .lead { color: #F1DDF0; max-width: 5.4in; }
+  .join { margin-top: 0.42in; display: grid; gap: 0; border-top: 1px solid rgba(241,202,243,.22); }
+  .join .r { display: grid; grid-template-columns: 0.6in 1fr; padding: 0.17in 0; border-bottom: 1px solid rgba(241,202,243,.22); }
+  .join .r .no { font-family: var(--mono); font-size: 10pt; color: #E5A3E8; padding-top: 0.02in; }
+  .join .r h3 { color: #fff; font-size: 13pt; }
+  .join .r p { color: #E8CFE7; font-size: 9.6pt; margin-top: 0.05in; max-width: 5.2in; }
+  .need { margin-top: 0.34in; }
+  .need .t { font-size: 7.6pt; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #D9A9D8; margin-bottom: 0.14in; }
+  .need .g { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.16in; }
+  .need .c { display: flex; gap: 0.12in; align-items: flex-start; border: 1px solid rgba(241,202,243,.22); border-radius: 0.14in; padding: 0.16in 0.16in; background: rgba(255,255,255,.04); }
+  .need .c .ic { color: #E5A3E8; margin-top: 0.01in; }
+  .need .c b { display: block; font-size: 9.6pt; font-weight: 600; color: #fff; }
+  .need .c span { display: block; font-size: 8.4pt; line-height: 1.4; color: #E2C6E1; margin-top: 0.03in; }
+  .ctacard {
+    position: absolute; left: 0.6in; right: 0.6in; bottom: 0.92in;
+    background: #fff; color: var(--ink); border-radius: 0.2in; padding: 0.3in 0.34in;
+    display: grid; grid-template-columns: 1fr 1.25in; gap: 0.3in; align-items: center;
+    box-shadow: 0 0.2in 0.5in -0.15in rgba(0,0,0,.4);
+  }
+  .ctacard .k { font-size: 7.6pt; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--orchid); }
+  .ctacard .big { font-size: 24pt; font-weight: 700; letter-spacing: -0.03em; margin-top: 0.06in; }
+  .ctacard .url { margin-top: 0.18in; display: flex; align-items: center; gap: 0.1in; border-top: 1px solid var(--line); padding-top: 0.15in; }
+  .ctacard .url span.l { font-size: 7.6pt; color: var(--muted); letter-spacing: 0.04em; width: 0.62in; }
+  .ctacard .url span.v { font-size: 13pt; font-weight: 600; letter-spacing: -0.01em; color: var(--deep); }
+  .ctacard .qr { width: 1.25in; height: 1.25in; }
+  .ctacard .qrcap { font-size: 6.8pt; color: var(--muted); text-align: center; margin-top: 0.06in; }
+  .fine { position: absolute; left: 0.6in; right: 0.6in; bottom: 0.38in; display: flex; justify-content: space-between; gap: 0.3in; align-items: flex-end; font-size: 6.9pt; line-height: 1.5; color: #CDA9CB; }
+  .fine .wm { height: 0.26in; width: auto; flex: none; }
+</style>
+</head>
+<body>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-consent" viewBox="0 0 24 24"><path d="M12 3l7 3v5.2c0 4.4-3 8.2-7 9.6-4-1.4-7-5.2-7-9.6V6z"/><path d="M9 12.2l2.1 2.1L15.2 10"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8.5L18 6.5V21H6z"/><path d="M14 3v4h4"/><path d="M9 11.5h6M9 15h6M9 18h3.5"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7L3.5 12l5 5"/><path d="M15.5 7l5 5-5 5"/><path d="M13.5 4.5l-3 15"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.2"/><circle cx="8.5" cy="10.5" r="2"/><path d="M5.8 15.6c.6-1.3 1.6-2 2.7-2s2.1.7 2.7 2"/><path d="M14 10h4M14 13.5h4"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M20.5 3.5L3.5 10.2l7 2.8 2.8 7z"/><path d="M20.5 3.5l-10 9.5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.8 18.3h2.4"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15.5" r="4"/><path d="M10.9 12.6L19.5 4"/><path d="M16.5 7l2.2 2.2"/><path d="M14.2 9.3l1.8 1.8"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M9.5 7V4.5h5V7"/><path d="M6.2 7l.9 13h9.8l.9-13"/><path d="M10.2 11v5.5M13.8 11v5.5"/></symbol>
+    <symbol id="i-sign" viewBox="0 0 24 24"><path d="M6 3h8.5L18 6.5V12"/><path d="M14 3v4h4"/><path d="M6 3v18h6"/><path d="M9 9h4M9 12.5h3"/><path d="M14.5 19.5l5.3-5.3a1.4 1.4 0 0 0-2-2l-5.3 5.3-.6 2.6z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></symbol>
+    <symbol id="i-offline" viewBox="0 0 24 24"><path d="M3.5 3.5l17 17"/><path d="M9.2 6.4A6 6 0 0 1 17.6 10h.4a4 4 0 0 1 2 7.5"/><path d="M6.6 9.3A4.2 4.2 0 0 0 7 17.7h9.5"/></symbol>
+    <symbol id="i-clinic" viewBox="0 0 24 24"><path d="M4 20.5V9l8-5.5L20 9v11.5"/><path d="M2.8 20.5h18.4"/><path d="M12 10.2v5.6M9.2 13h5.6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="8.5"/><path d="M12 8v4.7l3 1.8"/><path d="M9.5 2.8h5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 19.8s-8.3-5-8.3-10.7A4.6 4.6 0 0 1 12 6.4a4.6 4.6 0 0 1 8.3 2.7c0 5.7-8.3 10.7-8.3 10.7z"/><path d="M6.2 12h3.2l1.4-2.4 2.4 4.6 1.4-2.2h3.2"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 5.5v14"/><path d="M3 15h18v4.5"/><path d="M21 15v-2.8A3.2 3.2 0 0 0 17.8 9H11v6"/><circle cx="7" cy="11.6" r="1.9"/></symbol>
+    <symbol id="i-ambulance" viewBox="0 0 24 24"><path d="M14 16.5V6.5H3v10h1.8"/><path d="M14 9.5h3.8l3.2 3.8v3.2h-1.8"/><path d="M9.6 16.5h4.6"/><circle cx="7.2" cy="16.8" r="2"/><circle cx="16.8" cy="16.8" r="2"/><path d="M8.5 8.8v4.4M6.3 11h4.4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15"/><path d="M13.5 6l6 6-6 6"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 1 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 1 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.3"/><path d="M3 19.5c.7-3.2 3.1-5.2 6-5.2s5.3 2 6 5.2"/><path d="M15.8 4.9a3.3 3.3 0 0 1 0 6.2"/><path d="M17.8 14.6c1.6.7 2.7 2.4 3.1 4.9"/></symbol>
+    <symbol id="i-listcheck" viewBox="0 0 24 24"><path d="M4 6.5h10M4 11.5h10M4 16.5h6"/><path d="M14.5 16l2.3 2.3 4.2-4.6"/></symbol>
+    <symbol id="i-wave" viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 10.5v3"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18.5a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.4 1.6A3.7 3.7 0 0 1 17.5 18.5z"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><path d="M8 9.5h8M8 12.5h8M8 15.5h5"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.9-3.6 3.7-5.7 7-5.7s6.1 2.1 7 5.7"/></symbol>
+    <symbol id="sun" viewBox="0 0 1024 1024"><path d="M358.4 486.4A235.52 235.52 0 0 1 829.44 486.4ZM665.6 537.6A235.52 235.52 0 0 1 194.56 537.6Z"/></symbol>
+    <symbol id="sb-icons" viewBox="0 0 64 16"><path d="M2 12h2v2H2zM6 9h2v5H6zM10 6h2v8h-2zM14 3h2v11h-2z"/><path d="M24 6.2a9.5 9.5 0 0 1 13 0l-1.4 1.5a7.5 7.5 0 0 0-10.2 0zM27 9.3a5.2 5.2 0 0 1 7 0L30.5 13z"/><rect x="44" y="4" width="16" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="46" y="6" width="10" height="5" rx="1"/><rect x="60.6" y="7" width="1.6" height="3" rx=".6"/></symbol>
+  </defs>
+</svg>
+
+<!-- ======================= 1. COVER ======================= -->
+<section class="page cover">
+  <div class="panel">
+    <svg class="ghost" viewBox="0 0 1024 1024" fill="currentColor"><use href="#sun"/></svg>
+    <div class="top">
+      <svg class="wm" viewBox="0 0 684.981 240" aria-label="SOLIS">
+        <rect width="240" height="240" rx="55.2" fill="#980F86"/>
+        <rect x="1" y="1" width="238" height="238" rx="54.2" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+        <path fill="#FFFFFF" d="M84 114A55.2 55.2 0 0 1 194.4 114ZM156 126A55.2 55.2 0 0 1 45.6 126Z"/>
+        <path fill="#FFFFFF" fill-rule="evenodd" d="M340.32 128.64A28.32 28.32 0 0 1 340.32 72L340.32 89.28A11.04 11.04 0 0 0 340.32 111.36ZM354.01 111.36A28.32 28.32 0 0 1 354.01 168L354.01 150.72A11.04 11.04 0 0 0 354.01 128.64ZM340.32 72H382.33V89.28H340.32ZM340.32 111.36H354.01V128.64H340.32ZM312 150.72H354.01V168H312ZM397.69 120A48 48 0 1 1 493.690 120A48 48 0 1 1 397.69 120ZM414.97 120A30.72 30.72 0 1 0 476.41 120A30.72 30.72 0 1 0 414.97 120ZM509.05 72H526.33V168H509.05ZM509.05 150.72H566.65V168H509.05ZM582.01 72H599.29V168H582.01ZM642.97 128.64A28.32 28.32 0 0 1 642.97 72L642.97 89.28A11.04 11.04 0 0 0 642.97 111.36ZM656.661 111.36A28.32 28.32 0 0 1 656.661 168L656.661 150.72A11.04 11.04 0 0 0 656.661 128.64ZM642.97 72H684.981V89.28H642.97ZM642.97 111.36H656.661V128.64H642.97ZM614.65 150.72H656.661V168H614.65Z"/>
+      </svg>
+      <span class="pill">Pilot now open</span>
+    </div>
+
+    <h1>Look at your patient,<br><span class="l2">not the screen.</span></h1>
+    <p class="sub">SOLIS listens to the visit, writes the note, and builds a clean claim, on your phone.</p>
+
+    <div class="feats">
+      <div class="feat"><svg class="ic"><use href="#i-consent"/></svg><div><b>Consent first</b>A short script in English or Spanish before anything is recorded.</div></div>
+      <div class="feat"><svg class="ic"><use href="#i-listcheck"/></svg><div><b>Checked before it goes out</b>Codes tested against the official CMS code sets for the date of service.</div></div>
+      <div class="feat"><svg class="ic"><use href="#i-phone"/></svg><div><b>On-device mode</b>No audio leaves the phone, and it works offline.</div></div>
+    </div>
+
+    <div class="cta">
+      <span class="k">Request early access</span>
+      <span class="u">solis-health.pages.dev <svg class="ic" style="width:.17in;height:.17in;color:#E5A3E8"><use href="#i-arrow"/></svg></span>
+    </div>
+
+    <div class="phones">
+      <div class="phone back">
+        <div class="scr"><div class="sb"><span>9:41</span><span class="r"><svg viewBox="0 0 64 16"><use href="#sb-icons"/></svg></span></div><img src="../../screenshots/out/07_recording.png" alt="SOLIS recording a visit with a live transcript"></div>
+      </div>
+      <div class="phone front">
+        <div class="scr"><div class="sb"><span>9:41</span><span class="r"><svg viewBox="0 0 64 16"><use href="#sb-icons"/></svg></span></div><img src="../../screenshots/out/08_note.png" alt="SOLIS draft SOAP note for review"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 2. PROBLEM ======================= -->
+<section class="page">
+  <div class="eyebrow"><span class="num">01</span><span class="bar"></span>The problem</div>
+  <h2>The visit ends.<br><span class="soft">The charting doesn't.</span></h2>
+  <p class="lead">Notes, codes and claims follow physicians home, and every claim still has to get past the payer. The work is necessary. Doing it twice, or at night, is not.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="n">2<small>hours</small></div>
+      <div class="d">of EHR and desk work for <b>every hour of direct face time</b> with patients during the clinic day.</div>
+      <div class="src"><b>Source:</b> Sinsky C, et al. Allocation of Physician Time in Ambulatory Practice. Annals of Internal Medicine. 2016;165:753-760. doi.org/10.7326/M16-0961</div>
+    </div>
+    <div class="stat">
+      <div class="n">1.4<small>hours</small></div>
+      <div class="d">of EHR work <b>after clinic hours</b> each weekday, within a 5.9-hour daily EHR total for primary care physicians.</div>
+      <div class="src"><b>Source:</b> Arndt BG, et al. Tethered to the EHR. Annals of Family Medicine. 2017;15(5):419-426. doi.org/10.1370/afm.2121</div>
+    </div>
+    <div class="stat">
+      <div class="n">1<small>in 5</small></div>
+      <div class="d"><b>in-network claims denied</b> in 2023 by HealthCare.gov marketplace insurers (20%), and fewer than 1% of denials were appealed.</div>
+      <div class="src"><b>Source:</b> KFF analysis of CMS transparency data, Claims Denials and Appeals in ACA Marketplace Plans in 2023 (updated March 2026). kff.org</div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="hd"><span></span><span>The usual way</span><span class="w">With SOLIS</span></div>
+    <div class="row">
+      <div class="ic-tile"><svg class="ic"><use href="#i-doc"/></svg></div>
+      <div class="was">Notes typed from memory after the last patient leaves.</div>
+      <div class="now"><b>A concise SOAP draft</b> from the conversation itself, ready for you to review and sign.</div>
+    </div>
+    <div class="row">
+      <div class="ic-tile"><svg class="ic"><use href="#i-code"/></svg></div>
+      <div class="was">Codes picked from a cheat sheet, or left for someone else.</div>
+      <div class="now"><b>Diagnosis codes from the patient's own words</b>, each linked to the sentence it came from.</div>
+    </div>
+    <div class="row">
+      <div class="ic-tile"><svg class="ic"><use href="#i-listcheck"/></svg></div>
+      <div class="was">Errors found when the denial comes back.</div>
+      <div class="now"><b>Checks before the claim goes out</b>, against official CMS code sets for the date of service.</div>
+    </div>
+    <div class="row">
+      <div class="ic-tile"><svg class="ic"><use href="#i-card"/></svg></div>
+      <div class="was">Insurance details retyped at the front desk.</div>
+      <div class="now"><b>The card is read on the phone</b>, and the photo is deleted after reading.</div>
+    </div>
+  </div>
+
+  <div class="foot"><span class="brand"><svg viewBox="0 0 1024 1024"><rect width="1024" height="1024" rx="235.52" fill="#980F86"/><use href="#sun" fill="#fff"/></svg>SOLIS</span><span>The problem</span><span class="pg">02</span></div>
+</section>
+
+<!-- ======================= 3. STEPS 1-3 ======================= -->
+<section class="page">
+  <div class="eyebrow"><span class="num">02</span><span class="bar"></span>How a visit works</div>
+  <h2>One visit. Five steps.<br><span class="soft">One phone on the table.</span></h2>
+  <p class="lead">Put the phone between you and the patient and talk as you normally would. SOLIS handles the paperwork in the background.</p>
+
+  <div class="steps3">
+    <div class="step">
+      <div class="phone"><div class="scr"><div class="sb"><span>9:41</span><span class="r"><svg viewBox="0 0 64 16"><use href="#sb-icons"/></svg></span></div><img src="../../screenshots/out/16_consent.png" alt="Consent script before recording"></div></div>
+      <div class="cap">
+        <div class="stepno">01</div>
+        <h3>Consent first</h3>
+        <p>The patient hears a short script in English or Spanish, then agrees out loud or signs on the phone. Time and location are saved with the visit.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="phone"><div class="scr"><div class="sb"><span>9:41</span><span class="r"><svg viewBox="0 0 64 16"><use href="#sb-icons"/></svg></span></div><img src="../../screenshots/out/12_talk.png" alt="Transcript with doctor and patient turns"></div></div>
+      <div class="cap">
+        <div class="stepno">02</div>
+        <h3>Capture, voices separated</h3>
+        <p>SOLIS tells your voice from the patient's. Choose the on-device engine, or the cloud engine (Deepgram medical model) when your practice turns it on.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="phone"><div class="scr"><div class="sb"><span>9:41</span><span class="r"><svg viewBox="0 0 64 16"><use href="#sb-icons"/></svg></span></div><img src="../../screenshots/out/08_note.png" alt="Draft SOAP note"></div></div>
+      <div class="cap">
+        <div class="stepno">03</div>
+        <h3>The note writes itself</h3>
+        <p>A concise SOAP note. Nothing is invented: no vitals or exam findings that were not said. Tap Sources to see the words behind each section.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span class="brand"><svg viewBox="0 0 1024 1024"><rect width="1024" height="1024" rx="235.52" fill="#980F86"/><use href="#sun" fill="#fff"/></svg>SOLIS</span><span>How a visit works</span><span class="pg">03</span></div>
+</section>
+
+<!-- ======================= 4. STEPS 4-5 ======================= -->
+<section class="page">
+  <div class="eyebrow"><span class="num">02</span><span class="bar"></span>How a visit works, continued</div>
+  <h2>From the exam room<br><span class="soft">to a claim you can send.</span></h2>
+
+  <div class="steps2">
+    <div class="step">
+      <div class="phone"><div class="scr"><div class="sb"><span>9:41</span><span class="r"><svg viewBox="0 0 64 16"><use href="#sb-icons"/></svg></span></div><img src="../../screenshots/out/09_claim_uncertain.png" alt="Claim with patient-reported diagnosis codes"></div></div>
+      <div class="cap">
+        <div class="stepno">04</div>
+        <h3>Codes, then checks</h3>
+        <p>Diagnosis codes come from what was said, and uncertain wording waits for your one-tap confirmation. Procedure codes match the diagnosis, with the E/M level set by place of service, new or established patient, and medical decision making.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="phone"><div class="scr"><div class="sb"><span>9:41</span><span class="r"><svg viewBox="0 0 64 16"><use href="#sb-icons"/></svg></span></div><img src="../../screenshots/out/03_scan_review.png" alt="Insurance card and license scan review"></div></div>
+      <div class="cap">
+        <div class="stepno">05</div>
+        <h3>Scan the card, send the claim</h3>
+        <p>Insurance card, driver's license barcode and SSN card are read on the phone with Google ML Kit. Photos are deleted after reading. Only the last&nbsp;4 SSN digits are&nbsp;kept.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="t">From check-in to claim status, through the Stedi clearinghouse</div>
+    <div class="line">
+      <div class="node"><h4>Eligibility</h4><p>Checked at check-in.</p></div>
+      <div class="arr"><svg class="ic"><use href="#i-arrow"/></svg></div>
+      <div class="node"><h4>One account</h4><p>Check-digit account number, Visit 1, 2, 3 by date.</p></div>
+      <div class="arr"><svg class="ic"><use href="#i-arrow"/></svg></div>
+      <div class="node"><h4>Claim in one tap</h4><p>Sent as an <span class="mono">837P</span>.</p></div>
+      <div class="arr"><svg class="ic"><use href="#i-arrow"/></svg></div>
+      <div class="node"><h4>Status and export</h4><p>Claim status, plus <span class="mono" style="white-space:nowrap">CMS-1500</span> data and <span class="mono">837P</span> export.</p></div>
+    </div>
+  </div>
+
+  <div class="foot"><span class="brand"><svg viewBox="0 0 1024 1024"><rect width="1024" height="1024" rx="235.52" fill="#980F86"/><use href="#sun" fill="#fff"/></svg>SOLIS</span><span>How a visit works</span><span class="pg">04</span></div>
+</section>
+
+<!-- ======================= 5. CODING ENGINE ======================= -->
+<section class="page">
+  <div class="eyebrow"><span class="num">03</span><span class="bar"></span>The coding engine</div>
+  <h2>Coded from the patient's words.<br><span class="soft">Checked against the official rules.</span></h2>
+
+  <div class="engine">
+    <div>
+      <div class="quote">
+        <div class="q">"My feet burn at night."</div>
+        <div class="a">Coded as a symptom until you confirm a diagnosis, as the official outpatient rule requires (ICD-10-CM guideline&nbsp;<span class="mono">IV.H</span>). Confirming takes one&nbsp;tap.</div>
+      </div>
+
+      <div class="bign">
+        <div><div class="n">59</div><div class="l">of 63 official coding rules fully&nbsp;enforced</div></div>
+        <div><div class="n">4</div><div class="l">more need the AMA CPT license, not in the&nbsp;app</div></div>
+      </div>
+
+      <div class="setlist">
+        <div class="r"><span>Diagnosis codes</span><span class="chips"><span class="chip">ICD-10-CM FY2026</span><span class="chip">FY2027</span></span></div>
+        <div class="r"><span>HCPCS codes</span><span class="chips"><span class="chip">HCPCS Oct 2026</span></span></div>
+        <div class="r"><span>Payment</span><span class="chips"><span class="chip">2026 Physician Fee Schedule</span></span></div>
+        <div class="r"><span>Edits</span><span class="chips"><span class="chip">NCCI MUE</span><span class="chip">NCCI add-on</span></span></div>
+        <div class="r"><span>Age, maternity, manifestation</span><span class="chips"><span class="chip">Medicare Code Editor v44</span></span></div>
+        <div class="r"><span>Code structure</span><span class="chips"><span class="chip">Excludes1</span><span class="chip">7th character</span><span class="chip">Coding notes</span></span></div>
+      </div>
+      <p class="small" style="margin-top:.1in">Code sets in effect on the date of service. Tap <b>Why</b> on any check for the rule in plain English, its official citation and guideline text, offline.</p>
+    </div>
+    <div class="phone"><div class="scr"><div class="sb"><span>9:41</span><span class="r"><svg viewBox="0 0 64 16"><use href="#sb-icons"/></svg></span></div><img src="../../screenshots/out/19_claim_why.png" alt="The Why sheet: the rule, what it means on this claim, the official source and the guideline text"></div></div>
+  </div>
+
+  <div class="catches">
+    <div class="t"><h3>What it catches before the payer does</h3><span class="small">Examples</span></div>
+    <div class="grid4">
+      <div class="ccard"><div class="no">01</div><h4>Sex and age conflicts</h4><p>A code that does not fit the patient.</p></div>
+      <div class="ccard"><div class="no">02</div><h4>Diagnoses that exclude each other</h4><p>Excludes1 pairs, flagged before submission.</p></div>
+      <div class="ccard"><div class="no">03</div><h4>Missing 7th character</h4><p>Codes that are not yet complete.</p></div>
+      <div class="ccard"><div class="no">04</div><h4>External cause listed first</h4><p>Order that a payer would reject.</p></div>
+      <div class="ccard"><div class="no">05</div><h4>Modifier 25 needed</h4><p>When a separate E/M service applies.</p></div>
+      <div class="ccard"><div class="no">06</div><h4>Add-on without its primary</h4><p>Checked against NCCI <span style="white-space:nowrap">add-on</span> edits.</p></div>
+      <div class="ccard"><div class="no">07</div><h4>Units over the daily limit</h4><p>Checked against NCCI MUEs.</p></div>
+      <div class="ccard"><div class="no">08</div><h4>Uncertain diagnoses</h4><p>Held as symptoms until you confirm.</p></div>
+    </div>
+  </div>
+
+  <div class="foot"><span class="brand"><svg viewBox="0 0 1024 1024"><rect width="1024" height="1024" rx="235.52" fill="#980F86"/><use href="#sun" fill="#fff"/></svg>SOLIS</span><span>The coding engine</span><span class="pg">05</span></div>
+</section>
+
+<!-- ======================= 6. PRIVACY ======================= -->
+<section class="page">
+  <div class="eyebrow"><span class="num">04</span><span class="bar"></span>Privacy and control</div>
+  <h2>You decide where<br><span class="soft">the audio goes.</span></h2>
+  <p class="lead">Two engines, one switch. Keep everything on the phone, or let the practice turn on the cloud engine for its medical speech model.</p>
+
+  <div class="modes">
+    <div class="mode on">
+      <div class="hd"><div class="ic-tile"><svg class="ic"><use href="#i-phone"/></svg></div><h3>On-device mode</h3></div>
+      <div class="kv">
+        <span>Audio</span><span>Stays on the phone</span>
+        <span>Transcription</span><span>On-device, with speaker separation</span>
+        <span>Note writing</span><span>On-device engine</span>
+        <span>Connection</span><span>Works offline</span>
+        <span>Setup</span><span>One-time model download, about 150 MB</span>
+      </div>
+    </div>
+    <div class="mode">
+      <div class="hd"><div class="ic-tile"><svg class="ic"><use href="#i-cloud"/></svg></div><h3>Cloud mode</h3></div>
+      <div class="kv">
+        <span>Turned on by</span><span>The practice</span>
+        <span>Transcription</span><span>Deepgram medical model</span>
+        <span>Note writing</span><span>Claude</span>
+        <span>Vendor keys</span><span>Held on the SOLIS server</span>
+        <span>Setup</span><span>No model download</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pgrid">
+    <div class="pitem"><div class="ic-tile"><svg class="ic"><use href="#i-key"/></svg></div><div><h3>Keys never ship in the app</h3><p>Vendor API keys live on the SOLIS server, not on the phone.</p></div></div>
+    <div class="pitem"><div class="ic-tile"><svg class="ic"><use href="#i-trash"/></svg></div><div><h3>Card photos deleted</h3><p>Cards are read on the phone, then the photo is deleted. The full SSN is never stored, only the last 4 digits.</p></div></div>
+    <div class="pitem"><div class="ic-tile"><svg class="ic"><use href="#i-consent"/></svg></div><div><h3>Consent on the record</h3><p>Verbal agreement or an on-screen signature, saved with the time and location of the visit.</p></div></div>
+    <div class="pitem"><div class="ic-tile"><svg class="ic"><use href="#i-pin"/></svg></div><div><h3>A real location</h3><p>The visit record carries the real street address, never a placeholder.</p></div></div>
+  </div>
+
+  <div class="callout">
+    <svg class="ic"><use href="#i-sign"/></svg>
+    <div>
+      <div class="big">Built for HIPAA workflows. BAA available.</div>
+      <p>A Business Associate Agreement (BAA) template is available for practices.</p>
+    </div>
+  </div>
+
+  <div class="foot"><span class="brand"><svg viewBox="0 0 1024 1024"><rect width="1024" height="1024" rx="235.52" fill="#980F86"/><use href="#sun" fill="#fff"/></svg>SOLIS</span><span>Privacy and control</span><span class="pg">06</span></div>
+</section>
+
+<!-- ======================= 7. WHO ======================= -->
+<section class="page">
+  <div class="eyebrow"><span class="num">05</span><span class="bar"></span>Who it's for</div>
+  <h2>For practices without a<br><span class="soft">billing department down the hall.</span></h2>
+
+  <div class="who">
+    <div class="settings">
+      <div class="setting"><div class="ic-tile"><svg class="ic"><use href="#i-clinic"/></svg></div><div><h3>Primary care</h3><p>Office visits coded by new or established patient and medical decision making, with symptoms held until you confirm.</p></div></div>
+      <div class="setting"><div class="ic-tile"><svg class="ic"><use href="#i-clock"/></svg></div><div><h3>Urgent care</h3><p>Scan the card at the door, check eligibility at check-in, and send the claim in one tap.</p></div></div>
+      <div class="setting"><div class="ic-tile"><svg class="ic"><use href="#i-heart"/></svg></div><div><h3>Specialty clinics</h3><p>Your specialty and accepted insurers live in your provider profile, and procedure codes link to their diagnoses.</p></div></div>
+      <div class="setting"><div class="ic-tile"><svg class="ic"><use href="#i-bed"/></svg></div><div><h3>Nursing-home rounds</h3><p>One account per patient, each visit with its own date and place of service.</p></div></div>
+      <div class="setting"><div class="ic-tile"><svg class="ic"><use href="#i-ambulance"/></svg></div><div><h3>Ambulance and EMS</h3><p>On-device mode works offline, and the visit record keeps the real street address.</p></div></div>
+    </div>
+    <div>
+      <div class="phone"><div class="scr"><div class="sb"><span>9:41</span><span class="r"><svg viewBox="0 0 64 16"><use href="#sb-icons"/></svg></span></div><img src="../../screenshots/out/11_claim_stemi_ed.png" alt="Emergency visit claim"></div></div>
+      <div class="cap">
+        <h4>Aware of the setting</h4>
+        <p class="small" style="margin-top:.04in">Place of service shapes the codes: an emergency visit bills the emergency E/M level, and the EKG as interpretation only.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <div class="t">In version 1.0.0</div>
+    <div class="g">
+      <div class="c"><div class="k">Platform</div><div class="v">Android (iOS not yet released)</div></div>
+      <div class="c"><div class="k">Provider profile</div><div class="v">Live NPI registry lookup</div></div>
+      <div class="c"><div class="k">Consent script</div><div class="v">English and Spanish</div></div>
+      <div class="c"><div class="k">Clearinghouse</div><div class="v">Stedi: eligibility, 837P, status</div></div>
+      <div class="c"><div class="k">Card reading</div><div class="v">Insurance, license, SSN card</div></div>
+      <div class="c"><div class="k">Exports</div><div class="v">CMS-1500 data and 837P</div></div>
+    </div>
+  </div>
+
+  <div class="foot"><span class="brand"><svg viewBox="0 0 1024 1024"><rect width="1024" height="1024" rx="235.52" fill="#980F86"/><use href="#sun" fill="#fff"/></svg>SOLIS</span><span>Who it's for</span><span class="pg">07</span></div>
+</section>
+
+<!-- ======================= 8. BACK / CTA ======================= -->
+<section class="page back">
+  <div class="panel">
+    <div class="eyebrow"><span class="num">06</span><span class="bar"></span>Getting started</div>
+    <h2>Join the pilot.</h2>
+    <p class="lead">SOLIS is in its pilot stage. We are inviting physicians and small practices to use it in real visits and tell us what to fix.</p>
+
+    <div class="join">
+      <div class="r"><div class="no">01</div><div><h3>Request early access</h3><p>Tell us about your practice and the settings you work in.</p></div></div>
+      <div class="r"><div class="no">02</div><div><h3>Set up your provider profile</h3><p>Name, NPI (looked up live in the national NPI registry), tax ID, specialty and insurers accepted.</p></div></div>
+      <div class="r"><div class="no">03</div><div><h3>Record your first visit</h3><p>Pick on-device or cloud mode, ask for consent, and talk to your patient.</p></div></div>
+    </div>
+
+    <div class="need">
+      <div class="t">What to have ready</div>
+      <div class="g">
+        <div class="c"><svg class="ic"><use href="#i-phone"/></svg><div><b>An Android phone</b><span>SOLIS v1.0.0 runs on Android.</span></div></div>
+        <div class="c"><svg class="ic"><use href="#i-card"/></svg><div><b>Your NPI and tax ID</b><span>They go on every claim.</span></div></div>
+        <div class="c"><svg class="ic"><use href="#i-sign"/></svg><div><b>A BAA, if needed</b><span>A template is available.</span></div></div>
+      </div>
+    </div>
+
+    <div class="ctacard">
+      <div>
+        <div class="k">Pilot program</div>
+        <div class="big">Request early access</div>
+        <div class="url"><span class="l">Website</span><span class="v">solis-health.pages.dev</span></div>
+      </div>
+      <div>
+        <img class="qr" src="qr.svg" alt="QR code for solis-health.pages.dev">
+        <div class="qrcap">Scan to visit</div>
+      </div>
+    </div>
+
+    <div class="fine">
+      <span>SOLIS v1.0.0 for Android. iOS is not yet released. Screens show demo data with fictional patients and practice details. CPT is a registered trademark of the American Medical Association.</span>
+      <svg class="wm" viewBox="0 0 684.981 240" aria-label="SOLIS">
+        <rect width="240" height="240" rx="55.2" fill="#980F86"/>
+        <rect x="1" y="1" width="238" height="238" rx="54.2" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+        <path fill="#FFFFFF" d="M84 114A55.2 55.2 0 0 1 194.4 114ZM156 126A55.2 55.2 0 0 1 45.6 126Z"/>
+        <path fill="#FFFFFF" fill-rule="evenodd" d="M340.32 128.64A28.32 28.32 0 0 1 340.32 72L340.32 89.28A11.04 11.04 0 0 0 340.32 111.36ZM354.01 111.36A28.32 28.32 0 0 1 354.01 168L354.01 150.72A11.04 11.04 0 0 0 354.01 128.64ZM340.32 72H382.33V89.28H340.32ZM340.32 111.36H354.01V128.64H340.32ZM312 150.72H354.01V168H312ZM397.69 120A48 48 0 1 1 493.690 120A48 48 0 1 1 397.69 120ZM414.97 120A30.72 30.72 0 1 0 476.41 120A30.72 30.72 0 1 0 414.97 120ZM509.05 72H526.33V168H509.05ZM509.05 150.72H566.65V168H509.05ZM582.01 72H599.29V168H582.01ZM642.97 128.64A28.32 28.32 0 0 1 642.97 72L642.97 89.28A11.04 11.04 0 0 0 642.97 111.36ZM656.661 111.36A28.32 28.32 0 0 1 656.661 168L656.661 150.72A11.04 11.04 0 0 0 656.661 128.64ZM642.97 72H684.981V89.28H642.97ZM642.97 111.36H656.661V128.64H642.97ZM614.65 150.72H656.661V168H614.65Z"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Delete your SOLIS account</title>
+<meta name="description" content="How to delete your SOLIS account and its data: in the app, or by sending a request from this page.">
+<link rel="canonical" href="{{SITE}}/delete-account">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SOLIS">
+<meta property="og:title" content="Delete your SOLIS account">
+<meta property="og:description" content="Delete your SOLIS account in the app, or request deletion here if you no longer have the app.">
+<meta property="og:url" content="{{SITE}}/delete-account">
+<meta property="og:image" content="{{SITE}}/assets/img/og.png">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<x-header active="privacy"></x-header>
+<main id="main">
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Account deletion</span>
+      <h1>Delete your SOLIS account</h1>
+      <p class="lead">This page is for the SOLIS app on Google Play (SOLIS: Visit Notes and Claims, by SOLIS). You can delete your account in the app, or send us a request below if you no longer have the app.</p>
+    </div>
+  </section>
+
+  <div class="container doc-layout" style="grid-template-columns:minmax(0,1fr)">
+    <article class="prose" style="margin:0 auto">
+      <section id="in-app">
+        <h2>Delete it in the app</h2>
+        <ol>
+          <li>Open SOLIS and sign in.</li>
+          <li>Tap your initials at the top right to open <strong>Provider profile</strong>.</li>
+          <li>Scroll to <strong>Account</strong> and tap <strong>Delete account</strong>.</li>
+          <li>Enter your password and confirm.</li>
+        </ol>
+        <p>This deletes your account and sign-in sessions on the SOLIS server right away, and erases the patients, visits, notes and provider profile stored on that phone.</p>
+        <p>The demo account has nothing to delete on our server: it lives only on the phone. Uninstalling the app, or clearing its storage in Android settings, removes it.</p>
+      </section>
+
+      <section id="what">
+        <h2>What is deleted, and what is kept</h2>
+        <dl class="kv">
+          <dt>Deleted</dt><dd>Your SOLIS account: name, email, NPI, password hash and sessions. Everything the app stored on your phone, when you delete in the app.</dd>
+          <dt>Not stored by us</dt><dd>Patient records, notes and recordings are kept on your phone, not in a SOLIS database. In on-device mode audio never leaves the phone.</dd>
+          <dt>Cannot be recalled</dt><dd>Claims and eligibility checks already sent to a payer through the Stedi clearinghouse. The payer and the clearinghouse keep their own records as the law requires.</dd>
+        </dl>
+      </section>
+
+      <section id="request">
+        <h2>Request deletion without the app</h2>
+        <p>Send the email address you used for your SOLIS account. We confirm by email from that address before deleting, then delete the account within 30 days and reply when it is done.</p>
+        <div class="form-card">
+          <form id="access-form" novalidate>
+            <div class="form-grid">
+              <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required maxlength="120"><span class="field-error" id="e-name" role="alert"></span></div>
+              <div class="field"><label for="f-email">Account email</label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200"><span class="field-error" id="e-email" role="alert"></span></div>
+              <div class="field full"><label for="f-message">Anything we should know <span class="opt">(optional)</span></label><textarea id="f-message" name="message" maxlength="2000"></textarea><span class="field-error" id="e-message" role="alert"></span></div>
+              <input type="hidden" name="practice" value="Account deletion request">
+              <input type="hidden" name="role" value="Other">
+              <input type="hidden" name="specialty" value="Account deletion">
+              <input type="hidden" name="phone" value="">
+              <div class="hp" aria-hidden="true"><label for="f-website">Leave this field empty</label><input id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+            </div>
+            <div class="form-alert" id="form-alert" role="alert"><x-icon id="alert"></x-icon><span id="form-alert-text"></span></div>
+            <div class="form-foot">
+              <small>Please do not include patient information.</small>
+              <button class="btn btn-primary" type="submit" id="access-submit">Request account deletion</button>
+            </div>
+          </form>
+          <div class="form-success" id="access-success" hidden tabindex="-1">
+            <div class="ic"><x-icon id="check-circle" class="icon-lg"></x-icon></div>
+            <h3>Your request is in.</h3>
+            <p>We will email the address you gave to confirm, then delete the account and reply when it is done.</p>
+          </div>
+        </div>
+        <p style="margin-top:20px">You can also email <a href="mailto:[FOUNDER-SUPPORT-EMAIL]?subject=Delete%20my%20SOLIS%20account">[FOUNDER-SUPPORT-EMAIL]</a> with the subject "Delete my SOLIS account".</p>
+      </section>
+
+      <section id="more">
+        <h2>More about your data</h2>
+        <p>See <a href="privacy.html">how SOLIS handles data</a>.</p>
+      </section>
+    </article>
+  </div>
+</main>
+<x-footer></x-footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

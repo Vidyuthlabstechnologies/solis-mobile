@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOLIS security and compliance</title>
+<meta name="description" content="An honest account of how SOLIS protects visit data today, and what is still in progress: on-device mode, keys kept on the server, encryption in transit, signed builds, Business Associate Agreements and a SOC 2 plan.">
+<link rel="canonical" href="{{SITE}}/security">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SOLIS">
+<meta property="og:title" content="SOLIS security and compliance">
+<meta property="og:description" content="What is in place today and what is in progress. Built for HIPAA workflows. BAA available.">
+<meta property="og:url" content="{{SITE}}/security">
+<meta property="og:image" content="{{SITE}}/assets/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<x-header active="security"></x-header>
+<main id="main">
+  <section class="doc-hero">
+    <div class="container">
+      <span class="eyebrow">Security and compliance</span>
+      <h1>What is in place, and what is not yet.</h1>
+      <p class="lead">For physicians, practice managers and compliance leads. SOLIS is built for HIPAA workflows, and a Business Associate Agreement template is available. We describe the rest plainly, including the work still in progress.</p>
+    </div>
+  </section>
+
+  <div class="container doc-layout" style="grid-template-columns:minmax(0,1fr)">
+    <article class="prose" style="margin:0 auto">
+      <section id="today">
+        <h2>In place today</h2>
+        <div class="posture">
+          <div class="card"><span class="ic"><x-icon id="cpu"></x-icon></span><h3>On-device mode</h3><p>Speech recognition and speaker separation run on the phone. No audio leaves the device, and it works offline after a one-time download of about 150 MB.</p></div>
+          <div class="card"><span class="ic"><x-icon id="key"></x-icon></span><h3>Keys stay on the server</h3><p>Vendor keys never ship inside the app. They live on the SOLIS server, and the app reaches vendors through it. Cloud transcription uses short-lived tokens, so no long-term key is on the phone.</p></div>
+          <div class="card"><span class="ic"><x-icon id="lock"></x-icon></span><h3>Encrypted in transit</h3><p>The app, the SOLIS server and every vendor talk over HTTPS. This website sends strict transport security and a content security policy.</p></div>
+          <div class="card"><span class="ic"><x-icon id="check-circle"></x-icon></span><h3>Signed builds</h3><p>The Android app is a release-signed build. The SHA-256 of every download is published on the <a href="get-started.html#download">get started</a> page so you can check the file.</p></div>
+          <div class="card"><span class="ic"><x-icon id="shield"></x-icon></span><h3>Consent before every recording</h3><p>A short script in English or Spanish. The patient agrees out loud or signs on the phone, and the time and location are saved with the visit.</p></div>
+          <div class="card"><span class="ic"><x-icon id="trash"></x-icon></span><h3>Less data kept</h3><p>Card photos are deleted after reading. From an SSN card, only the last 4 digits are kept. The full SSN is never stored.</p></div>
+          <div class="card"><span class="ic"><x-icon id="refresh"></x-icon></span><h3>Rate limits on the server</h3><p>The SOLIS server limits how many notes and clearinghouse calls one network can make, and locks out repeated bad tokens.</p></div>
+          <div class="card"><span class="ic"><x-icon id="note"></x-icon></span><h3>BAA available</h3><p>A Business Associate Agreement template is available for practices. It is a draft under legal review.</p></div>
+        </div>
+      </section>
+
+      <section id="data">
+        <h2>Where visit data goes</h2>
+        <dl class="kv">
+          <dt>On-device mode</dt><dd>Audio and transcript stay on the phone. Works offline.</dd>
+          <dt>Cloud mode</dt><dd>Only when the practice turns it on. Audio goes to the Deepgram medical model for transcription; the transcript text goes to Claude to write the note.</dd>
+          <dt>Insurance cards and IDs</dt><dd>Read on the phone with Google ML Kit. Photos are deleted after reading.</dd>
+          <dt>Eligibility and claims</dt><dd>Sent through the SOLIS server to the Stedi clearinghouse (837P), with claim status from the same place.</dd>
+          <dt>Visit location</dt><dd>The real street address of the visit, or none if location is unavailable. Never a guessed one.</dd>
+        </dl>
+      </section>
+
+      <section id="progress">
+        <h2>In progress</h2>
+        <p>These are the steps before real patient data flows through SOLIS. Until they are done, pilots use demo or de-identified data, or on-device mode.</p>
+        <ul class="status-list">
+          <li><b>Business Associate Agreements with our vendors</b><span class="state">In progress</span><span class="d">Anthropic (note writing), Deepgram (cloud transcription), Stedi (eligibility and claims), and our server host. Each must be signed before real patient data passes through that vendor.</span></li>
+          <li><b>Legal review of the practice BAA</b><span class="state">In progress</span><span class="d">The template is drafted and is being reviewed by healthcare counsel.</span></li>
+          <li><b>HIPAA Security Rule risk analysis, written policies and training</b><span class="state">To do</span><span class="d">Risk analysis, security policies and procedures, workforce training and a breach response plan.</span></li>
+          <li><b>Per-user sign-in and account deletion</b><span class="state now">Being built</span><span class="d">Real accounts for each user, with sign-out and account deletion in the app.</span></li>
+          <li><b>Full privacy policy</b><span class="state">To do</span><span class="d">The current <a href="privacy.html">privacy page</a> is a plain summary. A full policy follows legal review.</span></li>
+          <li><b>SOC 2</b><span class="state">Planned</span><span class="d">A SOC 2 Type I report once pilots become paying customers, then Type II.</span></li>
+          <li><b>CPT license</b><span class="state">To do</span><span class="d">The AMA CPT license is needed for CPT descriptors and the 4 coding rules that depend on it. They are not in the app.</span></li>
+        </ul>
+      </section>
+
+      <section id="scope">
+        <h2>What SOLIS is, and is not</h2>
+        <p>SOLIS is documentation and billing software. It is not a medical device and does not diagnose or treat. It codes only what the clinician said, holds uncertain diagnoses for one-tap confirmation, and does not add vitals or exam findings that were not said. A note must be signed before a claim can be marked ready to bill.</p>
+        <p>There is no EHR, lab or pharmacy integration. Orders said in the visit are listed for the doctor to review and mark as sent.</p>
+        <p class="callout tip"><x-icon id="info"></x-icon><span>We do not claim certifications SOLIS does not have. There is no government HIPAA certification; what a practice needs from us is a signed BAA and the safeguards above. Ask for the BAA template when you <a href="index.html#access">request early access</a>.</span></p>
+      </section>
+    </article>
+  </div>
+</main>
+<x-footer></x-footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

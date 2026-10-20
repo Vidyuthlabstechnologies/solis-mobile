@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SOLIS Product Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --blue: #0F52BA;
+    --navy: #0F172A;
+    --slate: #475569;
+    --muted: #64748B;
+    --line: #E2E8F0;
+    --bg: #F8FAFC;
+    --tint: #EEF3FC;
+    --red: #C62828;
+    --green: #1B7F3B;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body { font-family: Inter, Roboto, "Segoe UI", Arial, sans-serif; color: var(--navy); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 210mm; height: 297mm; padding: 18mm 16mm 14mm; position: relative; page-break-after: always; overflow: hidden; }
+  .page:last-child { page-break-after: auto; }
+  .eyebrow { font-size: 9pt; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin: 0 0 3mm; }
+  h1 { font-size: 30pt; line-height: 1.12; margin: 0 0 5mm; font-weight: 700; letter-spacing: -0.01em; }
+  h2 { font-size: 20pt; line-height: 1.2; margin: 0 0 4mm; font-weight: 700; }
+  h3 { font-size: 11.5pt; margin: 0 0 1.5mm; font-weight: 600; }
+  p, li { font-size: 10.5pt; line-height: 1.55; color: var(--slate); margin: 0 0 3mm; }
+  .lead { font-size: 12.5pt; line-height: 1.55; color: var(--slate); max-width: 150mm; }
+  .footer { position: absolute; left: 16mm; right: 16mm; bottom: 9mm; display: flex; justify-content: space-between; font-size: 8pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 3mm; }
+  .phones { display: flex; gap: 7mm; justify-content: center; align-items: flex-start; }
+  .phone { width: 54mm; }
+  .phone img { width: 100%; display: block; border: 1.6mm solid var(--navy); border-radius: 6mm; background: #fff; }
+  .phone.dark img { border-color: #2A3142; }
+  .cap { margin-top: 3mm; }
+  .cap h3 { font-size: 10pt; }
+  .cap p { font-size: 9pt; line-height: 1.45; margin: 0; }
+  .brand { display: flex; align-items: center; gap: 4mm; margin-bottom: 14mm; }
+  .brand .word { font-size: 16pt; font-weight: 700; letter-spacing: 0.18em; }
+  .brand .co { font-size: 9pt; color: var(--muted); letter-spacing: 0.04em; }
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; margin: 6mm 0 8mm; }
+  .step { border: 1px solid var(--line); border-radius: 4mm; padding: 4mm; background: var(--bg); }
+  .step .n { width: 7mm; height: 7mm; border-radius: 2mm; background: var(--blue); color: #fff; font-weight: 700; font-size: 9pt; display: flex; align-items: center; justify-content: center; margin-bottom: 3mm; }
+  .step h3 { font-size: 10pt; }
+  .step p { font-size: 8.6pt; line-height: 1.45; margin: 0; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .card { border: 1px solid var(--line); border-radius: 4mm; padding: 5mm; }
+  .card h3 { color: var(--navy); }
+  .card p { font-size: 9.6pt; margin: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 9.4pt; }
+  th { text-align: left; font-weight: 600; color: var(--navy); background: var(--tint); padding: 2.6mm 3mm; border-bottom: 1px solid var(--line); }
+  td { padding: 2.6mm 3mm; border-bottom: 1px solid var(--line); color: var(--slate); vertical-align: top; line-height: 1.45; }
+  td:first-child { color: var(--navy); font-weight: 500; width: 46mm; }
+  .note { background: var(--tint); border-radius: 4mm; padding: 4mm 5mm; }
+  .note p { margin: 0; font-size: 9.6pt; color: var(--navy); }
+  .status { display: inline-block; font-size: 8pt; font-weight: 600; padding: 0.6mm 2mm; border-radius: 1.5mm; border: 1px solid; }
+  .status.done { color: var(--green); border-color: #A7D3B5; background: #EDF7F0; }
+  .status.next { color: #B45309; border-color: #F3D19B; background: #FDF6EC; }
+  .src { font-size: 7.6pt; color: var(--muted); line-height: 1.45; }
+  .src a { color: var(--muted); }
+  .cover { background: var(--navy); color: #fff; }
+  .cover .eyebrow { color: #9EC2FF; }
+  .cover h1 { color: #fff; font-size: 34pt; }
+  .cover .lead { color: #CBD5E1; }
+  .cover .footer { color: #94A3B8; border-color: #1E293B; }
+  .cover .phone img { border-color: #334155; }
+  .cover .cap h3 { color: #fff; }
+  .cover .cap p { color: #94A3B8; }
+  ul { padding-left: 5mm; margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- 1. Cover -->
+<section class="page cover">
+  <div class="brand">
+    <svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#0F52BA"/><g fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round"><path d="M10.9 30.7a13 13 0 0 1 26.2 0"/><path d="M17.3 30.7a6.7 6.7 0 0 1 13.4 0"/><path d="M7.7 33.6h32.6"/></g></svg>
+    <div><div class="word">SOLIS</div><div class="co">by ML Dynamic</div></div>
+  </div>
+  <p class="eyebrow">Product overview</p>
+  <h1>From the exam room conversation to a clean claim, on one phone.</h1>
+  <p class="lead">SOLIS listens to the visit with the patient's consent, writes the note, codes the diagnoses from what the patient actually said, checks the claim against the rules payers deny on, and exports it ready for billing.</p>
+  <div class="phones" style="margin-top: 14mm;">
+    <div class="phone"><img src="../../screenshots/out/07_recording.png" alt="Recording a visit"><div class="cap"><h3>Capture</h3><p>Record with consent, pause any time.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/08_note.png" alt="Draft note"><div class="cap"><h3>Review</h3><p>A draft note to check and sign.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/11_claim_stemi_ed.png" alt="Claim"><div class="cap"><h3>Bill</h3><p>Coded, checked, exportable.</p></div></div>
+  </div>
+  <div class="footer"><span>SOLIS product overview</span><span>October 2026</span></div>
+</section>
+
+<!-- 2. Why -->
+<section class="page">
+  <p class="eyebrow">Why SOLIS</p>
+  <h2>Documentation and billing are where a visit's time and money leak.</h2>
+  <p class="lead">Ambient scribes have shown they can cut note-writing time, but physicians still report that long notes and heavy editing are the main drawback. And a well-documented visit can still be denied if the codes on the claim don't line up.</p>
+  <div class="cards" style="margin-top: 8mm;">
+    <div class="card"><h3>Notes that need less editing</h3><p>Each SOAP section is a separate card with one-tap edit, and a Sources button shows the exact words from the visit behind it, so checking takes seconds instead of rereading a transcript.</p></div>
+    <div class="card"><h3>Coding from the patient's own words</h3><p>Symptoms are coded from how the patient describes them ("my feet burn at night" becomes paresthesia, R20.2). Diagnoses the physician states with hedged language wait for confirmation, as outpatient coding rules require.</p></div>
+    <div class="card"><h3>Denials caught before submission</h3><p>Every procedure must be supported by a related diagnosis. Place of service, sex-specific and age-limited codes, and new versus established patient are checked before the claim is marked ready.</p></div>
+    <div class="card"><h3>Billing without a hand-off</h3><p>The claim exports in CMS-1500 and X12 837P structure, so a practice can feed its billing system directly instead of sending charts to an outside billing company and waiting.</p></div>
+  </div>
+  <div class="note" style="margin-top: 8mm;"><p>Time and revenue impact will be measured in the pilot program and reported per clinic. This document makes no savings claims that have not yet been measured.</p></div>
+  <p class="src" style="margin-top: 8mm;">Physician experience with ambient scribes: Physician Perspectives on Ambient AI Scribes, JAMA Network Open (jamanetwork.com/journals/jamanetworkopen/fullarticle/2831866). Outpatient uncertain-diagnosis rule: ICD-10-CM Official Guidelines, Section IV.H.</p>
+  <div class="footer"><span>SOLIS product overview</span><span>2</span></div>
+</section>
+
+<!-- 3. How it works -->
+<section class="page">
+  <p class="eyebrow">How it works</p>
+  <h2>Five steps, one device.</h2>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>Scan a card</h3><p>Insurance card, driver's license barcode or SSN card is read on the phone.</p></div>
+    <div class="step"><div class="n">2</div><h3>Open the visit</h3><p>One account per patient; each date of service is Visit 1, 2, 3.</p></div>
+    <div class="step"><div class="n">3</div><h3>Record</h3><p>Consent first, then the conversation is captured and split by speaker.</p></div>
+    <div class="step"><div class="n">4</div><h3>Review and sign</h3><p>Note, transcript and orders, each traceable to what was said.</p></div>
+    <div class="step"><div class="n">5</div><h3>Claim ready</h3><p>Codes checked against payer rules, exported for billing.</p></div>
+  </div>
+  <div class="phones">
+    <div class="phone"><img src="../../screenshots/out/01_sign_in.png" alt="Sign in"><div class="cap"><h3>Sign in</h3><p>Choose whether notes are written on the device or in the cloud.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/02_patients.png" alt="Patients"><div class="cap"><h3>Patients</h3><p>Search by name, account number or member ID. Scan card is the main action.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/15_request_access.png" alt="Request access"><div class="cap"><h3>Request access</h3><p>The NPI is checked with the CMS check-digit rule as it is typed.</p></div></div>
+  </div>
+  <div class="footer"><span>SOLIS product overview</span><span>3</span></div>
+</section>
+
+<!-- 4. Scan and accounts -->
+<section class="page">
+  <p class="eyebrow">Step 1 and 2</p>
+  <h2>Scan once. One account, every visit under it.</h2>
+  <p class="lead">Card text and the license barcode are read on the device and the photo is deleted after reading. Every field stays editable. If the card matches an existing patient, SOLIS offers that account instead of creating a duplicate.</p>
+  <div class="phones" style="margin-top: 6mm;">
+    <div class="phone"><img src="../../screenshots/out/03_scan_review.png" alt="Scan review"><div class="cap"><h3>Review what was read</h3><p>Name, date of birth, sex, payer, member ID, group, Rx BIN and PCN, copays.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/04_chart.png" alt="Patient chart"><div class="cap"><h3>Patient account</h3><p>Account number with a check digit, an in-network check, and numbered visits with status.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/05_provider.png" alt="Provider profile"><div class="cap"><h3>Provider profile</h3><p>NPI, tax ID, taxonomy, practice address and accepted payers go on every claim.</p></div></div>
+  </div>
+  <div class="footer"><span>SOLIS product overview</span><span>4</span></div>
+</section>
+
+<!-- 5. Capture -->
+<section class="page">
+  <p class="eyebrow">Step 3</p>
+  <h2>Capture the visit, with consent built in.</h2>
+  <p class="lead">One large button starts recording after the physician confirms the patient agreed. The consent time is saved with the note. Recording can pause for a sensitive topic and keeps running with the screen off.</p>
+  <div class="phones" style="margin-top: 6mm;">
+    <div class="phone"><img src="../../screenshots/out/06_ready.png" alt="Ready to record"><div class="cap"><h3>Ready to record</h3><p>Or type the conversation instead.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/16_consent.png" alt="Consent"><div class="cap"><h3>Consent first</h3><p>A short script for the patient, and a clear "declined" path.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/07_recording.png" alt="Recording"><div class="cap"><h3>Recording</h3><p>Timer, live transcript, pause, finish, or discard with nothing kept.</p></div></div>
+  </div>
+  <div class="footer"><span>SOLIS product overview</span><span>5</span></div>
+</section>
+
+<!-- 6. Review -->
+<section class="page">
+  <p class="eyebrow">Step 4</p>
+  <h2>Review the note against what was actually said.</h2>
+  <p class="lead">Vitals are recorded only when they are stated in the visit; nothing is filled in with assumed values. The transcript separates doctor and patient, and orders are sorted with STAT items first.</p>
+  <div class="phones" style="margin-top: 6mm;">
+    <div class="phone"><img src="../../screenshots/out/08_note.png" alt="Note"><div class="cap"><h3>Note</h3><p>Draft banner, vitals with abnormal values flagged, Sources per section.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/12_talk.png" alt="Transcript"><div class="cap"><h3>Talk</h3><p>Speaker turns, small talk can be hidden, raw transcript archived.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/17_orders.png" alt="Orders"><div class="cap"><h3>Orders</h3><p>Labs, imaging, prescriptions and referrals, sent after confirmation.</p></div></div>
+  </div>
+  <div class="footer"><span>SOLIS product overview</span><span>6</span></div>
+</section>
+
+<!-- 7. Claim -->
+<section class="page">
+  <p class="eyebrow">Step 5</p>
+  <h2>A claim that explains itself.</h2>
+  <p class="lead">Diagnoses appear in claim order with pointer letters, each with the words that support it. Uncertain diagnoses wait for confirmation. Symptoms that belong to a confirmed diagnosis are folded in. Every service line shows which diagnosis supports it.</p>
+  <div class="phones" style="margin-top: 6mm;">
+    <div class="phone"><img src="../../screenshots/out/09_claim_uncertain.png" alt="Claim"><div class="cap"><h3>Coded from the patient</h3><p>"Sounds like pneumonia" is held; cough and fever are coded.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/10_claim_checks.png" alt="Claim checks"><div class="cap"><h3>Confirm and check</h3><p>One tap to confirm. Checks explain anything a payer would reject.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/11_claim_stemi_ed.png" alt="Emergency claim"><div class="cap"><h3>Setting-aware</h3><p>An ER visit bills the ER code, and the EKG as interpretation only.</p></div></div>
+  </div>
+  <div class="footer"><span>SOLIS product overview</span><span>7</span></div>
+</section>
+
+<!-- 8. Coding rules -->
+<section class="page">
+  <p class="eyebrow">Coding rules</p>
+  <h2>The checks that keep a claim from being denied.</h2>
+  <table style="margin-top: 4mm;">
+    <tr><th>Rule</th><th>What SOLIS does</th></tr>
+    <tr><td>Patient language first</td><td>Symptoms are coded from the patient's own words, in the order the patient raised them, so the chief complaint leads.</td></tr>
+    <tr><td>Uncertain diagnoses</td><td>"Sounds like", "suspicious for", "consistent with" and similar wording are not coded until the physician confirms (ICD-10-CM outpatient guideline IV.H).</td></tr>
+    <tr><td>Integral symptoms</td><td>Symptoms that are part of a confirmed diagnosis, such as chest pain with a heart attack, are not coded separately.</td></tr>
+    <tr><td>Diagnosis supports procedure</td><td>Each CPT code must link to a diagnosis in a related body system. A headache cannot support an upper GI endoscopy.</td></tr>
+    <tr><td>Place of service</td><td>The visit code follows the setting: office, telehealth, emergency room, hospital, nursing facility, home. Ambulance bills transport codes, never a visit code.</td></tr>
+    <tr><td>Sex and age</td><td>Sex-specific codes (pregnancy, prostate) and age-limited codes (newborn, preventive age bands) are checked against the patient.</td></tr>
+    <tr><td>New or established</td><td>Derived from the patient's visit history; a new-patient code on a return visit is flagged.</td></tr>
+    <tr><td>Performed vs ordered</td><td>Tests only ordered elsewhere are not billed by the practice. An EKG read in a facility bills interpretation only.</td></tr>
+    <tr><td>Claim export</td><td>CMS-1500 boxes and X12 837P loops in one JSON document, with diagnosis pointers filled in.</td></tr>
+  </table>
+  <p class="src" style="margin-top: 5mm;">Place of service codes: CMS Place of Service Code Set. Sex and age edits modeled on the CMS Medicare Code Editor definitions; commercial payer edits may differ.</p>
+  <div class="footer"><span>SOLIS product overview</span><span>8</span></div>
+</section>
+
+<!-- 9. Any phone, any light -->
+<section class="page">
+  <p class="eyebrow">Design</p>
+  <h2>Built for exam-room conditions.</h2>
+  <p class="lead">Body text is never below 14 points and the note reads at 16. Touch targets are at least 48 dp. Status always pairs an icon with a word, never color alone. Light and dark themes, and layouts that hold on small phones.</p>
+  <div class="phones" style="margin-top: 6mm;">
+    <div class="phone dark"><img src="../../screenshots/out/13_claim_dark.png" alt="Dark theme"><div class="cap"><h3>Dark theme</h3><p>For night shifts and dim rooms.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/14_compact_claim.png" alt="Small phone"><div class="cap"><h3>Small phones</h3><p>Rows stack instead of squeezing on 320 dp screens.</p></div></div>
+    <div class="phone"><img src="../../screenshots/out/10_claim_checks.png" alt="Checks"><div class="cap"><h3>Plain language</h3><p>Every check says what is wrong and how to fix it.</p></div></div>
+  </div>
+  <div class="footer"><span>SOLIS product overview</span><span>9</span></div>
+</section>
+
+<!-- 10. Privacy, compliance, roadmap -->
+<section class="page">
+  <p class="eyebrow">Privacy and status</p>
+  <h2>What is in place today, and what comes next.</h2>
+  <table style="margin-top: 4mm;">
+    <tr><th>Area</th><th>Status</th></tr>
+    <tr><td>Card scanning</td><td><span class="status done">In place</span> Read on the device; the photo is deleted after reading. Only the last 4 digits of an SSN are kept.</td></tr>
+    <tr><td>Screen protection</td><td><span class="status done">In place</span> Screenshots, screen recording and recent-app previews are blocked.</td></tr>
+    <tr><td>Consent and audit trail</td><td><span class="status done">In place</span> Consent time, UTC timestamp and location are saved with each visit.</td></tr>
+    <tr><td>On-device notes</td><td><span class="status done">In place</span> Notes can be written entirely on the phone, without sending audio or text out.</td></tr>
+    <tr><td>Cloud notes</td><td><span class="status next">Next</span> Moving the cloud model to a service covered by a Business Associate Agreement before real patient data is sent.</td></tr>
+    <tr><td>HIPAA program</td><td><span class="status next">Next</span> Risk analysis, policies, training and BAAs with clinics and vendors. HIPAA has no official certification; this is how compliance is shown.</td></tr>
+    <tr><td>SOC 2 Type II</td><td><span class="status next">Planned</span> Independent audit of security controls over an observation period.</td></tr>
+    <tr><td>Billing integration</td><td><span class="status next">Next</span> Direct submission to a clinic's billing system or clearinghouse API.</td></tr>
+  </table>
+  <div class="cards" style="margin-top: 8mm;">
+    <div class="card"><h3>Pilot program</h3><p>Pilot clinics get discounted pricing in exchange for feedback. Their results set the time and revenue figures we publish.</p></div>
+    <div class="card"><h3>Availability</h3><p>Android now. iOS, web checkout, and links for YouTube, Instagram, LinkedIn and the app stores will be added at launch.</p></div>
+  </div>
+  <div class="footer"><span>SOLIS by ML Dynamic</span><span>10</span></div>
+</section>
+
+</body>
+</html>

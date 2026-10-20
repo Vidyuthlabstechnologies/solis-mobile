@@ -1,0 +1,9 @@
+# Cloudflare Pages project for the SOLIS marketing site.
+# Build:  node tools/build.mjs     Deploy: npx wrangler pages deploy --branch main
+name = "solis-health"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-10-01"
+
+[[kv_namespaces]]
+binding = "LEADS"
+id = "68e35c21f90e4ec4a3b22294fb01d7b6"

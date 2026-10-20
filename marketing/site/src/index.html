@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOLIS: the visit note and the claim, written on your phone</title>
+<meta name="description" content="SOLIS listens to the visit, writes the note, and builds a clean claim, on the doctor's phone. Consent first, diagnosis codes from the patient's own words, checks before the claim goes out. Android pilot.">
+<link rel="canonical" href="{{SITE}}/">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e14" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SOLIS">
+<meta property="og:title" content="SOLIS: look at your patient, SOLIS writes the note">
+<meta property="og:description" content="Listens to the visit, writes the note, and builds a clean claim, on the doctor's phone. Request early access to the Android pilot.">
+<meta property="og:url" content="{{SITE}}/">
+<meta property="og:image" content="{{SITE}}/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SOLIS on a phone, showing a draft visit note">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="preload" as="image" href="assets/img/08_note-720.webp" imagesrcset="assets/img/08_note-360.webp 360w, assets/img/08_note-720.webp 720w" imagesizes="(max-width: 560px) 250px, 300px" fetchpriority="high">
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add("js")</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"SOLIS","operatingSystem":"Android","applicationCategory":"MedicalApplication","softwareVersion":"1.0.0","description":"Listens to the visit, writes the note, and builds a clean claim, on the doctor's phone.","url":"{{SITE}}/"}</script>
+</head>
+<body>
+<x-header active="home"></x-header>
+
+<main id="main">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <a class="pill reveal" href="#access"><span class="pill-tag">Pilot</span>SOLIS 1.0 for Android, now in pilot<x-icon id="arrow-right" class="icon-sm"></x-icon></a>
+      <h1 class="reveal d1">Look at your patient. <span class="accent">SOLIS writes the note.</span></h1>
+      <p class="lead reveal d2">SOLIS listens to the visit, writes the note, and builds a clean claim, on your phone. Made for physicians and small practices without a big billing department.</p>
+      <div class="hero-ctas reveal d3">
+        <a class="btn btn-primary" href="#access">Request early access <x-icon id="arrow-right" class="icon-sm"></x-icon></a>
+        <a class="btn btn-secondary" href="guide.html"><x-icon id="book" class="icon-sm"></x-icon>Read the user guide</a>
+      </div>
+      <p class="hero-note reveal d3"><x-icon id="shield" class="icon-sm"></x-icon>Consent first. On-device mode keeps audio on the phone.</p>
+    </div>
+    <div class="hero-visual" aria-label="SOLIS app screens">
+      <x-phone src="09_claim_uncertain" alt="The Claim tab: diagnosis codes taken from what the patient said, each with its quote" class="phone-back" sizes="(max-width: 560px) 200px, 252px"></x-phone>
+      <x-phone src="08_note" alt="A draft SOAP note in SOLIS with vitals and Sources for each section" class="phone-front" eager></x-phone>
+      <div class="float-card float-a reveal d2"><span class="ic"><x-icon id="quote" class="icon-sm"></x-icon></span><span><strong>Traceable</strong>Every diagnosis links to the words it came from.</span></div>
+      <div class="float-card float-b reveal d3"><span class="ic"><x-icon id="shield" class="icon-sm"></x-icon></span><span><strong>Consent saved</strong>With the time and location of the visit.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Evidence -->
+<section class="evidence" aria-labelledby="evidence-h">
+  <div class="container">
+    <h2 id="evidence-h" class="sr-only">The problem in published numbers</h2>
+    <div class="evidence-grid reveal">
+      <div class="evidence-item">
+        <div class="evidence-num">2<small>hours</small></div>
+        <p>of EHR and desk work for every hour of direct clinical face time with patients, inside the clinic day. Then another 1 to 2 hours each night.</p>
+        <div class="evidence-src">Sinsky C, et al. <a href="https://doi.org/10.7326/M16-0961" rel="noopener">Allocation of Physician Time in Ambulatory Practice</a>. Annals of Internal Medicine, 2016. 57 physicians, 4 specialties.</div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-num">5.9<small>of 11.4 hours</small></div>
+        <p>of a primary care physician's weekday spent in the EHR, including 1.4 hours after clinic hours.</p>
+        <div class="evidence-src">Arndt BG, et al. <a href="https://doi.org/10.1370/afm.2121" rel="noopener">Tethered to the EHR</a>. Annals of Family Medicine, 2017. 142 family physicians.</div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-num">60<small>%</small></div>
+        <p>of medical group leaders said their claim denial rates rose in early 2024 compared with the same period in 2023.</p>
+        <div class="evidence-src"><a href="https://www.mgma.com/mgma-stat/strategic-improvements-in-your-rcm-to-reduce-your-practices-claim-denials" rel="noopener">MGMA Stat poll</a>, March 5, 2024. 235 responses.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How a visit works -->
+<section class="section section-soft" id="how" aria-labelledby="how-h">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How a visit works</span>
+      <h2 id="how-h">Five steps, one phone, no typing in the room.</h2>
+      <p>From the front desk to the claim, everything happens on the same account, one visit at a time.</p>
+    </div>
+    <div class="visit-grid">
+      <ol class="step-tabs" role="tablist" aria-label="Steps of a visit">
+        <li><button class="step-tab" role="tab" id="tab-1" aria-selected="true" aria-controls="visit-shot" data-shot="0"><span class="step-num">1</span><span><span class="step-title">Scan the cards</span><span class="step-body">Insurance card, driver's license and SSN card are read on the phone. The chart fills itself and the photos are deleted after reading.</span></span></button></li>
+        <li><button class="step-tab" role="tab" id="tab-2" aria-selected="false" aria-controls="visit-shot" data-shot="1" tabindex="-1"><span class="step-num">2</span><span><span class="step-title">Ask for consent</span><span class="step-body">The patient hears a short script in English or Spanish and agrees out loud or signs on the phone. Time and location are saved with the visit.</span></span></button></li>
+        <li><button class="step-tab" role="tab" id="tab-3" aria-selected="false" aria-controls="visit-shot" data-shot="2" tabindex="-1"><span class="step-num">3</span><span><span class="step-title">Record the visit</span><span class="step-body">Put the phone between you and the patient and talk as you normally would. SOLIS tells your voice from the patient's. Pause any time.</span></span></button></li>
+        <li><button class="step-tab" role="tab" id="tab-4" aria-selected="false" aria-controls="visit-shot" data-shot="3" tabindex="-1"><span class="step-num">4</span><span><span class="step-title">Review the note</span><span class="step-body">A concise SOAP note with nothing invented: no vitals or exam findings that were not said. Tap Sources to see the conversation behind each section.</span></span></button></li>
+        <li><button class="step-tab" role="tab" id="tab-5" aria-selected="false" aria-controls="visit-shot" data-shot="4" tabindex="-1"><span class="step-num">5</span><span><span class="step-title">Check and send the claim</span><span class="step-body">Codes come from the conversation, checks run against the official code sets, and the claim goes to the clearinghouse in one tap.</span></span></button></li>
+      </ol>
+      <div class="visit-phone" id="visit-shot" role="tabpanel" aria-live="polite">
+        <div class="phone"><div class="screen"><div class="sb" aria-hidden="true"><span>9:41</span><svg viewBox="0 0 40 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="4.5" y="5.5" width="3" height="6.5" rx="1"/><rect x="9" y="3" width="3" height="9" rx="1"/><rect x="13.5" y="0.5" width="3" height="11.5" rx="1"/><rect x="21" y="1" width="16" height="10" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="22.8" y="2.8" width="10.5" height="6.4" rx="1.4"/><rect x="38" y="4" width="1.6" height="4" rx="0.8"/></svg></div>
+          <div class="stack">
+            <img class="on" src="assets/img/03_scan_review-720.webp" srcset="assets/img/03_scan_review-360.webp 360w, assets/img/03_scan_review-720.webp 720w" sizes="330px" width="412" height="915" alt="Scan card screen with fields filled from an insurance card and a driver's license" loading="lazy" decoding="async">
+            <img src="assets/img/16_consent-720.webp" srcset="assets/img/16_consent-360.webp 360w, assets/img/16_consent-720.webp 720w" sizes="330px" width="412" height="915" alt="Consent sheet with the English and Spanish script and the agree, sign and decline options" loading="lazy" decoding="async">
+            <img src="assets/img/07_recording-720.webp" srcset="assets/img/07_recording-360.webp 360w, assets/img/07_recording-720.webp 720w" sizes="330px" width="412" height="915" alt="Recording screen with a timer, live transcript, pause and Finish and write note" loading="lazy" decoding="async">
+            <img src="assets/img/08_note-720.webp" srcset="assets/img/08_note-360.webp 360w, assets/img/08_note-720.webp 720w" sizes="330px" width="412" height="915" alt="Draft SOAP note with vitals and Sources for each section" loading="lazy" decoding="async">
+            <img src="assets/img/10_claim_checks-720.webp" srcset="assets/img/10_claim_checks-360.webp 360w, assets/img/10_claim_checks-720.webp 720w" sizes="330px" width="412" height="915" alt="Claim tab with a diagnosis waiting for confirmation, services and checks" loading="lazy" decoding="async">
+          </div>
+        </div></div>
+        <p class="visit-caption">Real screens from SOLIS 1.0 with fictional demo patients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Coding and claims -->
+<section class="section night" id="coding" aria-labelledby="coding-h">
+  <div class="container">
+    <div class="engine-grid">
+      <div>
+        <div class="section-head reveal" style="margin-bottom:40px">
+          <span class="eyebrow">Coding and claims</span>
+          <h2 id="coding-h">Codes from the patient's own words. Checked before the claim leaves.</h2>
+        </div>
+        <ul class="feature-list">
+          <li class="feature reveal"><span class="ic"><x-icon id="quote"></x-icon></span><div><h3>Symptoms stay symptoms until you confirm</h3><p><span class="quote-chip">"My feet burn at night"</span> is coded as a symptom until you confirm a diagnosis, following official outpatient rule IV.H. Uncertain wording waits for your one-tap confirmation.</p></div></li>
+          <li class="feature reveal d1"><span class="ic"><x-icon id="link"></x-icon></span><div><h3>Every code shows where it came from</h3><p>Each diagnosis links to the words it came from, so checking it takes a glance, not a search through the transcript.</p></div></li>
+          <li class="feature reveal d2"><span class="ic"><x-icon id="layers"></x-icon></span><div><h3>Procedure codes that match the diagnosis</h3><p>The E/M level is picked by place of service, new or established patient, and medical decision making.</p></div></li>
+          <li class="feature reveal d3"><span class="ic"><x-icon id="list-check"></x-icon></span><div><h3>Checks before the claim goes out</h3><p>Against the official CMS code sets for the date of service. Anything that would get the claim rejected or denied is flagged and must be fixed before billing.</p></div></li>
+          <li class="feature reveal d3"><span class="ic"><x-icon id="book"></x-icon></span><div><h3>Every check explains itself</h3><p>Tap <strong>Why</strong> on any check to see the rule in plain English, what it means on this claim, its official citation and the official guideline text. It works offline.</p></div></li>
+          <li class="feature reveal d3"><span class="ic"><x-icon id="info"></x-icon></span><div><h3>Official coding notes on every diagnosis</h3><p>Excludes1, Excludes2, Code first, Use additional code, Code also and 7th-character notes from ICD-10-CM, shown under the code they apply to.</p></div></li>
+        </ul>
+      </div>
+      <div class="engine-phones" aria-label="Claim tab screens">
+        <x-phone src="09_claim_uncertain" alt="Claim tab showing patient-reported symptom codes with the patient's quote under each" class="p1" sizes="(max-width: 560px) 220px, 290px"></x-phone>
+        <x-phone src="19_claim_why" alt="The Why sheet for a claim check: the rule in plain English, what it means on this claim, the official source ICD-10-CM Guidelines IV.H and the guideline text" class="p2" sizes="(max-width: 560px) 220px, 290px"></x-phone>
+      </div>
+    </div>
+
+    <div class="codesets">
+      <div class="reveal">
+        <div class="big-stat">
+          <div><b>59</b><span>of 63 official coding rules fully enforced, each citing its guideline section</span></div>
+          <div><b>4</b><span>more need the AMA CPT license, so they are not in the app yet</span></div>
+        </div>
+        <p class="stat-note">The 4 are NCCI procedure-to-procedure pairs, mutually exclusive pairs, the most comprehensive code, and lab panels.</p>
+      </div>
+      <div class="reveal d1">
+        <h3>Checked against the official code sets for the date of service</h3>
+        <ul class="chips" aria-label="Code sets">
+          <li class="chip">ICD-10-CM FY2026</li><li class="chip">ICD-10-CM FY2027</li><li class="chip">HCPCS Oct 2026</li><li class="chip">2026 Physician Fee Schedule</li><li class="chip">NCCI MUE</li><li class="chip">NCCI add-on edits</li><li class="chip">Medicare Code Editor v44</li><li class="chip">Excludes1</li><li class="chip">7th-character rules</li>
+        </ul>
+        <ul class="checks-grid" aria-label="Examples of checks">
+          <li><x-icon id="check" class="icon-sm"></x-icon>Sex and age conflicts</li>
+          <li><x-icon id="check" class="icon-sm"></x-icon>Diagnoses that exclude each other (Excludes1)</li>
+          <li><x-icon id="check" class="icon-sm"></x-icon>Missing 7th character</li>
+          <li><x-icon id="check" class="icon-sm"></x-icon>External-cause code listed first</li>
+          <li><x-icon id="check" class="icon-sm"></x-icon>Modifier 25 needed</li>
+          <li><x-icon id="check" class="icon-sm"></x-icon>Add-on code without its primary</li>
+          <li><x-icon id="check" class="icon-sm"></x-icon>Units over the daily limit</li>
+          <li><x-icon id="check" class="icon-sm"></x-icon>Maternity and manifestation code lists</li>
+          <li><x-icon id="check" class="icon-sm"></x-icon>Code first and use additional code notes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="clearing">
+      <div class="reveal"><x-icon id="shield" class="icon-lg"></x-icon><h3>Eligibility at check-in</h3><p>Coverage is checked through the Stedi clearinghouse when the visit starts, with copay and deductible when the payer returns them.</p></div>
+      <div class="reveal d1"><x-icon id="send" class="icon-lg"></x-icon><h3>Claims in one tap</h3><p>Send the 837P claim from the Claim tab, then check its status from the same screen.</p></div>
+      <div class="reveal d2"><x-icon id="export" class="icon-lg"></x-icon><h3>Export when you need it</h3><p>Copy the claim as CMS-1500 data or as an 837P file for your billing software.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Scan -->
+<section class="section" id="scan" aria-labelledby="scan-h">
+  <div class="container">
+    <div class="scan-grid">
+      <div class="scan-visual">
+        <figure class="card-photo reveal">
+          <img src="assets/img/sample-card-1012.webp" srcset="assets/img/sample-card-520.webp 520w, assets/img/sample-card-1012.webp 1012w" sizes="(max-width: 560px) 64vw, 380px" width="1012" height="638" alt="A sample insurance card marked demo only, for the fictional patient Jordan A Rivera" loading="lazy" decoding="async">
+          <div class="frame" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <figcaption>The built-in sample card. Fictional patient.</figcaption>
+        </figure>
+        <x-phone src="03_scan_review" alt="Scan card screen showing the fields read from the cards, ready to review" sizes="(max-width: 560px) 230px, 280px"></x-phone>
+      </div>
+      <div>
+        <div class="section-head reveal" style="margin-bottom:0">
+          <span class="eyebrow">Scan the cards</span>
+          <h2 id="scan-h">The chart fills itself at the front desk.</h2>
+          <p>Point the phone at the patient's cards. SOLIS straightens each card, reads it on the phone, and fills the account for you to check.</p>
+        </div>
+        <ul class="doc-list">
+          <li class="reveal"><span class="ic"><x-icon id="card"></x-icon></span><div><b>Insurance card</b><span>Front, then back. Member ID, group, payer ID, and Rx BIN and PCN.</span></div></li>
+          <li class="reveal d1"><span class="ic"><x-icon id="barcode"></x-icon></span><div><b>Driver's license</b><span>Reads the barcode on the back of the license.</span></div></li>
+          <li class="reveal d2"><span class="ic"><x-icon id="id"></x-icon></span><div><b>SSN card</b><span>Only the last 4 digits are kept. The full number is never stored.</span></div></li>
+        </ul>
+        <p class="inline-note reveal"><x-icon id="phone" class="icon-sm"></x-icon><span>Read on the phone with Google ML Kit. Card photos are deleted after reading.</span></p>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="reveal">
+        <span class="eyebrow">One chart per patient</span>
+        <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-0.03em;line-height:1.08">One account per patient. Visits by date.</h2>
+        <p class="lead" style="margin-top:18px">Every patient gets one account number with a check digit. Visit 1, 2 and 3 each keep their own date and place of service, so the right codes land on the right day.</p>
+        <ul class="feature-list" style="margin-top:32px">
+          <li class="feature"><span class="ic"><x-icon id="search"></x-icon></span><div><h3>Find anyone fast</h3><p>Search by name, account number or member ID.</p></div></li>
+          <li class="feature"><span class="ic"><x-icon id="pin"></x-icon></span><div><h3>A real location on the record</h3><p>The visit keeps the street address where it happened, never a guessed one.</p></div></li>
+        </ul>
+      </div>
+      <x-phone src="04_chart" alt="Patient chart with account number, insurance details and visits listed by date" sizes="(max-width: 560px) 250px, 290px"></x-phone>
+    </div>
+  </div>
+</section>
+
+<!-- Privacy -->
+<section class="section section-soft" id="privacy" aria-labelledby="privacy-h">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Privacy and control</span>
+      <h2 id="privacy-h">Your practice decides where the audio goes.</h2>
+      <p>SOLIS is built for HIPAA workflows. Choose the on-device engine and the recording never leaves the phone.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal"><span class="ic"><x-icon id="cpu"></x-icon></span><h3>On-device mode</h3><p>Audio stays on the phone. A one-time download of about 150 MB, then it works offline.</p></div>
+      <div class="card reveal d1"><span class="ic"><x-icon id="settings"></x-icon></span><h3>Cloud only when you turn it on</h3><p>Cloud mode uses the Deepgram medical model to transcribe and Claude to write the note, when the practice turns it on.</p></div>
+      <div class="card reveal d2"><span class="ic"><x-icon id="shield"></x-icon></span><h3>Consent before every recording</h3><p>English or Spanish script, verbal agreement or a signature on the phone, saved with time and location.</p></div>
+      <div class="card reveal"><span class="ic"><x-icon id="key"></x-icon></span><h3>Keys never ship in the app</h3><p>Vendor keys live on the SOLIS server, not inside the app you install.</p></div>
+      <div class="card reveal d1"><span class="ic"><x-icon id="trash"></x-icon></span><h3>Card photos deleted</h3><p>Photos are deleted after reading, and the full SSN is never stored. Only the last 4 digits are kept.</p></div>
+      <div class="card reveal d2"><span class="ic"><x-icon id="note"></x-icon></span><h3>BAA available</h3><p>A Business Associate Agreement template is available for practices.</p></div>
+    </div>
+    <div class="privacy-foot reveal">
+      <a class="btn btn-secondary btn-sm" href="privacy.html">How data is handled <x-icon id="arrow-right" class="icon-sm"></x-icon></a>
+    </div>
+  </div>
+</section>
+
+<!-- Who -->
+<section class="section" id="who" aria-labelledby="who-h">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Who it is for</span>
+      <h2 id="who-h">US physicians and the small practices around them.</h2>
+      <p>Especially practices without a big billing department, where the doctor ends up doing the coding too.</p>
+    </div>
+    <ul class="who-grid">
+      <li class="reveal"><x-icon id="stethoscope"></x-icon><b>Primary care</b><span>E/M level by new or established patient and decision making.</span></li>
+      <li class="reveal d1"><x-icon id="clock"></x-icon><b>Urgent care</b><span>Cards scanned at the door, eligibility checked at check-in.</span></li>
+      <li class="reveal d2"><x-icon id="heart"></x-icon><b>Specialty clinics</b><span>Specialty and insurers set once in the provider profile.</span></li>
+      <li class="reveal d3"><x-icon id="home"></x-icon><b>Nursing-home rounds</b><span>Place of service on every visit, so the codes fit where you saw the patient.</span></li>
+      <li class="reveal d3"><x-icon id="ambulance"></x-icon><b>Ambulance and EMS</b><span>On-device mode works offline, away from Wi-Fi.</span></li>
+    </ul>
+    <div class="status-bar reveal">
+      <span class="status-chip"><x-icon id="phone" class="icon-sm"></x-icon>Android app, version 1.0.0</span>
+      <span class="status-chip"><x-icon id="info" class="icon-sm"></x-icon>iOS not yet released</span>
+      <span class="status-chip"><x-icon id="users" class="icon-sm"></x-icon>Pilot stage</span>
+    </div>
+  </div>
+</section>
+
+<!-- Film: shown only when the video file exists -->
+<section class="section section-soft" id="film" aria-labelledby="film-h" hidden>
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Watch</span>
+      <h2 id="film-h">One visit, start to claim.</h2>
+    </div>
+    <div class="film-frame reveal">
+      <video id="film-video" controls playsinline preload="none" width="1920" height="1080" aria-label="SOLIS launch film"></video>
+    </div>
+  </div>
+</section>
+
+<!-- Downloads -->
+<section class="section-tight" id="downloads" aria-labelledby="dl-h">
+  <div class="container">
+    <h2 id="dl-h" class="reveal" style="font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-0.025em;margin-bottom:24px">Take it with you</h2>
+    <div class="downloads">
+      <a class="dl-card reveal" href="guide.html"><span class="ic"><x-icon id="book" class="icon-lg"></x-icon></span><span><b>User guide</b><span>Step by step, for doctors and front-desk staff. Also as a PDF.</span></span><x-icon id="arrow-right" class="icon go"></x-icon></a>
+      <a class="dl-card reveal d1" id="brochure-card" href="media/SOLIS-Brochure.pdf" hidden><span class="ic"><x-icon id="download" class="icon-lg"></x-icon></span><span><b>Brochure (PDF)</b><span>A short overview to share with your practice.</span></span><x-icon id="arrow-right" class="icon go"></x-icon></a>
+      <a class="dl-card reveal d1" id="guide-pdf-card" href="media/SOLIS-User-Guide.pdf" data-pdf-check><span class="ic"><x-icon id="download" class="icon-lg"></x-icon></span><span><b>User guide (PDF)</b><span>Print it for the front desk.</span></span><x-icon id="arrow-right" class="icon go"></x-icon></a>
+    </div>
+  </div>
+</section>
+
+<!-- Early access -->
+<section class="section access" id="access" aria-labelledby="access-h">
+  <div class="container access-grid">
+    <div class="reveal">
+      <span class="eyebrow">Request early access</span>
+      <h2 id="access-h" style="font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-0.035em;line-height:1.05">Join the pilot.</h2>
+      <p class="lead" style="margin-top:18px">SOLIS is in its pilot stage on Android. Tell us about your practice and we will reply by email.</p>
+      <ul class="access-points">
+        <li><x-icon id="users"></x-icon><span>A demo account with fictional patients, so you can try every screen before a real visit.</span></li>
+        <li><x-icon id="note"></x-icon><span>A Business Associate Agreement template for your practice.</span></li>
+        <li><x-icon id="send"></x-icon><span>Test mode for claims, so nothing is billed until your payer enrollment is complete.</span></li>
+      </ul>
+      <div class="apk-card" id="download">
+        <a class="btn btn-primary" href="{{APK_URL}}" download><x-icon id="download" class="icon-sm"></x-icon>Download for Android</a>
+        <p class="apk-meta">SOLIS {{APK_VERSION}} &middot; {{APK_SIZE}} &middot; Pilot build. Android 8+.</p>
+        <p class="apk-sha">SHA-256 <code>{{APK_SHA256}}</code></p>
+        <ol class="apk-steps">
+          <li>Open the download on your Android phone and tap <strong>Install</strong>.</li>
+          <li>If Android asks, allow installs from this source (your browser or Files app), then go back and tap <strong>Install</strong> again.</li>
+          <li>Open SOLIS. The <a href="guide.html#install">user guide</a> walks you through the rest.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="form-card reveal d1">
+      <form id="access-form" novalidate>
+        <div class="form-grid">
+          <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required maxlength="120"><span class="field-error" id="e-name" role="alert"></span></div>
+          <div class="field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200"><span class="field-error" id="e-email" role="alert"></span></div>
+          <div class="field"><label for="f-practice">Practice or organization</label><input id="f-practice" name="practice" autocomplete="organization" required maxlength="160"><span class="field-error" id="e-practice" role="alert"></span></div>
+          <div class="field"><label for="f-role">Your role</label>
+            <select id="f-role" name="role" required>
+              <option value="">Choose one</option>
+              <option>Physician</option><option>Nurse practitioner or PA</option><option>Practice owner or manager</option><option>Front desk</option><option>Billing and coding</option><option>EMS or ambulance</option><option>Other</option>
+            </select><span class="field-error" id="e-role" role="alert"></span></div>
+          <div class="field"><label for="f-specialty">Specialty</label><input id="f-specialty" name="specialty" required maxlength="120" list="specialties" placeholder="Family Medicine"><datalist id="specialties"><option>Family Medicine</option><option>Internal Medicine</option><option>Pediatrics</option><option>Urgent Care</option><option>Cardiology</option><option>Geriatrics</option><option>Emergency Medicine</option><option>EMS</option></datalist><span class="field-error" id="e-specialty" role="alert"></span></div>
+          <div class="field"><label for="f-phone">Phone <span class="opt">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" maxlength="40"><span class="field-error" id="e-phone" role="alert"></span></div>
+          <div class="field full"><label for="f-message">What would you like SOLIS to help with? <span class="opt">(optional)</span></label><textarea id="f-message" name="message" maxlength="2000"></textarea><span class="field-error" id="e-message" role="alert"></span></div>
+          <div class="hp" aria-hidden="true"><label for="f-website">Leave this field empty</label><input id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+        </div>
+        <div class="form-alert" id="form-alert" role="alert"><x-icon id="alert"></x-icon><span id="form-alert-text"></span></div>
+        <div class="form-foot">
+          <small>Please do not include patient information. We use your details only to reply about the pilot.</small>
+          <button class="btn btn-primary" type="submit" id="access-submit">Request early access</button>
+        </div>
+      </form>
+      <div class="form-success" id="access-success" hidden tabindex="-1">
+        <div class="ic"><x-icon id="check-circle" class="icon-lg"></x-icon></div>
+        <h3>Thank you. Your request is in.</h3>
+        <p>We will reply by email about the pilot. In the meantime, the user guide shows every screen.</p>
+        <a class="btn btn-secondary" href="guide.html"><x-icon id="book" class="icon-sm"></x-icon>Open the user guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<x-footer></x-footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
