@@ -318,7 +318,21 @@ class PatientAccount {
     this.sampleConversationKey,
     this.isSample = false,
     this.deletedAtUtc,
+    this.allergies,
   });
+
+  /// Allergies as the clinician recorded them. Null means not asked yet;
+  /// an empty list means the patient has no known allergies.
+  final List<String>? allergies;
+
+  bool get allergiesRecorded => allergies != null;
+
+  /// "No known allergies", "Not recorded" or the list.
+  String get allergySummary => allergies == null
+      ? 'Not recorded'
+      : allergies!.isEmpty
+          ? 'No known allergies'
+          : allergies!.join(', ');
 
   bool get isDeleted => deletedAtUtc != null;
 
@@ -367,6 +381,7 @@ class PatientAccount {
     List<Visit>? visits,
     DateTime? deletedAtUtc,
     bool restore = false,
+    List<String>? allergies,
   }) =>
       PatientAccount(
         accountNumber: accountNumber,
@@ -389,6 +404,7 @@ class PatientAccount {
         ssnLast4: ssnLast4 ?? this.ssnLast4,
         insurance: insurance ?? this.insurance,
         visits: visits ?? this.visits,
+        allergies: allergies ?? this.allergies,
       );
 
   Map<String, dynamic> toJson() => {
@@ -412,6 +428,7 @@ class PatientAccount {
         'sampleConversationKey': sampleConversationKey,
         'isSample': isSample,
         'deletedAtUtc': deletedAtUtc?.toIso8601String(),
+        'allergies': allergies,
       };
 
   factory PatientAccount.fromJson(Map<String, dynamic> j) => PatientAccount(
@@ -436,5 +453,21 @@ class PatientAccount {
         // Older stores marked seeded patients only by their sample conversation.
         isSample: j['isSample'] ?? (j['sampleConversationKey'] != null),
         deletedAtUtc: DateTime.tryParse(j['deletedAtUtc'] ?? ''),
+        allergies: j['allergies'] is List ? [for (final a in j['allergies'] as List) '$a'] : null,
       );
+}
+
+/// Cleans an allergy list typed as free text: one entry per comma or line,
+/// trimmed, without repeats (case-insensitive). "NKA", "NKDA" or "none"
+/// alone means no known allergies (an empty list).
+List<String> parseAllergies(String text) {
+  final parts = text.split(RegExp(r'[,;\n]')).map((p) => p.trim()).where((p) => p.isNotEmpty).toList();
+  if (parts.length == 1 && RegExp(r'^(nka|nkda|none|no known (drug )?allergies)$', caseSensitive: false).hasMatch(parts.single)) {
+    return const [];
+  }
+  final seen = <String>{};
+  return [
+    for (final p in parts)
+      if (seen.add(p.toLowerCase())) p,
+  ];
 }

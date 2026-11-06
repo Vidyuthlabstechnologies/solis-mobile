@@ -57,7 +57,7 @@ owner.
 | 22 | Haptic cues on start, stop and "no sound" | P2 | S | app | |
 | 23 | Remember microphone settings (noise suppression, language) between visits | P2 | S | app | |
 | 24 | Show the on-device draft at once, replace with the cloud note when ready (UX item 25) | P1 | M | app | |
-| 25 | Cancel and timeout on "Writing the note" | P1 | S | app | |
+| 25 | Stop waiting for the cloud note and use the on-device draft | P1 | S | app | B4 |
 | 26 | Replace the hard-coded small-talk filter with a configurable list (UX item 27) | P2 | S | app | |
 | 27 | Upload an audio file recorded elsewhere (dictation) | P2 | M | app | |
 | 28 | Dictation mode for a note without a patient conversation | P1 | M | app | |
@@ -84,7 +84,7 @@ owner.
 | 44 | Structured ROS and exam checklists with "normal" defaults | P2 | M | app | |
 | 45 | Problem list carried across visits | P1 | M | app | |
 | 46 | Medication list carried across visits, with changes per visit | P1 | M | app | |
-| 47 | Allergy list with "no known allergies" as an explicit state | P1 | S | app | |
+| 47 | Allergy list with "no known allergies" as an explicit state | P1 | S | app | B4 |
 | 48 | Vitals trend view (BP, weight, BMI) | P2 | M | app | |
 | 49 | Time-based documentation: total time on date of service, for E/M by time | P1 | S | app | B2 |
 | 50 | Co-signature workflow for NPs and PAs | P2 | M | worker | |
@@ -131,7 +131,7 @@ owner.
 | 81 | Patient responsibility estimate (copay, deductible) at check-out | P1 | M | app | |
 | 82 | Superbill PDF for self-pay or out-of-network patients | P1 | M | app | |
 | 83 | Self-pay visits that skip the claim | P1 | S | app | |
-| 84 | Status refresh every few hours while the app stays open | P2 | S | app | |
+| 84 | Status refresh every few hours while the app stays open | P2 | S | app | B4 |
 | 85 | Automatic status polling with notifications (UX item 30) | P1 | M | app | |
 | 86 | 277CA acknowledgement handling through webhooks (Big idea D) | P1 | L | worker | |
 | 87 | 835 ERA posting: paid amount, adjustments, patient responsibility | P1 | L | worker | |
@@ -296,8 +296,8 @@ owner.
 - **B1** (shipped): 1, 2, 3, 5, 6, 67, 90, 98, 99, 116, 147, 148, 166, 167, 189.
 - **B2** (shipped): 4, 49, 58, 59, 60, 101, 114.
 - **B3** (shipped): 89, 96, 97, 100, 134.
-- **Next**: 25, 36, 37, 47, 85, 135, 80, then B4. 154 needs a biometric
-  plugin and is held for a decision.
-- **B4**: check-in: 111, 112, 113, 118, 120, 115, 93, 14, 15.
+- **B4** (shipped): 25, 47, 84.
+- **Next**: 36, 135, 80, 113, 118, 120, 115, 93, 14, 15. 154 needs a
+  biometric plugin and is held for a decision.
 - **B5 onward**: the remaining `app` items by priority; `worker`, `vendor`
   and `license` items once those are in place.

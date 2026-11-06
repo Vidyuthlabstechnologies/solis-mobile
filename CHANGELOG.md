@@ -7,6 +7,11 @@ All notable changes to the SOLIS app are recorded here. The format follows
 ## [Unreleased]
 
 ### Added
+- Allergies on the patient chart: free text, or "No known allergies" in
+  one tap; "Not recorded" is shown until someone asks.
+- "Stop waiting, use the on-device note" while the cloud model writes.
+- With the app left open, the outbox and claim status are checked again
+  every 3 hours.
 - Billing tab: this month's billed and paid totals and accounts receivable
   aging (0-30, 31-60, 61-90, 90+ days) of claims waiting on payers.
 - Today tab: a "Left to do" card (notes to sign, claims to fix, claims
