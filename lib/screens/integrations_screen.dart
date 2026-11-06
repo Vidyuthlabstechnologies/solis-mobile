@@ -72,6 +72,46 @@ class _IntegrationsScreenState extends State<IntegrationsScreen> {
     }
   }
 
+  /// Production claims are paid by payers: one stray tap must not switch.
+  Future<void> _chooseTestMode(bool test) async {
+    if (test || !_test) {
+      setState(() => _test = test);
+      return;
+    }
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Send real claims?'),
+        content: const Text(
+          'Production claims go to payers for payment. Switch only after your payer enrollment with the clearinghouse is complete.',
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Stay on test')),
+          FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Use production')),
+        ],
+      ),
+    );
+    if (ok == true && mounted) setState(() => _test = false);
+  }
+
+  Future<void> _confirmRemove(String what) async {
+    final name = what == 'stedi' ? 'clearinghouse' : 'transcription';
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Remove the $name key?'),
+        content: Text(what == 'stedi'
+            ? 'Claims, eligibility and claim status stop working on this phone until a key is entered again.'
+            : 'Cloud transcription stops working on this phone until a key is entered again.'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Keep key')),
+          FilledButton(onPressed: () => Navigator.pop(context, true), child: const Text('Remove')),
+        ],
+      ),
+    );
+    if (ok == true) await _remove(what);
+  }
+
   Future<void> _remove(String what) async {
     if (what == 'stedi') await _s.setStediApiKey(null);
     if (what == 'deepgram') await _s.setDeepgramApiKey(null);
@@ -127,7 +167,7 @@ class _IntegrationsScreenState extends State<IntegrationsScreen> {
                   decoration: InputDecoration(labelText: _s.hasStediApiKey ? 'Replace API key' : 'API key', prefixIcon: const Icon(Icons.key_outlined)),
                 ),
                 if (_s.hasStediApiKey)
-                  Align(alignment: Alignment.centerLeft, child: TextButton(onPressed: () => _remove('stedi'), child: const Text('Remove key'))),
+                  Align(alignment: Alignment.centerLeft, child: TextButton(onPressed: () => _confirmRemove('stedi'), child: const Text('Remove key'))),
                 const SizedBox(height: 12),
                 SegmentedButton<bool>(
                   showSelectedIcon: false,
@@ -136,7 +176,7 @@ class _IntegrationsScreenState extends State<IntegrationsScreen> {
                     ButtonSegment(value: false, label: Text('Production')),
                   ],
                   selected: {_test},
-                  onSelectionChanged: (v) => setState(() => _test = v.first),
+                  onSelectionChanged: (v) => _chooseTestMode(v.first),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -181,7 +221,7 @@ class _IntegrationsScreenState extends State<IntegrationsScreen> {
                   decoration: InputDecoration(labelText: _s.hasDeepgramApiKey ? 'Replace API key' : 'API key', prefixIcon: const Icon(Icons.key_outlined)),
                 ),
                 if (_s.hasDeepgramApiKey)
-                  Align(alignment: Alignment.centerLeft, child: TextButton(onPressed: () => _remove('deepgram'), child: const Text('Remove key'))),
+                  Align(alignment: Alignment.centerLeft, child: TextButton(onPressed: () => _confirmRemove('deepgram'), child: const Text('Remove key'))),
               ],
             ),
           ),

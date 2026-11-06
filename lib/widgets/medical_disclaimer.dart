@@ -5,7 +5,9 @@ import 'solis_brand.dart';
 const solisDisclaimer = 'SOLIS helps clinicians document and bill. It is not a medical device and does not diagnose or treat. '
     'The clinician reviews and signs every note.';
 
-const solisVersion = '1.0.0';
+/// The app version shown in About. Must match `version:` in pubspec.yaml
+/// (test/version_test.dart fails the build when it does not).
+const solisVersion = '1.0.2';
 
 /// The one-line medical disclaimer, shown on sign-in and in About.
 class MedicalDisclaimer extends StatelessWidget {

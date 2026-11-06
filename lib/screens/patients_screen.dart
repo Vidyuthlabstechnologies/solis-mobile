@@ -8,7 +8,10 @@ import '../services/app_session.dart';
 import '../services/auth_service.dart';
 import '../services/billing/billing_queue.dart';
 import '../services/billing/claim_submission_service.dart';
+import '../services/billing/claims_csv.dart';
 import '../services/coding/place_of_service.dart';
+import '../services/patient_list.dart';
+import '../services/security/phi_clipboard.dart';
 import '../widgets/medical_disclaimer.dart';
 import '../theme/solis_theme.dart';
 import '../widgets/encounter_widgets.dart';
@@ -101,17 +104,19 @@ class _PatientsScreenState extends State<PatientsScreen> {
       ..showSnackBar(SnackBar(content: Text(text), action: action));
   }
 
-  List<PatientAccount> get _filtered {
-    final q = _query.trim().toLowerCase();
-    if (q.isEmpty) return _repo.accounts;
-    String n(String? s) => (s ?? '').toLowerCase();
-    return _repo.accounts
-        .where((a) =>
-            n(a.fullName).contains(q) ||
-            n(a.accountNumber).contains(q) ||
-            n(a.insurance?.memberId).contains(q) ||
-            n(a.insurance?.payerName).contains(q))
-        .toList();
+  PatientSort _sort = PatientSort.recent;
+  PatientFilter _filter = PatientFilter.all;
+
+  List<PatientAccount> get _filtered => patientList(_repo.accounts, query: _query, filter: _filter, sort: _sort);
+
+  Future<void> _copyClaimsCsv() async {
+    final count = _repo.accounts.fold<int>(0, (n, a) => n + a.visits.where((v) => v.claim != null).length);
+    if (count == 0) {
+      _message('No claims to copy yet.');
+      return;
+    }
+    await PhiClipboard.copy(claimsCsv(_repo.accounts));
+    if (mounted) _message('$count ${count == 1 ? 'claim' : 'claims'} copied as CSV. Paste within 60 seconds; then the clipboard clears.');
   }
 
   Future<void> _openScan({bool manual = false}) async {
@@ -250,6 +255,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
               if (v == 'theme') widget.onThemeToggle?.call(!widget.isDark);
               if (v == 'integrations') Navigator.push(context, MaterialPageRoute(builder: (_) => const IntegrationsScreen()));
               if (v == 'deleted') _showRecentlyDeleted();
+              if (v == 'csv') _copyClaimsCsv();
               if (v == 'about') showSolisAbout(context);
               if (v == 'signout') {
                 final nav = Navigator.of(context);
@@ -261,6 +267,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
             itemBuilder: (_) => [
               _menuItem('integrations', Icons.hub_outlined, 'Integrations'),
               _menuItem('deleted', Icons.restore_from_trash_outlined, 'Recently deleted'),
+              _menuItem('csv', Icons.table_chart_outlined, 'Copy claims as CSV'),
               if (widget.onThemeToggle != null)
                 _menuItem('theme', widget.isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined, widget.isDark ? 'Light theme' : 'Dark theme'),
               _menuItem('about', Icons.info_outline, 'About SOLIS'),
@@ -367,16 +374,53 @@ class _PatientsScreenState extends State<PatientsScreen> {
             ),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 8, 4),
+          child: Row(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      for (final f in PatientFilter.values)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: ChoiceChip(
+                            label: Text(patientFilterLabel(f)),
+                            selected: _filter == f,
+                            onSelected: (_) => setState(() => _filter = f),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+              PopupMenuButton<PatientSort>(
+                tooltip: 'Sort patients',
+                icon: const Icon(Icons.sort_rounded),
+                initialValue: _sort,
+                onSelected: (v) => setState(() => _sort = v),
+                itemBuilder: (_) => const [
+                  PopupMenuItem(value: PatientSort.recent, child: Text('Last visit, newest first')),
+                  PopupMenuItem(value: PatientSort.name, child: Text('Name, A to Z')),
+                ],
+              ),
+            ],
+          ),
+        ),
         Expanded(
           child: list.isEmpty
               ? ListView(
                   children: [
                     EmptyState(
-                      icon: _query.isEmpty ? Icons.badge_outlined : Icons.search_off_rounded,
-                      title: _query.isEmpty ? 'No patients yet' : 'No matches',
-                      message: _query.isEmpty
+                      icon: _query.isEmpty && _filter == PatientFilter.all ? Icons.badge_outlined : Icons.search_off_rounded,
+                      title: _query.isEmpty && _filter == PatientFilter.all ? 'No patients yet' : 'No matches',
+                      message: _query.isEmpty && _filter == PatientFilter.all
                           ? 'Scan an insurance card or driver\'s license to open a patient account.'
-                          : 'Try a different name, account number or member ID.',
+                          : _query.isEmpty
+                              ? 'No patients match this filter.'
+                              : 'Try a different name, account number or member ID.',
                     ),
                   ],
                 )
@@ -477,7 +521,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
         BillingBucket.needsFixes => '${i.errors} ${i.errors == 1 ? 'issue' : 'issues'} to fix',
         BillingBucket.readyToSend => i.warnings > 0 ? '${i.warnings} ${i.warnings == 1 ? 'warning' : 'warnings'} to review before sending' : null,
         BillingBucket.queued => 'Sends when the connection is back',
-        BillingBucket.rejected || BillingBucket.denied => (i.visit.submission?['lastStatus'] ?? (i.visit.submission?['errors'] as List?)?.firstOrNull)?.toString(),
+        BillingBucket.rejected || BillingBucket.denied => (i.visit.submission?['statusExplanation'] ??
+                i.visit.submission?['lastStatus'] ?? (i.visit.submission?['errors'] as List?)?.firstOrNull)?.toString(),
         BillingBucket.paidThisWeek => i.visit.submission?['paidAmount'] == null ? null : 'Paid \$${i.visit.submission!['paidAmount']}',
         BillingBucket.awaitingPayer => i.visit.submission?['lastStatus']?.toString(),
       };

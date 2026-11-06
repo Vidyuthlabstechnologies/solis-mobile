@@ -4,6 +4,7 @@ import '../account_repository.dart';
 import '../coding/claim_scrubber.dart';
 import '../integrations.dart';
 import 'claim_idempotency.dart';
+import 'claim_status_codes.dart';
 import 'clearinghouse.dart';
 import 'integration_settings.dart';
 import 'x12_837p.dart';
@@ -243,6 +244,11 @@ class ClaimSubmissionService {
       return const StatusRefresh(false, 'The payer returned claims for this date, but none with this claim number.');
     }
     final latest = _repo.byNumber(accountNumber)!.visit(visitNumber)!;
+    final explanation = describeClaimStatus(
+      categoryCode: c.statusCategoryCode,
+      statusCode: c.statusCode,
+      payerText: c.statusDescription ?? c.statusCategory,
+    );
     final status = c.paid
         ? VisitStatus.paid
         : c.denied
@@ -256,13 +262,15 @@ class ClaimSubmissionService {
         ...?latest.submission,
         'lastStatus': c.statusDescription ?? c.statusCategory,
         'statusCategoryCode': c.statusCategoryCode,
+        'statusCode': c.statusCode,
+        'statusExplanation': explanation,
         'paidAmount': c.paidAmount,
         'payerClaimNumber': c.payerClaimNumber,
         'statusCheckedAtUtc': checkedAt,
         if (status == VisitStatus.paid) 'paidAtUtc': latest.submission?['paidAtUtc'] ?? checkedAt,
       }),
     );
-    return StatusRefresh(true, 'Claim status: ${c.statusDescription ?? c.statusCategory ?? 'updated'}', status: status);
+    return StatusRefresh(true, 'Claim status: $explanation', status: status);
   }
 
   /// The 277 entry for this claim: the one whose patient account number is

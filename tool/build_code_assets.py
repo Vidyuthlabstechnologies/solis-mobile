@@ -654,7 +654,11 @@ APP_RULES = [
      "Ambulance claims report the transport reason and loaded miles (CR1) and the pick-up and drop-off locations (2310E, 2310F)."),
     ("CLAIM-AMBULANCE-03", "Ambulance lines carry origin and destination modifiers", "error", "Medicare Claims Processing Manual, Chapter 15, Section 30.A",
      "Each ambulance service and mileage line carries a two-letter modifier: the origin code then the destination code (for example RH)."),
-    # Medicare front-end (CCEM) edits, CMS CR 14429 (transmittal R13967OTN, October 2026). docs/CMS_EDI_OCT2026.md.
+    ("CLAIM-DOS-01", "The date of service is real", "error", "CMS-1500 claim form, item 24A",
+     "The date of service is the day the service was given: it cannot be in the future or before the patient was born."),
+    ("CLAIM-TIMELY-01", "The claim is sent within the payer's filing limit", "warning", "42 CFR 424.44",
+     "Medicare must receive a Part B claim within one calendar year of the date of service; commercial plans set their own limits, often 90 to 180 days."),
+    # Medicare front-end (CCEM) edits, CMS CR 14429 (transmittal R13977OTN, October 2026). docs/CMS_EDI_OCT2026.md.
     ("CMS-EDI-X222.351.2400.SV101-7.020", "Unlisted and not-otherwise-classified services carry a description", "error",
      "CMS CR 14429 (R13977OTN)",
      "Medicare 837P edit X222.351.2400.SV101-7.020 (revised October 5, 2026): when the procedure code is on the CMS table of codes "

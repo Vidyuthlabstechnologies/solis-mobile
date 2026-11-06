@@ -269,6 +269,16 @@ bool isOriginDestinationModifier(String m) {
   return s.length == 2 && ambulanceLocationCodes.containsKey(s[0]) && ambulanceLocationCodes.containsKey(s[1]) && s[0] != 'X';
 }
 
+/// CLM05-3 claim frequency type code.
+enum ClaimFrequency {
+  original('1'),
+  replacement('7'),
+  voided('8');
+
+  final String code;
+  const ClaimFrequency(this.code);
+}
+
 /// Builds 005010X222A1 837P interchanges.
 class Claim837PGenerator {
   static const implementationGuide = '005010X222A1';
@@ -281,6 +291,10 @@ class Claim837PGenerator {
   /// [now] sets the ISA/GS/BHT date and time (defaults to the current local time).
   /// [filingIndicator] overrides SBR09.
   /// [pretty] puts each segment on its own line.
+  /// [frequency] sets CLM05-3: original (1), replacement of a prior claim
+  /// (7) or void (8). A replacement or void must name the payer's claim
+  /// control number of the claim it replaces ([payerClaimControlNumber],
+  /// sent as 2300 REF*F8).
   static X12BuildResult build({
     required ClaimDraft claim,
     required PatientAccount account,
@@ -290,9 +304,16 @@ class Claim837PGenerator {
     DateTime? now,
     String? filingIndicator,
     bool pretty = false,
+    ClaimFrequency frequency = ClaimFrequency.original,
+    String? payerClaimControlNumber,
   }) {
     final errors = <String>[];
     final warnings = <String>[];
+    final originalRef = _clean(payerClaimControlNumber ?? '');
+    if (frequency != ClaimFrequency.original && originalRef.isEmpty) {
+      errors.add('A ${frequency == ClaimFrequency.replacement ? 'corrected' : 'void'} claim needs the payer claim number of the original claim (2300 REF*F8).');
+    }
+    if (originalRef.length > 50) errors.add('The payer claim number is longer than 50 characters (REF02).');
     final ins = account.insurance;
     final pcn = _clean('${account.accountNumber}-V${visit.number}');
 
@@ -461,7 +482,7 @@ class Claim837PGenerator {
     if (!RegExp(r'^\d{2}$').hasMatch(pos)) errors.add('Place of service must be a 2-digit CMS code (CLM05-1).');
     final dob = account.dateOfBirth;
 
-    // ---- Medicare front-end edits (CMS CR 14429, R13967OTN, October 2026).
+    // ---- Medicare front-end edits (CMS CR 14429, R13977OTN, October 2026).
     final medicare = (filingIndicator ?? claimFilingIndicatorFor(ins)) == 'MB';
     if (medicare) {
       // X222.079.1000B.NM109.060: a MAC rejects the file at the translator
@@ -561,7 +582,9 @@ class Claim837PGenerator {
       add(['DMG', 'D8', _dateDigits(dob!), sexCode(account.sex)]);
     }
     // 2300 claim.
-    add(['CLM', pcn, _money(totalCents), '', '', '$pos:B:1', 'Y', 'A', 'Y', 'Y']);
+    add(['CLM', pcn, _money(totalCents), '', '', '$pos:B:${frequency.code}', 'Y', 'A', 'Y', 'Y']);
+    // 2300 REF*F8: the payer's control number of the claim being replaced or voided.
+    if (frequency != ClaimFrequency.original) add(['REF', 'F8', originalRef]);
     if (ambulance) {
       final t = transport!;
       final weight = t.patientWeightLbs;
