@@ -488,6 +488,14 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     });
   }
 
+  void _onReferralChanged(ReferringProvider? referring, String priorAuth) {
+    final visit = _visitOrNull;
+    if (visit == null) return;
+    final updated = visit.copyWith(referringProvider: referring, clearReferringProvider: referring == null, priorAuthNumber: priorAuth);
+    unawaited(_repo.updateVisit(widget.accountNumber, updated).then((_) => _persist()));
+    setState(() => _claimReady = false);
+  }
+
   /// Runs a check's fix button. Fixes that change the claim offer Undo.
   Future<void> _onFix(IssueFix fix) async {
     switch (fix.kind) {
@@ -1570,7 +1578,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     );
   }
 
-  String _formattedNote() {
+  String _formattedNote({bool withAddenda = false}) {
     final b = StringBuffer()
       ..writeln('CLINICAL ENCOUNTER NOTE')
       ..writeln('Patient: $_patientName')
@@ -1611,12 +1619,53 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       b.writeln();
     }
     b.writeln(_isSigned ? 'Electronically signed by $_attending' : 'DRAFT, not signed');
+    if (withAddenda) b.write(_addendaText());
     return b.toString();
+  }
+
+  String _addendaText() {
+    if (_encounter.addenda.isEmpty) return '';
+    final b = StringBuffer()..writeln()..writeln('ADDENDA');
+    for (final a in _encounter.addenda) {
+      b
+        ..writeln('Addendum ${_formatAddendumTime(a.atUtc)} by ${a.signerName} (NPI: ${a.signerNpi})')
+        ..writeln(a.text)
+        ..writeln('SHA-256 seal: ${a.seal}');
+    }
+    return b.toString();
+  }
+
+  static String _formatAddendumTime(DateTime utc) {
+    final t = utc.toLocal();
+    String two(int n) => n.toString().padLeft(2, '0');
+    return '${t.year}-${two(t.month)}-${two(t.day)} ${two(t.hour)}:${two(t.minute)}';
+  }
+
+  /// Once the claim has gone out, the signed note is a legal record that no
+  /// longer changes; corrections are made as addenda.
+  bool get _noteLocked => _isSigned && const {VisitStatus.queued, VisitStatus.submitted, VisitStatus.paid, VisitStatus.denied}.contains(_status);
+
+  /// Adds a sealed addendum to the signed note.
+  Future<void> _addAddendum() async {
+    if (!_isSigned) return;
+    final text = await showDialog<String>(context: context, builder: (_) => const _AddendumDialog());
+    if (text == null || text.trim().isEmpty || !mounted) return;
+    final p = _repo.provider;
+    final addendum = NoteAddendum.create(
+      text: text,
+      atUtc: DateTime.now().toUtc(),
+      signerName: p.displayName,
+      signerNpi: p.npi,
+      noteSeal: _encounter.sha256Seal,
+    );
+    setState(() => _encounter = _encounter.copyWith(addenda: [..._encounter.addenda, addendum]));
+    await _persist();
+    _showMessage('Addendum signed and added.', icon: Icons.post_add_rounded);
   }
 
   void _copyFormattedNote() {
     final seal = _encounter.sha256Seal;
-    PhiClipboard.copy(_isSigned && seal.isNotEmpty ? '${_formattedNote()}SHA-256 seal: $seal\n' : _formattedNote());
+    PhiClipboard.copy(_isSigned && seal.isNotEmpty ? '${_formattedNote()}SHA-256 seal: $seal\n${_addendaText()}' : _formattedNote(withAddenda: true));
     HapticFeedback.lightImpact();
     _showMessage('Note copied. Paste it into the EHR within 60 seconds; then the clipboard clears.', icon: Icons.content_copy_rounded);
   }
@@ -1726,6 +1775,10 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
   }
 
   void _toggleEdit(String key) {
+    if (_noteLocked && !(_editing[key] ?? false)) {
+      _showMessage('This claim has been sent, so the signed note can no longer change. Add an addendum instead.', icon: Icons.lock_outline_rounded);
+      return;
+    }
     setState(() {
       final wasEditing = _editing[key] ?? false;
       if (wasEditing) {
@@ -2739,6 +2792,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
                     onClaimChanged: _onClaimChanged,
                     onPlaceOfServiceChanged: _changePlaceOfService,
                     onTransportChanged: _onTransportChanged,
+                    onReferralChanged: _onReferralChanged,
                     onFix: _onFix,
                     checksKey: _checksKey,
                     eligibilityConfigured: _eligibility.isConfigured,
@@ -2904,7 +2958,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
             icon: Icons.verified_outlined,
             title: 'Signed${_signedAt != null ? ' at ${_formatClock(_signedAt!)}' : ''}',
             message: [
-              'Editing any section reopens the note as a draft.',
+              _noteLocked ? 'The claim has been sent, so corrections are added as addenda.' : 'Editing any section reopens the note as a draft.',
               if (_encounter.sha256Seal.isNotEmpty) 'SHA-256 seal ${_encounter.sha256Seal.substring(0, 16)}',
             ].join('\n'),
             color: SolisTheme.success,
@@ -2923,6 +2977,10 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
         ],
         for (final (key, title) in sections) ...[
           _buildSoapSection(context, key, title),
+          const SizedBox(height: 12),
+        ],
+        if (_isSigned) ...[
+          _buildAddenda(context),
           const SizedBox(height: 12),
         ],
         if (_claim != null) _buildCodingSummary(context),
@@ -2957,6 +3015,48 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     );
   }
 
+  Widget _buildAddenda(BuildContext context) {
+    final theme = Theme.of(context);
+    final addenda = _encounter.addenda;
+    return SectionCard(
+      key: const Key('addenda_card'),
+      title: 'Addenda',
+      icon: Icons.post_add_rounded,
+      actions: [
+        TextButton.icon(
+          key: const Key('add_addendum'),
+          onPressed: _addAddendum,
+          icon: const Icon(Icons.add_rounded, size: 20),
+          label: const Text('Add addendum'),
+        ),
+      ],
+      child: addenda.isEmpty
+          ? Text('None. An addendum is signed and sealed on its own and leaves the signed note unchanged.',
+              style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant))
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (final a in addenda)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('${_formatAddendumTime(a.atUtc)}  ${a.signerName}', style: theme.textTheme.labelLarge),
+                        const SizedBox(height: 2),
+                        Text(a.text, style: theme.textTheme.bodyLarge),
+                        Text(
+                          '${a.verify(_encounter.sha256Seal) ? 'Seal' : 'Seal does not match'} ${a.seal.substring(0, 16)}',
+                          style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+    );
+  }
+
   Widget _buildSoapSection(BuildContext context, String key, String title) {
     final theme = Theme.of(context);
     final isEditing = _editing[key] ?? false;
@@ -2972,8 +3072,8 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
           label: const Text('Sources'),
         ),
         IconButton(
-          tooltip: isEditing ? 'Save $title' : 'Edit $title',
-          icon: Icon(isEditing ? Icons.check_rounded : Icons.edit_outlined),
+          tooltip: isEditing ? 'Save $title' : (_noteLocked ? 'Signed note is locked' : 'Edit $title'),
+          icon: Icon(isEditing ? Icons.check_rounded : (_noteLocked ? Icons.lock_outline_rounded : Icons.edit_outlined)),
           color: isEditing ? theme.colorScheme.primary : null,
           onPressed: () => _toggleEdit(key),
         ),
@@ -3232,4 +3332,43 @@ class _TranscriptTurn extends StatelessWidget {
       ),
     );
   }
+}
+
+class _AddendumDialog extends StatefulWidget {
+  const _AddendumDialog();
+
+  @override
+  State<_AddendumDialog> createState() => _AddendumDialogState();
+}
+
+class _AddendumDialogState extends State<_AddendumDialog> {
+  final _c = TextEditingController();
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+        title: const Text('Add addendum'),
+        content: TextField(
+          key: const Key('addendum_text'),
+          controller: _c,
+          autofocus: true,
+          minLines: 3,
+          maxLines: 8,
+          textCapitalization: TextCapitalization.sentences,
+          decoration: const InputDecoration(hintText: 'What is being added or corrected, and why'),
+          onChanged: (_) => setState(() {}),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          FilledButton(
+            onPressed: _c.text.trim().isEmpty ? null : () => Navigator.pop(context, _c.text),
+            child: const Text('Sign addendum'),
+          ),
+        ],
+      );
 }

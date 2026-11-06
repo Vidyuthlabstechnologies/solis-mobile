@@ -1,3 +1,5 @@
+import '../services/note_seal.dart';
+
 class MedicalCode {
   final String code;
   final String description;
@@ -197,6 +199,10 @@ class ClinicalEncounter {
   final String rawTranscript;
   final Map<String, dynamic> gpsCoordinates;
 
+  /// Addenda written after signing, oldest first. The signed note itself
+  /// never changes once its claim is sent; corrections go here.
+  final List<NoteAddendum> addenda;
+
   ClinicalEncounter({
     required this.id,
     required this.patientName,
@@ -219,6 +225,7 @@ class ClinicalEncounter {
     this.signedAtUtc,
     this.rawTranscript = '',
     this.gpsCoordinates = const {},
+    this.addenda = const [],
   });
 
   ClinicalEncounter copyWith({
@@ -244,6 +251,7 @@ class ClinicalEncounter {
     bool clearSignature = false,
     String? rawTranscript,
     Map<String, dynamic>? gpsCoordinates,
+    List<NoteAddendum>? addenda,
   }) {
     return ClinicalEncounter(
       id: id ?? this.id,
@@ -267,6 +275,7 @@ class ClinicalEncounter {
       signedAtUtc: clearSignature ? null : (signedAtUtc ?? this.signedAtUtc),
       rawTranscript: rawTranscript ?? this.rawTranscript,
       gpsCoordinates: gpsCoordinates ?? this.gpsCoordinates,
+      addenda: clearSignature ? const [] : (addenda ?? this.addenda),
     );
   }
 
@@ -292,6 +301,7 @@ class ClinicalEncounter {
     'isSigned': isSigned,
     'signedAtUtc': signedAtUtc?.toIso8601String(),
     'gpsCoordinates': gpsCoordinates,
+    if (addenda.isNotEmpty) 'addenda': [for (final a in addenda) a.toJson()],
     'syncedAt': DateTime.now().toUtc().toIso8601String(),
   };
 
@@ -317,6 +327,7 @@ class ClinicalEncounter {
         signedAtUtc: DateTime.tryParse(j['signedAtUtc'] ?? ''),
         rawTranscript: j['rawTranscript'] ?? '',
         gpsCoordinates: ((j['gpsCoordinates'] as Map?) ?? const {}).cast<String, dynamic>(),
+        addenda: [for (final a in (j['addenda'] as List? ?? const [])) NoteAddendum.fromJson((a as Map).cast<String, dynamic>())],
       );
 
   Map<String, List<String>> get soapSections => {
@@ -329,4 +340,55 @@ class ClinicalEncounter {
   bool get isLocalEngine => latencyMs < 150;
 
   String get attending => attendingPhysician;
+}
+
+/// A note added after signing. It is sealed on its own: the SHA-256 covers
+/// the addendum text, the signer's NPI, its time and the seal of the note
+/// it amends, so neither can change without the seal showing it.
+class NoteAddendum {
+  final String text;
+  final DateTime atUtc;
+  final String signerName;
+  final String signerNpi;
+  final String seal;
+
+  const NoteAddendum({required this.text, required this.atUtc, required this.signerName, required this.signerNpi, required this.seal});
+
+  /// The text that is hashed: the amended note's seal, then the addendum.
+  static String sealedText(String noteSeal, String text) => 'ADDENDUM TO $noteSeal\n$text';
+
+  factory NoteAddendum.create({
+    required String text,
+    required DateTime atUtc,
+    required String signerName,
+    required String signerNpi,
+    required String noteSeal,
+  }) {
+    final t = text.trim();
+    return NoteAddendum(
+      text: t,
+      atUtc: atUtc.toUtc(),
+      signerName: signerName,
+      signerNpi: signerNpi,
+      seal: NoteSeal.compute(noteText: sealedText(noteSeal, t), signerNpi: signerNpi, signedAtUtc: atUtc.toUtc()),
+    );
+  }
+
+  bool verify(String noteSeal) => NoteSeal.verify(seal: seal, noteText: sealedText(noteSeal, text), signerNpi: signerNpi, signedAtUtc: atUtc);
+
+  Map<String, dynamic> toJson() => {
+        'text': text,
+        'atUtc': atUtc.toIso8601String(),
+        'signerName': signerName,
+        'signerNpi': signerNpi,
+        'seal': seal,
+      };
+
+  factory NoteAddendum.fromJson(Map<String, dynamic> j) => NoteAddendum(
+        text: '${j['text'] ?? ''}',
+        atUtc: DateTime.tryParse('${j['atUtc'] ?? ''}')?.toUtc() ?? DateTime.utc(1970),
+        signerName: '${j['signerName'] ?? ''}',
+        signerNpi: '${j['signerNpi'] ?? ''}',
+        seal: '${j['seal'] ?? ''}',
+      );
 }

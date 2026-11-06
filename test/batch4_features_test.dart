@@ -37,7 +37,7 @@ void main() {
       final a = await billablePatient(repo);
       await tester.pumpWidget(MaterialApp(theme: SolisTheme.lightTheme(), home: PatientChartScreen(accountNumber: a.accountNumber)));
       await tester.pump(const Duration(milliseconds: 100));
-      expect(find.text('Not recorded'), findsOneWidget);
+      expect(find.descendant(of: find.byKey(const Key('allergies_row')), matching: find.text('Not recorded')), findsOneWidget);
       await tester.tap(find.byKey(const Key('allergies_row')));
       await tester.pumpAndSettle();
       await tester.tap(find.text('No known allergies'));

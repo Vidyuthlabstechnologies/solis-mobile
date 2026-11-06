@@ -41,8 +41,8 @@ owner.
 | 11 | ABN (Advance Beneficiary Notice) prompt and GA/GZ modifiers | P1 | M | app | |
 | 12 | Telehealth: POS 02/10 and modifier 95/93 chosen from the visit mode | P1 | M | app | |
 | 13 | Rendering vs billing vs supervising provider (incident-to) on the claim | P1 | M | app | |
-| 14 | Referring provider NPI (2310A) for specialties and tests that need it | P1 | S | app | |
-| 15 | Prior authorization number field (REF*G1) on the claim | P1 | S | app | |
+| 14 | Referring provider NPI (2310A) for specialties and tests that need it | P1 | S | app | B5 |
+| 15 | Prior authorization number field (REF*G1) on the claim | P1 | S | app | B5 |
 | 16 | CLIA number (REF*X4) for in-office lab lines | P2 | S | app | |
 | 17 | Attestation text versioned and stored with every signature | P1 | S | app | |
 | 18 | Retention policy: records kept per state rules, with a purge report | P2 | M | app | |
@@ -73,7 +73,7 @@ owner.
 
 | # | Feature | Pri | Eff | Needs | Status |
 | --- | --- | --- | --- | --- | --- |
-| 36 | Addendum after signing, sealed separately (UX item 26) | P0 | M | app | |
+| 36 | Addendum after signing, sealed separately (UX item 26) | P0 | M | app | B5 |
 | 37 | Share the signed note to another app (Android share sheet) | P1 | S | app | |
 | 38 | Share the note as PDF | P1 | M | app | |
 | 39 | Note templates per visit type (annual, follow-up, procedure, telehealth) | P1 | M | app | |
@@ -127,7 +127,7 @@ owner.
 | 77 | Secondary and tertiary claims (COB loop 2320/2330) after primary pays | P1 | L | app | |
 | 78 | Payer list with payer IDs (search, not typed by hand) | P1 | M | vendor | |
 | 79 | Per-payer fee schedules (not only Medicare PFS) | P1 | M | app | |
-| 80 | Practice charge master: the practice's own prices per code | P1 | S | app | |
+| 80 | Practice charge master: the practice's own prices per code | P1 | S | app | B5 |
 | 81 | Patient responsibility estimate (copay, deductible) at check-out | P1 | M | app | |
 | 82 | Superbill PDF for self-pay or out-of-network patients | P1 | M | app | |
 | 83 | Self-pay visits that skip the claim | P1 | S | app | |
@@ -177,7 +177,7 @@ owner.
 | 117 | Patient photo for identity check | P2 | S | app | |
 | 118 | Guarantor / responsible party when the patient is a minor | P1 | M | app | |
 | 119 | Emergency contact | P2 | S | app | |
-| 120 | Preferred language and interpreter-needed flag | P1 | S | app | |
+| 120 | Preferred language and interpreter-needed flag | P1 | S | app | B5 |
 | 121 | Pronouns and preferred name | P2 | S | app | |
 | 122 | Address validation and ZIP+4 | P2 | S | app | |
 | 123 | Phone and email validation with tap-to-call | P2 | S | app | |
@@ -297,7 +297,8 @@ owner.
 - **B2** (shipped): 4, 49, 58, 59, 60, 101, 114.
 - **B3** (shipped): 89, 96, 97, 100, 134.
 - **B4** (shipped): 25, 47, 84.
-- **Next**: 36, 135, 80, 113, 118, 120, 115, 93, 14, 15. 154 needs a
-  biometric plugin and is held for a decision.
+- **B5** (shipped): 14, 15, 36, 80, 120.
+- **Next**: 113, 118, 115, 93. 135 needs a local-notification plugin and
+  154 a biometric plugin; both are held for a decision.
 - **B5 onward**: the remaining `app` items by priority; `worker`, `vendor`
   and `license` items once those are in place.
