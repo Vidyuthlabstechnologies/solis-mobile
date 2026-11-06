@@ -92,6 +92,8 @@ const Map<String, String> ruleCitations = {
   'CLAIM-AMBULANCE-03': 'Medicare Claims Processing Manual, Chapter 15, Section 30.A',
   'CLAIM-DOS-01': 'CMS-1500 claim form, item 24A',
   'CLAIM-TIMELY-01': '42 CFR 424.44',
+  'CLAIM-PATIENT-02': 'CMS-1500 claim form, item 2',
+  'CLAIM-G2211-01': 'CMS CY2024 Physician Fee Schedule final rule (HCPCS G2211)',
   'CMS-EDI-X222.351.2400.SV101-7.020': 'CMS CR 14429 (R13977OTN)',
   'CMS-EDI-X222.121.2010BA.NM109.020': 'CMS CR 14429 (R13977OTN)',
 };

@@ -658,6 +658,10 @@ APP_RULES = [
      "The date of service is the day the service was given: it cannot be in the future or before the patient was born."),
     ("CLAIM-TIMELY-01", "The claim is sent within the payer's filing limit", "warning", "42 CFR 424.44",
      "Medicare must receive a Part B claim within one calendar year of the date of service; commercial plans set their own limits, often 90 to 180 days."),
+    ("CLAIM-PATIENT-02", "The patient is identified by legal name", "error", "CMS-1500 claim form, item 2",
+     "A patient registered as unidentified (EMS or emergency arrival) is billed only after the legal name is entered."),
+    ("CLAIM-G2211-01", "Medicare office visits in ongoing care may add G2211", "info", "CMS CY2024 Physician Fee Schedule final rule (HCPCS G2211)",
+     "Medicare pays G2211 with office E/M visits 99202-99215 when the clinician is the continuing focal point for the patient's care or treats a single serious or complex condition over time; with modifier 25 only beside preventive services and vaccines."),
     # Medicare front-end (CCEM) edits, CMS CR 14429 (transmittal R13977OTN, October 2026). docs/CMS_EDI_OCT2026.md.
     ("CMS-EDI-X222.351.2400.SV101-7.020", "Unlisted and not-otherwise-classified services carry a description", "error",
      "CMS CR 14429 (R13977OTN)",

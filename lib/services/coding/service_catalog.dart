@@ -39,4 +39,15 @@ final List<CatalogService> serviceCatalog = [
   const CatalogService('A0427', 'Ambulance, advanced life support, emergency (ALS1)'),
   const CatalogService('A0429', 'Ambulance, basic life support, emergency (BLS)'),
   const CatalogService('A0425', 'Ambulance ground mileage, per statute mile'),
+  const CatalogService('G2211', 'Visit complexity add-on: longitudinal care of a serious or complex condition (Medicare)'),
+  const CatalogService('99417', 'Prolonged office visit, each additional 15 minutes'),
+  const CatalogService('G2212', 'Prolonged office visit, each additional 15 minutes (Medicare)'),
 ];
+
+/// The catalog description of [code], or null when it is not in the catalog.
+String? serviceDescription(String code) {
+  for (final s in serviceCatalog) {
+    if (s.code == code) return s.description;
+  }
+  return null;
+}

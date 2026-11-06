@@ -103,6 +103,8 @@ class ClaimSubmissionService {
       return const SendResult(SendStatus.blocked, problems: ['This claim was already sent.']);
     }
     if (visit.status == VisitStatus.queued) return retry(accountNumber, visitNumber);
+    final pending = _pendingReplacement(visit);
+    if (visit.status == VisitStatus.rejected && pending != null) return sendReplacement(accountNumber, visitNumber, pending);
     final blocked = blockers(account, visit);
     if (blocked.isNotEmpty) return SendResult(SendStatus.blocked, problems: blocked);
     final client = _client();
@@ -114,6 +116,75 @@ class ClaimSubmissionService {
     // Same claim, same key: a retry after a lost response is not a second claim.
     final key = claimIdempotencyKey(built.x12!, built.patientControlNumber);
     return _submit(accountNumber, visitNumber, x12: built.x12!, key: key, pcn: built.patientControlNumber, test: config.isTest, attempts: 1);
+  }
+
+  /// Whether [visit]'s sent claim can be corrected (frequency 7) or voided
+  /// (frequency 8): the payer adjudicated or received it and gave it a
+  /// claim number to refer to.
+  static bool canReplace(Visit visit) {
+    if (visit.claim == null) return false;
+    const sent = {VisitStatus.submitted, VisitStatus.paid, VisitStatus.denied};
+    if (sent.contains(visit.status)) return (_originalClaimNumber(visit) ?? '').isNotEmpty;
+    // A corrected or void claim that was rejected can be fixed and sent again.
+    return visit.status == VisitStatus.rejected && _pendingReplacement(visit) != null;
+  }
+
+  /// The payer claim number a corrected or void claim refers to.
+  static String? _originalClaimNumber(Visit visit) {
+    final s = visit.submission;
+    final v = (s?['payerClaimNumber'] ?? s?['replacesPayerClaimNumber'])?.toString().trim();
+    return v == null || v.isEmpty ? null : v;
+  }
+
+  /// The frequency of a corrected or void claim that was rejected, so a
+  /// resend stays a correction and never becomes a second original claim.
+  static ClaimFrequency? _pendingReplacement(Visit visit) {
+    final s = visit.submission;
+    if (s?['replacesPayerClaimNumber'] == null) return null;
+    final code = s?['frequency']?.toString();
+    for (final f in ClaimFrequency.values) {
+      if (f.code == code && f != ClaimFrequency.original) return f;
+    }
+    return null;
+  }
+
+  /// Sends a corrected ([ClaimFrequency.replacement]) or void
+  /// ([ClaimFrequency.voided]) claim for a claim the payer already has,
+  /// naming the payer's claim number in REF*F8. The current claim on the
+  /// visit is what is sent; the original claim number is kept.
+  Future<SendResult> sendReplacement(String accountNumber, int visitNumber, ClaimFrequency frequency) async {
+    final account = _repo.byNumber(accountNumber);
+    final visit = account?.visit(visitNumber);
+    if (account == null || visit == null) return const SendResult(SendStatus.blocked, problems: ['The visit no longer exists.']);
+    if (frequency == ClaimFrequency.original) return send(accountNumber, visitNumber);
+    if (!canReplace(visit)) {
+      return const SendResult(SendStatus.blocked, problems: ['Only a sent claim with a payer claim number can be corrected or voided. Check the claim status first.']);
+    }
+    final blocked = blockers(account, visit);
+    if (blocked.isNotEmpty) return SendResult(SendStatus.blocked, problems: blocked);
+    final client = _client();
+    if (client == null) return const SendResult(SendStatus.blocked, problems: ['No clearinghouse is connected.']);
+    final config = await _settings().submitterConfigForNextClaim();
+    if (config == null) return const SendResult(SendStatus.blocked, problems: ['Add your submitter details in Integrations before sending claims.']);
+    final icn = _originalClaimNumber(visit)!;
+    final built = Claim837PGenerator.build(
+      claim: visit.claim!,
+      account: account,
+      visit: visit,
+      provider: _repo.provider,
+      config: config,
+      frequency: frequency,
+      payerClaimControlNumber: icn,
+    );
+    if (!built.ok) return SendResult(SendStatus.blocked, problems: built.errors);
+    final key = claimIdempotencyKey(built.x12!, built.patientControlNumber);
+    return _submit(accountNumber, visitNumber,
+        x12: built.x12!,
+        key: key,
+        pcn: built.patientControlNumber,
+        test: config.isTest,
+        attempts: 1,
+        extra: {'frequency': frequency.code, 'replacesPayerClaimNumber': icn, 'previousStatus': visit.status.name});
   }
 
   /// Sends a queued claim again with its stored file and key.
@@ -132,6 +203,10 @@ class ClaimSubmissionService {
       pcn: s['patientControlNumber'] as String,
       test: s['testMode'] != false,
       attempts: ((s['attempts'] as num?)?.toInt() ?? 1) + 1,
+      extra: {
+        for (final k in const ['frequency', 'replacesPayerClaimNumber', 'previousStatus'])
+          if (s[k] != null) k: s[k],
+      },
     );
   }
 
@@ -150,7 +225,12 @@ class ClaimSubmissionService {
   }
 
   Future<SendResult> _submit(String accountNumber, int visitNumber,
-      {required String x12, required String key, required String pcn, required bool test, required int attempts}) async {
+      {required String x12,
+      required String key,
+      required String pcn,
+      required bool test,
+      required int attempts,
+      Map<String, dynamic> extra = const {}}) async {
     final client = _client()!;
     ClaimSubmissionResult res;
     try {
@@ -181,6 +261,7 @@ class ClaimSubmissionService {
           'patientControlNumber': pcn,
           'testMode': test,
           'errors': errors,
+          ...extra,
         }),
       );
       return SendResult(SendStatus.queued, problems: errors, testMode: test);
@@ -204,6 +285,7 @@ class ClaimSubmissionService {
           'testMode': res.testMode ?? test,
           'attempts': attempts,
           'errors': errors,
+          ...extra,
         },
       ),
     );
