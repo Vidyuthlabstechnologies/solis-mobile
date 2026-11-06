@@ -730,6 +730,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       if (s['payerClaimNumber'] != null) 'Payer claim number ${s['payerClaimNumber']}',
       if ((s['errors'] as List?)?.isNotEmpty == true) ...(s['errors'] as List).map((e) => '$e'),
       if (s['correlationId'] != null) 'Clearinghouse reference ${s['correlationId']}',
+      ...claimHistoryLines(s),
     ];
     return NoteBanner(icon: icon, title: title, message: lines.isEmpty ? 'Waiting for the payer.' : lines.join('\n'), color: color);
   }

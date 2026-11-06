@@ -7,6 +7,7 @@ import '../services/account_repository.dart';
 import '../services/app_session.dart';
 import '../services/auth_service.dart';
 import '../services/billing/billing_queue.dart';
+import '../services/billing/billing_stats.dart';
 import '../services/billing/claim_submission_service.dart';
 import '../services/billing/claims_csv.dart';
 import '../services/coding/place_of_service.dart';
@@ -315,7 +316,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
             if (_repo.demoMode) const _DemoStrip(),
             Expanded(
               child: switch (_tab) {
-                0 => _buildToday(context),
+                0 => _buildToday(context, items),
                 1 => _buildPatients(context),
                 _ => _buildBilling(context, items),
               },
@@ -328,12 +329,39 @@ class _PatientsScreenState extends State<PatientsScreen> {
 
   // --- Today ---------------------------------------------------------------
 
-  Widget _buildToday(BuildContext context) {
+  /// What is left for the day, all dates: tapping it opens Billing.
+  Widget? _daySummaryCard(BuildContext context, List<BillingItem> items) {
+    final d = daySummary(items);
+    if (d.clear) return null;
+    final theme = Theme.of(context);
+    String n(int c, String one, String many) => '$c ${c == 1 ? one : many}';
+    final parts = [
+      if (d.unsigned > 0) n(d.unsigned, 'note to sign', 'notes to sign'),
+      if (d.needsFixes > 0) n(d.needsFixes, 'claim to fix', 'claims to fix'),
+      if (d.readyToSend > 0) n(d.readyToSend, 'claim ready to send', 'claims ready to send'),
+    ];
+    return Card(
+      key: const Key('day_summary'),
+      margin: EdgeInsets.zero,
+      child: ListTile(
+        leading: const Icon(Icons.checklist_rounded),
+        title: Text('Left to do', style: theme.textTheme.titleSmall),
+        subtitle: Text(parts.join(', ')),
+        trailing: const Icon(Icons.chevron_right_rounded),
+        onTap: () => setState(() => _tab = 2),
+      ),
+    );
+  }
+
+  Widget _buildToday(BuildContext context, List<BillingItem> items) {
     final visits = visitsOn(_repo.accounts);
+    final summary = _daySummaryCard(context, items);
     if (visits.isEmpty) {
       return ListView(
-        children: const [
-          EmptyState(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+        children: [
+          ?summary,
+          const EmptyState(
             icon: Icons.today_outlined,
             title: 'No visits today',
             message: 'Scan a card for a new patient, or open a patient in Patients to start a visit.',
@@ -341,13 +369,15 @@ class _PatientsScreenState extends State<PatientsScreen> {
         ],
       );
     }
+    final offset = summary == null ? 0 : 1;
     return ListView.separated(
       key: const Key('today_list'),
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
-      itemCount: visits.length,
+      itemCount: visits.length + offset,
       separatorBuilder: (_, _) => const SizedBox(height: 8),
       itemBuilder: (context, i) {
-        final (a, v) = visits[i];
+        if (i < offset) return summary!;
+        final (a, v) = visits[i - offset];
         return _VisitCard(
           title: a.fullName,
           subtitle: 'Visit ${v.number}  |  ${placeOfService(v.placeOfService).label}',
@@ -493,6 +523,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
               ),
             ),
           if (_refreshing) const Padding(padding: EdgeInsets.only(top: 8), child: LinearProgressIndicator()),
+          _MoneyCard(accounts: _repo.accounts),
           if (items.isEmpty)
             const EmptyState(icon: Icons.receipt_long_outlined, title: 'Nothing to bill', message: 'Signed visits and their claims appear here.')
           else
@@ -664,6 +695,59 @@ class _BatchSendDialogState extends State<BatchSendDialog> {
 }
 
 /// One line saying the app is in demo mode, on every home tab.
+/// This month's billed and paid totals and what payers still owe, by age.
+class _MoneyCard extends StatelessWidget {
+  final List<PatientAccount> accounts;
+  const _MoneyCard({required this.accounts});
+
+  @override
+  Widget build(BuildContext context) {
+    final now = DateTime.now();
+    final month = monthTotals(accounts, month: now);
+    final aging = arAging(accounts, today: now);
+    if (month.claims == 0 && aging.count == 0) return const SizedBox.shrink();
+    final theme = Theme.of(context);
+    final cs = theme.colorScheme;
+    String money(double v) => '\$${v.toStringAsFixed(2)}';
+    const tabular = [FontFeature.tabularFigures()];
+    Widget cell(String label, String value) => Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(label, style: theme.textTheme.labelSmall?.copyWith(color: cs.onSurfaceVariant)),
+              Text(value, style: theme.textTheme.bodyMedium?.copyWith(fontFeatures: tabular)),
+            ],
+          ),
+        );
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Card(
+        key: const Key('money_card'),
+        margin: EdgeInsets.zero,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('This month', style: theme.textTheme.titleSmall),
+              const SizedBox(height: 8),
+              Row(children: [cell('Billed', money(month.billed)), cell('Paid', money(month.paid)), cell('Claims', '${month.claims}')]),
+              if (aging.count > 0) ...[
+                const SizedBox(height: 16),
+                Text('Waiting on payers, by days since the visit', style: theme.textTheme.titleSmall),
+                const SizedBox(height: 8),
+                Row(children: [
+                  for (var i = 0; i < 4; i++) cell('${ArAging.labels[i]} days', money(aging.buckets[i])),
+                ]),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _DemoStrip extends StatelessWidget {
   const _DemoStrip();
 
