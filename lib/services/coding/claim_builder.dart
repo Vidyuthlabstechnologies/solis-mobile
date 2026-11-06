@@ -83,7 +83,10 @@ class ClaimBuilder {
       },
       'serviceLines': lines,
       'provider': {
-        'box17_referringProvider': null,
+        'box17_referringProvider': visit.referringProvider == null
+            ? null
+            : {'qualifier': 'DN', 'name': visit.referringProvider!.displayName, 'npi': visit.referringProvider!.npi},
+        'box23_priorAuthorization': visit.priorAuthNumber,
         'box24J_renderingNpi': provider.npi,
         'box25_federalTaxId': provider.taxId,
         'box25_taxIdType': 'EIN',

@@ -192,6 +192,9 @@ class ClaimTab extends StatelessWidget {
   final ValueChanged<String> onPlaceOfServiceChanged;
   final ValueChanged<AmbulanceTransport>? onTransportChanged;
 
+  /// Saves the referring provider and prior authorization number.
+  final void Function(ReferringProvider? referring, String priorAuth)? onReferralChanged;
+
   /// Fixes the tab cannot run itself (sign, open the profile or the patient).
   final ValueChanged<IssueFix>? onFix;
 
@@ -212,6 +215,7 @@ class ClaimTab extends StatelessWidget {
     required this.onPlaceOfServiceChanged,
     this.demoMode = false,
     this.onTransportChanged,
+    this.onReferralChanged,
     this.onFix,
     this.checksKey,
     this.eligibilityConfigured = false,
@@ -464,6 +468,24 @@ class ClaimTab extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 12),
+        SectionCard(
+          key: const Key('referral_card'),
+          title: 'Referral and authorization',
+          icon: Icons.assignment_ind_outlined,
+          actions: [
+            if (onReferralChanged != null)
+              TextButton(key: const Key('edit_referral'), onPressed: () => _editReferral(context), child: const Text('Edit')),
+          ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _kv(context, 'Referring provider',
+                  visit.referringProvider == null ? 'None' : '${visit.referringProvider!.displayName}  |  NPI ${visit.referringProvider!.npi}'),
+              _kv(context, 'Prior authorization', visit.priorAuthNumber ?? 'None'),
+            ],
+          ),
+        ),
         if (errors == 0) ...[const SizedBox(height: 12), checks],
       ],
     );
@@ -500,6 +522,14 @@ class ClaimTab extends StatelessWidget {
       default:
         onFix?.call(fix);
     }
+  }
+
+  Future<void> _editReferral(BuildContext context) async {
+    final result = await showDialog<(ReferringProvider?, String)>(
+      context: context,
+      builder: (_) => ReferralDialog(referring: visit.referringProvider, priorAuth: visit.priorAuthNumber ?? ''),
+    );
+    if (result != null) onReferralChanged?.call(result.$1, result.$2);
   }
 
   Future<void> _editTransport(BuildContext context) async {
@@ -1379,4 +1409,66 @@ class _ServiceSearchDialogState extends State<_ServiceSearchDialog> {
       actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close'))],
     );
   }
+}
+
+/// Edits the referring provider (box 17, 2310A) and the prior authorization
+/// number (box 23, REF*G1). Leaving the referring NPI empty removes it.
+class ReferralDialog extends StatefulWidget {
+  final ReferringProvider? referring;
+  final String priorAuth;
+
+  const ReferralDialog({super.key, this.referring, this.priorAuth = ''});
+
+  @override
+  State<ReferralDialog> createState() => _ReferralDialogState();
+}
+
+class _ReferralDialogState extends State<ReferralDialog> {
+  late final _first = TextEditingController(text: widget.referring?.firstName ?? '');
+  late final _last = TextEditingController(text: widget.referring?.lastName ?? '');
+  late final _npi = TextEditingController(text: widget.referring?.npi ?? '');
+  late final _auth = TextEditingController(text: widget.priorAuth);
+  String? _npiError;
+  String? _lastError;
+
+  @override
+  void dispose() {
+    for (final c in [_first, _last, _npi, _auth]) {
+      c.dispose();
+    }
+    super.dispose();
+  }
+
+  void _save() {
+    final npi = _npi.text.trim();
+    final last = _last.text.trim();
+    setState(() {
+      _npiError = npi.isEmpty && last.isEmpty ? null : (isValidNpi(npi) ? null : 'Enter a valid 10-digit NPI');
+      _lastError = npi.isNotEmpty && last.isEmpty ? 'Last name is required' : null;
+    });
+    if (_npiError != null || _lastError != null) return;
+    final referring = npi.isEmpty ? null : ReferringProvider(firstName: _first.text.trim(), lastName: last, npi: npi);
+    Navigator.pop(context, (referring, _auth.text.trim()));
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+        title: const Text('Referral and authorization'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(key: const Key('referring_first'), controller: _first, textCapitalization: TextCapitalization.words, decoration: const InputDecoration(labelText: 'Referring provider first name')),
+              TextField(key: const Key('referring_last'), controller: _last, textCapitalization: TextCapitalization.words, decoration: InputDecoration(labelText: 'Last name', errorText: _lastError)),
+              TextField(key: const Key('referring_npi'), controller: _npi, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: 'Referring NPI', errorText: _npiError)),
+              const SizedBox(height: 8),
+              TextField(key: const Key('prior_auth'), controller: _auth, textCapitalization: TextCapitalization.characters, decoration: const InputDecoration(labelText: 'Prior authorization number')),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          FilledButton(key: const Key('referral_save'), onPressed: _save, child: const Text('Save')),
+        ],
+      );
 }

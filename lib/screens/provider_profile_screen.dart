@@ -10,6 +10,7 @@ import '../services/security_and_background_service.dart';
 import '../services/coding/place_of_service.dart';
 import '../services/npi_registry.dart';
 import '../widgets/account_section.dart';
+import 'charge_master_screen.dart';
 
 /// Looks up an NPI in NPPES. Tests pass a fake.
 typedef NpiLookup = Future<NpiRecord?> Function(String npi);
@@ -206,6 +207,20 @@ class _ProviderProfileScreenState extends State<ProviderProfileScreen> {
     }
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Provider profile saved. New claims use it.')));
     Navigator.pop(context);
+  }
+
+  /// Prices are saved as soon as the charge master closes, so they do not
+  /// wait on the rest of the form.
+  Future<void> _openChargeMaster() async {
+    final fees = await Navigator.push<Map<String, double>>(
+      context,
+      MaterialPageRoute(builder: (_) => ChargeMasterScreen(fees: _p.feeSchedule)),
+    );
+    if (fees == null || !mounted) return;
+    await _repo.saveProvider(_repo.provider.copyWith(feeSchedule: fees));
+    if (!mounted) return;
+    setState(() => _p = _p.copyWith(feeSchedule: fees));
+    _message('Prices saved. New claim lines use them.');
   }
 
   Future<void> _signOut() async {
@@ -421,6 +436,17 @@ class _ProviderProfileScreenState extends State<ProviderProfileScreen> {
                 ],
               ),
               if (!widget.firstRun) ...[
+                const SizedBox(height: 24),
+                _section(context, 'Your prices'),
+                ListTile(
+                  key: const Key('open_charge_master'),
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.price_change_outlined),
+                  title: const Text('Charge master'),
+                  subtitle: Text('${_p.feeSchedule.length} ${_p.feeSchedule.length == 1 ? 'code' : 'codes'} priced. New claim lines use these.'),
+                  trailing: const Icon(Icons.chevron_right_rounded),
+                  onTap: _openChargeMaster,
+                ),
                 const SizedBox(height: 24),
                 _section(context, 'Saved places'),
                 if (_places.isEmpty)

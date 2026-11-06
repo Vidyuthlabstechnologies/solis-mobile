@@ -179,6 +179,12 @@ class Visit {
   /// or 'manual'. A manual choice is never changed automatically.
   final String? posSource;
 
+  /// Referring or ordering provider, when the service needs one (box 17).
+  final ReferringProvider? referringProvider;
+
+  /// The payer's prior authorization number (box 23, 2300 REF*G1).
+  final String? priorAuthNumber;
+
   const Visit({
     required this.number,
     required this.dateOfService,
@@ -195,6 +201,8 @@ class Visit {
     this.submission,
     this.transport,
     this.posSource,
+    this.referringProvider,
+    this.priorAuthNumber,
   });
 
   Visit copyWith({
@@ -212,6 +220,9 @@ class Visit {
     Map<String, dynamic>? submission,
     AmbulanceTransport? transport,
     String? posSource,
+    ReferringProvider? referringProvider,
+    bool clearReferringProvider = false,
+    String? priorAuthNumber,
   }) =>
       Visit(
         number: number,
@@ -229,6 +240,9 @@ class Visit {
         submission: submission ?? this.submission,
         transport: transport ?? this.transport,
         posSource: posSource ?? this.posSource,
+        referringProvider: clearReferringProvider ? null : (referringProvider ?? this.referringProvider),
+        // An empty string clears the number.
+        priorAuthNumber: priorAuthNumber == null ? this.priorAuthNumber : (priorAuthNumber.trim().isEmpty ? null : priorAuthNumber.trim()),
       );
 
   Map<String, dynamic> toJson() => {
@@ -247,6 +261,8 @@ class Visit {
         'submission': submission,
         'transport': transport?.toJson(),
         'posSource': posSource,
+        if (referringProvider != null) 'referringProvider': referringProvider!.toJson(),
+        if (priorAuthNumber != null) 'priorAuthNumber': priorAuthNumber,
       };
 
   factory Visit.fromJson(Map<String, dynamic> j) => Visit(
@@ -265,7 +281,26 @@ class Visit {
         submission: (j['submission'] as Map?)?.cast<String, dynamic>(),
         transport: j['transport'] is Map ? AmbulanceTransport.fromJson((j['transport'] as Map).cast<String, dynamic>()) : null,
         posSource: j['posSource'],
+        referringProvider: j['referringProvider'] is Map ? ReferringProvider.fromJson((j['referringProvider'] as Map).cast<String, dynamic>()) : null,
+        priorAuthNumber: j['priorAuthNumber'] as String?,
       );
+}
+
+/// The provider who referred or ordered the service (CMS-1500 box 17,
+/// 837P loop 2310A, qualifier DN).
+class ReferringProvider {
+  final String firstName;
+  final String lastName;
+  final String npi;
+
+  const ReferringProvider({required this.firstName, required this.lastName, required this.npi});
+
+  String get displayName => [firstName, lastName].where((s) => s.trim().isNotEmpty).join(' ');
+
+  Map<String, dynamic> toJson() => {'firstName': firstName, 'lastName': lastName, 'npi': npi};
+
+  factory ReferringProvider.fromJson(Map<String, dynamic> j) =>
+      ReferringProvider(firstName: '${j['firstName'] ?? ''}', lastName: '${j['lastName'] ?? ''}', npi: '${j['npi'] ?? ''}');
 }
 
 /// A patient's account: demographics, coverage and every visit.
@@ -319,7 +354,21 @@ class PatientAccount {
     this.isSample = false,
     this.deletedAtUtc,
     this.allergies,
+    this.preferredLanguage,
+    this.interpreterNeeded = false,
   });
+
+  /// The language the patient prefers for care, such as "Spanish". Null
+  /// when not recorded.
+  final String? preferredLanguage;
+
+  /// The patient needs an interpreter for the visit.
+  final bool interpreterNeeded;
+
+  /// "Spanish, interpreter needed", "English" or "Not recorded".
+  String get languageSummary => preferredLanguage == null
+      ? (interpreterNeeded ? 'Interpreter needed' : 'Not recorded')
+      : '$preferredLanguage${interpreterNeeded ? ', interpreter needed' : ''}';
 
   /// Allergies as the clinician recorded them. Null means not asked yet;
   /// an empty list means the patient has no known allergies.
@@ -382,6 +431,8 @@ class PatientAccount {
     DateTime? deletedAtUtc,
     bool restore = false,
     List<String>? allergies,
+    String? preferredLanguage,
+    bool? interpreterNeeded,
   }) =>
       PatientAccount(
         accountNumber: accountNumber,
@@ -405,6 +456,9 @@ class PatientAccount {
         insurance: insurance ?? this.insurance,
         visits: visits ?? this.visits,
         allergies: allergies ?? this.allergies,
+        // An empty string clears the language.
+        preferredLanguage: preferredLanguage == null ? this.preferredLanguage : (preferredLanguage.trim().isEmpty ? null : preferredLanguage.trim()),
+        interpreterNeeded: interpreterNeeded ?? this.interpreterNeeded,
       );
 
   Map<String, dynamic> toJson() => {
@@ -429,6 +483,8 @@ class PatientAccount {
         'isSample': isSample,
         'deletedAtUtc': deletedAtUtc?.toIso8601String(),
         'allergies': allergies,
+        if (preferredLanguage != null) 'preferredLanguage': preferredLanguage,
+        if (interpreterNeeded) 'interpreterNeeded': true,
       };
 
   factory PatientAccount.fromJson(Map<String, dynamic> j) => PatientAccount(
@@ -454,6 +510,8 @@ class PatientAccount {
         isSample: j['isSample'] ?? (j['sampleConversationKey'] != null),
         deletedAtUtc: DateTime.tryParse(j['deletedAtUtc'] ?? ''),
         allergies: j['allergies'] is List ? [for (final a in j['allergies'] as List) '$a'] : null,
+        preferredLanguage: j['preferredLanguage'] as String?,
+        interpreterNeeded: j['interpreterNeeded'] == true,
       );
 }
 

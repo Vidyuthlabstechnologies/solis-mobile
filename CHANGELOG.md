@@ -7,6 +7,14 @@ All notable changes to the SOLIS app are recorded here. The format follows
 ## [Unreleased]
 
 ### Added
+- Addenda on a signed note. Each one is signed and sealed with its own
+  SHA-256, tied to the note's seal. Once the claim has gone out, the signed
+  note is locked and corrections go into an addendum.
+- Referring provider (box 17, 837P 2310A) and prior authorization number
+  (box 23, 2300 REF*G1) on the Claim tab.
+- Charge master ("Your prices" in the provider profile): set, add and
+  remove the practice's own price per code. New claim lines use it.
+- Preferred language and an interpreter-needed flag on the patient chart.
 - Allergies on the patient chart: free text, or "No known allergies" in
   one tap; "Not recorded" is shown until someone asks.
 - "Stop waiting, use the on-device note" while the cloud model writes.

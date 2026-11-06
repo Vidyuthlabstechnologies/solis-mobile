@@ -365,6 +365,11 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
                   onTap: () => _editAllergies(context, account),
                   child: _row(context, 'Allergies', account.allergySummary, missing: !account.allergiesRecorded),
                 ),
+                InkWell(
+                  key: const Key('language_row'),
+                  onTap: () => _editLanguage(context, account),
+                  child: _row(context, 'Language', account.languageSummary),
+                ),
               ],
             ),
           ),
@@ -460,6 +465,15 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
     );
     if (result == null) return;
     await AccountRepository.instance.updateAccount(account.copyWith(allergies: result));
+  }
+
+  Future<void> _editLanguage(BuildContext context, PatientAccount account) async {
+    final result = await showDialog<(String, bool)>(
+      context: context,
+      builder: (_) => LanguageDialog(language: account.preferredLanguage, interpreter: account.interpreterNeeded),
+    );
+    if (result == null) return;
+    await AccountRepository.instance.updateAccount(account.copyWith(preferredLanguage: result.$1, interpreterNeeded: result.$2));
   }
 
   Widget _row(BuildContext context, String label, String value, {bool copy = false, bool missing = false}) {
@@ -581,6 +595,82 @@ class _AllergyDialogState extends State<_AllergyDialog> {
         actions: [
           TextButton(onPressed: () => Navigator.pop(context, const <String>[]), child: const Text('No known allergies')),
           FilledButton(onPressed: () => Navigator.pop(context, parseAllergies(_c.text)), child: const Text('Save')),
+        ],
+      );
+}
+
+/// Languages most often needed in US clinics, offered first.
+const commonLanguages = [
+  'English', 'Spanish', 'Chinese (Mandarin)', 'Chinese (Cantonese)', 'Vietnamese', 'Tagalog', 'Arabic', 'Korean',
+  'Russian', 'French', 'Haitian Creole', 'Portuguese', 'Hindi', 'Polish', 'Japanese', 'American Sign Language',
+];
+
+/// Picks the preferred language and whether an interpreter is needed.
+/// Pops with (language, interpreter); an empty language clears it.
+class LanguageDialog extends StatefulWidget {
+  final String? language;
+  final bool interpreter;
+
+  const LanguageDialog({super.key, this.language, this.interpreter = false});
+
+  @override
+  State<LanguageDialog> createState() => _LanguageDialogState();
+}
+
+class _LanguageDialogState extends State<LanguageDialog> {
+  late final _c = TextEditingController(text: widget.language ?? '');
+  late bool _interpreter = widget.interpreter;
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+        title: const Text('Language'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                key: const Key('language_text'),
+                controller: _c,
+                textCapitalization: TextCapitalization.words,
+                decoration: const InputDecoration(labelText: 'Preferred language'),
+                onChanged: (_) => setState(() {}),
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: [
+                  for (final l in commonLanguages.take(8))
+                    ChoiceChip(
+                      label: Text(l),
+                      selected: _c.text.trim().toLowerCase() == l.toLowerCase(),
+                      onSelected: (_) => setState(() {
+                        _c.text = l;
+                        if (l != 'English') _interpreter = true;
+                      }),
+                    ),
+                ],
+              ),
+              SwitchListTile(
+                key: const Key('interpreter_switch'),
+                contentPadding: EdgeInsets.zero,
+                value: _interpreter,
+                onChanged: (v) => setState(() => _interpreter = v),
+                title: const Text('Interpreter needed'),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          FilledButton(key: const Key('language_save'), onPressed: () => Navigator.pop(context, (_c.text.trim(), _interpreter)), child: const Text('Save')),
         ],
       );
 }

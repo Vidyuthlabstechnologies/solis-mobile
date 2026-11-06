@@ -350,6 +350,15 @@ class Claim837PGenerator {
     if (billAsGroup && !isValidNpi(individualNpi)) {
       errors.add('Rendering provider NPI is missing or invalid (2310B NM109).');
     }
+    // ---- Referring provider (2310A) and prior authorization (2300 REF*G1).
+    final referring = visit.referringProvider;
+    if (referring != null) {
+      if (_clean(referring.lastName).isEmpty) errors.add('Referring provider last name is required (2310A NM103).');
+      if (!isValidNpi(referring.npi.trim())) errors.add('Referring provider NPI "${referring.npi}" fails the NPI check digit (2310A NM109).');
+    }
+    final priorAuth = _clean(visit.priorAuthNumber ?? '');
+    if (priorAuth.length > 50) errors.add('The prior authorization number is longer than 50 characters (2300 REF*G1).');
+
     final ein = provider.taxId.replaceAll(RegExp(r'[^0-9]'), '');
     if (!isValidEin(provider.taxId) || ein.length != 9) errors.add('Billing provider EIN is required as 9 digits (2010AA REF*EI).');
     if (provider.taxonomyCode.trim().length != 10) errors.add('Billing provider taxonomy code must be 10 characters (2000A PRV03).');
@@ -583,6 +592,8 @@ class Claim837PGenerator {
     }
     // 2300 claim.
     add(['CLM', pcn, _money(totalCents), '', '', '$pos:B:${frequency.code}', 'Y', 'A', 'Y', 'Y']);
+    // 2300 REF*G1: prior authorization (precedes REF*F8 in the guide).
+    if (priorAuth.isNotEmpty) add(['REF', 'G1', priorAuth]);
     // 2300 REF*F8: the payer's control number of the claim being replaced or voided.
     if (frequency != ClaimFrequency.original) add(['REF', 'F8', originalRef]);
     if (ambulance) {
@@ -599,6 +610,10 @@ class Claim837PGenerator {
       'HI',
       for (var i = 0; i < dx.length; i++) '${i == 0 ? 'ABK' : 'ABF'}:${icdForX12(dx[i].code)}',
     ]);
+    // 2310A referring provider.
+    if (referring != null) {
+      add(['NM1', 'DN', '1', _cap(_clean(referring.lastName), 60), _cap(_clean(referring.firstName), 35), '', '', '', 'XX', referring.npi.trim()]);
+    }
     // 2310B rendering provider when the claim bills under a group NPI.
     if (billAsGroup) {
       add(['NM1', '82', '1', _cap(renderingName.last, 60), _cap(renderingName.first, 35), '', '', '', 'XX', individualNpi]);
