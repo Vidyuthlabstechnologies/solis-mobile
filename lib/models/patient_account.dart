@@ -185,6 +185,9 @@ class Visit {
   /// The payer's prior authorization number (box 23, 2300 REF*G1).
   final String? priorAuthNumber;
 
+  /// Service facility when the visit was not at the billing address.
+  final ServiceFacility? serviceFacility;
+
   const Visit({
     required this.number,
     required this.dateOfService,
@@ -203,6 +206,7 @@ class Visit {
     this.posSource,
     this.referringProvider,
     this.priorAuthNumber,
+    this.serviceFacility,
   });
 
   Visit copyWith({
@@ -223,6 +227,8 @@ class Visit {
     ReferringProvider? referringProvider,
     bool clearReferringProvider = false,
     String? priorAuthNumber,
+    ServiceFacility? serviceFacility,
+    bool clearServiceFacility = false,
   }) =>
       Visit(
         number: number,
@@ -243,6 +249,7 @@ class Visit {
         referringProvider: clearReferringProvider ? null : (referringProvider ?? this.referringProvider),
         // An empty string clears the number.
         priorAuthNumber: priorAuthNumber == null ? this.priorAuthNumber : (priorAuthNumber.trim().isEmpty ? null : priorAuthNumber.trim()),
+        serviceFacility: clearServiceFacility ? null : (serviceFacility ?? this.serviceFacility),
       );
 
   Map<String, dynamic> toJson() => {
@@ -263,6 +270,7 @@ class Visit {
         'posSource': posSource,
         if (referringProvider != null) 'referringProvider': referringProvider!.toJson(),
         if (priorAuthNumber != null) 'priorAuthNumber': priorAuthNumber,
+        if (serviceFacility != null) 'serviceFacility': serviceFacility!.toJson(),
       };
 
   factory Visit.fromJson(Map<String, dynamic> j) => Visit(
@@ -283,6 +291,7 @@ class Visit {
         posSource: j['posSource'],
         referringProvider: j['referringProvider'] is Map ? ReferringProvider.fromJson((j['referringProvider'] as Map).cast<String, dynamic>()) : null,
         priorAuthNumber: j['priorAuthNumber'] as String?,
+        serviceFacility: j['serviceFacility'] is Map ? ServiceFacility.fromJson((j['serviceFacility'] as Map).cast<String, dynamic>()) : null,
       );
 }
 
@@ -301,6 +310,76 @@ class ReferringProvider {
 
   factory ReferringProvider.fromJson(Map<String, dynamic> j) =>
       ReferringProvider(firstName: '${j['firstName'] ?? ''}', lastName: '${j['lastName'] ?? ''}', npi: '${j['npi'] ?? ''}');
+}
+
+/// Where the service was given, when that is not the billing address
+/// (CMS-1500 box 32, 837P loop 2310C).
+class ServiceFacility {
+  final String name;
+  final String line1;
+  final String city;
+  final String state;
+  final String zip;
+
+  const ServiceFacility({required this.name, required this.line1, required this.city, required this.state, required this.zip});
+
+  bool get isComplete =>
+      name.trim().isNotEmpty &&
+      line1.trim().isNotEmpty &&
+      city.trim().isNotEmpty &&
+      RegExp(r'^[A-Za-z]{2}$').hasMatch(state.trim()) &&
+      RegExp(r'^\d{5}(-?\d{4})?$').hasMatch(zip.trim());
+
+  /// "450 Mission Bay Blvd, San Francisco, CA 94158".
+  String get oneLine => '${line1.trim()}, ${city.trim()}, ${state.trim().toUpperCase()} ${zip.trim()}';
+
+  Map<String, dynamic> toJson() => {'name': name, 'line1': line1, 'city': city, 'state': state, 'zip': zip};
+
+  factory ServiceFacility.fromJson(Map<String, dynamic> j) => ServiceFacility(
+        name: '${j['name'] ?? ''}',
+        line1: '${j['line1'] ?? ''}',
+        city: '${j['city'] ?? ''}',
+        state: '${j['state'] ?? ''}',
+        zip: '${j['zip'] ?? ''}',
+      );
+
+  /// Reads "street, city, ST 12345" (a trailing country is ignored). Null
+  /// when the text does not have that shape.
+  static ServiceFacility? parse(String name, String? address) {
+    if (address == null) return null;
+    final parts = address.split(',').map((p) => p.trim()).where((p) => p.isNotEmpty).toList();
+    if (parts.isNotEmpty && RegExp(r'^(usa|us|united states( of america)?)$', caseSensitive: false).hasMatch(parts.last)) parts.removeLast();
+    if (parts.length < 3) return null;
+    final m = RegExp(r'^([A-Za-z]{2})\s+(\d{5}(?:-?\d{4})?)$').firstMatch(parts.last);
+    if (m == null) return null;
+    final f = ServiceFacility(
+      name: name,
+      line1: parts.sublist(0, parts.length - 2).join(', '),
+      city: parts[parts.length - 2],
+      state: m.group(1)!.toUpperCase(),
+      zip: m.group(2)!,
+    );
+    return f.isComplete ? f : null;
+  }
+}
+
+/// Who is responsible for the bill when it is not the patient, usually a
+/// parent or guardian of a minor.
+class Guarantor {
+  final String name;
+  final String relationship; // parent, guardian, spouse, other
+  final String? phone;
+
+  const Guarantor({required this.name, this.relationship = 'parent', this.phone});
+
+  static const relationships = {'parent': 'Parent', 'guardian': 'Legal guardian', 'spouse': 'Spouse', 'other': 'Other'};
+
+  String get summary => '$name (${relationships[relationship] ?? relationship})${phone == null || phone!.isEmpty ? '' : ', $phone'}';
+
+  Map<String, dynamic> toJson() => {'name': name, 'relationship': relationship, if (phone != null) 'phone': phone};
+
+  factory Guarantor.fromJson(Map<String, dynamic> j) =>
+      Guarantor(name: '${j['name'] ?? ''}', relationship: '${j['relationship'] ?? 'parent'}', phone: j['phone'] as String?);
 }
 
 /// A patient's account: demographics, coverage and every visit.
@@ -356,6 +435,7 @@ class PatientAccount {
     this.allergies,
     this.preferredLanguage,
     this.interpreterNeeded = false,
+    this.guarantor,
   });
 
   /// The language the patient prefers for care, such as "Spanish". Null
@@ -391,6 +471,18 @@ class PatientAccount {
   String get fullName => [firstName, if (middleName != null && middleName!.isNotEmpty) middleName, lastName].join(' ');
 
   /// Age in whole years on [on] (defaults to today), or null without a DOB.
+  /// The responsible party when it is not the patient.
+  final Guarantor? guarantor;
+
+  /// Under 18 on [on]. Unknown birth dates are not minors.
+  bool isMinorOn([DateTime? on]) {
+    final age = ageOn(on);
+    return age != null && age < 18;
+  }
+
+  /// A minor with no responsible party recorded.
+  bool get needsGuarantor => isMinorOn() && guarantor == null;
+
   int? ageOn([DateTime? on]) {
     final dob = dateOfBirth;
     if (dob == null) return null;
@@ -433,6 +525,8 @@ class PatientAccount {
     List<String>? allergies,
     String? preferredLanguage,
     bool? interpreterNeeded,
+    Guarantor? guarantor,
+    bool clearGuarantor = false,
   }) =>
       PatientAccount(
         accountNumber: accountNumber,
@@ -459,6 +553,7 @@ class PatientAccount {
         // An empty string clears the language.
         preferredLanguage: preferredLanguage == null ? this.preferredLanguage : (preferredLanguage.trim().isEmpty ? null : preferredLanguage.trim()),
         interpreterNeeded: interpreterNeeded ?? this.interpreterNeeded,
+        guarantor: clearGuarantor ? null : (guarantor ?? this.guarantor),
       );
 
   Map<String, dynamic> toJson() => {
@@ -485,6 +580,7 @@ class PatientAccount {
         'allergies': allergies,
         if (preferredLanguage != null) 'preferredLanguage': preferredLanguage,
         if (interpreterNeeded) 'interpreterNeeded': true,
+        if (guarantor != null) 'guarantor': guarantor!.toJson(),
       };
 
   factory PatientAccount.fromJson(Map<String, dynamic> j) => PatientAccount(
@@ -512,6 +608,7 @@ class PatientAccount {
         allergies: j['allergies'] is List ? [for (final a in j['allergies'] as List) '$a'] : null,
         preferredLanguage: j['preferredLanguage'] as String?,
         interpreterNeeded: j['interpreterNeeded'] == true,
+        guarantor: j['guarantor'] is Map ? Guarantor.fromJson((j['guarantor'] as Map).cast<String, dynamic>()) : null,
       );
 }
 

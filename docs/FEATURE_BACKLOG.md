@@ -140,7 +140,7 @@ owner.
 | 90 | Plain-language 277 status category explanations | P1 | S | app | B1 |
 | 91 | Claim notes: a free-text note on a claim for the biller | P2 | S | app | |
 | 92 | Workers' comp and auto claims (property and casualty fields) | P3 | L | app | |
-| 93 | Place-of-service facility address (2310C) from saved places | P1 | S | app | |
+| 93 | Place-of-service facility address (2310C) from saved places | P1 | S | app | B6 |
 | 94 | Line-item date of service for multi-day services | P2 | S | app | |
 | 95 | Claim print preview as CMS-1500 PDF | P2 | M | app | |
 | 96 | Accounts receivable aging (0-30, 31-60, 61-90, 90+) | P1 | M | app | B3 |
@@ -170,12 +170,12 @@ owner.
 | --- | --- | --- | --- | --- | --- |
 | 111 | One scanner session for all cards with automatic card type (UX item 11) | P1 | M | app | |
 | 112 | Short review form and a fixed Save button (UX item 12) | P1 | S | app | |
-| 113 | Pre-select the matching patient and scroll to the choice (UX item 13) | P1 | S | app | |
+| 113 | Pre-select the matching patient and scroll to the choice (UX item 13) | P1 | S | app | B6 |
 | 114 | Quick "unidentified patient" for EMS and ED (UX item 34) | P1 | S | app | B2 |
-| 115 | Merge two patient accounts | P1 | M | app | |
+| 115 | Merge two patient accounts | P1 | M | app | B6 |
 | 116 | Patient list sorting (name, last visit) and filters (status, payer) | P1 | S | app | B1 |
 | 117 | Patient photo for identity check | P2 | S | app | |
-| 118 | Guarantor / responsible party when the patient is a minor | P1 | M | app | |
+| 118 | Guarantor / responsible party when the patient is a minor | P1 | M | app | B6 |
 | 119 | Emergency contact | P2 | S | app | |
 | 120 | Preferred language and interpreter-needed flag | P1 | S | app | B5 |
 | 121 | Pronouns and preferred name | P2 | S | app | |
@@ -298,7 +298,8 @@ owner.
 - **B3** (shipped): 89, 96, 97, 100, 134.
 - **B4** (shipped): 25, 47, 84.
 - **B5** (shipped): 14, 15, 36, 80, 120.
-- **Next**: 113, 118, 115, 93. 135 needs a local-notification plugin and
-  154 a biometric plugin; both are held for a decision.
+- **B6** (shipped): 93, 113, 115, 118.
+- **Next**: 7, 17, 66, 69, 12, 61, 45, 46. 135 needs a local-notification
+  plugin and 154 a biometric plugin; both are held for a decision.
 - **B5 onward**: the remaining `app` items by priority; `worker`, `vendor`
   and `license` items once those are in place.

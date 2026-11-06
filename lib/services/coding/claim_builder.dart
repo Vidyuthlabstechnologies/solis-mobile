@@ -94,8 +94,8 @@ class ClaimBuilder {
         'box28_totalCharge': claim.totalCharge,
         'box31_signature': '${provider.displayName}, signature on file',
         'box32_serviceFacility': {
-          'name': provider.practiceName,
-          'address': '${provider.addressLine1}, ${provider.city}, ${provider.state} ${provider.zip}',
+          'name': visit.serviceFacility?.name ?? provider.practiceName,
+          'address': visit.serviceFacility?.oneLine ?? '${provider.addressLine1}, ${provider.city}, ${provider.state} ${provider.zip}',
           'placeOfService': pos.label,
         },
         'box33_billingProvider': {

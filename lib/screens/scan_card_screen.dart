@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -37,6 +39,7 @@ class _ScanCardScreenState extends State<ScanCardScreen> {
   ScannedIdentity _scanned = const ScannedIdentity();
   bool _showForm = false;
   String? _matchChoice; // account number, or 'new'
+  final _matchKey = GlobalKey();
 
   DateTime? _dob;
   PatientSex _sex = PatientSex.unknown;
@@ -151,6 +154,13 @@ class _ScanCardScreenState extends State<ScanCardScreen> {
         _apply(result.identity, authoritative: result.usedBarcode);
         _showForm = true;
         _matchChoice = null;
+        if (_existing == null) {
+          _matchChoice = strongMatch(
+            _repo.findMatches(memberId: _t('memberId'), firstName: _t('first'), lastName: _t('last'), dateOfBirth: _dob),
+            memberId: _t('memberId'),
+            dateOfBirth: _dob,
+          )?.accountNumber;
+        }
       });
       _message(demo
           ? 'Sample ${cardTypeLabel(_type).toLowerCase()} read on this phone. Check the details below.'
@@ -199,6 +209,9 @@ class _ScanCardScreenState extends State<ScanCardScreen> {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     final possible = _existing != null ? const [] : _repo.findMatches(memberId: _t('memberId'), firstName: _t('first'), lastName: _t('last'), dateOfBirth: _dob);
     if (possible.isNotEmpty && _matchChoice == null) {
+      HapticFeedback.lightImpact();
+      final panel = _matchKey.currentContext;
+      if (panel != null) unawaited(Scrollable.ensureVisible(panel, duration: const Duration(milliseconds: 300), alignment: 0.05));
       _message('This looks like an existing patient. Choose their account or Create a new account.');
       return;
     }
@@ -303,6 +316,7 @@ class _ScanCardScreenState extends State<ScanCardScreen> {
               if (_showForm) ...[
                 if (matches.isNotEmpty) ...[
                   _MatchPanel(
+                    key: _matchKey,
                     matches: matches,
                     choice: _matchChoice,
                     onChoice: (c) => setState(() => _matchChoice = c),
@@ -592,7 +606,7 @@ class _MatchPanel extends StatelessWidget {
   final String? choice;
   final ValueChanged<String> onChoice;
 
-  const _MatchPanel({required this.matches, required this.choice, required this.onChoice});
+  const _MatchPanel({super.key, required this.matches, required this.choice, required this.onChoice});
 
   @override
   Widget build(BuildContext context) {
@@ -625,9 +639,27 @@ class _MatchPanel extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         for (final m in matches)
-          option(m.accountNumber, 'Add to ${m.fullName}', '${m.accountNumber}  |  ${formatDate(m.dateOfBirth)}  |  ${m.visits.length} visits'),
+          option(m.accountNumber, 'Add to ${m.fullName}${choice == m.accountNumber ? ' (selected)' : ''}', '${m.accountNumber}  |  ${formatDate(m.dateOfBirth)}  |  ${m.visits.length} visits'),
         option('new', 'Create a new account', 'Only if this is a different person'),
       ],
     );
   }
+}
+
+/// The one existing chart a scanned card clearly belongs to: the only match
+/// with the same member ID, or else the only match with the same name and
+/// date of birth. Null when there is none or more than one, so the person
+/// at the desk chooses.
+PatientAccount? strongMatch(List<PatientAccount> matches, {String? memberId, DateTime? dateOfBirth}) {
+  String n(String? s) => (s ?? '').toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+  if (n(memberId).length >= 5) {
+    final byId = matches.where((m) => n(m.insurance?.memberId) == n(memberId)).toList();
+    if (byId.length == 1) return byId.single;
+    if (byId.length > 1) return null;
+  }
+  if (dateOfBirth == null) return null;
+  final byDob = matches
+      .where((m) => m.dateOfBirth != null && m.dateOfBirth!.year == dateOfBirth.year && m.dateOfBirth!.month == dateOfBirth.month && m.dateOfBirth!.day == dateOfBirth.day)
+      .toList();
+  return byDob.length == 1 ? byDob.single : null;
 }

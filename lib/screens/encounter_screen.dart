@@ -496,6 +496,22 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     setState(() => _claimReady = false);
   }
 
+  /// Saves the service facility on the visit. A saved place with that name
+  /// and no address learns this one, so the next visit there fills it in.
+  Future<void> _onFacilityChanged(ServiceFacility? facility) async {
+    final visit = _visitOrNull;
+    if (visit == null) return;
+    await _repo.updateVisit(widget.accountNumber, visit.copyWith(serviceFacility: facility, clearServiceFacility: facility == null));
+    final p = _repo.provider;
+    if (facility != null && p.savedPlaces.any((sp) => sp.name == facility.name && sp.address == null)) {
+      await _repo.saveProvider(p.copyWith(savedPlaces: [
+        for (final sp in p.savedPlaces) sp.name == facility.name && sp.address == null ? sp.copyWith(address: facility.oneLine) : sp,
+      ]));
+    }
+    await _persist();
+    if (mounted) setState(() => _claimReady = false);
+  }
+
   /// Runs a check's fix button. Fixes that change the claim offer Undo.
   Future<void> _onFix(IssueFix fix) async {
     switch (fix.kind) {
@@ -2793,6 +2809,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
                     onPlaceOfServiceChanged: _changePlaceOfService,
                     onTransportChanged: _onTransportChanged,
                     onReferralChanged: _onReferralChanged,
+                    onFacilityChanged: _onFacilityChanged,
                     onFix: _onFix,
                     checksKey: _checksKey,
                     eligibilityConfigured: _eligibility.isConfigured,

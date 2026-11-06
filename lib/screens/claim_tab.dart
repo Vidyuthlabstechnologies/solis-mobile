@@ -195,6 +195,9 @@ class ClaimTab extends StatelessWidget {
   /// Saves the referring provider and prior authorization number.
   final void Function(ReferringProvider? referring, String priorAuth)? onReferralChanged;
 
+  /// Saves the service facility, or clears it (null).
+  final ValueChanged<ServiceFacility?>? onFacilityChanged;
+
   /// Fixes the tab cannot run itself (sign, open the profile or the patient).
   final ValueChanged<IssueFix>? onFix;
 
@@ -216,6 +219,7 @@ class ClaimTab extends StatelessWidget {
     this.demoMode = false,
     this.onTransportChanged,
     this.onReferralChanged,
+    this.onFacilityChanged,
     this.onFix,
     this.checksKey,
     this.eligibilityConfigured = false,
@@ -486,9 +490,38 @@ class ClaimTab extends StatelessWidget {
             ],
           ),
         ),
+        if (visit.placeOfService != '12' && !isAmbulancePos(visit.placeOfService)) ...[
+          const SizedBox(height: 12),
+          SectionCard(
+            key: const Key('facility_card'),
+            title: 'Service facility',
+            icon: Icons.apartment_outlined,
+            actions: [
+              if (onFacilityChanged != null)
+                TextButton(key: const Key('edit_facility'), onPressed: () => _editFacility(context), child: Text(visit.serviceFacility == null ? 'Add' : 'Edit')),
+            ],
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                visit.serviceFacility == null
+                    ? 'Your practice address (${provider.city.isEmpty ? 'from your profile' : provider.city}). Add a facility when you saw the patient somewhere else.'
+                    : '${visit.serviceFacility!.name}\n${visit.serviceFacility!.oneLine}',
+                style: theme.textTheme.bodyMedium,
+              ),
+            ),
+          ),
+        ],
         if (errors == 0) ...[const SizedBox(height: 12), checks],
       ],
     );
+  }
+
+  Future<void> _editFacility(BuildContext context) async {
+    final result = await showDialog<(ServiceFacility?,)>(
+      context: context,
+      builder: (_) => FacilityDialog(initial: visit.serviceFacility, places: provider.savedPlaces),
+    );
+    if (result != null) onFacilityChanged?.call(result.$1);
   }
 
   ClaimDraft _confirm(String code) => reconcileClaim(
@@ -1471,4 +1504,114 @@ class _ReferralDialogState extends State<ReferralDialog> {
           FilledButton(key: const Key('referral_save'), onPressed: _save, child: const Text('Save')),
         ],
       );
+}
+
+/// Edits the service facility (box 32, 2310C). A saved place fills the
+/// name and, when it has one, the address. Pops with (facility,) or (null,)
+/// to go back to the practice address.
+class FacilityDialog extends StatefulWidget {
+  final ServiceFacility? initial;
+  final List<SavedPlace> places;
+
+  const FacilityDialog({super.key, this.initial, this.places = const []});
+
+  @override
+  State<FacilityDialog> createState() => _FacilityDialogState();
+}
+
+class _FacilityDialogState extends State<FacilityDialog> {
+  late final _name = TextEditingController(text: widget.initial?.name ?? '');
+  late final _line1 = TextEditingController(text: widget.initial?.line1 ?? '');
+  late final _city = TextEditingController(text: widget.initial?.city ?? '');
+  late final _state = TextEditingController(text: widget.initial?.state ?? '');
+  late final _zip = TextEditingController(text: widget.initial?.zip ?? '');
+  bool _tried = false;
+
+  ServiceFacility get _facility => ServiceFacility(
+        name: _name.text.trim(),
+        line1: _line1.text.trim(),
+        city: _city.text.trim(),
+        state: _state.text.trim().toUpperCase(),
+        zip: _zip.text.trim(),
+      );
+
+  @override
+  void dispose() {
+    for (final c in [_name, _line1, _city, _state, _zip]) {
+      c.dispose();
+    }
+    super.dispose();
+  }
+
+  void _usePlace(SavedPlace p) {
+    final parsed = ServiceFacility.parse(p.name, p.address);
+    setState(() {
+      _name.text = p.name;
+      if (parsed != null) {
+        _line1.text = parsed.line1;
+        _city.text = parsed.city;
+        _state.text = parsed.state;
+        _zip.text = parsed.zip;
+      }
+    });
+  }
+
+  void _save() {
+    setState(() => _tried = true);
+    if (!_facility.isComplete) return;
+    Navigator.pop(context, (_facility,));
+  }
+
+  Widget _f(String key, TextEditingController c, String label, {TextInputType? type, TextCapitalization caps = TextCapitalization.words}) => TextField(
+        key: Key('facility_$key'),
+        controller: c,
+        keyboardType: type,
+        textCapitalization: caps,
+        decoration: InputDecoration(labelText: label),
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return AlertDialog(
+      title: const Text('Service facility'),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.places.isNotEmpty) ...[
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: [for (final p in widget.places) ActionChip(avatar: const Icon(Icons.place_outlined, size: 18), label: Text(p.name), onPressed: () => _usePlace(p))],
+              ),
+              const SizedBox(height: 8),
+            ],
+            _f('name', _name, 'Facility name'),
+            _f('line1', _line1, 'Street'),
+            _f('city', _city, 'City'),
+            Row(
+              children: [
+                Expanded(child: _f('state', _state, 'State', caps: TextCapitalization.characters)),
+                const SizedBox(width: 12),
+                Expanded(child: _f('zip', _zip, 'ZIP', type: TextInputType.number)),
+              ],
+            ),
+            if (_tried && !_facility.isComplete)
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Text('Fill in the name, street, city, a 2-letter state and a 5-digit ZIP.',
+                    style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.error)),
+              ),
+          ],
+        ),
+      ),
+      actions: [
+        if (widget.initial != null) TextButton(onPressed: () => Navigator.pop(context, (null,)), child: const Text('Use practice address')),
+        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+        FilledButton(key: const Key('facility_save'), onPressed: _save, child: const Text('Save')),
+      ],
+    );
+  }
 }

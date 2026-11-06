@@ -356,6 +356,13 @@ class Claim837PGenerator {
       if (_clean(referring.lastName).isEmpty) errors.add('Referring provider last name is required (2310A NM103).');
       if (!isValidNpi(referring.npi.trim())) errors.add('Referring provider NPI "${referring.npi}" fails the NPI check digit (2310A NM109).');
     }
+    // ---- Service facility (2310C). Not sent for home (12) or ambulance
+    // claims, whose locations are the patient's address or 2310E/F.
+    final facility = visit.serviceFacility;
+    final sendFacility = facility != null && visit.placeOfService != '12' && !isAmbulancePos(visit.placeOfService);
+    if (sendFacility && !facility.isComplete) {
+      errors.add('Service facility needs a name, street, city, 2-letter state and ZIP (2310C NM1, N3, N4).');
+    }
     final priorAuth = _clean(visit.priorAuthNumber ?? '');
     if (priorAuth.length > 50) errors.add('The prior authorization number is longer than 50 characters (2300 REF*G1).');
 
@@ -618,6 +625,12 @@ class Claim837PGenerator {
     if (billAsGroup) {
       add(['NM1', '82', '1', _cap(renderingName.last, 60), _cap(renderingName.first, 35), '', '', '', 'XX', individualNpi]);
       add(['PRV', 'PE', 'PXC', provider.taxonomyCode.trim().toUpperCase()]);
+    }
+    // 2310C service facility.
+    if (sendFacility && facility.isComplete) {
+      add(['NM1', '77', '2', _cap(_clean(facility.name), 60)]);
+      add(['N3', _cap(_clean(facility.line1), 55)]);
+      add(['N4', _cap(_clean(facility.city), 30), facility.state.trim().toUpperCase(), _zip(facility.zip)!]);
     }
     // 2310E ambulance pick-up and 2310F drop-off locations.
     if (ambulance) {
