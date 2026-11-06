@@ -6,6 +6,8 @@ import '../models/ambulance_transport.dart';
 import '../models/claim_models.dart';
 import '../models/patient_account.dart';
 import '../models/provider_profile.dart';
+import '../services/account_repository.dart';
+import '../services/auth_service.dart';
 import '../services/billing/cms_edi_edits.dart';
 import '../services/billing/eligibility_service.dart';
 import '../services/billing/x12_837p.dart' show isAmbulancePos, isAmbulanceMileageCode;
@@ -13,6 +15,7 @@ import '../services/codesets/reference_data.dart';
 import '../services/coding/claim_scrubber.dart';
 import '../services/coding/clinical_coder.dart';
 import '../services/coding/place_of_service.dart';
+import '../services/coding/recent_codes.dart';
 import '../services/coding/service_catalog.dart';
 import '../services/nlm_coding_service.dart';
 import '../theme/solis_theme.dart';
@@ -1080,6 +1083,14 @@ class _DiagnosisSearchDialogState extends State<_DiagnosisSearchDialog> {
   List<(String, String)> _results = [];
   final Set<String> _open = {};
 
+  // Before anything is typed: the diagnoses this clinician billed most
+  // recently, valid on this visit's date of service.
+  late final List<(String, String)> _recent = recentDiagnoses(
+    AccountRepository.instance.accounts,
+    includeSamples: AuthService.instance.isDemo,
+    isValid: (code) => ReferenceData.icdFor(widget.dateOfService)?.isBillable(code) ?? true,
+  );
+
   @override
   void dispose() {
     _debounce?.cancel();
@@ -1141,7 +1152,12 @@ class _DiagnosisSearchDialogState extends State<_DiagnosisSearchDialog> {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  for (final (code, desc) in _results) ...[
+                  if (_q.text.trim().length < 2 && _recent.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4, bottom: 4),
+                      child: Text('Recent', style: Theme.of(context).textTheme.labelLarge),
+                    ),
+                  for (final (code, desc) in _q.text.trim().length < 2 ? _recent : _results) ...[
                     ListTile(
                       contentPadding: EdgeInsets.zero,
                       title: Text(code),
@@ -1187,10 +1203,19 @@ class _ServiceSearchDialog extends StatefulWidget {
 class _ServiceSearchDialogState extends State<_ServiceSearchDialog> {
   String _q = '';
 
+  // Recently billed services are listed first until something is typed.
+  late final List<String> _recent = recentServiceCodes(AccountRepository.instance.accounts, includeSamples: AuthService.instance.isDemo);
+
   @override
   Widget build(BuildContext context) {
     final q = _q.toLowerCase();
-    final results = serviceCatalog.where((s) => q.isEmpty || s.code.toLowerCase().contains(q) || s.description.toLowerCase().contains(q)).toList();
+    var results = serviceCatalog.where((s) => q.isEmpty || s.code.toLowerCase().contains(q) || s.description.toLowerCase().contains(q)).toList();
+    if (q.isEmpty && _recent.isNotEmpty) {
+      results = [
+        for (final code in _recent) ...results.where((s) => s.code == code),
+        ...results.where((s) => !_recent.contains(s.code)),
+      ];
+    }
     return AlertDialog(
       title: const Text('Add a service'),
       contentPadding: const EdgeInsets.fromLTRB(24, 16, 24, 0),

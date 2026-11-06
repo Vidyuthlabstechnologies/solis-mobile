@@ -2,7 +2,7 @@ import '../../models/claim_models.dart';
 import '../../models/patient_account.dart';
 import '../../models/provider_profile.dart';
 import '../billing/cms_edi_edits.dart';
-import '../billing/x12_837p.dart' show isAmbulanceMileageCode, isAmbulancePos, isAmbulanceServiceCode, isOriginDestinationModifier;
+import '../billing/x12_837p.dart' show claimFilingIndicatorFor, isAmbulanceMileageCode, isAmbulancePos, isAmbulanceServiceCode, isOriginDestinationModifier;
 import '../codesets/icd_catalog.dart';
 import '../codesets/reference_data.dart';
 import 'code_rules.dart';
@@ -388,13 +388,22 @@ class ClaimScrubber {
     required ProviderProfile provider,
     required bool noteSigned,
     bool demoMode = false,
+    DateTime? today,
   }) {
     // Every check reads the ICD-10-CM edition of the visit's date of service
     // (validity, billable status, Excludes1, Tabular notes, 7th characters):
     // FY2026 through 2026-09-30, FY2027 from 2026-10-01.
     final issues = ReferenceData.atDateOfService(
       DateTime.tryParse(visit.dateOfService),
-      () => _check(claim: claim, account: account, visit: visit, provider: provider, noteSigned: noteSigned, demoMode: demoMode),
+      () => _check(
+        claim: claim,
+        account: account,
+        visit: visit,
+        provider: provider,
+        noteSigned: noteSigned,
+        demoMode: demoMode,
+        today: today ?? DateTime.now(),
+      ),
     );
     return [for (final i in issues) i.fix == null ? i.withFix(fixFor(i, claim)) : i];
   }
@@ -406,6 +415,7 @@ class ClaimScrubber {
     required ProviderProfile provider,
     required bool noteSigned,
     required bool demoMode,
+    required DateTime today,
   }) {
     final issues = <ClaimIssue>[];
     final dx = claim.billable;
@@ -452,6 +462,7 @@ class ClaimScrubber {
       issues.add(ruleIssue('CLAIM-SAMPLE-01', IssueSeverity.error, 'Sample patient, cannot be billed',
           '${account.fullName} is a demo patient. Claims are only sent for real patients.'));
     }
+    issues.addAll(dateOfServiceIssues(visit: visit, account: account, today: today));
     final elig = visit.eligibility;
     if (ins != null && ins.memberId.trim().isNotEmpty) {
       if (elig == null) {
@@ -727,6 +738,10 @@ class ClaimScrubber {
         return est == null ? null : IssueFix(FixKind.replaceService, 'Use $est', code: code, replacement: est);
       case 'CLAIM-TELEHEALTH-01':
         return code == null ? null : IssueFix(FixKind.addModifier, 'Add modifier 95', code: code, replacement: '95');
+      case 'CLAIM-DOS-01':
+        return issue.title.contains('birth')
+            ? const IssueFix(FixKind.editPatient, 'Check date of birth', field: 'dob')
+            : null;
       case 'CLAIM-SERVICE-01':
         return code == null ? null : IssueFix(FixKind.editLine, 'Enter charge', code: code);
       case 'NCCI-MUE-01':
@@ -742,6 +757,62 @@ class ClaimScrubber {
         return pending.length == 1 ? IssueFix(FixKind.confirmDiagnosis, 'Confirm ${pending.first.code}', code: pending.first.code) : null;
     }
     return null;
+  }
+
+  /// Medicare's filing limit: one calendar year after the date of service
+  /// (42 CFR 424.44(a)).
+  static const medicareFilingDays = 365;
+
+  /// Days before a filing limit when SOLIS starts warning.
+  static const filingWarningDays = 30;
+
+  /// Many commercial plans allow 90 to 180 days; past this the claim is
+  /// flagged so it is sent or checked against the payer contract.
+  static const commercialFilingWarnDays = 90;
+
+  /// CLAIM-DOS-01 (date of service in the future or before birth) and
+  /// CLAIM-TIMELY-01 (the filing limit is near or past). [today] is the
+  /// local date the check runs.
+  static List<ClaimIssue> dateOfServiceIssues({required Visit visit, required PatientAccount account, required DateTime today}) {
+    final dos = DateTime.tryParse(visit.dateOfService);
+    if (dos == null) {
+      return [
+        ruleIssue('CLAIM-DOS-01', IssueSeverity.error, 'Date of service missing',
+            'Item 24A needs the date of service. Set the visit date.'),
+      ];
+    }
+    final day = DateTime(dos.year, dos.month, dos.day);
+    final now = DateTime(today.year, today.month, today.day);
+    final issues = <ClaimIssue>[];
+    if (day.isAfter(now)) {
+      issues.add(ruleIssue('CLAIM-DOS-01', IssueSeverity.error, 'Date of service is in the future',
+          '${visit.dateOfService} has not happened yet. A claim is billed only after the service is given.'));
+    }
+    final dob = account.dateOfBirth;
+    if (dob != null && day.isBefore(DateTime(dob.year, dob.month, dob.day))) {
+      issues.add(ruleIssue('CLAIM-DOS-01', IssueSeverity.error, 'Date of service is before birth',
+          '${visit.dateOfService} is before the patient\'s date of birth. Check the visit date and the birth date.'));
+    }
+    // Already sent: the filing limit no longer applies to this claim.
+    const sent = {VisitStatus.submitted, VisitStatus.paid, VisitStatus.denied};
+    if (sent.contains(visit.status) || day.isAfter(now)) return issues;
+    final age = now.difference(day).inDays;
+    final medicare = account.insurance != null && claimFilingIndicatorFor(account.insurance!) == 'MB';
+    if (medicare) {
+      final left = medicareFilingDays - age;
+      if (left < 0) {
+        issues.add(ruleIssue('CLAIM-TIMELY-01', IssueSeverity.error, 'Past the Medicare filing limit',
+            'Medicare must receive a claim within one year of the date of service. ${visit.dateOfService} was $age days ago, '
+                'so Medicare will deny it (CO-29). Bill only if an exception applies.'));
+      } else if (left <= filingWarningDays) {
+        issues.add(ruleIssue('CLAIM-TIMELY-01', IssueSeverity.warning, 'Medicare filing limit in $left days',
+            'Medicare must receive this claim within one year of ${visit.dateOfService}. Send it within $left days.'));
+      }
+    } else if (account.insurance != null && age > commercialFilingWarnDays) {
+      issues.add(ruleIssue('CLAIM-TIMELY-01', IssueSeverity.warning, 'Check the payer\'s filing limit',
+          '${visit.dateOfService} was $age days ago. Many plans allow 90 to 180 days; check the ${account.insurance!.payerName} contract before sending.'));
+    }
+    return issues;
   }
 
   /// The established-patient code at the same MDM level as a new-patient

@@ -32,6 +32,7 @@ import '../services/note_seal.dart';
 import '../services/places.dart';
 import '../services/recording_foreground_service.dart';
 import '../services/security_and_background_service.dart';
+import '../services/security/phi_clipboard.dart';
 import '../theme/solis_theme.dart';
 import '../widgets/encounter_widgets.dart';
 import '../widgets/sign_and_send_sheet.dart';
@@ -528,9 +529,9 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     if (claim == null) return;
     final issues = _issues(claim);
     final json = ClaimBuilder.build(account: _account, visit: _visit, provider: _repo.provider, claim: claim, issues: issues);
-    Clipboard.setData(ClipboardData(text: const JsonEncoder.withIndent('  ').convert(json)));
+    PhiClipboard.copy(const JsonEncoder.withIndent('  ').convert(json));
     HapticFeedback.lightImpact();
-    _showMessage('Claim copied as JSON (CMS-1500 and 837P fields).', icon: Icons.data_object_rounded);
+    _showMessage('Claim copied as JSON (CMS-1500 and 837P fields). The clipboard clears in 60 seconds.', icon: Icons.data_object_rounded);
   }
 
   /// Builds the HIPAA 5010 837P file for this visit.
@@ -556,8 +557,8 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       await _showProblems('The 837P file cannot be built yet', r.errors);
       return;
     }
-    Clipboard.setData(ClipboardData(text: r.pretty ?? r.x12!));
-    _showMessage('837P file copied (${r.transactionSegmentCount} segments).', icon: Icons.description_outlined);
+    PhiClipboard.copy(r.pretty ?? r.x12!);
+    _showMessage('837P file copied (${r.transactionSegmentCount} segments). The clipboard clears in 60 seconds.', icon: Icons.description_outlined);
   }
 
   Future<void> _showProblems(String title, List<String> problems) => showDialog<void>(
@@ -690,7 +691,10 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       );
     }
     final lines = [
-      if (s['lastStatus'] != null) 'Latest status: ${s['lastStatus']}',
+      if (s['statusExplanation'] != null)
+        'Latest status: ${s['statusExplanation']}'
+      else if (s['lastStatus'] != null)
+        'Latest status: ${s['lastStatus']}',
       if (s['payerClaimNumber'] != null) 'Payer claim number ${s['payerClaimNumber']}',
       if ((s['errors'] as List?)?.isNotEmpty == true) ...(s['errors'] as List).map((e) => '$e'),
       if (s['correlationId'] != null) 'Clearinghouse reference ${s['correlationId']}',
@@ -1556,9 +1560,9 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
 
   void _copyFormattedNote() {
     final seal = _encounter.sha256Seal;
-    Clipboard.setData(ClipboardData(text: _isSigned && seal.isNotEmpty ? '${_formattedNote()}SHA-256 seal: $seal\n' : _formattedNote()));
+    PhiClipboard.copy(_isSigned && seal.isNotEmpty ? '${_formattedNote()}SHA-256 seal: $seal\n' : _formattedNote());
     HapticFeedback.lightImpact();
-    _showMessage('Note copied. Paste it into the EHR.', icon: Icons.content_copy_rounded);
+    _showMessage('Note copied. Paste it into the EHR within 60 seconds; then the clipboard clears.', icon: Icons.content_copy_rounded);
   }
 
   void _openFhirExportDialog() {
@@ -1600,9 +1604,9 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
               icon: const Icon(Icons.content_copy_rounded, size: 18),
               label: const Text('Copy JSON'),
               onPressed: () {
-                Clipboard.setData(ClipboardData(text: jsonString));
+                PhiClipboard.copy(jsonString);
                 Navigator.pop(ctx);
-                _showMessage('FHIR bundle copied.', icon: Icons.data_object_rounded);
+                _showMessage('FHIR bundle copied. The clipboard clears in 60 seconds.', icon: Icons.data_object_rounded);
               },
             ),
           ],

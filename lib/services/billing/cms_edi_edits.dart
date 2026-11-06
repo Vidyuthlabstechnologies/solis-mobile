@@ -1,7 +1,8 @@
 // Medicare front-end (CCEM) edits from CMS Change Request 14429, transmittal
-// R13967OTN (September 18, 2026; replaces R13934OTN): "HIPAA EDI Front End
-// Updates for October 2026", effective October 1, 2026, implementation
-// October 5, 2026. https://www.cms.gov/files/document/r13967otn.pdf
+// R13977OTN (September 28, 2026; rescinds and replaces R13967OTN, which
+// replaced R13934OTN): "HIPAA EDI Front End Updates for October 2026",
+// effective October 1, 2026, implementation October 5, 2026.
+// https://www.cms.gov/files/document/r13977otn.pdf
 //
 // The edits spreadsheets in that transmittal are what Medicare
 // Administrative Contractors (Part A/B MACs and CEDI for DME) run on every

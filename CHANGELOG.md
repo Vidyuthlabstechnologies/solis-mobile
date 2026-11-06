@@ -7,9 +7,37 @@ All notable changes to the SOLIS app are recorded here. The format follows
 ## [Unreleased]
 
 ### Added
+- `docs/FEATURE_BACKLOG.md`: 200 missing features by area and priority,
+  with the build batch that ships each one.
+- Corrected and void claims in the 837P builder: CLM05-3 frequency code 7
+  or 8 with the original payer claim number in 2300 REF*F8.
+- Claim checks `CLAIM-DOS-01` (date of service in the future or before
+  birth) and `CLAIM-TIMELY-01` (Medicare one-year filing limit per 42 CFR
+  424.44, warning 30 days ahead; commercial claims flagged after 90 days).
+- Plain-language claim status: 277 category codes, common status codes
+  and common CARC adjustment codes explained with what to do
+  (`claim_status_codes.dart`); the visit and Billing tab show it.
+- Patients list filters (unsigned notes, no insurance) and sort (last
+  visit, name).
+- "Copy claims as CSV" in the home menu, for an outside biller.
+- Code search lists the clinician's recent diagnoses before anything is
+  typed, and recent services first.
+- Copied notes, claims and FHIR bundles are cleared from the clipboard
+  after 60 seconds (`PhiClipboard`).
+- Confirmation before switching the clearinghouse to Production and
+  before removing a key.
+- The app follows the phone's light/dark setting until a theme is picked,
+  and remembers the pick.
+- CI workflow running `flutter analyze` and `flutter test` on pull requests.
 - `README.md` and this changelog.
 - `docs/PLAY_STORE.md`: publishing on Google Play, including the requirement
   for an Organization developer account with a D-U-N-S number.
+
+### Fixed
+- About showed version 1.0.0 on the 1.0.2 build; a test now keeps it equal
+  to `pubspec.yaml`.
+- Code comments named the replaced CMS transmittal R13967OTN; they now
+  name R13977OTN, as the citations already did.
 
 ### Changed
 - `docs/CMS_EDI_OCT2026.md`: re-checked against the CMS watcher on

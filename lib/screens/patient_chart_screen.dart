@@ -8,6 +8,7 @@ import '../services/account_repository.dart';
 import '../services/billing/eligibility_service.dart';
 import '../services/coding/place_of_service.dart';
 import '../services/places.dart';
+import '../services/security/phi_clipboard.dart';
 import '../theme/solis_theme.dart';
 import '../widgets/encounter_widgets.dart';
 import 'encounter_screen.dart';
@@ -470,7 +471,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
                   visualDensity: VisualDensity.compact,
                   icon: const Icon(Icons.content_copy_rounded, size: 18),
                   onPressed: () {
-                    Clipboard.setData(ClipboardData(text: value));
+                    PhiClipboard.copy(value);
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()
                       ..showSnackBar(SnackBar(content: Text('$label copied')));
