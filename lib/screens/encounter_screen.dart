@@ -619,17 +619,24 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
 
   /// Sends through the claim service (same checks, outbox and idempotency
   /// key as the Billing tab's batch send) and reports the outcome.
-  Future<void> _sendNow() async {
+  Future<void> _sendNow({ClaimFrequency frequency = ClaimFrequency.original}) async {
     await _persist();
     setState(() => _submitting = true);
     try {
-      final r = await _claims.send(widget.accountNumber, widget.visitNumber);
+      final r = frequency == ClaimFrequency.original
+          ? await _claims.send(widget.accountNumber, widget.visitNumber)
+          : await _claims.sendReplacement(widget.accountNumber, widget.visitNumber, frequency);
       if (!mounted) return;
       setState(_reloadFromRepo);
       switch (r.status) {
         case SendStatus.accepted:
           HapticFeedback.mediumImpact();
-          _showMessage('Claim accepted by the clearinghouse${r.testMode ? ' (test)' : ''}.', icon: Icons.outbox_outlined);
+          final what = switch (frequency) {
+            ClaimFrequency.original => 'Claim',
+            ClaimFrequency.replacement => 'Corrected claim',
+            ClaimFrequency.voided => 'Void request',
+          };
+          _showMessage('$what accepted by the clearinghouse${r.testMode ? ' (test)' : ''}.', icon: Icons.outbox_outlined);
         case SendStatus.queued:
           _showMessage('No connection. The claim is queued and sends when the connection is back.', icon: Icons.schedule_send_outlined);
         case SendStatus.rejected:
@@ -642,6 +649,31 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     } finally {
       if (mounted) setState(() => _submitting = false);
     }
+  }
+
+  /// Corrected (frequency 7) or void (frequency 8) claim for a claim the
+  /// payer already has. The current claim on this visit is what is sent.
+  Future<void> _replaceClaim(ClaimFrequency frequency) async {
+    final icn = _visit.submission?['payerClaimNumber'] ?? _visit.submission?['replacesPayerClaimNumber'];
+    final voiding = frequency == ClaimFrequency.voided;
+    final payer = _account.insurance?.payerName ?? 'the payer';
+    final total = _claim!.totalCharge.toStringAsFixed(2);
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        icon: Icon(voiding ? Icons.block_rounded : Icons.edit_note_rounded, size: 32),
+        title: Text(voiding ? 'Void this claim?' : 'Send a corrected claim?', textAlign: TextAlign.center),
+        content: Text(voiding
+            ? 'Asks $payer to cancel claim $icn. Any payment already made will be taken back.'
+            : 'Replaces claim $icn at $payer with the claim as it is now, total \$$total.'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancel')),
+          FilledButton(onPressed: () => Navigator.pop(ctx, true), child: Text(voiding ? 'Void claim' : 'Send corrected claim')),
+        ],
+      ),
+    );
+    if (ok != true || !mounted) return;
+    await _sendNow(frequency: frequency);
   }
 
   /// Asks the payer for this claim's status (276/277), matched by the
@@ -2775,10 +2807,26 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
                     height: 48,
                     child: PopupMenuButton<String>(
                       tooltip: 'Export the claim',
-                      onSelected: (v) => v == 'x12' ? _copyX12() : _copyClaim(),
-                      itemBuilder: (_) => const [
-                        PopupMenuItem(value: 'x12', child: Text('Copy 837P file')),
-                        PopupMenuItem(value: 'json', child: Text('Copy JSON')),
+                      onSelected: (v) {
+                        switch (v) {
+                          case 'x12':
+                            _copyX12();
+                          case 'corrected':
+                            _replaceClaim(ClaimFrequency.replacement);
+                          case 'void':
+                            _replaceClaim(ClaimFrequency.voided);
+                          default:
+                            _copyClaim();
+                        }
+                      },
+                      itemBuilder: (_) => [
+                        const PopupMenuItem(value: 'x12', child: Text('Copy 837P file')),
+                        const PopupMenuItem(value: 'json', child: Text('Copy JSON')),
+                        if (_claims.isConnected && ClaimSubmissionService.canReplace(_visit)) ...[
+                          const PopupMenuDivider(),
+                          const PopupMenuItem(value: 'corrected', child: Text('Send corrected claim')),
+                          const PopupMenuItem(value: 'void', child: Text('Void claim')),
+                        ],
                       ],
                       child: IgnorePointer(
                         child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.ios_share_rounded), label: const Text('Export')),

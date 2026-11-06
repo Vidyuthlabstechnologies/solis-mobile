@@ -4,6 +4,19 @@ import 'claim_models.dart';
 /// Biological sex as used on claims (CMS-1500 box 3, 837P DMG03).
 enum PatientSex { male, female, unknown }
 
+/// Placeholder first name of a patient registered before they can be
+/// identified (EMS, ED). The claim checks keep such an account from being
+/// billed until a name, date of birth, sex and coverage are entered.
+const unidentifiedFirstName = 'Unidentified';
+
+/// A unique placeholder name for an unidentified patient registered at
+/// [now]: first name "Unidentified", last name "Patient 1106-1442"
+/// (month, day, hour, minute), so two arrivals are told apart.
+({String first, String last}) unidentifiedName(DateTime now) {
+  String two(int n) => n.toString().padLeft(2, '0');
+  return (first: unidentifiedFirstName, last: 'Patient ${two(now.month)}${two(now.day)}-${two(now.hour)}${two(now.minute)}');
+}
+
 PatientSex sexFromString(String? s) {
   switch ((s ?? '').trim().toUpperCase()) {
     case 'M':
@@ -308,6 +321,9 @@ class PatientAccount {
   });
 
   bool get isDeleted => deletedAtUtc != null;
+
+  /// Registered with a placeholder name (see [unidentifiedName]).
+  bool get isUnidentified => firstName == unidentifiedFirstName && lastName.startsWith('Patient ');
 
   String get fullName => [firstName, if (middleName != null && middleName!.isNotEmpty) middleName, lastName].join(' ');
 

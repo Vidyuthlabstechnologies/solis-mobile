@@ -109,6 +109,16 @@ class _PatientsScreenState extends State<PatientsScreen> {
 
   List<PatientAccount> get _filtered => patientList(_repo.accounts, query: _query, filter: _filter, sort: _sort);
 
+  /// Registers a patient who cannot be identified yet, in one tap, and
+  /// opens the chart so the visit can start. Billing waits for the name.
+  Future<void> _addUnidentified() async {
+    final name = unidentifiedName(DateTime.now());
+    final account = await _repo.createAccount(firstName: name.first, lastName: name.last);
+    if (!mounted) return;
+    _message('${account.fullName} added. Enter the name when known; the claim waits for it.');
+    _openChart(account);
+  }
+
   Future<void> _copyClaimsCsv() async {
     final count = _repo.accounts.fold<int>(0, (n, a) => n + a.visits.where((v) => v.claim != null).length);
     if (count == 0) {
@@ -256,6 +266,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
               if (v == 'integrations') Navigator.push(context, MaterialPageRoute(builder: (_) => const IntegrationsScreen()));
               if (v == 'deleted') _showRecentlyDeleted();
               if (v == 'csv') _copyClaimsCsv();
+              if (v == 'unidentified') _addUnidentified();
               if (v == 'about') showSolisAbout(context);
               if (v == 'signout') {
                 final nav = Navigator.of(context);
@@ -266,6 +277,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
             },
             itemBuilder: (_) => [
               _menuItem('integrations', Icons.hub_outlined, 'Integrations'),
+              _menuItem('unidentified', Icons.person_search_outlined, 'Unidentified patient (EMS, ED)'),
               _menuItem('deleted', Icons.restore_from_trash_outlined, 'Recently deleted'),
               _menuItem('csv', Icons.table_chart_outlined, 'Copy claims as CSV'),
               if (widget.onThemeToggle != null)

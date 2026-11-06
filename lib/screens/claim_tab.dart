@@ -10,10 +10,11 @@ import '../services/account_repository.dart';
 import '../services/auth_service.dart';
 import '../services/billing/cms_edi_edits.dart';
 import '../services/billing/eligibility_service.dart';
-import '../services/billing/x12_837p.dart' show isAmbulancePos, isAmbulanceMileageCode;
+import '../services/billing/x12_837p.dart' show claimFilingIndicatorFor, isAmbulancePos, isAmbulanceMileageCode;
 import '../services/codesets/reference_data.dart';
 import '../services/coding/claim_scrubber.dart';
 import '../services/coding/clinical_coder.dart';
+import '../services/coding/em_time.dart';
 import '../services/coding/place_of_service.dart';
 import '../services/coding/recent_codes.dart';
 import '../services/coding/service_catalog.dart';
@@ -63,6 +64,43 @@ ClaimDraft changeEmLevel(ClaimDraft claim, int lineIndex, String code, Map<Strin
   return claim.copyWith(lines: [...claim.lines]..[lineIndex] = updated);
 }
 
+/// Bills the office E/M line by [minutes] of total time on the date of
+/// service: sets the level the time supports and adds (or updates, or
+/// removes) the prolonged-service line, 99417 or Medicare's G2212. Null
+/// when the claim has no office E/M line or the time is below its lowest
+/// level. The note must document the total time.
+ClaimDraft? applyTotalTime(ClaimDraft claim, int minutes, Map<String, double> fees, {required bool medicare}) {
+  final i = claim.lines.indexWhere((l) => isOfficeEm(l.code));
+  if (i < 0) return null;
+  final level = officeEmForTime(claim.lines[i].code, minutes);
+  if (level == null) return null;
+  final em = claim.lines[i].copyWith(
+    code: level,
+    description: emDescription(level),
+    charge: level == claim.lines[i].code ? claim.lines[i].charge : fees[level] ?? claim.lines[i].charge,
+    evidence: 'Level by total time on the date of service: $minutes minutes',
+  );
+  final p = prolongedFor(level, minutes, medicare: medicare);
+  final lines = <ServiceLine>[
+    for (var j = 0; j < claim.lines.length; j++)
+      if (j == i) em else if (!prolongedCodes.contains(claim.lines[j].code)) claim.lines[j],
+  ];
+  if (p != null) {
+    lines.insert(
+      i + 1,
+      ServiceLine(
+        code: p.code,
+        description: p.code == 'G2212' ? 'Prolonged office visit, each additional 15 minutes (Medicare)' : 'Prolonged office visit, each additional 15 minutes',
+        units: p.units,
+        charge: fees[p.code] ?? 0,
+        diagnosisCodes: em.diagnosisCodes,
+        evidence: 'Total time $minutes minutes',
+      ),
+    );
+  }
+  return claim.copyWith(lines: lines);
+}
+
 /// Applies a fix that changes the claim with no judgment left (replacing a
 /// code the checks named, or adding a modifier they require). Returns null
 /// when [fix] is not such a fix or no longer applies.
@@ -89,6 +127,20 @@ ClaimDraft? applyClaimFix(ClaimDraft claim, IssueFix fix, Map<String, double> fe
       return emSettingOf(fix.replacement!) != null
           ? changeEmLevel(claim, i, fix.replacement!, fees)
           : claim.copyWith(lines: [...claim.lines]..[i] = claim.lines[i].copyWith(code: fix.replacement, charge: fees[fix.replacement] ?? claim.lines[i].charge));
+    case FixKind.addService:
+      final code = fix.replacement;
+      final anchor = claim.lines.indexWhere((l) => l.code == fix.code);
+      if (code == null || anchor < 0 || claim.lines.any((l) => l.code == code)) return null;
+      return claim.copyWith(lines: [
+        ...claim.lines,
+        ServiceLine(
+          code: code,
+          description: serviceDescription(code) ?? code,
+          charge: fees[code] ?? 0,
+          diagnosisCodes: claim.lines[anchor].diagnosisCodes,
+          evidence: 'Added from a claim check',
+        ),
+      ]);
     case FixKind.addModifier:
       final i = claim.lines.indexWhere((l) => l.code == fix.code);
       final m = fix.replacement;
@@ -368,7 +420,11 @@ class ClaimTab extends StatelessWidget {
         SectionCard(
           title: 'Services (CPT / HCPCS)',
           icon: Icons.medical_services_outlined,
-          actions: [TextButton.icon(onPressed: () => _addService(context), icon: const Icon(Icons.add_rounded), label: const Text('Add'))],
+          actions: [
+            if (claim.lines.any((l) => isOfficeEm(l.code)))
+              TextButton.icon(onPressed: () => _billByTime(context), icon: const Icon(Icons.timer_outlined), label: const Text('Time')),
+            TextButton.icon(onPressed: () => _addService(context), icon: const Icon(Icons.add_rounded), label: const Text('Add')),
+          ],
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -438,6 +494,7 @@ class ClaimTab extends StatelessWidget {
       case FixKind.replaceDiagnosis:
       case FixKind.replaceService:
       case FixKind.addModifier:
+      case FixKind.addService:
         final updated = applyClaimFix(claim, fix, provider.feeSchedule, dateOfService: _dos);
         if (updated != null) onClaimChanged(updated, undoLabel: fix.label);
       default:
@@ -492,6 +549,21 @@ class ClaimTab extends StatelessWidget {
     );
     if (picked == null || claim.diagnoses.any((d) => d.code == picked.code && d.status == DxStatus.billable)) return;
     onClaimChanged(reconcileClaim(claim, dateOfService: _dos, diagnoses: [...claim.diagnoses.where((d) => d.code != picked.code), picked]));
+  }
+
+  /// Office E/M by total time on the date of service, with prolonged
+  /// services past the top level.
+  Future<void> _billByTime(BuildContext context) async {
+    final minutes = await showDialog<int>(context: context, builder: (_) => const _TotalTimeDialog());
+    if (minutes == null || !context.mounted) return;
+    final medicare = claimFilingIndicatorFor(account.insurance) == 'MB';
+    final updated = applyTotalTime(claim, minutes, provider.feeSchedule, medicare: medicare);
+    if (updated == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$minutes minutes is below the lowest office visit level. Bill by medical decision making instead.')));
+      return;
+    }
+    final em = updated.lines.firstWhere((l) => isOfficeEm(l.code));
+    onClaimChanged(updated, undoLabel: 'Billed by time: ${em.code}, $minutes minutes');
   }
 
   Future<void> _addService(BuildContext context) async {
@@ -1063,6 +1135,63 @@ class _IssueRow extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Asks for the total time on the date of service, in minutes.
+class _TotalTimeDialog extends StatefulWidget {
+  const _TotalTimeDialog();
+
+  @override
+  State<_TotalTimeDialog> createState() => _TotalTimeDialogState();
+}
+
+class _TotalTimeDialogState extends State<_TotalTimeDialog> {
+  final _c = TextEditingController();
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  int? get _minutes {
+    final n = int.tryParse(_c.text.trim());
+    return n == null || n < 1 || n > 600 ? null : n;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return AlertDialog(
+      title: const Text('Bill by total time'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Your total time on the date of service, face to face and not, including notes and orders. '
+            'The note must state it.',
+            style: theme.textTheme.bodyMedium,
+          ),
+          const SizedBox(height: 12),
+          TextField(
+            controller: _c,
+            autofocus: true,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(labelText: 'Total minutes', suffixText: 'min'),
+            onChanged: (_) => setState(() {}),
+            onSubmitted: (_) {
+              if (_minutes != null) Navigator.pop(context, _minutes);
+            },
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+        FilledButton(onPressed: _minutes == null ? null : () => Navigator.pop(context, _minutes), child: const Text('Apply')),
+      ],
     );
   }
 }

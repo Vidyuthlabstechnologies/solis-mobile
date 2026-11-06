@@ -31,7 +31,7 @@ owner.
 | 1 | In-app version label read from the build (About says 1.0.0 on 1.0.2) | P0 | S | app | B1 |
 | 2 | Correct the CMS CR 14429 transmittal named in code comments (R13967OTN to R13977OTN) | P0 | S | app | B1 |
 | 3 | Corrected and void claims: CLM05-3 frequency code 7/8 with REF*F8 payer claim number | P0 | M | app | B1 |
-| 4 | Void a sent claim from the visit (frequency 8) | P1 | S | app | |
+| 4 | Void a sent claim from the visit (frequency 8) | P1 | S | app | B2 |
 | 5 | Timely-filing warning (Medicare 12 months from date of service; payer-configurable) | P0 | S | app | B1 |
 | 6 | Date-of-service sanity checks: no future DOS, no DOS before birth date | P0 | S | app | B1 |
 | 7 | Patient age vs code checks surfaced at visit start, not only in the scrubber | P1 | S | app | |
@@ -52,7 +52,7 @@ owner.
 | # | Feature | Pri | Eff | Needs | Status |
 | --- | --- | --- | --- | --- | --- |
 | 19 | Leave the visit screen while recording (RecordingController, UX item 22) | P1 | L | app | |
-| 20 | Pause and resume recording with a visible paused state | P1 | S | app | |
+| 20 | Reminder when a recording stays paused for more than 5 minutes | P2 | S | app | |
 | 21 | Voice commands: start, pause, finish (UX item 24) | P2 | M | app | |
 | 22 | Haptic cues on start, stop and "no sound" | P2 | S | app | |
 | 23 | Remember microphone settings (noise suppression, language) between visits | P2 | S | app | |
@@ -86,7 +86,7 @@ owner.
 | 46 | Medication list carried across visits, with changes per visit | P1 | M | app | |
 | 47 | Allergy list with "no known allergies" as an explicit state | P1 | S | app | |
 | 48 | Vitals trend view (BP, weight, BMI) | P2 | M | app | |
-| 49 | Time-based documentation: total time on date of service, for E/M by time | P1 | S | app | |
+| 49 | Time-based documentation: total time on date of service, for E/M by time | P1 | S | app | B2 |
 | 50 | Co-signature workflow for NPs and PAs | P2 | M | worker | |
 | 51 | Scribe-edit history: who changed what in the draft | P2 | M | app | |
 | 52 | Inline "unsupported statement" flags where a note line has no source | P1 | M | app | |
@@ -100,9 +100,9 @@ owner.
 
 | # | Feature | Pri | Eff | Needs | Status |
 | --- | --- | --- | --- | --- | --- |
-| 58 | G2211 visit-complexity add-on suggestion for longitudinal care | P1 | S | app | |
-| 59 | E/M by total time (99202-99215 time thresholds) alongside MDM | P1 | S | app | |
-| 60 | Prolonged services (99417 / G2212) when time exceeds the top level | P1 | S | app | |
+| 58 | G2211 visit-complexity add-on suggestion for longitudinal care | P1 | S | app | B2 |
+| 59 | E/M by total time (99202-99215 time thresholds) alongside MDM | P1 | S | app | B2 |
+| 60 | Prolonged services (99417 / G2212) when time exceeds the top level | P1 | S | app | B2 |
 | 61 | Preventive visits (99381-99397) and the modifier 25 split with a problem visit | P1 | M | app | |
 | 62 | Medicare Annual Wellness Visit (G0438/G0439) and its required elements | P1 | M | app | |
 | 63 | Chronic care management (99490, 99491) monthly time tracking | P2 | L | app | |
@@ -153,7 +153,7 @@ owner.
 | --- | --- | --- | --- | --- | --- |
 | 99 | Plain-language CARC denial reasons with the likely fix (UX item 31); shown once 835 posting (87) lands | P1 | M | app | B1 |
 | 100 | Denial work queue on the Billing tab, oldest first | P1 | S | app | |
-| 101 | Corrected-claim flow from a denial (pre-filled, frequency 7) | P1 | M | app | |
+| 101 | Corrected-claim flow from a denial (pre-filled, frequency 7) | P1 | M | app | B2 |
 | 102 | Appeal letter draft from the denial and the note | P2 | M | worker | |
 | 103 | Denial trends by payer and reason | P2 | M | app | |
 | 104 | Eligibility recheck before resubmitting a denial for coverage | P1 | S | app | |
@@ -171,7 +171,7 @@ owner.
 | 111 | One scanner session for all cards with automatic card type (UX item 11) | P1 | M | app | |
 | 112 | Short review form and a fixed Save button (UX item 12) | P1 | S | app | |
 | 113 | Pre-select the matching patient and scroll to the choice (UX item 13) | P1 | S | app | |
-| 114 | Quick "unidentified patient" for EMS and ED (UX item 34) | P1 | S | app | |
+| 114 | Quick "unidentified patient" for EMS and ED (UX item 34) | P1 | S | app | B2 |
 | 115 | Merge two patient accounts | P1 | M | app | |
 | 116 | Patient list sorting (name, last visit) and filters (status, payer) | P1 | S | app | B1 |
 | 117 | Patient photo for identity check | P2 | S | app | |
@@ -227,7 +227,7 @@ owner.
 | --- | --- | --- | --- | --- | --- |
 | 153 | App lock with biometrics or device PIN | P0 | M | app | |
 | 154 | Auto-lock after inactivity (default 5 minutes) | P0 | S | app | |
-| 155 | Hide patient data in the app switcher | P1 | S | app | |
+| 155 | Privacy mode: initials only on the Today and Patients lists | P2 | S | app | |
 | 156 | Local data encrypted at rest with a key in the keystore | P0 | M | app | |
 | 157 | Audit log viewer: who opened, edited, signed, sent | P1 | M | app | |
 | 158 | Export the audit log for a HIPAA access request | P2 | S | app | |
@@ -294,8 +294,9 @@ owner.
 ## Batch plan
 
 - **B1** (shipped): 1, 2, 3, 5, 6, 67, 90, 98, 99, 116, 147, 148, 166, 167, 189.
-- **B2**: visit flow and safety: 4, 20, 25, 36, 47, 49, 59, 60, 58, 114, 37, 154, 155.
-- **B3**: end of day: 84, 85, 89, 100, 101, 110, 134, 135, 96, 80.
+- **B2** (shipped): 4, 49, 58, 59, 60, 101, 114.
+- **B3**: 25, 36, 37, 47, 154 (needs a biometric plugin), then end of day:
+  84, 85, 89, 100, 110, 134, 135, 96, 80.
 - **B4**: check-in: 111, 112, 113, 118, 120, 115, 93, 14, 15.
 - **B5 onward**: the remaining `app` items by priority; `worker`, `vendor`
   and `license` items once those are in place.

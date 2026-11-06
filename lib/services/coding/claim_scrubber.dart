@@ -458,11 +458,17 @@ class ClaimScrubber {
       issues.add(ruleIssue('CLAIM-PROVIDER-02', IssueSeverity.error, 'Provider profile incomplete',
           'Boxes 24J, 32 and 33 need: ${profileGaps.join(', ')}. Complete the provider profile.'));
     }
+    if (account.isUnidentified) {
+      issues.add(ruleIssue('CLAIM-PATIENT-02', IssueSeverity.error, 'Patient not identified yet',
+          '${account.fullName} was registered without a name. Enter the patient\'s legal name before billing.'));
+    }
     if (!demoMode && account.isSample) {
       issues.add(ruleIssue('CLAIM-SAMPLE-01', IssueSeverity.error, 'Sample patient, cannot be billed',
           '${account.fullName} is a demo patient. Claims are only sent for real patients.'));
     }
     issues.addAll(dateOfServiceIssues(visit: visit, account: account, today: today));
+    final g2211 = complexityAddOnIssue(claim, account.insurance);
+    if (g2211 != null) issues.add(g2211);
     final elig = visit.eligibility;
     if (ins != null && ins.memberId.trim().isNotEmpty) {
       if (elig == null) {
@@ -720,6 +726,8 @@ class ClaimScrubber {
             : const IssueFix(FixKind.editPatient, 'Add sex', field: 'sex');
       case 'CLAIM-PAYER-01':
         return const IssueFix(FixKind.scanCard, 'Scan insurance card');
+      case 'CLAIM-PATIENT-02':
+        return const IssueFix(FixKind.editPatient, 'Enter name', field: 'name');
       case 'CLAIM-ELIG-01':
         return issue.severity == IssueSeverity.error ? const IssueFix(FixKind.scanCard, 'Rescan card') : null;
       case 'CLAIM-NPI-01':
@@ -813,6 +821,26 @@ class ClaimScrubber {
           '${visit.dateOfService} was $age days ago. Many plans allow 90 to 180 days; check the ${account.insurance!.payerName} contract before sending.'));
     }
     return issues;
+  }
+
+  /// CLAIM-G2211-01: a Medicare office visit without the visit-complexity
+  /// add-on G2211 (CMS CY2024 PFS final rule). Only the clinician knows
+  /// whether the visit is part of ongoing care, so this is a suggestion
+  /// with a one-tap add. Skipped when the E/M carries modifier 25, where
+  /// Medicare pays G2211 only beside preventive services and vaccines.
+  static ClaimIssue? complexityAddOnIssue(ClaimDraft claim, InsuranceCoverage? ins) {
+    if (ins == null || claimFilingIndicatorFor(ins) != 'MB') return null;
+    if (claim.lines.any((l) => l.code == 'G2211')) return null;
+    final em = claim.lines.where((l) {
+      final n = int.tryParse(l.code) ?? 0;
+      return n >= 99202 && n <= 99215 && n != 99211;
+    }).firstOrNull;
+    if (em == null || em.modifiers.contains('25')) return null;
+    return ruleIssue('CLAIM-G2211-01', IssueSeverity.info, 'Consider G2211 for ongoing care',
+            'If you are this patient\'s continuing focal point for care, or treat a serious or complex condition over time, '
+            'Medicare pays the add-on G2211 with ${em.code}. Leave it off for a one-time visit.',
+            code: em.code)
+        .withFix(IssueFix(FixKind.addService, 'Add G2211', code: em.code, replacement: 'G2211'));
   }
 
   /// The established-patient code at the same MDM level as a new-patient

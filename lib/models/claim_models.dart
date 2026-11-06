@@ -246,6 +246,10 @@ enum FixKind {
 
   /// Adds modifier [IssueFix.replacement] to service [IssueFix.code].
   addModifier,
+
+  /// Adds service [IssueFix.replacement], pointing to the diagnoses of
+  /// service [IssueFix.code]. Offered on a tap, never applied on its own.
+  addService,
 }
 
 /// A one-tap fix offered next to a check.

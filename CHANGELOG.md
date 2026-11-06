@@ -7,6 +7,16 @@ All notable changes to the SOLIS app are recorded here. The format follows
 ## [Unreleased]
 
 ### Added
+- Corrected and void claims from the visit (Export menu): sent with
+  frequency 7 or 8 and the payer's claim number; a rejected correction is
+  resent as a correction, never as a second original claim.
+- Bill an office visit by total time ("Time" on the Services card): sets
+  the level from the 99202-99215 minimums and adds prolonged services,
+  99417 or Medicare's G2212, from their own thresholds.
+- `CLAIM-G2211-01`: Medicare office visits suggest the G2211 add-on with a
+  one-tap add (not with modifier 25).
+- "Unidentified patient (EMS, ED)" in the home menu registers a patient in
+  one tap; `CLAIM-PATIENT-02` holds the claim until the name is entered.
 - `docs/FEATURE_BACKLOG.md`: 200 missing features by area and priority,
   with the build batch that ships each one.
 - Corrected and void claims in the 837P builder: CLM05-3 frequency code 7
