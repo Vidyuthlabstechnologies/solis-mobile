@@ -7,6 +7,15 @@ All notable changes to the SOLIS app are recorded here. The format follows
 ## [Unreleased]
 
 ### Added
+- Service facility on the claim (box 32, 837P 2310C) for visits away from
+  the practice address, picked from saved places. A saved place learns the
+  address the first time it is entered.
+- Responsible party for minors on the patient chart.
+- Merge a duplicate chart from the chart menu. Details already on the kept
+  chart win, missing ones are filled in, and visits move across. A chart
+  whose claims were already sent is never merged away.
+- A scanned card that clearly matches one existing patient preselects that
+  patient. Saving without a choice scrolls to the choice.
 - Addenda on a signed note. Each one is signed and sealed with its own
   SHA-256, tied to the note's seal. Once the claim has gone out, the signed
   note is locked and corrections go into an addendum.

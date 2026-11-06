@@ -14,6 +14,7 @@ import '../widgets/encounter_widgets.dart';
 import 'encounter_screen.dart';
 import 'patients_screen.dart';
 import 'scan_card_screen.dart';
+import '../services/patient_merge.dart';
 
 /// One patient account: demographics, insurance and every visit (date of
 /// service) under the account number.
@@ -185,6 +186,77 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
       ));
   }
 
+  /// Picks a duplicate chart and merges it into this one.
+  Future<void> _mergeInto(PatientAccount account) async {
+    final likely = {
+      for (final m in _repo.findMatches(firstName: account.firstName, lastName: account.lastName, dateOfBirth: account.dateOfBirth, memberId: account.insurance?.memberId))
+        m.accountNumber,
+    };
+    final others = _repo.accounts.where((a) => a.accountNumber != account.accountNumber).toList()
+      ..sort((a, b) {
+        final la = likely.contains(a.accountNumber) ? 0 : 1;
+        final lb = likely.contains(b.accountNumber) ? 0 : 1;
+        return la != lb ? la.compareTo(lb) : a.fullName.toLowerCase().compareTo(b.fullName.toLowerCase());
+      });
+    if (others.isEmpty) {
+      _message('There is no other chart to merge.');
+      return;
+    }
+    final picked = await showModalBottomSheet<PatientAccount>(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) => SafeArea(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(ctx).height * 0.7),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              ListTile(title: Text('Merge which chart into ${account.fullName}?', style: Theme.of(ctx).textTheme.titleMedium)),
+              for (final o in others)
+                ListTile(
+                  key: Key('merge_pick_${o.accountNumber}'),
+                  leading: Icon(likely.contains(o.accountNumber) ? Icons.content_copy_rounded : Icons.person_outline_rounded),
+                  title: Text(o.fullName),
+                  subtitle: Text([
+                    o.accountNumber,
+                    if (o.dateOfBirth != null) 'DOB ${formatDate(o.dateOfBirth)}',
+                    '${o.visits.length} ${o.visits.length == 1 ? 'visit' : 'visits'}',
+                    if (likely.contains(o.accountNumber)) 'likely the same person',
+                  ].join('  |  ')),
+                  onTap: () => Navigator.pop(ctx, o),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+    if (picked == null || !mounted) return;
+    final preview = planMerge(account, picked);
+    if (preview.blocked != null) {
+      _message(preview.blocked!);
+      return;
+    }
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Merge ${picked.fullName} into this chart?'),
+        content: Text([
+          '${picked.visits.length} ${picked.visits.length == 1 ? 'visit moves' : 'visits move'} to ${account.accountNumber}.',
+          if (preview.filled.isNotEmpty) 'Filled in from the duplicate: ${preview.filled.join(', ')}.',
+          'Details already on this chart are kept. ${picked.accountNumber} goes to Recently deleted.',
+        ].join('\n\n')),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancel')),
+          FilledButton(key: const Key('merge_confirm'), onPressed: () => Navigator.pop(ctx, true), child: const Text('Merge')),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    final result = await _repo.mergePatients(account.accountNumber, picked.accountNumber);
+    if (!mounted) return;
+    _message(result.blocked ?? 'Merged. ${result.movedVisits.length} ${result.movedVisits.length == 1 ? 'visit' : 'visits'} moved to this chart.');
+  }
+
   Map<String, dynamic>? _lastEligibility;
 
   void _message(String text) {
@@ -288,6 +360,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
             onSelected: (v) {
               if (v == 'date') _startVisitOnDate(account);
               if (v == 'delete') _deletePatient(account);
+              if (v == 'merge') _mergeInto(account);
             },
             itemBuilder: (_) => [
               const PopupMenuItem(
@@ -296,6 +369,14 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
                   Icon(Icons.event_outlined, size: 20),
                   SizedBox(width: 12),
                   Flexible(child: Text('Visit for another date', overflow: TextOverflow.ellipsis)),
+                ]),
+              ),
+              const PopupMenuItem(
+                value: 'merge',
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  Icon(Icons.merge_rounded, size: 20),
+                  SizedBox(width: 12),
+                  Flexible(child: Text('Merge a duplicate chart', overflow: TextOverflow.ellipsis)),
                 ]),
               ),
               PopupMenuItem(
@@ -365,6 +446,12 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
                   onTap: () => _editAllergies(context, account),
                   child: _row(context, 'Allergies', account.allergySummary, missing: !account.allergiesRecorded),
                 ),
+                if (account.isMinorOn() || account.guarantor != null)
+                  InkWell(
+                    key: const Key('guarantor_row'),
+                    onTap: () => _editGuarantor(context, account),
+                    child: _row(context, 'Responsible party', account.guarantor?.summary ?? 'Needed for a minor', missing: account.guarantor == null),
+                  ),
                 InkWell(
                   key: const Key('language_row'),
                   onTap: () => _editLanguage(context, account),
@@ -465,6 +552,12 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
     );
     if (result == null) return;
     await AccountRepository.instance.updateAccount(account.copyWith(allergies: result));
+  }
+
+  Future<void> _editGuarantor(BuildContext context, PatientAccount account) async {
+    final result = await showDialog<(Guarantor?,)>(context: context, builder: (_) => GuarantorDialog(initial: account.guarantor));
+    if (result == null) return;
+    await AccountRepository.instance.updateAccount(account.copyWith(guarantor: result.$1, clearGuarantor: result.$1 == null));
   }
 
   Future<void> _editLanguage(BuildContext context, PatientAccount account) async {
@@ -671,6 +764,81 @@ class _LanguageDialogState extends State<LanguageDialog> {
         actions: [
           TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
           FilledButton(key: const Key('language_save'), onPressed: () => Navigator.pop(context, (_c.text.trim(), _interpreter)), child: const Text('Save')),
+        ],
+      );
+}
+
+/// Records the responsible party. Pops with (guarantor,) or (null,) to
+/// remove it.
+class GuarantorDialog extends StatefulWidget {
+  final Guarantor? initial;
+
+  const GuarantorDialog({super.key, this.initial});
+
+  @override
+  State<GuarantorDialog> createState() => _GuarantorDialogState();
+}
+
+class _GuarantorDialogState extends State<GuarantorDialog> {
+  late final _name = TextEditingController(text: widget.initial?.name ?? '');
+  late final _phone = TextEditingController(text: widget.initial?.phone ?? '');
+  late String _relationship = widget.initial?.relationship ?? 'parent';
+  String? _error;
+
+  @override
+  void dispose() {
+    _name.dispose();
+    _phone.dispose();
+    super.dispose();
+  }
+
+  void _save() {
+    final name = _name.text.trim();
+    if (name.isEmpty) {
+      setState(() => _error = 'Enter their name');
+      return;
+    }
+    final phone = _phone.text.trim();
+    Navigator.pop(context, (Guarantor(name: name, relationship: _relationship, phone: phone.isEmpty ? null : phone),));
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+        title: const Text('Responsible party'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                key: const Key('guarantor_name'),
+                controller: _name,
+                autofocus: true,
+                textCapitalization: TextCapitalization.words,
+                decoration: InputDecoration(labelText: 'Full name', errorText: _error),
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: [
+                  for (final e in Guarantor.relationships.entries)
+                    ChoiceChip(label: Text(e.value), selected: _relationship == e.key, onSelected: (_) => setState(() => _relationship = e.key)),
+                ],
+              ),
+              TextField(
+                key: const Key('guarantor_phone'),
+                controller: _phone,
+                keyboardType: TextInputType.phone,
+                decoration: const InputDecoration(labelText: 'Phone'),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          if (widget.initial != null) TextButton(onPressed: () => Navigator.pop(context, (null,)), child: const Text('Remove')),
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+          FilledButton(key: const Key('guarantor_save'), onPressed: _save, child: const Text('Save')),
         ],
       );
 }

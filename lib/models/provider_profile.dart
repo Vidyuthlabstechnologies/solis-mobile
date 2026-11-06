@@ -243,14 +243,14 @@ class SavedPlace {
     this.address,
   });
 
-  SavedPlace copyWith({String? name, String? placeOfService, double? radiusMeters}) => SavedPlace(
+  SavedPlace copyWith({String? name, String? placeOfService, double? radiusMeters, String? address}) => SavedPlace(
         id: id,
         name: name ?? this.name,
         placeOfService: placeOfService ?? this.placeOfService,
         latitude: latitude,
         longitude: longitude,
         radiusMeters: radiusMeters ?? this.radiusMeters,
-        address: address,
+        address: address ?? this.address,
       );
 
   Map<String, dynamic> toJson() => {

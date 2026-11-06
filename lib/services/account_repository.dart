@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../models/patient_account.dart';
 import '../models/provider_profile.dart';
+import 'patient_merge.dart';
 
 /// Local store for patient accounts, visits and the provider profile.
 ///
@@ -276,6 +277,25 @@ class AccountRepository extends ChangeNotifier {
     _accounts[i] = deleted;
     await _save();
     return deleted;
+  }
+
+  /// Merges the [duplicate] chart into [keep] (see [planMerge]). The
+  /// duplicate is soft-deleted, so the merge can be undone by restoring it
+  /// within [softDeleteWindow]; its visits stay on the kept chart.
+  Future<MergePlan> mergePatients(String keep, String duplicate, {DateTime? now}) async {
+    final a = byNumber(keep);
+    final b = byNumber(duplicate);
+    if (a == null || b == null || a.isDeleted || b.isDeleted) {
+      return MergePlan(merged: a ?? b!, blocked: 'One of the charts no longer exists.');
+    }
+    final plan = planMerge(a, b);
+    if (plan.blocked != null) return plan;
+    final ia = _accounts.indexWhere((x) => x.accountNumber == keep);
+    final ib = _accounts.indexWhere((x) => x.accountNumber == duplicate);
+    _accounts[ia] = plan.merged;
+    _accounts[ib] = b.copyWith(deletedAtUtc: (now ?? DateTime.now()).toUtc(), visits: const []);
+    await _save();
+    return plan;
   }
 
   /// Brings back a patient deleted within [softDeleteWindow].
