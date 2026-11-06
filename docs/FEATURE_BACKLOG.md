@@ -131,20 +131,20 @@ owner.
 | 81 | Patient responsibility estimate (copay, deductible) at check-out | P1 | M | app | |
 | 82 | Superbill PDF for self-pay or out-of-network patients | P1 | M | app | |
 | 83 | Self-pay visits that skip the claim | P1 | S | app | |
-| 84 | Batch status check of every submitted claim in one tap | P1 | S | app | |
+| 84 | Status refresh every few hours while the app stays open | P2 | S | app | |
 | 85 | Automatic status polling with notifications (UX item 30) | P1 | M | app | |
 | 86 | 277CA acknowledgement handling through webhooks (Big idea D) | P1 | L | worker | |
 | 87 | 835 ERA posting: paid amount, adjustments, patient responsibility | P1 | L | worker | |
 | 88 | Payment posting by hand for paper EOBs | P2 | M | app | |
-| 89 | Claim history timeline per visit (built, sent, accepted, paid) | P1 | S | app | |
+| 89 | Claim history timeline per visit (built, sent, accepted, paid) | P1 | S | app | B3 |
 | 90 | Plain-language 277 status category explanations | P1 | S | app | B1 |
 | 91 | Claim notes: a free-text note on a claim for the biller | P2 | S | app | |
 | 92 | Workers' comp and auto claims (property and casualty fields) | P3 | L | app | |
 | 93 | Place-of-service facility address (2310C) from saved places | P1 | S | app | |
 | 94 | Line-item date of service for multi-day services | P2 | S | app | |
 | 95 | Claim print preview as CMS-1500 PDF | P2 | M | app | |
-| 96 | Accounts receivable aging (0-30, 31-60, 61-90, 90+) | P1 | M | app | |
-| 97 | Daily and monthly billed vs paid totals | P2 | S | app | |
+| 96 | Accounts receivable aging (0-30, 31-60, 61-90, 90+) | P1 | M | app | B3 |
+| 97 | Daily and monthly billed vs paid totals | P2 | S | app | B3 |
 | 98 | CSV export of claims for an outside biller | P1 | S | app | B1 |
 
 ## F. Denials and revenue cycle (12)
@@ -152,7 +152,7 @@ owner.
 | # | Feature | Pri | Eff | Needs | Status |
 | --- | --- | --- | --- | --- | --- |
 | 99 | Plain-language CARC denial reasons with the likely fix (UX item 31); shown once 835 posting (87) lands | P1 | M | app | B1 |
-| 100 | Denial work queue on the Billing tab, oldest first | P1 | S | app | |
+| 100 | Denial work queue on the Billing tab, oldest first | P1 | S | app | B3 |
 | 101 | Corrected-claim flow from a denial (pre-filled, frequency 7) | P1 | M | app | B2 |
 | 102 | Appeal letter draft from the denial and the note | P2 | M | worker | |
 | 103 | Denial trends by payer and reason | P2 | M | app | |
@@ -162,7 +162,7 @@ owner.
 | 107 | Online patient payment link | P3 | L | vendor | |
 | 108 | Collection reminders for unpaid patient balances | P3 | M | vendor | |
 | 109 | Rejected-claim auto-fix where no clinical judgment is needed | P1 | M | app | |
-| 110 | Reason the claim was rejected shown on the Billing tile | P1 | S | app | |
+| 110 | Payer-specific rejection tips learned from past rejections | P3 | M | app | |
 
 ## G. Patients and check-in (18)
 
@@ -196,7 +196,7 @@ owner.
 | 131 | Rounds mode for nursing homes and hospitals (Big idea C) | P1 | L | app | |
 | 132 | "Finish and next patient" in rounds | P1 | M | app | |
 | 133 | Geofence prompt: "At Sunrise SNF. Start rounds?" (Big idea B) | P2 | M | app | |
-| 134 | End-of-day summary: unsigned notes, unsent claims, open orders | P1 | S | app | |
+| 134 | End-of-day summary: unsigned notes, unsent claims, open orders | P1 | S | app | B3 |
 | 135 | Unsigned-note reminder notification | P1 | S | app | |
 | 136 | Orders follow-up: results expected, overdue | P2 | M | app | |
 | 137 | Task list for the clinician (call patient, review lab) | P2 | M | app | |
@@ -295,8 +295,9 @@ owner.
 
 - **B1** (shipped): 1, 2, 3, 5, 6, 67, 90, 98, 99, 116, 147, 148, 166, 167, 189.
 - **B2** (shipped): 4, 49, 58, 59, 60, 101, 114.
-- **B3**: 25, 36, 37, 47, 154 (needs a biometric plugin), then end of day:
-  84, 85, 89, 100, 110, 134, 135, 96, 80.
+- **B3** (shipped): 89, 96, 97, 100, 134.
+- **Next**: 25, 36, 37, 47, 85, 135, 80, then B4. 154 needs a biometric
+  plugin and is held for a decision.
 - **B4**: check-in: 111, 112, 113, 118, 120, 115, 93, 14, 15.
 - **B5 onward**: the remaining `app` items by priority; `worker`, `vendor`
   and `license` items once those are in place.

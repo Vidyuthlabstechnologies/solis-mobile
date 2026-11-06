@@ -7,6 +7,13 @@ All notable changes to the SOLIS app are recorded here. The format follows
 ## [Unreleased]
 
 ### Added
+- Billing tab: this month's billed and paid totals and accounts receivable
+  aging (0-30, 31-60, 61-90, 90+ days) of claims waiting on payers.
+- Today tab: a "Left to do" card (notes to sign, claims to fix, claims
+  ready to send) that opens Billing.
+- Claim history on each visit: queued, accepted or rejected, corrected or
+  voided, and each change of payer status, with times.
+- Rejected and denied claims are listed oldest first on Billing.
 - Corrected and void claims from the visit (Export menu): sent with
   frequency 7 or 8 and the payer's claim number; a rejected correction is
   resent as a correction, never as a second original claim.

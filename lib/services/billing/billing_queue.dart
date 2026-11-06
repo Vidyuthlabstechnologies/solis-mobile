@@ -79,6 +79,11 @@ List<BillingItem> classifyVisits(
   items.sort((x, y) {
     final b = x.bucket.index.compareTo(y.bucket.index);
     if (b != 0) return b;
+    // Rejections and denials are a work queue: oldest first, nearest its
+    // filing or appeal limit. Everything else: newest first.
+    if (x.bucket == BillingBucket.rejected || x.bucket == BillingBucket.denied) {
+      return x.visit.dateOfService.compareTo(y.visit.dateOfService);
+    }
     return y.visit.dateOfService.compareTo(x.visit.dateOfService);
   });
   return items;

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import '../../models/claim_models.dart';
 import '../../models/patient_account.dart';
 import '../account_repository.dart';
@@ -262,6 +264,7 @@ class ClaimSubmissionService {
           'testMode': test,
           'errors': errors,
           ...extra,
+          'history': appendHistory(latest.submission, nowIso, '${_sendLabel(extra)} queued: no connection (attempt $attempts)'),
         }),
       );
       return SendResult(SendStatus.queued, problems: errors, testMode: test);
@@ -286,11 +289,38 @@ class ClaimSubmissionService {
           'attempts': attempts,
           'errors': errors,
           ...extra,
+          'history': appendHistory(
+            latest.submission,
+            nowIso,
+            accepted
+                ? '${_sendLabel(extra)} accepted by the clearinghouse${(res.testMode ?? test) ? ' (test)' : ''}'
+                : '${_sendLabel(extra)} rejected by the clearinghouse${errors.isEmpty ? '' : ': ${errors.first}'}',
+          ),
         },
       ),
     );
     return SendResult(accepted ? SendStatus.accepted : SendStatus.rejected, problems: errors, testMode: res.testMode ?? test);
   }
+
+  /// Most events kept in a claim's history.
+  static const historyLimit = 30;
+
+  /// The claim's history so far plus [event], newest last. Each entry is
+  /// {atUtc, event}. Kept in the submission so it survives every update.
+  static List<Map<String, dynamic>> appendHistory(Map<String, dynamic>? submission, String atUtc, String event) {
+    final old = [
+      for (final e in (submission?['history'] as List? ?? const []))
+        if (e is Map) e.cast<String, dynamic>(),
+    ];
+    final all = [...old, {'atUtc': atUtc, 'event': event}];
+    return all.length > historyLimit ? all.sublist(all.length - historyLimit) : all;
+  }
+
+  static String _sendLabel(Map<String, dynamic> extra) => switch (extra['frequency']) {
+        '7' => 'Corrected claim',
+        '8' => 'Void request',
+        _ => 'Claim',
+      };
 
   /// Unreachable, timed out, rate limited or a server error: worth sending
   /// again later. A missing key or a refused login is not.
@@ -349,6 +379,8 @@ class ClaimSubmissionService {
         'paidAmount': c.paidAmount,
         'payerClaimNumber': c.payerClaimNumber,
         'statusCheckedAtUtc': checkedAt,
+        if (latest.submission?['statusExplanation'] != explanation)
+          'history': appendHistory(latest.submission, checkedAt, 'Payer status: $explanation'),
         if (status == VisitStatus.paid) 'paidAtUtc': latest.submission?['paidAtUtc'] ?? checkedAt,
       }),
     );
@@ -393,4 +425,18 @@ class ClaimSubmissionService {
     }
     return changed;
   }
+}
+
+/// The newest [limit] events of a claim's history, newest first, as
+/// "Nov 6, 2:05 PM  Claim accepted by the clearinghouse" in local time.
+List<String> claimHistoryLines(Map<String, dynamic>? submission, {int limit = 5}) {
+  final events = [
+    for (final e in (submission?['history'] as List? ?? const []))
+      if (e is Map && e['event'] != null) e,
+  ];
+  final f = DateFormat('MMM d, h:mm a');
+  return [
+    for (final e in events.reversed.take(limit))
+      '${DateTime.tryParse('${e['atUtc']}') == null ? '' : '${f.format(DateTime.parse('${e['atUtc']}').toLocal())}  '}${e['event']}',
+  ];
 }
