@@ -28,6 +28,7 @@ import '../services/coding/clinical_coder.dart';
 import '../services/coding/place_of_service.dart';
 import '../services/fhir_export_service.dart';
 import '../services/local_clinical_engine.dart';
+import '../services/attestation.dart';
 import '../services/note_seal.dart';
 import '../services/places.dart';
 import '../services/recording_foreground_service.dart';
@@ -1634,6 +1635,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       }
       b.writeln();
     }
+    if (_isSigned && _encounter.attestationText.isNotEmpty) b.writeln('Attestation (${_encounter.attestationVersion}): ${_encounter.attestationText}');
     b.writeln(_isSigned ? 'Electronically signed by $_attending' : 'DRAFT, not signed');
     if (withAddenda) b.write(_addendaText());
     return b.toString();
@@ -1825,7 +1827,13 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     final now = DateTime.now();
     _isSigned = true;
     _signedAt = now;
-    _encounter = _encounter.copyWith(isSigned: true, signedAtUtc: now.toUtc());
+    // The attestation is stored with its version and is part of the sealed text.
+    _encounter = _encounter.copyWith(
+      isSigned: true,
+      signedAtUtc: now.toUtc(),
+      attestationVersion: attestationVersion,
+      attestationText: attestationText(_attending),
+    );
     _encounter = _encounter.copyWith(
       sha256Seal: NoteSeal.compute(noteText: _formattedNote(), signerNpi: _repo.provider.npi, signedAtUtc: now.toUtc()),
     );
@@ -1851,7 +1859,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       context: context,
       isScrollControlled: true,
       builder: (ctx) => SignAndSendSheet(
-        attestation: 'I personally performed this encounter and reviewed this note for accuracy. Signing as $_attending.',
+        attestation: attestationText(_attending),
         claimId: claim == null ? null : ClaimBuilder.claimId(_account, _visit),
         primaryDiagnosis: claim == null || claim.billable.isEmpty ? null : '${claim.billable.first.code}  ${claim.billable.first.description}',
         services: claim == null ? const [] : [for (final l in claim.lines) '${[l.code, ...l.modifiers].join('-')}  ${l.description}'],

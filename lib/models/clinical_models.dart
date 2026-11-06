@@ -203,6 +203,11 @@ class ClinicalEncounter {
   /// never changes once its claim is sent; corrections go here.
   final List<NoteAddendum> addenda;
 
+  /// The attestation the note was signed under: its version and exact text.
+  /// Empty until signed (and on notes signed before versions were kept).
+  final String attestationVersion;
+  final String attestationText;
+
   ClinicalEncounter({
     required this.id,
     required this.patientName,
@@ -226,6 +231,8 @@ class ClinicalEncounter {
     this.rawTranscript = '',
     this.gpsCoordinates = const {},
     this.addenda = const [],
+    this.attestationVersion = '',
+    this.attestationText = '',
   });
 
   ClinicalEncounter copyWith({
@@ -252,6 +259,8 @@ class ClinicalEncounter {
     String? rawTranscript,
     Map<String, dynamic>? gpsCoordinates,
     List<NoteAddendum>? addenda,
+    String? attestationVersion,
+    String? attestationText,
   }) {
     return ClinicalEncounter(
       id: id ?? this.id,
@@ -276,6 +285,8 @@ class ClinicalEncounter {
       rawTranscript: rawTranscript ?? this.rawTranscript,
       gpsCoordinates: gpsCoordinates ?? this.gpsCoordinates,
       addenda: clearSignature ? const [] : (addenda ?? this.addenda),
+      attestationVersion: clearSignature ? '' : (attestationVersion ?? this.attestationVersion),
+      attestationText: clearSignature ? '' : (attestationText ?? this.attestationText),
     );
   }
 
@@ -302,6 +313,8 @@ class ClinicalEncounter {
     'signedAtUtc': signedAtUtc?.toIso8601String(),
     'gpsCoordinates': gpsCoordinates,
     if (addenda.isNotEmpty) 'addenda': [for (final a in addenda) a.toJson()],
+    if (attestationVersion.isNotEmpty) 'attestationVersion': attestationVersion,
+    if (attestationText.isNotEmpty) 'attestationText': attestationText,
     'syncedAt': DateTime.now().toUtc().toIso8601String(),
   };
 
@@ -328,6 +341,8 @@ class ClinicalEncounter {
         rawTranscript: j['rawTranscript'] ?? '',
         gpsCoordinates: ((j['gpsCoordinates'] as Map?) ?? const {}).cast<String, dynamic>(),
         addenda: [for (final a in (j['addenda'] as List? ?? const [])) NoteAddendum.fromJson((a as Map).cast<String, dynamic>())],
+        attestationVersion: '${j['attestationVersion'] ?? ''}',
+        attestationText: '${j['attestationText'] ?? ''}',
       );
 
   Map<String, List<String>> get soapSections => {

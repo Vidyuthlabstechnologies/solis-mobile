@@ -480,7 +480,8 @@ class ClinicalCoder {
 
     // 6. Services.
     final billableDx = diagnoses.where((d) => d.status == DxStatus.billable).toList();
-    final mdm = _mdm(doctorText, billableDx);
+    final mdmWhy = mdmBreakdown(doctorText, billableDx);
+    final mdm = mdmWhy.level;
     final lines = <ServiceLine>[];
     double fee(String c) => context.feeSchedule[c] ?? 0;
 
@@ -491,7 +492,7 @@ class ClinicalCoder {
         description: emDescription(em),
         charge: fee(em),
         modifiers: isTelehealthPos(context.placeOfService) ? const ['95'] : const [],
-        evidence: 'Place of service ${context.placeOfService}, ${context.newPatient ? 'new' : 'established'} patient, ${mdm.name} medical decision making',
+        evidence: 'Place of service ${context.placeOfService}, ${context.newPatient ? 'new' : 'established'} patient, ${mdm.name} medical decision making. ${mdmWhy.explain()}',
       ));
     } else if (setting == EmSetting.ambulance) {
       final als = _re(r'cardiac monitor|\biv\b|ekg|ecg|intubat|medication|aspirin|nitro').hasMatch(allText);
@@ -882,17 +883,53 @@ class ClinicalCoder {
     return null;
   }
 
-  static MdmLevel _mdm(String doctorText, List<ClaimDiagnosis> billable) {
-    final highRisk = _diagnoses.any((t) => t.acuteHighRisk && billable.any((d) => d.code == t.code)) ||
-        _re(r'cath(eterization)? lab|code stemi|intubat|sepsis|admit (him|her|you|the patient)|life[- ]threatening|emergency surgery').hasMatch(doctorText);
-    if (highRisk) return MdmLevel.high;
+  /// Medical decision making by its three elements (2021 office E/M
+  /// guidelines): problems addressed, data reviewed or ordered, and risk of
+  /// management. The level is what the elements support together.
+  static MdmBreakdown mdmBreakdown(String doctorText, List<ClaimDiagnosis> billable) {
+    final highRiskDx = _diagnoses.any((t) => t.acuteHighRisk && billable.any((d) => d.code == t.code));
+    final highRiskTalk = _re(r'cath(eterization)? lab|code stemi|intubat|sepsis|admit (him|her|you|the patient)|life[- ]threatening|emergency surgery').hasMatch(doctorText);
     final rxManagement = _re(
       r'prescrib\w*|start (you|him|her) on|\b\d+\s?mg\b|refill|increase (your|the) dose|tablets?|'
       r'\b(adjust|add|start|continue|stop|increase|decrease|titrate)\b[^.?!]{0,25}\b\w*(pril|olol|statin|formin|pentin|triptan|cillin|mycin|zole|sartan|dipine|tidine|prazole|semide|thiazide|insulin)\b',
     ).hasMatch(doctorText);
     final workup = _re(r'\bmri\b|ct scan|x-ray|ultrasound|referral|refer (you|him|her)').hasMatch(doctorText);
-    if (rxManagement || (workup && billable.length >= 2) || billable.length >= 3) return MdmLevel.moderate;
-    if (billable.isNotEmpty || workup) return MdmLevel.low;
-    return MdmLevel.straightforward;
+    final n = billable.length;
+
+    final problems = highRiskDx
+        ? 'an acute or chronic illness posing a threat to life or bodily function'
+        : n == 0
+            ? 'no billable problem documented'
+            : '$n billable ${n == 1 ? 'problem' : 'problems'} addressed';
+    final data = workup ? 'imaging or a referral ordered' : 'no tests or outside records named';
+    final risk = highRiskTalk
+        ? 'a decision about hospital-level care or emergency treatment'
+        : rxManagement
+            ? 'prescription drug management'
+            : 'no prescription drug management named';
+
+    final MdmLevel level;
+    if (highRiskDx || highRiskTalk) {
+      level = MdmLevel.high;
+    } else if (rxManagement || (workup && n >= 2) || n >= 3) {
+      level = MdmLevel.moderate;
+    } else if (n > 0 || workup) {
+      level = MdmLevel.low;
+    } else {
+      level = MdmLevel.straightforward;
+    }
+    return MdmBreakdown(level: level, problems: problems, data: data, risk: risk);
   }
+}
+
+/// Why an MDM level was picked, one line per element.
+class MdmBreakdown {
+  final MdmLevel level;
+  final String problems;
+  final String data;
+  final String risk;
+
+  const MdmBreakdown({required this.level, required this.problems, required this.data, required this.risk});
+
+  String explain() => 'Problems: $problems. Data: $data. Risk: $risk.';
 }

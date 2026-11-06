@@ -1283,6 +1283,14 @@ class _DiagnosisSearchDialogState extends State<_DiagnosisSearchDialog> {
     isValid: (code) => ReferenceData.icdFor(widget.dateOfService)?.isBillable(code) ?? true,
   );
 
+  Map<String, String> get _favorites => AccountRepository.instance.provider.favoriteDiagnoses;
+
+  Future<void> _toggleFavorite(String code, String desc) async {
+    final repo = AccountRepository.instance;
+    await repo.saveProvider(repo.provider.toggleFavoriteDiagnosis(code, desc));
+    if (mounted) setState(() {});
+  }
+
   @override
   void dispose() {
     _debounce?.cancel();
@@ -1344,14 +1352,33 @@ class _DiagnosisSearchDialogState extends State<_DiagnosisSearchDialog> {
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  if (_q.text.trim().length < 2 && _recent.isNotEmpty)
+                  if (_q.text.trim().length < 2 && _favorites.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4, bottom: 4),
+                      child: Text('Favorites', style: Theme.of(context).textTheme.labelLarge),
+                    ),
+                  if (_q.text.trim().length < 2 && _recent.any((r) => !_favorites.containsKey(r.$1.toUpperCase())))
                     Padding(
                       padding: const EdgeInsets.only(top: 4, bottom: 4),
                       child: Text('Recent', style: Theme.of(context).textTheme.labelLarge),
                     ),
-                  for (final (code, desc) in _q.text.trim().length < 2 ? _recent : _results) ...[
+                  for (final (code, desc) in _q.text.trim().length < 2
+                      ? [
+                          // A starred code that is not billable on this date of service is left out.
+                          for (final e in _favorites.entries)
+                            if (ReferenceData.icdFor(widget.dateOfService)?.isBillable(e.key) ?? true) (e.key, e.value),
+                          ..._recent.where((r) => !_favorites.containsKey(r.$1.toUpperCase()))]
+                      : _results) ...[
                     ListTile(
+                      key: Key('dx_option_$code'),
                       contentPadding: EdgeInsets.zero,
+                      leading: IconButton(
+                        key: Key('dx_star_$code'),
+                        tooltip: _favorites.containsKey(code.toUpperCase()) ? 'Remove $code from favorites' : 'Add $code to favorites',
+                        icon: Icon(_favorites.containsKey(code.toUpperCase()) ? Icons.star_rounded : Icons.star_outline_rounded),
+                        color: _favorites.containsKey(code.toUpperCase()) ? Theme.of(context).colorScheme.primary : null,
+                        onPressed: () => _toggleFavorite(code, desc),
+                      ),
                       title: Text(code),
                       subtitle: Text(desc),
                       trailing: codeNotesFor(code, dateOfService: widget.dateOfService).isEmpty &&
@@ -1402,10 +1429,12 @@ class _ServiceSearchDialogState extends State<_ServiceSearchDialog> {
   Widget build(BuildContext context) {
     final q = _q.toLowerCase();
     var results = serviceCatalog.where((s) => q.isEmpty || s.code.toLowerCase().contains(q) || s.description.toLowerCase().contains(q)).toList();
-    if (q.isEmpty && _recent.isNotEmpty) {
+    final favorites = AccountRepository.instance.provider.favoriteServices;
+    if (q.isEmpty && (_recent.isNotEmpty || favorites.isNotEmpty)) {
+      final first = [...favorites, ..._recent.where((c) => !favorites.contains(c))];
       results = [
-        for (final code in _recent) ...results.where((s) => s.code == code),
-        ...results.where((s) => !_recent.contains(s.code)),
+        for (final code in first) ...results.where((s) => s.code == code),
+        ...results.where((s) => !first.contains(s.code)),
       ];
     }
     return AlertDialog(
@@ -1428,7 +1457,19 @@ class _ServiceSearchDialogState extends State<_ServiceSearchDialog> {
                 children: [
                   for (final s in results)
                     ListTile(
+                      key: Key('svc_option_${s.code}'),
                       contentPadding: EdgeInsets.zero,
+                      leading: IconButton(
+                        key: Key('svc_star_${s.code}'),
+                        tooltip: favorites.contains(s.code) ? 'Remove ${s.code} from favorites' : 'Add ${s.code} to favorites',
+                        icon: Icon(favorites.contains(s.code) ? Icons.star_rounded : Icons.star_outline_rounded),
+                        color: favorites.contains(s.code) ? Theme.of(context).colorScheme.primary : null,
+                        onPressed: () async {
+                          final repo = AccountRepository.instance;
+                          await repo.saveProvider(repo.provider.toggleFavoriteService(s.code));
+                          if (mounted) setState(() {});
+                        },
+                      ),
                       title: Text(s.code),
                       subtitle: Text(s.description),
                       onTap: () => Navigator.pop(context, s),
