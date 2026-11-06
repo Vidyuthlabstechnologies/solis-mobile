@@ -42,6 +42,9 @@ class PatientsScreen extends StatefulWidget {
   /// Claim status is refreshed once per app start, not on every rebuild.
   static bool _refreshedThisLaunch = false;
 
+  /// How often a screen left open checks the outbox and claim status.
+  static const statusRefreshEvery = Duration(hours: 3);
+
   @visibleForTesting
   static void resetLaunchRefresh() => _refreshedThisLaunch = false;
 
@@ -67,11 +70,19 @@ class _PatientsScreenState extends State<PatientsScreen> {
       // Send what waited in the outbox and pick up payer answers.
       unawaited(_refresh(minAge: const Duration(hours: 1), quiet: true));
     }
+    // While the app stays open, outbox and payer status are checked again
+    // every few hours (claims checked within the last hours are skipped).
+    _statusTimer = Timer.periodic(PatientsScreen.statusRefreshEvery, (_) {
+      if (mounted && _claims.isConnected) unawaited(_refresh(minAge: PatientsScreen.statusRefreshEvery, quiet: true));
+    });
   }
+
+  Timer? _statusTimer;
 
   @override
   void dispose() {
     _repo.removeListener(_onChanged);
+    _statusTimer?.cancel();
     _search.dispose();
     super.dispose();
   }

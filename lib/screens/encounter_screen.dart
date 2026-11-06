@@ -804,6 +804,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       attending: _attending,
       context: _codingContext(),
     ).copyWith(gpsCoordinates: _currentGps, date: _visit.dateOfService);
+    _pendingLocal = local;
 
     // Cloud mode: Claude writes the note text through the SOLIS server.
     CloudNote? cloud;
@@ -844,6 +845,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
 
     setState(() {
       _encounter = encounter;
+      _pendingLocal = null;
       _isProcessing = false;
       _syncControllers();
       _rebuildClaim();
@@ -853,6 +855,27 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
   }
 
   int _cloudLatencyMs = 0;
+
+  /// The on-device draft of the note being written, while the cloud model
+  /// works. Lets the clinician stop waiting.
+  ClinicalEncounter? _pendingLocal;
+
+  /// Stops waiting for the cloud model and uses the on-device note now.
+  /// A cloud answer that arrives later is ignored.
+  void _useOnDeviceNow() {
+    final local = _pendingLocal;
+    if (local == null || !_isProcessing) return;
+    _synthesisGeneration++;
+    setState(() {
+      _encounter = local;
+      _pendingLocal = null;
+      _isProcessing = false;
+      _syncControllers();
+      _rebuildClaim();
+    });
+    _persist();
+    _showMessage('Using the note written on this phone.', icon: Icons.smartphone_outlined);
+  }
 
   /// Diagnoses Claude found that the rules did not, offered on the claim for
   /// the clinician to confirm. Never billed until confirmed, and only codes
@@ -2661,6 +2684,15 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
               _isOffline || !SolisBackend.instance.isConfigured ? 'Using the on-device engine' : 'Using the cloud model',
               style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant),
             ),
+            if (_pendingLocal != null) ...[
+              const SizedBox(height: 24),
+              OutlinedButton.icon(
+                key: const Key('use_on_device_now'),
+                onPressed: _useOnDeviceNow,
+                icon: const Icon(Icons.smartphone_outlined),
+                label: const Text('Stop waiting, use the on-device note'),
+              ),
+            ],
           ],
         ),
       ),

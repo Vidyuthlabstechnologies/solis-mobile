@@ -360,6 +360,11 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
                 if (account.driverLicenseNumber != null)
                   _row(context, "Driver's license", '${account.driverLicenseState ?? ''} ${_mask(account.driverLicenseNumber!)}'.trim()),
                 if (account.ssnLast4 != null) _row(context, 'SSN', 'Last 4: ${account.ssnLast4}'),
+                InkWell(
+                  key: const Key('allergies_row'),
+                  onTap: () => _editAllergies(context, account),
+                  child: _row(context, 'Allergies', account.allergySummary, missing: !account.allergiesRecorded),
+                ),
               ],
             ),
           ),
@@ -447,6 +452,16 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
     return x.isNotEmpty && y.isNotEmpty && (x.contains(y) || y.contains(x));
   }
 
+  /// Records allergies as free text, or "No known allergies" in one tap.
+  Future<void> _editAllergies(BuildContext context, PatientAccount account) async {
+    final result = await showDialog<List<String>>(
+      context: context,
+      builder: (_) => _AllergyDialog(initial: account.allergies?.join(', ') ?? ''),
+    );
+    if (result == null) return;
+    await AccountRepository.instance.updateAccount(account.copyWith(allergies: result));
+  }
+
   Widget _row(BuildContext context, String label, String value, {bool copy = false, bool missing = false}) {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
@@ -531,4 +546,41 @@ class _VisitTile extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Allergies as free text; owns its controller so it lives as long as the
+/// dialog, including its closing animation.
+class _AllergyDialog extends StatefulWidget {
+  final String initial;
+  const _AllergyDialog({required this.initial});
+
+  @override
+  State<_AllergyDialog> createState() => _AllergyDialogState();
+}
+
+class _AllergyDialogState extends State<_AllergyDialog> {
+  late final _c = TextEditingController(text: widget.initial);
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+        title: const Text('Allergies'),
+        content: TextField(
+          controller: _c,
+          autofocus: true,
+          minLines: 1,
+          maxLines: 4,
+          textCapitalization: TextCapitalization.sentences,
+          decoration: const InputDecoration(labelText: 'Allergies and reactions', hintText: 'Penicillin (hives), latex'),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context, const <String>[]), child: const Text('No known allergies')),
+          FilledButton(onPressed: () => Navigator.pop(context, parseAllergies(_c.text)), child: const Text('Save')),
+        ],
+      );
 }
