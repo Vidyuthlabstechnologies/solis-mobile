@@ -61,3 +61,26 @@ Do not put credentials in this file or in git.
 - Do not make access depend on location, a VPN, or an allow-list of emails during review.
 - If Play Integrity enforcement is on (`SOLIS_INTEGRITY_ENFORCE=true`), keep it in report-only mode until the first
   Play-distributed build is approved, so the reviewer's devices are not blocked.
+
+## Instructions set 3: SOLIS Pro (subscription) for reviewers
+
+Added for Play Billing (2026-11-09). The demo account never asks for a subscription. A signed-in account (set 2)
+sees the SOLIS Pro paywall when it starts a new visit. Give reviewers an access code so they can test past it
+without paying:
+
+1. In RevenueCat, create the code: Customers > search `access_<CODE>` (for example `access_PLAYREVIEW2026`).
+   If it does not exist yet, open the app once, enter the code (it fails), and the customer appears. Then
+   Customer > Entitlements > **Grant promotional entitlement** > `pro` > duration (e.g. 3 months).
+2. Paste into the "Any other instructions" field, with the real code:
+
+```
+SOLIS Pro is a Google Play subscription. To test it without paying:
+1. Sign in with the account in instructions set 2.
+2. Open any patient and tap "Start today's visit". The SOLIS Pro screen appears.
+3. Tap "I have an access code", enter PLAYREVIEW2026 and tap Unlock.
+The paywall itself (prices from Google Play, Restore purchase, Privacy policy, Terms of use) can be
+viewed before step 3. Subscriptions can be cancelled in Google Play > Subscriptions; the app links
+there from Provider profile > Account > SOLIS Pro.
+```
+
+Revoke the code in RevenueCat after review if you want; the reviewer's Pro ends at once. The code lasts for the app session: after the app is closed and reopened, enter it again.

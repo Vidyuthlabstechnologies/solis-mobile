@@ -1,0 +1,43 @@
+name: Launch readiness
+
+# Lists what is still missing before a Play release. Prints secret names
+# only, never values.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    environment: play-release
+    env:
+      ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      REVENUECAT_ANDROID_KEY: ${{ secrets.REVENUECAT_ANDROID_KEY }}
+      PRIVACY_POLICY_URL: ${{ vars.PRIVACY_POLICY_URL || 'https://solis-health.pages.dev/privacy' }}
+      TERMS_URL: ${{ vars.TERMS_URL || 'https://solis-health.pages.dev/terms' }}
+      DELETE_ACCOUNT_URL: ${{ vars.DELETE_ACCOUNT_URL || 'https://solis-health.pages.dev/delete-account' }}
+      SUPPORT_EMAIL: ${{ vars.SUPPORT_EMAIL }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check
+        run: |
+          ok=1
+          say() { echo "$1" >> "$GITHUB_STEP_SUMMARY"; echo "$1"; }
+          say "## SOLIS launch readiness"
+          for n in ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD REVENUECAT_ANDROID_KEY; do
+            if [ -n "${!n}" ]; then say "- [x] secret $n"; else say "- [ ] secret $n is missing"; ok=0; fi
+          done
+          case "$REVENUECAT_ANDROID_KEY" in goog_*|"") ;; *) say "- [ ] REVENUECAT_ANDROID_KEY does not start with goog_"; ok=0;; esac
+          if [ -n "$SUPPORT_EMAIL" ]; then say "- [x] variable SUPPORT_EMAIL"; else say "- [ ] variable SUPPORT_EMAIL is not set"; ok=0; fi
+          for u in "$PRIVACY_POLICY_URL" "$TERMS_URL" "$DELETE_ACCOUNT_URL"; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -L "$u")
+            if [ "$code" = 200 ]; then say "- [x] $u is live"; else say "- [ ] $u returned $code"; ok=0; fi
+          done
+          grep -q 'com.android.vending.BILLING' android/app/src/main/AndroidManifest.xml && say "- [x] BILLING permission in the manifest" || { say "- [ ] BILLING permission missing"; ok=0; }
+          say "Version: $(grep '^version:' pubspec.yaml | cut -d' ' -f2)"
+          [ $ok = 1 ] && say "Ready to build." || { say "Not ready yet: fix the unticked items."; exit 1; }

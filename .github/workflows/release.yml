@@ -1,0 +1,97 @@
+name: Release (Play bundle)
+
+# Builds the signed Play bundle (.aab) and a test .apk from GitHub secrets.
+# Run it from Actions > Release (Play bundle) > Run workflow. Nothing secret
+# is printed: only the signing certificate fingerprint, which is public.
+on:
+  workflow_dispatch:
+    inputs:
+      track_note:
+        description: "Note for this build (e.g. internal test 1)"
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: play-release
+    env:
+      ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      REVENUECAT_ANDROID_KEY: ${{ secrets.REVENUECAT_ANDROID_KEY }}
+      PRIVACY_POLICY_URL: ${{ vars.PRIVACY_POLICY_URL || 'https://solis-health.pages.dev/privacy' }}
+      TERMS_URL: ${{ vars.TERMS_URL || 'https://solis-health.pages.dev/terms' }}
+      SUPPORT_EMAIL: ${{ vars.SUPPORT_EMAIL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check secrets are present
+        run: |
+          missing=0
+          for n in ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD REVENUECAT_ANDROID_KEY; do
+            if [ -z "${!n}" ]; then echo "::error::Missing secret $n"; missing=1; fi
+          done
+          case "$REVENUECAT_ANDROID_KEY" in goog_*) ;; *) echo "::error::REVENUECAT_ANDROID_KEY must be the Google Play public SDK key (starts with goog_)"; missing=1;; esac
+          exit $missing
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.9
+          cache: true
+
+      - name: Write the upload key (deleted when the job ends)
+        run: |
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/app/upload.jks
+          {
+            echo "storeFile=upload.jks"
+            echo "storePassword=$ANDROID_KEYSTORE_PASSWORD"
+            echo "keyAlias=$ANDROID_KEY_ALIAS"
+            echo "keyPassword=$ANDROID_KEY_PASSWORD"
+          } > android/key.properties
+
+      - run: flutter pub get
+      - run: flutter test
+
+      - name: Build bundle and APK
+        run: |
+          DEFINES="--dart-define=REVENUECAT_ANDROID_KEY=$REVENUECAT_ANDROID_KEY --dart-define=PRIVACY_POLICY_URL=$PRIVACY_POLICY_URL --dart-define=TERMS_URL=$TERMS_URL --dart-define=SUPPORT_EMAIL=$SUPPORT_EMAIL"
+          flutter build appbundle --release $DEFINES
+          flutter build apk --release $DEFINES
+
+      - name: Verify the build
+        run: |
+          AAB=build/app/outputs/bundle/release/app-release.aab
+          APK=build/app/outputs/flutter-apk/app-release.apk
+          echo "## SOLIS release build" >> "$GITHUB_STEP_SUMMARY"
+          echo "Version (pubspec): $(grep '^version:' pubspec.yaml | cut -d' ' -f2)" >> "$GITHUB_STEP_SUMMARY"
+          SHA1=$(keytool -printcert -jarfile "$AAB" | grep -m1 'SHA1:' | awk '{print $2}')
+          if [ -z "$SHA1" ]; then echo "::error::The bundle is not signed"; exit 1; fi
+          if keytool -printcert -jarfile "$AAB" | grep -q 'CN=Android Debug'; then echo "::error::The bundle is signed with the debug key"; exit 1; fi
+          echo "Upload key SHA-1: \`$SHA1\` (must match Play Console > App integrity > Upload key)" >> "$GITHUB_STEP_SUMMARY"
+          BT=$(ls $ANDROID_HOME/build-tools | sort -V | tail -1)
+          "$ANDROID_HOME/build-tools/$BT/aapt2" dump permissions "$APK" > perms.txt
+          grep -q 'com.android.vending.BILLING' perms.txt || { echo "::error::BILLING permission missing"; exit 1; }
+          echo "BILLING permission: present" >> "$GITHUB_STEP_SUMMARY"
+          strings -n 8 "$APK" | grep -q 'goog_' && echo "RevenueCat key: compiled in (goog_ prefix)" >> "$GITHUB_STEP_SUMMARY" || echo "RevenueCat key: could not confirm in the APK (it is compiled into libapp.so)" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: solis-release-${{ github.run_number }}
+          path: |
+            build/app/outputs/bundle/release/app-release.aab
+            build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 14
+
+      - name: Remove the key
+        if: always()
+        run: rm -f android/app/upload.jks android/key.properties

@@ -12,6 +12,9 @@ import 'services/codesets/reference_data.dart';
 import 'services/integrations.dart';
 import 'services/security_and_background_service.dart';
 import 'services/solis_backend.dart';
+import 'services/subscriptions/revenuecat_backend.dart';
+import 'services/subscriptions/subscription_service.dart';
+import 'config/app_config.dart';
 import 'services/theme_preference.dart';
 import 'services/transcription/native_speech_provider.dart';
 import 'widgets/on_device_speech_card.dart';
@@ -27,6 +30,12 @@ Future<void> main() async {
   final auth = AuthService.instance;
   SolisBackend.defaultSessions = auth;
   await auth.restore();
+  // SOLIS Pro through Google Play Billing, only when this build has a
+  // RevenueCat key. Offline it stays as last known and never blocks start.
+  if (AppConfig.hasRevenueCat) {
+    SubscriptionService.instance = SubscriptionService(backend: RevenueCatBackend());
+    SubscriptionService.instance.attach(auth).ignore();
+  }
   // Demo data only in demo mode; a clinician without a complete practice
   // profile goes to setup before any patient or claim.
   final initialRoute = await AppSession.start(auth, repo);

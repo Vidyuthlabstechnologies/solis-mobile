@@ -2,15 +2,31 @@ import 'package:flutter/material.dart';
 
 import '../services/account_repository.dart';
 import '../services/auth_service.dart';
+import '../config/app_config.dart';
+import '../screens/paywall_screen.dart';
+import '../services/subscriptions/subscription_service.dart';
+import 'legal_links.dart';
 import 'medical_disclaimer.dart';
 
 /// Who is signed in, sign out, delete account and About. Shown at the end of
 /// the provider profile.
 class AccountSection extends StatelessWidget {
   final AuthService? auth;
-  const AccountSection({super.key, this.auth});
+  final SubscriptionService? subscriptions;
+  const AccountSection({super.key, this.auth, this.subscriptions});
 
   AuthService get _auth => auth ?? AuthService.instance;
+  SubscriptionService get _subs => subscriptions ?? SubscriptionService.instance;
+
+  Future<void> _subscription(BuildContext context) async {
+    if (_subs.isPro) {
+      if (_subs.accessCode != null) return;
+      final url = await _subs.managementUrl();
+      if (context.mounted) await openExternal(context, url);
+    } else {
+      await Navigator.of(context).push<bool>(MaterialPageRoute(fullscreenDialog: true, builder: (_) => PaywallScreen(subscriptions: _subs)));
+    }
+  }
 
   Future<void> _signOut(BuildContext context) async {
     final nav = Navigator.of(context);
@@ -36,7 +52,7 @@ class AccountSection extends StatelessWidget {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     return ListenableBuilder(
-      listenable: _auth,
+      listenable: Listenable.merge([_auth, _subs]),
       builder: (context, _) {
         final user = _auth.user;
         final demo = _auth.isDemo;
@@ -53,6 +69,18 @@ class AccountSection extends StatelessWidget {
               title: Text(demo ? 'Demo account' : (user?.fullName.isNotEmpty ?? false) ? user!.fullName : 'Signed in'),
               subtitle: Text(demo ? 'Stays on this phone. No SOLIS account.' : user?.email ?? ''),
             ),
+            if (_subs.isConfigured && !demo)
+              ListTile(
+                key: const Key('account_subscription'),
+                contentPadding: EdgeInsets.zero,
+                leading: Icon(_subs.isPro ? Icons.workspace_premium_outlined : Icons.lock_open_outlined),
+                title: Text(_subs.isPro ? 'SOLIS Pro' : 'Get SOLIS Pro'),
+                subtitle: Text(_subs.isPro
+                    ? (_subs.accessCode != null ? 'Unlocked with access code ${_subs.accessCode}' : 'Active. Manage or cancel in Google Play.')
+                    : 'Needed to start new visits. Your patients and past visits stay open.'),
+                trailing: _subs.isPro && _subs.accessCode == null ? const Icon(Icons.open_in_new, size: 18) : null,
+                onTap: () => _subscription(context),
+              ),
             ListTile(
               key: const Key('account_sign_out'),
               contentPadding: EdgeInsets.zero,
@@ -75,6 +103,20 @@ class AccountSection extends StatelessWidget {
               title: const Text('About SOLIS'),
               subtitle: const Text('Version $solisVersion'),
               onTap: () => showSolisAbout(context),
+            ),
+            ListTile(
+              key: const Key('account_privacy'),
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.privacy_tip_outlined),
+              title: const Text('Privacy policy'),
+              onTap: () => openExternal(context, AppConfig.privacyPolicyUrl),
+            ),
+            ListTile(
+              key: const Key('account_terms'),
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.gavel_outlined),
+              title: const Text('Terms of use'),
+              onTap: () => openExternal(context, AppConfig.termsUrl),
             ),
           ],
         );

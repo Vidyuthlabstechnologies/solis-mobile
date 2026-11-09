@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Google Play Billing (SOLIS Pro). The billing library adds it too; listed so the check in the release workflow can see it. -->
+    <uses-permission android:name="com.android.vending.BILLING"/>
     <application
         android:label="SOLIS Clinical OS"
         android:name="${applicationName}"

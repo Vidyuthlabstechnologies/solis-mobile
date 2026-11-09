@@ -64,12 +64,13 @@ function footer() {
           <li><a href="media/SOLIS-User-Guide.pdf">User guide (PDF)</a></li>
           <li><a href="security.html">Security and compliance</a></li>
           <li><a href="privacy.html">How data is handled</a></li>
+          <li><a href="terms.html">Terms of use</a></li>
           <li><a href="index.html#access">Request early access</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-base">
-      <span>&copy; 2026 SOLIS. Android app v1.0.0, pilot stage. iOS not yet released.</span>
+      <span>&copy; 2026 SOLIS. Android app, pilot stage. iOS not yet released.</span>
       <span>CPT is a registered trademark of the American Medical Association.</span>
     </div>
   </div>
@@ -138,7 +139,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
       .replace(/assets\/(site\.css|site\.js|icons\.svg)/g, (m, n) => `${m}?v=${ver[n]}`)
       .replace(/href="index\.html#/g, 'href="/#')
       .replace(/href="index\.html"/g, 'href="/"')
-      .replace(/href="(guide|privacy|pricing|security|get-started)\.html(#[^"]*)?"/g, (_, p, hash) => `href="/${p}${hash || ""}"`);
+      .replace(/href="(guide|privacy|terms|pricing|security|get-started)\.html(#[^"]*)?"/g, (_, p, hash) => `href="/${p}${hash || ""}"`);
     for (const m of h.matchAll(/<script>([\s\S]*?)<\/script>/g)) hashes.add("'sha256-" + createHash("sha256").update(m[1]).digest("base64") + "'");
     writeFileSync(f, h);
   }
