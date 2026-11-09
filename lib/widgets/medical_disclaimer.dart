@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../config/app_config.dart';
 import 'solis_brand.dart';
 
 const solisDisclaimer = 'SOLIS helps clinicians document and bill. It is not a medical device and does not diagnose or treat. '
@@ -40,7 +41,7 @@ void showSolisAbout(BuildContext context) {
   showAboutDialog(
     context: context,
     applicationName: 'SOLIS',
-    applicationVersion: solisVersion,
+    applicationVersion: AppConfig.isStandalone ? '$solisVersion (standalone)' : solisVersion,
     applicationIcon: const SolisBrandMark(size: 40),
     children: const [
       SizedBox(height: 8),

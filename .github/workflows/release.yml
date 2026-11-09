@@ -1,6 +1,7 @@
 name: Release (Play bundle)
 
-# Builds the signed Play bundle (.aab) and a test .apk from GitHub secrets.
+# Builds the signed Play bundle (.aab), a Play test .apk and the standalone
+# website .apk (no Google Play Billing) from GitHub secrets.
 # Run it from Actions > Release (Play bundle) > Run workflow. Nothing secret
 # is printed: only the signing certificate fingerprint, which is public.
 on:
@@ -65,13 +66,16 @@ jobs:
       - name: Build bundle and APK
         run: |
           DEFINES="--dart-define=REVENUECAT_ANDROID_KEY=$REVENUECAT_ANDROID_KEY --dart-define=PRIVACY_POLICY_URL=$PRIVACY_POLICY_URL --dart-define=TERMS_URL=$TERMS_URL --dart-define=SUPPORT_EMAIL=$SUPPORT_EMAIL"
-          flutter build appbundle --release $DEFINES
-          flutter build apk --release $DEFINES
+          flutter build appbundle --release --flavor play $DEFINES
+          flutter build apk --release --flavor play $DEFINES
+          # Website build: no RevenueCat key, no Play Billing, no Play Integrity.
+          flutter build apk --release --flavor standalone --dart-define=PRIVACY_POLICY_URL=$PRIVACY_POLICY_URL --dart-define=TERMS_URL=$TERMS_URL --dart-define=SUPPORT_EMAIL=$SUPPORT_EMAIL
 
       - name: Verify the build
         run: |
-          AAB=build/app/outputs/bundle/release/app-release.aab
-          APK=build/app/outputs/flutter-apk/app-release.apk
+          AAB=build/app/outputs/bundle/playRelease/app-play-release.aab
+          APK=build/app/outputs/flutter-apk/app-play-release.apk
+          SAPK=build/app/outputs/flutter-apk/app-standalone-release.apk
           echo "## SOLIS release build" >> "$GITHUB_STEP_SUMMARY"
           echo "Version (pubspec): $(grep '^version:' pubspec.yaml | cut -d' ' -f2)" >> "$GITHUB_STEP_SUMMARY"
           SHA1=$(keytool -printcert -jarfile "$AAB" | grep -m1 'SHA1:' | awk '{print $2}')
@@ -82,14 +86,18 @@ jobs:
           "$ANDROID_HOME/build-tools/$BT/aapt2" dump permissions "$APK" > perms.txt
           grep -q 'com.android.vending.BILLING' perms.txt || { echo "::error::BILLING permission missing"; exit 1; }
           echo "BILLING permission: present" >> "$GITHUB_STEP_SUMMARY"
+          "$ANDROID_HOME/build-tools/$BT/aapt2" dump permissions "$SAPK" > sperms.txt
+          if grep -q 'com.android.vending.BILLING' sperms.txt; then echo "::error::Standalone APK has the BILLING permission"; exit 1; fi
+          echo "Standalone APK: no BILLING permission; SHA-256 \`$(sha256sum "$SAPK" | cut -d' ' -f1)\`" >> "$GITHUB_STEP_SUMMARY"
           strings -n 8 "$APK" | grep -q 'goog_' && echo "RevenueCat key: compiled in (goog_ prefix)" >> "$GITHUB_STEP_SUMMARY" || echo "RevenueCat key: could not confirm in the APK (it is compiled into libapp.so)" >> "$GITHUB_STEP_SUMMARY"
 
       - uses: actions/upload-artifact@v4
         with:
           name: solis-release-${{ github.run_number }}
           path: |
-            build/app/outputs/bundle/release/app-release.aab
-            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/bundle/playRelease/app-play-release.aab
+            build/app/outputs/flutter-apk/app-play-release.apk
+            build/app/outputs/flutter-apk/app-standalone-release.apk
           retention-days: 14
 
       - name: Remove the key

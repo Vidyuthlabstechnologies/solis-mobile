@@ -6,6 +6,8 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+import '../../config/app_config.dart';
+
 /// Play Integrity attestation for sign-in and sign-up.
 ///
 /// Each call gets a fresh random nonce. The token is bound to
@@ -25,7 +27,7 @@ class PlayIntegrity {
   static const projectNumber = String.fromEnvironment('SOLIS_GCP_PROJECT_NUMBER');
   static const _channel = MethodChannel('com.solis.clinical/integrity');
 
-  static bool get configured => projectNumber.isNotEmpty && !kIsWeb && Platform.isAndroid;
+  static bool get configured => projectNumber.isNotEmpty && !kIsWeb && Platform.isAndroid && !AppConfig.isStandalone;
 
   /// The request hash for [nonce] on [path], as the server recomputes it.
   static String requestHash(String nonce, String path) => sha256.convert(utf8.encode('$nonce|$path')).toString();

@@ -27,6 +27,24 @@ android {
         versionName = flutter.versionName
     }
 
+    // Two builds of the same app (same application ID, so a phone has one or
+    // the other):
+    //   play        Google Play: Play Billing (SOLIS Pro via RevenueCat) and
+    //               Play Integrity at sign-in.
+    //   standalone  Installed from the website: no Play Billing, no Play
+    //               Integrity library, everything unlocked.
+    // flutter build apk --flavor standalone   (pubspec default-flavor: play)
+    flavorDimensions += "distribution"
+    productFlavors {
+        create("play") {
+            dimension = "distribution"
+        }
+        create("standalone") {
+            dimension = "distribution"
+            versionNameSuffix = "-standalone"
+        }
+    }
+
     // Play upload key: android/key.properties (git-ignored) points at the
     // keystore in secrets/. Without it, release builds fall back to debug keys.
     val keyProps = Properties().apply {
@@ -80,7 +98,8 @@ dependencies {
     // bzip2 decoder for unpacking the downloaded model archives (Apache-2.0).
     implementation("org.apache.commons:commons-compress:1.28.0")
     // Play Integrity (Standard API) for sign-in attestation; see docs/KEYS.md.
-    implementation("com.google.android.play:integrity:1.4.0")
+    // Play builds only.
+    "playImplementation"("com.google.android.play:integrity:1.4.0")
 }
 
 kotlin {

@@ -101,7 +101,7 @@ class AccountSection extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.info_outline),
               title: const Text('About SOLIS'),
-              subtitle: const Text('Version $solisVersion'),
+              subtitle: Text(AppConfig.isStandalone ? 'Version $solisVersion, standalone' : 'Version $solisVersion'),
               onTap: () => showSolisAbout(context),
             ),
             ListTile(
