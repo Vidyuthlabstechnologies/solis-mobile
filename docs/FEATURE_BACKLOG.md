@@ -325,6 +325,11 @@ owner.
   appetite and concentration and reports safety questions as answered.
   Diagnoses removed from a psychiatry claim stay ruled out for the patient
   and are never coded again.
+- **B12** (next-version brief step 5): "What SOLIS did for you" on Today
+  (notes signed, claims sent and amount billed, today and the last 7 days,
+  with an estimated time saved labeled as an estimate), and a plain-language
+  patient summary from the signed note (what we found, medicines, what to
+  do next, when to get help) to copy or text to the patient.
 - **Next**: 7, 12, 61, 45, 46, 83, 104. 135 needs a local-notification
   plugin, and 153/154 (app lock) a biometric plugin; both are held for a
   decision.
