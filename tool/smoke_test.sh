@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Smoke test for an installed SOLIS APK on a running emulator or phone:
 #   tool/smoke_test.sh <apk> <screenshot dir>
-# Opens the app, taps "Use demo account", opens the first patient, and fails
+# Opens the app, taps "Use demo account", opens the Patients tab and a demo patient, and fails
 # if the app crashes or a step's text never appears.
 set -uo pipefail
 APK=$1; OUT=$2; PKG=com.solis.clinical.solis_mobile
@@ -41,12 +41,15 @@ shot 2-demo
 for b in "Allow" "While using the app" "Continue" "Got it"; do
   xy=$(find_text "$b" 2) && adb shell input tap $xy && sleep 2
 done
-find_text "Patients" 30 >/dev/null || fail "patient list never appeared"
-shot 3-patients
-tap_text "Margaret" 20 || true
+# After sign-in the app opens on "Today"; switch to the Patients tab.
+shot 3-today
+tap_text "Patients" 30
+find_text "Margaret" 20 >/dev/null || fail "demo patients never appeared"
+shot 4-patients
+tap_text "Margaret" 10
 sleep 3
 alive || fail "app crashed opening a patient"
-shot 4-patient
+shot 5-patient
 
 adb logcat -d > "$OUT/logcat.txt"
 if grep -E "FATAL EXCEPTION|Fatal signal" "$OUT/logcat.txt" | grep -q .; then fail "crash in logcat"; fi
