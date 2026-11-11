@@ -76,3 +76,5 @@ where they already cover it.
 - B8: build-order step 1 (recording never lost, sentence-level sources).
 - B9: step 2 (code confirm, audit trail, rejection fixes; claim status
   timeline already shipped in B3).
+- B10: step 3 (free notes, paywall at the first real claim, 14-day trial,
+  renewal date in Settings).

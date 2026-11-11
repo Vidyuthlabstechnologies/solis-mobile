@@ -311,6 +311,12 @@ owner.
   audit trail (signed, confirmed, codes changed, sections edited, sent or
   rejected) that can be copied for an auditor, and one-tap fixes on rejected
   or denied claims.
+- **B10** (next-version brief step 3): notes and visits are free and
+  unlimited; the paywall appears only when a real claim is billed (Send,
+  Mark ready, Sign and send, batch send; test claims stay free). The
+  paywall leads with "Notes are free. SOLIS Pro sends the claim." and an
+  example billing-service comparison. Settings shows the trial end or
+  renewal date. 14-day trial, $149 / $1,548 confirmed.
 - **Next**: 7, 12, 61, 45, 46, 83, 104. 135 needs a local-notification
   plugin, and 153/154 (app lock) a biometric plugin; both are held for a
   decision.

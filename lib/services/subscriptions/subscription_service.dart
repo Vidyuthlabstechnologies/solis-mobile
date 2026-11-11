@@ -40,6 +40,26 @@ enum PurchaseOutcome { purchased, cancelled, pending }
 
 /// What a store SDK must do. The RevenueCat version is used in release
 /// builds; tests use a fake.
+/// When the current Pro period ends, and what happens then.
+class ProRenewal {
+  final DateTime? endsAt;
+  final bool willRenew;
+  final bool inTrial;
+
+  const ProRenewal({this.endsAt, this.willRenew = true, this.inTrial = false});
+
+  /// "Free trial until Nov 25, then renews", "Renews Dec 11",
+  /// "Ends Dec 11 (cancelled)".
+  String describe() {
+    final d = endsAt?.toLocal();
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    final when = d == null ? null : '${months[d.month - 1]} ${d.day}, ${d.year}';
+    if (inTrial) return when == null ? 'Free trial' : 'Free trial until $when${willRenew ? ', then the plan starts' : ', then ends'}';
+    if (when == null) return willRenew ? 'Renews automatically' : 'Cancelled';
+    return willRenew ? 'Renews $when' : 'Ends $when (cancelled)';
+  }
+}
+
 abstract class SubscriptionBackend {
   Future<void> configure({String? appUserId});
 
@@ -53,6 +73,9 @@ abstract class SubscriptionBackend {
   Future<bool> logIn(String appUserId);
   Future<void> logOut();
   Future<String?> managementUrl();
+
+  /// The current Pro period, or null when not Pro or not known.
+  Future<ProRenewal?> renewal();
 }
 
 /// SOLIS Pro: whether this clinician may start new visits, and the actions
@@ -80,8 +103,10 @@ class SubscriptionService extends ChangeNotifier {
   /// The reviewer or partner code in use, if Pro came from one.
   String? get accessCode => _accessCode;
 
-  /// Whether starting a visit needs Pro first.
-  bool blocksNewVisits(AuthService auth) => isConfigured && !auth.isDemo && !_pro;
+  /// Whether billing a real claim needs Pro first. Notes are free and
+  /// unlimited; Pro is what sends claims to payers. Test claims and the demo
+  /// are always free.
+  bool blocksRealClaims(AuthService auth) => isConfigured && !auth.isDemo && !_pro;
 
   /// Sets up the SDK and keeps the customer in step with who is signed in.
   Future<void> attach(AuthService auth) async {
@@ -121,9 +146,15 @@ class SubscriptionService extends ChangeNotifier {
     if (b == null) return;
     try {
       _pro = await b.isPro();
+      _renewal = _pro && _accessCode == null ? await b.renewal() : null;
       notifyListeners();
     } catch (_) {}
   }
+
+  ProRenewal? _renewal;
+
+  /// Trial end or renewal date for Settings, when Google Play reports one.
+  ProRenewal? get renewal => _renewal;
 
   Future<List<SubscriptionPlan>> plans() async {
     final b = _backend;

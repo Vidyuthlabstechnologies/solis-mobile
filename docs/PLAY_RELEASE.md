@@ -21,11 +21,12 @@ bundle from the release workflow (step 4) to **Internal testing**, then:
 
 1. Monetize > Products > **Subscriptions** > Create subscription.
    - Product ID `solis_pro` (cannot be changed later), name "SOLIS Pro".
-2. Add base plan **`monthly`**: auto-renewing, 1 month, price (proposed $149.00; set per country or let Play convert).
-3. Add base plan **`yearly`**: auto-renewing, 1 year, price (proposed $1,548.00, i.e. $129/month).
-4. Optional free trial: base plan > Add offer > "New customer acquisition", eligibility "Never had this
-   subscription", phase **Free trial**, length of your choice (7 or 14 days). The app shows whatever length Play
-   offers, so changing it needs no new build.
+2. Add base plan **`monthly`**: auto-renewing, 1 month, price $149.00 (confirmed 2026-11-11; set per country or let Play convert).
+3. Add base plan **`yearly`**: auto-renewing, 1 year, price $1,548.00, i.e. $129/month (confirmed 2026-11-11).
+4. Free trial on both base plans: Add offer > "New customer acquisition", eligibility "Never had this
+   subscription", phase **Free trial**, **14 days** (confirmed 2026-11-11: a first real claim takes more than a
+   week to come back). The app shows whatever length Play offers, so changing it needs no new build.
+   The paywall appears only when a clinician bills a real claim; notes, visits and test claims are always free.
 5. Activate both base plans.
 6. Setup > **Payments profile** must be the organization's (ML Dynamic Solutions Private Limited), with a bank
    account for payouts.
