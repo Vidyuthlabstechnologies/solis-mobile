@@ -21,9 +21,15 @@ class CodingContext {
   /// (CH19-INJ-01).
   final Set<String> priorDiagnosisCodes;
 
+  /// Diagnoses the clinician ruled out for this patient. They are never
+  /// coded again from the conversation (the clinician can still add one by
+  /// hand on the claim).
+  final Set<String> ruledOut;
+
   const CodingContext({
     this.dateOfService,
     this.priorDiagnosisCodes = const {},
+    this.ruledOut = const {},
     this.placeOfService = '11',
     this.newPatient = false,
     this.sex = PatientSex.unknown,
@@ -476,7 +482,12 @@ class ClinicalCoder {
       }
     }
 
-    final diagnoses = finalizeDiagnoses(found.values.toList());
+    final ruledOut = {for (final c in context.ruledOut) c.toUpperCase()};
+    // Filtered before and after: combination codes are formed in between.
+    final diagnoses = [
+      for (final d in finalizeDiagnoses([for (final d in found.values) if (!ruledOut.contains(d.code.toUpperCase())) d]))
+        if (!ruledOut.contains(d.code.toUpperCase())) d,
+    ];
 
     // 6. Services.
     final billableDx = diagnoses.where((d) => d.status == DxStatus.billable).toList();

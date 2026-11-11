@@ -317,6 +317,14 @@ owner.
   paywall leads with "Notes are free. SOLIS Pro sends the claim." and an
   example billing-service comparison. Settings shows the trial end or
   renewal date. 14-day trial, $149 / $1,548 confirmed.
+- **B11** (next-version brief step 4): note style on the provider profile
+  (template SOAP, primary care, urgent care or psychiatry; length brief,
+  standard or detailed; abbreviations as written, spelled out or
+  abbreviated), a Style chip on the note with "Rewrite this note". Urgent
+  care adds return precautions as said; psychiatry quotes mood, sleep,
+  appetite and concentration and reports safety questions as answered.
+  Diagnoses removed from a psychiatry claim stay ruled out for the patient
+  and are never coded again.
 - **Next**: 7, 12, 61, 45, 46, 83, 104. 135 needs a local-notification
   plugin, and 153/154 (app lock) a biometric plugin; both are held for a
   decision.

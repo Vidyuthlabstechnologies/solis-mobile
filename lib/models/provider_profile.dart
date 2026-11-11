@@ -1,3 +1,5 @@
+import 'note_style.dart';
+
 /// The rendering and billing provider. Feeds CMS-1500 boxes 24J, 25, 31-33.
 class ProviderProfile {
   final String fullName; // e.g. Sarah Lin
@@ -28,6 +30,9 @@ class ProviderProfile {
   /// Services (CPT/HCPCS) the clinician starred.
   final List<String> favoriteServices;
 
+  /// Template, length and abbreviations for written notes.
+  final NoteStyle noteStyle;
+
   const ProviderProfile({
     required this.fullName,
     required this.credentials,
@@ -51,6 +56,7 @@ class ProviderProfile {
     this.preferOnDevice = false,
     this.favoriteDiagnoses = const {},
     this.favoriteServices = const [],
+    this.noteStyle = const NoteStyle(),
   });
 
   /// Stars or unstars a diagnosis.
@@ -173,6 +179,7 @@ class ProviderProfile {
     bool? preferOnDevice,
     Map<String, String>? favoriteDiagnoses,
     List<String>? favoriteServices,
+    NoteStyle? noteStyle,
   }) =>
       ProviderProfile(
         fullName: fullName ?? this.fullName,
@@ -197,6 +204,7 @@ class ProviderProfile {
         preferOnDevice: preferOnDevice ?? this.preferOnDevice,
         favoriteDiagnoses: favoriteDiagnoses ?? this.favoriteDiagnoses,
         favoriteServices: favoriteServices ?? this.favoriteServices,
+        noteStyle: noteStyle ?? this.noteStyle,
       );
 
   Map<String, dynamic> toJson() => {
@@ -222,6 +230,7 @@ class ProviderProfile {
         'preferOnDevice': preferOnDevice,
         if (favoriteDiagnoses.isNotEmpty) 'favoriteDiagnoses': favoriteDiagnoses,
         if (favoriteServices.isNotEmpty) 'favoriteServices': favoriteServices,
+        if (!noteStyle.isDefault) 'noteStyle': noteStyle.toJson(),
       };
 
   factory ProviderProfile.fromJson(Map<String, dynamic> j) => ProviderProfile(
@@ -249,6 +258,7 @@ class ProviderProfile {
         preferOnDevice: j['preferOnDevice'] == true,
         favoriteDiagnoses: {for (final e in ((j['favoriteDiagnoses'] as Map?) ?? const {}).entries) '${e.key}': '${e.value}'},
         favoriteServices: [for (final c in (j['favoriteServices'] as List? ?? const [])) '$c'],
+        noteStyle: NoteStyle.fromJson(j['noteStyle']),
       );
 }
 

@@ -30,6 +30,8 @@ import '../services/coding/place_of_service.dart';
 import '../services/fhir_export_service.dart';
 import '../services/local_clinical_engine.dart';
 import '../services/attestation.dart';
+import '../models/note_style.dart';
+import '../services/note_formatter.dart';
 import '../services/note_seal.dart';
 import '../services/note_sources.dart';
 import '../services/places.dart';
@@ -444,6 +446,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       sex: account.sex,
       age: account.ageOn(DateTime.tryParse(visit.dateOfService)),
       feeSchedule: _repo.provider.feeSchedule,
+      ruledOut: account.ruledOut.keys.toSet(),
       priorDiagnosisCodes: {
         for (final v in account.visits)
           if (v.number < visit.number && v.claim != null)
@@ -506,6 +509,11 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
   /// snackbar offers Undo, which restores the claim as it was.
   void _onClaimChanged(ClaimDraft claim, {String? undoLabel}) {
     final before = _claim;
+    if (before != null && _repo.provider.noteStyle.template == NoteTemplate.psych) {
+      final kept = {for (final d in claim.diagnoses) d.code};
+      final removed = [for (final d in before.diagnoses) if (!kept.contains(d.code) && d.status != DxStatus.integral) d];
+      if (removed.isNotEmpty) unawaited(_keepRuledOut(removed));
+    }
     if (before != null && before.codeSummary != claim.codeSummary) {
       unawaited(_record('Changed codes', detail: 'from ${before.codeSummary} to ${claim.codeSummary}'));
     }
@@ -668,6 +676,31 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
           actions: [FilledButton(onPressed: () => Navigator.pop(ctx), child: const Text('OK'))],
         ),
       );
+
+  /// Psychiatry: diagnoses removed from the claim stay ruled out for this
+  /// patient, so a later note never brings them back. Undo reverses it.
+  Future<void> _keepRuledOut(List<ClaimDiagnosis> removed) async {
+    final account = _account;
+    final next = {...account.ruledOut, for (final d in removed) d.code.toUpperCase(): d.description};
+    await _repo.updateAccount(account.copyWith(ruledOut: next));
+    await _record('Ruled out', detail: removed.map((d) => d.code).join(', '));
+    if (!mounted) return;
+    _showMessage(
+      'Kept ruled out for ${account.firstName}: ${removed.map((d) => d.code).join(', ')}.',
+      icon: Icons.block_rounded,
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: () {
+          final now = _repo.byNumber(widget.accountNumber);
+          if (now == null) return;
+          unawaited(_repo.updateAccount(now.copyWith(ruledOut: {
+            for (final e in now.ruledOut.entries)
+              if (!removed.any((d) => d.code.toUpperCase() == e.key)) e.key: e.value,
+          })));
+        },
+      ),
+    );
+  }
 
   /// Adds [action] to the visit's audit trail; with [confirmCodes] also
   /// records the clinician's confirmation of the current codes.
@@ -1031,7 +1064,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     }
     if (isStale()) return;
 
-    final encounter = cloud == null
+    final written = cloud == null
         ? local
         : local.copyWith(
             subjective: cloud.subjective.join('\n'),
@@ -1043,6 +1076,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
                 : [for (final v in cloud.vitals) VitalSign(label: v.name, value: v.display)],
             latencyMs: _cloudLatencyMs,
           );
+    final encounter = _styled(written);
 
     setState(() {
       _encounter = encounter;
@@ -1057,6 +1091,92 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
 
   int _cloudLatencyMs = 0;
 
+  /// The note in the clinician's template, length and abbreviation style.
+  ClinicalEncounter _styled(ClinicalEncounter e) => NoteFormatter.apply(e, _repo.provider.noteStyle, ruledOut: _account.ruledOut);
+
+  /// Template, length and abbreviations, saved for every later note. The
+  /// current draft can be rewritten in the new style.
+  void _openNoteStyle() {
+    var style = _repo.provider.noteStyle;
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setLocal) {
+          final theme = Theme.of(ctx);
+          Future<void> save(NoteStyle next) async {
+            setLocal(() => style = next);
+            await _repo.saveProvider(_repo.provider.copyWith(noteStyle: next));
+          }
+
+          Widget group<T>(String title, List<T> values, T selected, String Function(T) label, NoteStyle Function(T) apply) => Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, style: theme.textTheme.titleSmall),
+                    const SizedBox(height: 6),
+                    Wrap(spacing: 8, runSpacing: 4, children: [
+                      for (final v in values)
+                        ChoiceChip(
+                          key: Key('style_${(v as Enum).name}'),
+                          label: Text(label(v)),
+                          selected: v == selected,
+                          onSelected: (_) => save(apply(v)),
+                        ),
+                    ]),
+                  ],
+                ),
+              );
+
+          final canRewrite = !_isSigned && _transcriptController.text.trim().isNotEmpty;
+          return SafeArea(
+            child: SingleChildScrollView(
+              key: const Key('note_style_sheet'),
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('Note style', style: theme.textTheme.titleLarge),
+                  const SizedBox(height: 4),
+                  Text('Used for every note you write from now on.', style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                  group<NoteTemplate>('Template', NoteTemplate.values, style.template, (v) => v.label, (v) => style.copyWith(template: v)),
+                  group<NoteLength>('Length', NoteLength.values, style.length, (v) => v.label, (v) => style.copyWith(length: v)),
+                  group<AbbreviationMode>('Abbreviations', AbbreviationMode.values, style.abbreviations, (v) => v.label, (v) => style.copyWith(abbreviations: v)),
+                  if (style.template == NoteTemplate.psych) ...[
+                    const SizedBox(height: 12),
+                    Text(
+                      'Psychiatry: a diagnosis you remove from the claim is kept ruled out for this patient and never added back on its own.',
+                      style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                  if (canRewrite)
+                    FilledButton.icon(
+                      key: const Key('rewrite_note'),
+                      icon: const Icon(Icons.auto_fix_high_rounded),
+                      label: const Text('Rewrite this note in this style'),
+                      onPressed: () {
+                        Navigator.pop(ctx);
+                        unawaited(_synthesizeEncounter());
+                      },
+                    ),
+                  if (canRewrite)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text('Rewriting replaces your edits to this draft.', style: theme.textTheme.bodySmall, textAlign: TextAlign.center),
+                    ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    ).then((_) {
+      if (mounted) setState(() {});
+    });
+  }
+
   /// The on-device draft of the note being written, while the cloud model
   /// works. Lets the clinician stop waiting.
   ClinicalEncounter? _pendingLocal;
@@ -1068,7 +1188,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     if (local == null || !_isProcessing) return;
     _synthesisGeneration++;
     setState(() {
-      _encounter = local;
+      _encounter = _styled(local);
       _pendingLocal = null;
       _isProcessing = false;
       _syncControllers();
@@ -1090,6 +1210,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     for (final d in found) {
       final code = d.icd10Candidate;
       if (code == null || code.isEmpty || have.contains(code)) continue;
+      if (_account.ruledOut.containsKey(code.toUpperCase())) continue; // the clinician ruled it out
       if (icd != null && !icd.isBillable(code)) continue;
       have.add(code);
       added.add(ClaimDiagnosis(
@@ -3270,7 +3391,17 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
               color: missing == 0 ? SolisTheme.info : SolisTheme.warning,
             );
           }),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: ActionChip(
+            key: const Key('note_style'),
+            avatar: const Icon(Icons.tune_rounded, size: 18),
+            label: Text('Style: ${_repo.provider.noteStyle.summary}'),
+            onPressed: _openNoteStyle,
+          ),
+        ),
+        const SizedBox(height: 8),
         if (_encounter.vitals.isNotEmpty) ...[
           VitalsPanel(vitals: _encounter.vitals),
           const SizedBox(height: 12),

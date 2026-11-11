@@ -536,7 +536,12 @@ class PatientAccount {
     this.preferredLanguage,
     this.interpreterNeeded = false,
     this.guarantor,
+    this.ruledOut = const {},
   });
+
+  /// Diagnoses the clinician ruled out for this patient (ICD-10 code to
+  /// description). Later notes and claims never add them back on their own.
+  final Map<String, String> ruledOut;
 
   /// The language the patient prefers for care, such as "Spanish". Null
   /// when not recorded.
@@ -627,6 +632,7 @@ class PatientAccount {
     bool? interpreterNeeded,
     Guarantor? guarantor,
     bool clearGuarantor = false,
+    Map<String, String>? ruledOut,
   }) =>
       PatientAccount(
         accountNumber: accountNumber,
@@ -654,6 +660,7 @@ class PatientAccount {
         preferredLanguage: preferredLanguage == null ? this.preferredLanguage : (preferredLanguage.trim().isEmpty ? null : preferredLanguage.trim()),
         interpreterNeeded: interpreterNeeded ?? this.interpreterNeeded,
         guarantor: clearGuarantor ? null : (guarantor ?? this.guarantor),
+        ruledOut: ruledOut ?? this.ruledOut,
       );
 
   Map<String, dynamic> toJson() => {
@@ -681,6 +688,7 @@ class PatientAccount {
         if (preferredLanguage != null) 'preferredLanguage': preferredLanguage,
         if (interpreterNeeded) 'interpreterNeeded': true,
         if (guarantor != null) 'guarantor': guarantor!.toJson(),
+        if (ruledOut.isNotEmpty) 'ruledOut': ruledOut,
       };
 
   factory PatientAccount.fromJson(Map<String, dynamic> j) => PatientAccount(
@@ -709,6 +717,7 @@ class PatientAccount {
         preferredLanguage: j['preferredLanguage'] as String?,
         interpreterNeeded: j['interpreterNeeded'] == true,
         guarantor: j['guarantor'] is Map ? Guarantor.fromJson((j['guarantor'] as Map).cast<String, dynamic>()) : null,
+        ruledOut: {for (final e in ((j['ruledOut'] as Map?) ?? const {}).entries) '${e.key}': '${e.value}'},
       );
 }
 

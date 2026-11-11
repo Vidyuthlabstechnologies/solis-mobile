@@ -78,3 +78,4 @@ where they already cover it.
   timeline already shipped in B3).
 - B10: step 3 (free notes, paywall at the first real claim, 14-day trial,
   renewal date in Settings).
+- B11: step 4 (templates, length and abbreviation setting, ruled-out list).

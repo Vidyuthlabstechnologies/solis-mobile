@@ -82,7 +82,9 @@ void main() {
     expect(find.textContaining('without a source'), findsOneWidget);
 
     await tester.ensureVisible(find.byKey(const Key('note_subjective')));
-    await tester.tap(find.byKey(const Key('note_subjective')));
+    await tester.pump();
+    // The top of the section: its centre can sit under the bottom bar.
+    await tester.tapAt(tester.getTopLeft(find.byKey(const Key('note_subjective'))) + const Offset(20, 10));
     await tester.pump(const Duration(milliseconds: 600));
     expect(find.byKey(const Key('sources_sheet')), findsOneWidget);
     await tester.scrollUntilVisible(find.byKey(const Key('no_source')), 200,
