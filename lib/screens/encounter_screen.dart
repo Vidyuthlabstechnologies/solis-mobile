@@ -30,6 +30,7 @@ import '../services/fhir_export_service.dart';
 import '../services/local_clinical_engine.dart';
 import '../services/attestation.dart';
 import '../services/note_seal.dart';
+import '../services/note_sources.dart';
 import '../services/places.dart';
 import '../services/recording_foreground_service.dart';
 import '../services/security_and_background_service.dart';
@@ -78,7 +79,7 @@ class EncounterScreen extends StatefulWidget {
   State<EncounterScreen> createState() => _EncounterScreenState();
 }
 
-class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProviderStateMixin {
+class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   // Engine and environment. The note engine starts from the clinician's
   // saved preference (cloud writes with Claude through the SOLIS server and
   // falls back to this phone when offline).
@@ -99,6 +100,16 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
   bool _isProcessing = false;
   int _recordSeconds = 0;
   Timer? _recordTimer;
+
+  // The recording is saved to the visit every few seconds and whenever the
+  // app leaves the foreground, so a killed app, a phone call or a crash loses
+  // at most the last few seconds. [_interrupted] is a recording found still
+  // running when the visit was opened.
+  static const _checkpointEvery = Duration(seconds: 5);
+  Timer? _checkpointTimer;
+  DateTime? _recordingStartedUtc;
+  String _checkpointedText = '';
+  RecordingCheckpoint? _interrupted;
   Timer? _listenRestartTimer;
 
   // Microphone level from the capture source actually in use (0 to 1), and
@@ -215,6 +226,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _notificationStop = RecordingForegroundService.stopRequests.listen((_) {
       if (mounted && _isRecording) unawaited(_stopRecording(synthesize: true));
     });
@@ -235,6 +247,13 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     _submission = visit.submission;
     _claim = visit.claim;
     _transcriptController.text = visit.transcript;
+    if (!widget.previewRecording && visit.liveRecording != null) {
+      if (visit.transcript.trim().isEmpty) {
+        unawaited(_clearCheckpoint());
+      } else {
+        _interrupted = visit.liveRecording;
+      }
+    }
     final saved = visit.encounter;
     if (saved != null) {
       _encounter = ClinicalEncounter.fromJson(saved);
@@ -327,7 +346,50 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!_isRecording) return;
+    if (state == AppLifecycleState.resumed) {
+      // A call or another app can take the microphone; the basic engine
+      // does not restart by itself.
+      if (!_isPaused && _engine == null && !_speech.isListening) unawaited(_listen());
+    } else {
+      unawaited(_saveCheckpoint(force: true));
+    }
+  }
+
+  /// Saves the transcript so far and marks the recording as running.
+  Future<void> _saveCheckpoint({bool force = false}) async {
+    final visit = _visitOrNull;
+    if (visit == null || widget.previewRecording || !_isRecording) return;
+    final text = _transcriptController.text;
+    if (!force && text == _checkpointedText) return;
+    _checkpointedText = text;
+    final now = DateTime.now().toUtc();
+    await _repo.updateVisit(
+      widget.accountNumber,
+      visit.copyWith(
+        transcript: text,
+        liveRecording: RecordingCheckpoint(startedAtUtc: _recordingStartedUtc ?? now, savedAtUtc: now, seconds: _recordSeconds),
+      ),
+    );
+  }
+
+  /// The recording ended normally: keep the transcript, drop the marker.
+  Future<void> _clearCheckpoint() async {
+    _checkpointTimer?.cancel();
+    _checkpointTimer = null;
+    final visit = _visitOrNull;
+    if (visit == null || widget.previewRecording || visit.liveRecording == null) return;
+    await _repo.updateVisit(widget.accountNumber, visit.copyWith(transcript: _transcriptController.text, clearLiveRecording: true));
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    // Leaving the screen mid-recording: save what was captured. The marker
+    // stays, so the visit offers to continue when it is opened again.
+    if (_isRecording) unawaited(_saveCheckpoint(force: true));
+    _checkpointTimer?.cancel();
     // Invalidate any in-flight synthesis so late responses are dropped.
     _synthesisGeneration++;
     _recordTimer?.cancel();
@@ -1011,6 +1073,12 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     _silentSeconds = 0;
     _pulseController.repeat();
     _startGpsTrack();
+    _recordingStartedUtc = DateTime.now().toUtc();
+    _interrupted = null;
+    _checkpointedText = '';
+    unawaited(_saveCheckpoint(force: true));
+    _checkpointTimer?.cancel();
+    _checkpointTimer = Timer.periodic(_checkpointEvery, (_) => unawaited(_saveCheckpoint()));
 
     _recordTimer?.cancel();
     _recordTimer = Timer.periodic(const Duration(seconds: 1), (t) {
@@ -1322,6 +1390,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
         }
       }
       _commitSession(_listenSession);
+      await _clearCheckpoint();
       if (!mounted) return;
       if (!synthesize) {
         _gpsTrackTimer?.cancel();
@@ -1738,31 +1807,42 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     );
   }
 
+  /// Each sentence of a note section with the line of the conversation it
+  /// came from, and the sentences that have no source flagged for review.
   void _showEvidence(String sectionTitle, String sectionContent) {
     final turns = _encounter.transcript;
+    final links = turns.isEmpty ? const <SentenceSource>[] : NoteSources.link(sectionContent, turns);
+    final missing = links.where((l) => l.unsupported).length;
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
       builder: (ctx) {
         final theme = Theme.of(ctx);
+        final dark = theme.brightness == Brightness.dark;
         return ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(ctx).height * 0.8),
+          constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(ctx).height * 0.85),
           child: SafeArea(
             child: ListView(
+              key: const Key('sources_sheet'),
               shrinkWrap: true,
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
               children: [
                 Text('Sources for $sectionTitle', style: theme.textTheme.titleLarge),
                 const SizedBox(height: 4),
                 Text(
-                  'What was said in the room that supports this section.',
-                  style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                  missing == 0
+                      ? 'Each sentence with the line of the conversation it came from.'
+                      : '$missing ${missing == 1 ? 'sentence has' : 'sentences have'} no source in the conversation. Check or edit ${missing == 1 ? 'it' : 'them'} before signing.',
+                  style: theme.textTheme.bodyMedium?.copyWith(color: missing == 0 ? theme.colorScheme.onSurfaceVariant : SolisTheme.onTint(SolisTheme.warning, isDark: dark)),
                 ),
                 const SizedBox(height: 16),
                 if (turns.isEmpty)
                   const EmptyState(icon: Icons.forum_outlined, title: 'No transcript', message: 'Record the visit to link note content to the conversation.')
+                else if (links.isEmpty)
+                  Text('Nothing documented in this section.', style: theme.textTheme.bodyMedium)
                 else
-                  for (final t in _supportingTurns(sectionContent, turns)) _TranscriptTurn(turn: t, patientName: _patientName),
+                  for (final l in links.where((l) => l.needsSource))
+                    _SentenceSourceTile(link: l, turn: l.turnIndex == null ? null : turns[l.turnIndex!], patientName: _patientName),
                 const SizedBox(height: 8),
                 OutlinedButton.icon(
                   icon: const Icon(Icons.forum_outlined),
@@ -1780,17 +1860,11 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     );
   }
 
-  /// Ranks transcript turns by word overlap with the note section so the most
-  /// relevant evidence shows first.
-  List<SpeakerTurn> _supportingTurns(String content, List<SpeakerTurn> turns) {
-    final words = RegExp(r'[a-z0-9]{4,}').allMatches(content.toLowerCase()).map((m) => m.group(0)!).toSet();
-    final scored = [
-      for (final t in turns)
-        (t, RegExp(r'[a-z0-9]{4,}').allMatches(t.text.toLowerCase()).where((m) => words.contains(m.group(0))).length),
-    ]..sort((a, b) => b.$2.compareTo(a.$2));
-    final top = scored.where((e) => e.$2 > 0).take(5).map((e) => e.$1).toList();
-    return top.isEmpty ? turns.take(5).toList() : top;
-  }
+  /// Sentences across the note with no source in the conversation.
+  int get _unsupportedSentences => NoteSources.unsupportedCount(
+        [for (final k in const ['subjective', 'objective', 'assessment', 'plan']) _soapControllers[k]!.text],
+        _encounter.transcript,
+      );
 
   void _toggleEdit(String key) {
     if (_noteLocked && !(_editing[key] ?? false)) {
@@ -2978,6 +3052,10 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
       children: [
+        if (_interrupted != null && !_isRecording) ...[
+          _buildInterruptedCard(context, _interrupted!),
+          const SizedBox(height: 12),
+        ],
         if (_isSigned)
           NoteBanner(
             icon: Icons.verified_outlined,
@@ -2989,12 +3067,18 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
             color: SolisTheme.success,
           )
         else
-          NoteBanner(
-            icon: Icons.rate_review_outlined,
-            title: 'Draft for your review',
-            message: 'Check each section against what was said. Tap Sources to see the conversation behind it.',
-            color: SolisTheme.info,
-          ),
+          Builder(builder: (context) {
+            final missing = _unsupportedSentences;
+            return NoteBanner(
+              key: const Key('draft_banner'),
+              icon: missing == 0 ? Icons.rate_review_outlined : Icons.report_outlined,
+              title: missing == 0 ? 'Draft for your review' : 'Draft: $missing ${missing == 1 ? 'sentence' : 'sentences'} without a source',
+              message: missing == 0
+                  ? 'Tap any section to see the line of the conversation behind each sentence.'
+                  : 'Highlighted sentences were not found in the conversation. Tap a section to check them, then edit or keep them.',
+              color: missing == 0 ? SolisTheme.info : SolisTheme.warning,
+            );
+          }),
         const SizedBox(height: 12),
         if (_encounter.vitals.isNotEmpty) ...[
           VitalsPanel(vitals: _encounter.vitals),
@@ -3037,6 +3121,49 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
           ),
         ],
       ],
+    );
+  }
+
+  /// Shown when a recording was cut off: what was kept, and how to go on.
+  Widget _buildInterruptedCard(BuildContext context, RecordingCheckpoint cp) {
+    final minutes = cp.seconds ~/ 60;
+    final seconds = cp.seconds % 60;
+    final length = minutes > 0 ? '$minutes min ${seconds.toString().padLeft(2, '0')} s' : '$seconds s';
+    return SectionCard(
+      key: const Key('recording_interrupted'),
+      title: 'Recording was cut off',
+      icon: Icons.history_rounded,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            'The app closed while recording, at $length, last saved ${_formatClock(cp.savedAtUtc.toLocal())}. '
+            'Everything captured up to then is kept, and the note below is written from it.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              FilledButton.icon(
+                key: const Key('resume_recording'),
+                icon: const Icon(Icons.mic_rounded),
+                label: const Text('Continue recording'),
+                onPressed: _isSigned ? null : () => unawaited(_onRecordPressed()),
+              ),
+              OutlinedButton(
+                key: const Key('dismiss_interrupted'),
+                onPressed: () {
+                  setState(() => _interrupted = null);
+                  unawaited(_clearCheckpoint());
+                },
+                child: const Text('Done recording'),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -3112,13 +3239,35 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
               textCapitalization: TextCapitalization.sentences,
               style: theme.textTheme.bodyLarge,
             )
-          : Text(
-              content.trim().isEmpty ? 'Nothing documented.' : content,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: content.trim().isEmpty ? theme.colorScheme.onSurfaceVariant : null,
-              ),
-            ),
+          : content.trim().isEmpty
+              ? Text('Nothing documented.', style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSurfaceVariant))
+              : InkWell(
+                  key: Key('note_$key'),
+                  onTap: () => _showEvidence(title, content),
+                  child: Text.rich(_highlightUnsupported(theme, content), style: theme.textTheme.bodyLarge),
+                ),
     );
+  }
+
+  /// The section text with sentences that have no source highlighted.
+  TextSpan _highlightUnsupported(ThemeData theme, String content) {
+    final turns = _encounter.transcript;
+    if (turns.isEmpty) return TextSpan(text: content);
+    final flagged = NoteSources.link(content, turns).where((l) => l.unsupported).toList();
+    if (flagged.isEmpty) return TextSpan(text: content);
+    final mark = SolisTheme.warning.withValues(alpha: theme.brightness == Brightness.dark ? 0.35 : 0.16);
+    final spans = <TextSpan>[];
+    var at = 0;
+    for (final l in flagged) {
+      if (l.start > at) spans.add(TextSpan(text: content.substring(at, l.start)));
+      spans.add(TextSpan(
+        text: content.substring(l.start, l.end),
+        style: TextStyle(backgroundColor: mark, decoration: TextDecoration.underline, decorationStyle: TextDecorationStyle.dotted, decorationColor: SolisTheme.warning),
+      ));
+      at = l.end;
+    }
+    if (at < content.length) spans.add(TextSpan(text: content.substring(at)));
+    return TextSpan(children: spans);
   }
 
   /// One-line coding summary on the note, linking to the Claim tab.
@@ -3321,6 +3470,62 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
 }
 
 /// One speaker turn: role label, time, and the words, at reading size.
+/// A note sentence and the conversation line it came from.
+class _SentenceSourceTile extends StatelessWidget {
+  final SentenceSource link;
+  final SpeakerTurn? turn;
+  final String patientName;
+
+  const _SentenceSourceTile({required this.link, required this.turn, required this.patientName});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final dark = theme.brightness == Brightness.dark;
+    final missing = turn == null;
+    final tone = missing ? SolisTheme.onTint(SolisTheme.warning, isDark: dark) : theme.colorScheme.primary;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Icon(missing ? Icons.report_outlined : Icons.link_rounded, size: 20, color: tone),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(link.sentence, style: theme.textTheme.bodyLarge),
+                const SizedBox(height: 4),
+                if (missing)
+                  Text('No source in the conversation', key: const Key('no_source'), style: theme.textTheme.labelMedium?.copyWith(color: tone))
+                else
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(10, 6, 10, 6),
+                    decoration: BoxDecoration(
+                      border: Border(left: BorderSide(color: tone, width: 3)),
+                      color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                    ),
+                    child: Text.rich(
+                      TextSpan(children: [
+                        TextSpan(text: '${turn!.speaker}: ', style: theme.textTheme.labelLarge?.copyWith(color: tone)),
+                        TextSpan(text: turn!.text),
+                      ]),
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _TranscriptTurn extends StatelessWidget {
   final SpeakerTurn turn;
   final String patientName;

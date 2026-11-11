@@ -158,6 +158,31 @@ class ConsentRecord {
       );
 }
 
+/// A recording in progress, saved every few seconds while it runs. Still set
+/// when the visit is opened again means the recording was cut off (the app
+/// was closed, killed or crashed); the transcript saved with it is kept.
+class RecordingCheckpoint {
+  final DateTime startedAtUtc;
+  final DateTime savedAtUtc;
+  final int seconds; // recorded time, pauses excluded
+
+  const RecordingCheckpoint({required this.startedAtUtc, required this.savedAtUtc, required this.seconds});
+
+  Map<String, dynamic> toJson() => {
+        'startedAtUtc': startedAtUtc.toIso8601String(),
+        'savedAtUtc': savedAtUtc.toIso8601String(),
+        'seconds': seconds,
+      };
+
+  static RecordingCheckpoint? fromJson(Object? j) {
+    if (j is! Map) return null;
+    final started = DateTime.tryParse('${j['startedAtUtc'] ?? ''}');
+    final saved = DateTime.tryParse('${j['savedAtUtc'] ?? ''}');
+    if (started == null || saved == null) return null;
+    return RecordingCheckpoint(startedAtUtc: started, savedAtUtc: saved, seconds: (j['seconds'] as num?)?.toInt() ?? 0);
+  }
+}
+
 /// One date of service under an account: Visit 1, Visit 2, ...
 class Visit {
   final int number;
@@ -188,6 +213,9 @@ class Visit {
   /// Service facility when the visit was not at the billing address.
   final ServiceFacility? serviceFacility;
 
+  /// Set while a recording runs; see [RecordingCheckpoint].
+  final RecordingCheckpoint? liveRecording;
+
   const Visit({
     required this.number,
     required this.dateOfService,
@@ -207,6 +235,7 @@ class Visit {
     this.referringProvider,
     this.priorAuthNumber,
     this.serviceFacility,
+    this.liveRecording,
   });
 
   Visit copyWith({
@@ -229,6 +258,8 @@ class Visit {
     String? priorAuthNumber,
     ServiceFacility? serviceFacility,
     bool clearServiceFacility = false,
+    RecordingCheckpoint? liveRecording,
+    bool clearLiveRecording = false,
   }) =>
       Visit(
         number: number,
@@ -250,6 +281,7 @@ class Visit {
         // An empty string clears the number.
         priorAuthNumber: priorAuthNumber == null ? this.priorAuthNumber : (priorAuthNumber.trim().isEmpty ? null : priorAuthNumber.trim()),
         serviceFacility: clearServiceFacility ? null : (serviceFacility ?? this.serviceFacility),
+        liveRecording: clearLiveRecording ? null : (liveRecording ?? this.liveRecording),
       );
 
   Map<String, dynamic> toJson() => {
@@ -271,6 +303,7 @@ class Visit {
         if (referringProvider != null) 'referringProvider': referringProvider!.toJson(),
         if (priorAuthNumber != null) 'priorAuthNumber': priorAuthNumber,
         if (serviceFacility != null) 'serviceFacility': serviceFacility!.toJson(),
+        if (liveRecording != null) 'liveRecording': liveRecording!.toJson(),
       };
 
   factory Visit.fromJson(Map<String, dynamic> j) => Visit(
@@ -292,6 +325,7 @@ class Visit {
         referringProvider: j['referringProvider'] is Map ? ReferringProvider.fromJson((j['referringProvider'] as Map).cast<String, dynamic>()) : null,
         priorAuthNumber: j['priorAuthNumber'] as String?,
         serviceFacility: j['serviceFacility'] is Map ? ServiceFacility.fromJson((j['serviceFacility'] as Map).cast<String, dynamic>()) : null,
+        liveRecording: RecordingCheckpoint.fromJson(j['liveRecording']),
       );
 }
 
