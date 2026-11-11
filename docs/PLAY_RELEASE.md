@@ -77,7 +77,8 @@ Then:
 3. Actions > **Release (Play bundle)** > Run workflow. It runs the tests, builds the signed `.aab` and `.apk`, and
    fails if the bundle is debug-signed or the BILLING permission is missing. The run summary shows the upload key
    **SHA-1**: it must match Play Console > Test and release > App integrity > Upload key certificate.
-4. Download the artifact and upload the `.aab` in Play Console.
+4. Download the artifact and upload `app-play-release.aab` in Play Console. The same run also builds
+   `app-standalone-release.apk` for the website (see `docs/STANDALONE.md`).
 
 ## 5. Website
 

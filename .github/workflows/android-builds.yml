@@ -1,0 +1,63 @@
+name: Android builds
+
+# Proves both Android builds compile and keeps the standalone one free of
+# Google Play Billing. Release-mode, signed with the debug key (no secrets),
+# so the APKs here are for testing only; signed builds come from the Release
+# workflow.
+on:
+  pull_request:
+    paths: [android/**, lib/**, pubspec.yaml, pubspec.lock, .github/workflows/android-builds.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.9
+          cache: true
+      - name: Fit Gradle into the runner's memory
+        # The project asks Gradle for 8 GB, which with the Kotlin daemon, R8
+        # and the Dart compiler runs a 16 GB runner out of memory.
+        run: |
+          sudo fallocate -l 8G /swapfile && sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile
+          mkdir -p ~/.gradle
+          printf 'org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g\nkotlin.daemon.jvmargs=-Xmx2g\norg.gradle.workers.max=2\n' > ~/.gradle/gradle.properties
+      - run: flutter pub get
+      - name: Standalone APK
+        run: flutter build apk --release --flavor standalone
+      - name: Play APK
+        run: flutter build apk --release --flavor play
+      - name: Check what each build contains
+        run: |
+          BT=$(ls $ANDROID_HOME/build-tools | sort -V | tail -1)
+          A2="$ANDROID_HOME/build-tools/$BT/aapt2"
+          S=build/app/outputs/flutter-apk/app-standalone-release.apk
+          P=build/app/outputs/flutter-apk/app-play-release.apk
+          "$A2" dump permissions "$S" > s.txt
+          "$A2" dump permissions "$P" > p.txt
+          if grep -q com.android.vending.BILLING s.txt; then echo "::error::standalone has BILLING"; exit 1; fi
+          grep -q com.android.vending.BILLING p.txt || { echo "::error::play build lacks BILLING"; exit 1; }
+          if unzip -p "$S" 'classes*.dex' | grep -aq 'com/google/android/play/core/integrity'; then echo "::error::standalone contains Play Integrity"; exit 1; fi
+          "$A2" dump badging "$S" | grep -E "^package:" 
+          {
+            echo "## Android builds"
+            echo "- standalone: no BILLING permission, no Play Integrity library ($(du -h "$S" | cut -f1))"
+            echo "- play: BILLING permission present ($(du -h "$P" | cut -f1))"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: standalone-apk-test-${{ github.run_number }}
+          path: build/app/outputs/flutter-apk/app-standalone-release.apk
+          retention-days: 7

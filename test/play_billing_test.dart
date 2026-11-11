@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:solis_mobile/config/app_config.dart';
 import 'package:solis_mobile/screens/paywall_screen.dart';
 import 'package:solis_mobile/screens/patient_chart_screen.dart';
 import 'package:solis_mobile/services/auth_service.dart';
@@ -223,5 +224,11 @@ void main() {
     expect(find.text('Unlocked with access code PILOT01'), findsOneWidget);
     await _pump(tester, Scaffold(body: AccountSection(auth: FakeAuth(demo: true, account: false), subscriptions: subs)));
     expect(find.byKey(const Key('account_subscription')), findsNothing, reason: 'demo is free');
+  });
+
+  test('the default build is the Google Play one', () {
+    // `flutter test` has no flavor; `--flavor standalone` turns billing off.
+    expect(AppConfig.distribution, 'play');
+    expect(AppConfig.isStandalone, isFalse);
   });
 }

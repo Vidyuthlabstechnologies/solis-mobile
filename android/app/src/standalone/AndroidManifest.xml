@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Standalone build: no Google Play Billing. Drops the permission that
+         the main manifest and the billing library add. -->
+    <uses-permission android:name="com.android.vending.BILLING" tools:node="remove"/>
+</manifest>
