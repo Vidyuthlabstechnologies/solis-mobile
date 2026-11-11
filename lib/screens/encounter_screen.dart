@@ -33,6 +33,7 @@ import '../services/attestation.dart';
 import '../models/note_style.dart';
 import '../services/note_formatter.dart';
 import '../services/note_seal.dart';
+import '../services/patient_summary.dart';
 import '../services/note_sources.dart';
 import '../services/places.dart';
 import '../services/recording_foreground_service.dart';
@@ -40,6 +41,7 @@ import '../services/security_and_background_service.dart';
 import '../services/security/phi_clipboard.dart';
 import '../theme/solis_theme.dart';
 import '../widgets/encounter_widgets.dart';
+import '../widgets/legal_links.dart';
 import '../widgets/sign_and_send_sheet.dart';
 import '../widgets/signature_pad.dart';
 import 'claim_tab.dart';
@@ -1992,6 +1994,78 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     _showMessage('Note copied. Paste it into the EHR within 60 seconds; then the clipboard clears.', icon: Icons.content_copy_rounded);
   }
 
+  /// A plain-language after-visit summary for the patient, from the note.
+  /// Copy and text are offered once the note is signed, so it matches what
+  /// was signed.
+  void _openPatientSummary() {
+    final p = _repo.provider;
+    final text = PatientSummary.write(
+      note: _encounter,
+      patientFirstName: _account.firstName,
+      dateOfService: _visit.dateOfService,
+      clinician: p.displayName,
+      practice: p.practiceName,
+      phone: p.phone,
+    );
+    final phone = (_account.phone ?? '').replaceAll(RegExp(r'[^0-9+]'), '');
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) {
+        final theme = Theme.of(ctx);
+        return ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(ctx).height * 0.85),
+          child: SafeArea(
+            child: ListView(
+              key: const Key('patient_summary'),
+              shrinkWrap: true,
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+              children: [
+                Text('Patient summary', style: theme.textTheme.titleLarge),
+                const SizedBox(height: 4),
+                Text(
+                  _isSigned ? 'Plain language, from the signed note. Read it before you share it.' : 'Sign the note first, so the summary matches what you signed.',
+                  style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                ),
+                const SizedBox(height: 12),
+                SelectableText(text, key: const Key('patient_summary_text'), style: theme.textTheme.bodyLarge),
+                const SizedBox(height: 16),
+                Wrap(spacing: 8, runSpacing: 8, children: [
+                  FilledButton.icon(
+                    key: const Key('copy_summary'),
+                    onPressed: !_isSigned
+                        ? null
+                        : () {
+                            unawaited(PhiClipboard.copy(text));
+                            unawaited(_record('Patient summary copied'));
+                            Navigator.pop(ctx);
+                            _showMessage('Summary copied. It clears from the clipboard in 60 seconds.', icon: Icons.content_copy_rounded);
+                          },
+                    icon: const Icon(Icons.content_copy_rounded),
+                    label: const Text('Copy'),
+                  ),
+                  if (phone.isNotEmpty)
+                    OutlinedButton.icon(
+                      key: const Key('text_summary'),
+                      onPressed: !_isSigned
+                          ? null
+                          : () {
+                              unawaited(_record('Patient summary texted'));
+                              Navigator.pop(ctx);
+                              unawaited(openExternal(context, 'sms:$phone?body=${Uri.encodeComponent(text)}'));
+                            },
+                      icon: const Icon(Icons.sms_outlined),
+                      label: const Text('Text to patient'),
+                    ),
+                ]),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   /// Who signed, confirmed, changed and sent what on this visit, newest
   /// first, with a copy of the whole trail for an auditor.
   void _openAuditTrail() {
@@ -2730,6 +2804,8 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
                 _openFhirExportDialog();
               case 'audit':
                 _openAuditTrail();
+              case 'summary':
+                _openPatientSummary();
               case 'theme':
                 widget.onThemeToggle?.call(!widget.isDark);
             }
@@ -2738,6 +2814,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
             if (hasNote && !_isRecording && compact) _menuItem('copy', Icons.content_copy_rounded, 'Copy note'),
             _menuItem('session', Icons.tune_rounded, 'Session details'),
             if (hasNote) _menuItem('fhir', Icons.data_object_rounded, 'Export FHIR R4'),
+            if (hasNote) _menuItem('summary', Icons.summarize_outlined, 'Patient summary'),
             _menuItem('audit', Icons.history_edu_outlined, 'Audit trail'),
             if (widget.onThemeToggle != null)
               _menuItem('theme', widget.isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined, widget.isDark ? 'Light theme' : 'Dark theme'),

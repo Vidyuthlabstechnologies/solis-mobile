@@ -79,3 +79,7 @@ where they already cover it.
 - B10: step 3 (free notes, paywall at the first real claim, 14-day trial,
   renewal date in Settings).
 - B11: step 4 (templates, length and abbreviation setting, ruled-out list).
+- B12: step 5 (daily and weekly value card, patient after-visit summary).
+  All five build-order steps are done; still open from the brief: offline
+  claim queue is already in (B3/B4 outbox), staff seats, trial-end email
+  reminder (needs the worker), website and listing copy.

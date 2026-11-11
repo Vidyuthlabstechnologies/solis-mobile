@@ -12,6 +12,7 @@ import '../services/billing/claim_submission_service.dart';
 import '../services/billing/claims_csv.dart';
 import '../services/coding/place_of_service.dart';
 import '../services/patient_list.dart';
+import '../services/value_report.dart';
 import '../services/security/phi_clipboard.dart';
 import '../widgets/medical_disclaimer.dart';
 import '../theme/solis_theme.dart';
@@ -365,14 +366,57 @@ class _PatientsScreenState extends State<PatientsScreen> {
     );
   }
 
+  /// What SOLIS did today and this week: notes signed, claims sent, the
+  /// amount billed, and an estimate of the time saved.
+  Widget? _valueCard(BuildContext context) {
+    final r = ValueReport.compute(_repo.accounts);
+    if (r.week.isEmpty) return null;
+    final theme = Theme.of(context);
+    final cs = theme.colorScheme;
+    String line(ValueTotals t) => [
+          '${t.notesSigned} ${t.notesSigned == 1 ? 'note' : 'notes'} signed',
+          '${t.claimsSent} ${t.claimsSent == 1 ? 'claim' : 'claims'} sent (${formatDollars(t.billed)})',
+          'about ${t.timeSavedLabel} saved',
+        ].join(', ');
+    return Card(
+      key: const Key('value_card'),
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              Icon(Icons.insights_rounded, color: cs.primary),
+              const SizedBox(width: 12),
+              Expanded(child: Text('What SOLIS did for you', style: theme.textTheme.titleSmall)),
+            ]),
+            const SizedBox(height: 8),
+            Text('Today: ${line(r.today)}.', key: const Key('value_today')),
+            const SizedBox(height: 4),
+            Text('Last 7 days: ${line(r.week)}.', key: const Key('value_week')),
+            const SizedBox(height: 6),
+            Text(
+              'Time saved is an estimate of ${ValueTotals.minutesPerNote} minutes of writing per signed note.',
+              style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurfaceVariant),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildToday(BuildContext context, List<BillingItem> items) {
     final visits = visitsOn(_repo.accounts);
     final summary = _daySummaryCard(context, items);
+    final value = _valueCard(context);
     if (visits.isEmpty) {
       return ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
         children: [
           ?summary,
+          if (summary != null && value != null) const SizedBox(height: 8),
+          ?value,
           const EmptyState(
             icon: Icons.today_outlined,
             title: 'No visits today',
@@ -381,14 +425,15 @@ class _PatientsScreenState extends State<PatientsScreen> {
         ],
       );
     }
-    final offset = summary == null ? 0 : 1;
+    final header = [?summary, ?value];
+    final offset = header.length;
     return ListView.separated(
       key: const Key('today_list'),
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
       itemCount: visits.length + offset,
       separatorBuilder: (_, _) => const SizedBox(height: 8),
       itemBuilder: (context, i) {
-        if (i < offset) return summary!;
+        if (i < offset) return header[i];
         final (a, v) = visits[i - offset];
         return _VisitCard(
           title: a.fullName,
