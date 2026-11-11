@@ -300,6 +300,11 @@ owner.
 - **B5** (shipped): 14, 15, 36, 80, 120.
 - **B6** (shipped): 93, 113, 115, 118.
 - **B7** (shipped): 17, 66, 69, 165.
+- **B8** (shipped, next-version brief step 1): recordings saved every 5
+  seconds and when the app leaves the foreground, with "Continue recording"
+  after a kill or crash; every note sentence linked to its transcript line,
+  and sentences with no source highlighted. See
+  docs/NEXT_VERSION.md.
 - **Next**: 7, 12, 61, 45, 46, 83, 104. 135 needs a local-notification
   plugin, and 153/154 (app lock) a biometric plugin; both are held for a
   decision.
