@@ -76,8 +76,10 @@ class AccountSection extends StatelessWidget {
                 leading: Icon(_subs.isPro ? Icons.workspace_premium_outlined : Icons.lock_open_outlined),
                 title: Text(_subs.isPro ? 'SOLIS Pro' : 'Get SOLIS Pro'),
                 subtitle: Text(_subs.isPro
-                    ? (_subs.accessCode != null ? 'Unlocked with access code ${_subs.accessCode}' : 'Active. Manage or cancel in Google Play.')
-                    : 'Needed to start new visits. Your patients and past visits stay open.'),
+                    ? (_subs.accessCode != null
+                        ? 'Unlocked with access code ${_subs.accessCode}'
+                        : '${_subs.renewal?.describe() ?? 'Active'}. Tap to manage or cancel in Google Play.')
+                    : 'Notes are free. Pro bills claims to payers, with a 14-day free trial.'),
                 trailing: _subs.isPro && _subs.accessCode == null ? const Icon(Icons.open_in_new, size: 18) : null,
                 onTap: () => _subscription(context),
               ),

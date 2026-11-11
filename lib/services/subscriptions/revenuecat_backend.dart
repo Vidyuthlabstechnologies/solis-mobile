@@ -74,6 +74,17 @@ class RevenueCatBackend implements SubscriptionBackend {
       });
 
   @override
+  Future<ProRenewal?> renewal() => _guard(() async {
+        final e = (await Purchases.getCustomerInfo()).entitlements.active[entitlement];
+        if (e == null) return null;
+        return ProRenewal(
+          endsAt: DateTime.tryParse(e.expirationDate ?? ''),
+          willRenew: e.willRenew,
+          inTrial: e.periodType == PeriodType.trial,
+        );
+      });
+
+  @override
   Future<String?> managementUrl() => _guard(() async => (await Purchases.getCustomerInfo()).managementURL);
 
   Future<T> _guard<T>(Future<T> Function() f) async {

@@ -41,6 +41,7 @@ import '../widgets/encounter_widgets.dart';
 import '../widgets/sign_and_send_sheet.dart';
 import '../widgets/signature_pad.dart';
 import 'claim_tab.dart';
+import 'paywall_screen.dart';
 import 'patients_screen.dart';
 import 'provider_profile_screen.dart';
 import 'scan_card_screen.dart';
@@ -742,8 +743,15 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     }
   }
 
+  /// Billing a real claim needs SOLIS Pro; notes and test claims never do.
+  Future<bool> _proForClaim() async {
+    if (_claims.isConnected && _claims.isTest) return true;
+    return ensurePro(context);
+  }
+
   Future<void> _submitClaimOnce() async {
     if (!await _ensureCodesConfirmed() || !mounted) return;
+    if (!await _proForClaim() || !mounted) return;
     if (!_claims.isConnected) {
       _copyClaim();
       return;
@@ -927,6 +935,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
 
   Future<void> _markClaimReady() async {
     if (!await _ensureCodesConfirmed() || !mounted) return;
+    if (!await _proForClaim() || !mounted) return;
     setState(() => _claimReady = true);
     await _persist();
     if (!mounted) return;
@@ -2118,6 +2127,10 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       ),
     );
     if (result == null || !mounted) return;
+    // The note is signed either way; only billing the claim waits for Pro.
+    var billNow = errors.isEmpty && claim != null;
+    if (billNow && !await _proForClaim()) billNow = false;
+    if (!mounted) return;
     HapticFeedback.mediumImpact();
     setState(() {
       _applySignature();
@@ -2126,7 +2139,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
           a.isCompleted = true;
         }
       }
-      if (errors.isEmpty && !connected && claim != null) _claimReady = true;
+      if (billNow && !connected) _claimReady = true;
     });
     await _persist();
     await _record('Signed note', detail: _encounter.sha256Seal.isEmpty ? '' : 'seal ${_encounter.sha256Seal.substring(0, 16)}');
@@ -2138,11 +2151,14 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToChecks());
       return;
     }
-    if (connected && claim != null) {
+    if (connected && billNow) {
       await _sendNow();
       return;
     }
-    _showMessage(claim == null ? 'Note signed.' : 'Note signed. Claim ready to bill.', icon: Icons.verified_outlined);
+    _showMessage(
+      claim == null ? 'Note signed.' : (billNow ? 'Note signed. Claim ready to bill.' : 'Note signed. Start SOLIS Pro to bill the claim.'),
+      icon: Icons.verified_outlined,
+    );
   }
 
   void _scrollToChecks() {

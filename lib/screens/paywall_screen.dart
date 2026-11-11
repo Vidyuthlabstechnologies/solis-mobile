@@ -4,16 +4,26 @@ import '../services/auth_service.dart';
 import '../services/subscriptions/subscription_service.dart';
 import '../widgets/legal_links.dart';
 
-/// Shows the paywall when a new visit needs SOLIS Pro. Returns true when
-/// the clinician may go ahead.
+/// Shows the paywall when billing a real claim needs SOLIS Pro. Notes are
+/// never behind it. Returns true when the clinician may go ahead.
 Future<bool> ensurePro(BuildContext context, {AuthService? auth, SubscriptionService? subscriptions}) async {
   final subs = subscriptions ?? SubscriptionService.instance;
-  if (!subs.blocksNewVisits(auth ?? AuthService.instance)) return true;
+  if (!subs.blocksRealClaims(auth ?? AuthService.instance)) return true;
   final unlocked = await Navigator.of(context).push<bool>(
     MaterialPageRoute(fullscreenDialog: true, builder: (_) => PaywallScreen(subscriptions: subs)),
   );
   return unlocked == true || subs.isPro;
 }
+
+/// What Pro adds. Notes stay free whether or not the clinician subscribes.
+const paywallBenefits = [
+  'Claims sent to payers from the visit, every code explained',
+  'Eligibility, claim status and one-tap fixes for rejections',
+  'No caps. Notes stay free, and yours, if you stop',
+];
+
+/// Labeled as an example: what a percentage billing service would cost.
+const paywallComparison = 'Example: a billing service at 6% of \$40,000 a month costs about \$2,400. SOLIS Pro is one flat price.';
 
 /// SOLIS Pro plans from Google Play, with restore and an access code.
 class PaywallScreen extends StatefulWidget {
@@ -115,14 +125,9 @@ class _PaywallScreenState extends State<PaywallScreen> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
           children: [
-            Text('Keep documenting and billing with SOLIS Pro', style: theme.textTheme.titleLarge),
+            Text('Notes are free. SOLIS Pro sends the claim.', style: theme.textTheme.titleLarge),
             const SizedBox(height: 12),
-            for (final line in const [
-              'Unlimited visits, notes and claims',
-              'Voice notes written on this phone or in the cloud',
-              'Claim checks, eligibility and 837P files',
-              'Your patients and visits stay yours: nothing is locked if you stop',
-            ])
+            for (final line in paywallBenefits)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Row(children: [
@@ -159,6 +164,11 @@ class _PaywallScreenState extends State<PaywallScreen> {
                       ),
                   ],
                 ),
+              ),
+            if (plans != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Text(paywallComparison, style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurfaceVariant)),
               ),
             if (_error != null)
               Padding(

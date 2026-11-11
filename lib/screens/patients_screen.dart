@@ -18,6 +18,7 @@ import '../theme/solis_theme.dart';
 import '../widgets/encounter_widgets.dart';
 import 'encounter_screen.dart';
 import 'patient_chart_screen.dart';
+import 'paywall_screen.dart';
 import 'integrations_screen.dart';
 import 'provider_profile_screen.dart';
 import 'scan_card_screen.dart';
@@ -610,6 +611,9 @@ class _BatchSendDialogState extends State<BatchSendDialog> {
   bool _done = false;
 
   Future<void> _send() async {
+    // Real claims need SOLIS Pro; test claims are free.
+    if (!widget.service.isTest && !await ensurePro(context)) return;
+    if (!mounted) return;
     setState(() => _sending = true);
     for (final i in widget.items) {
       setState(() => _results[i.claimId] = null);

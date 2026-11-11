@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:solis_mobile/config/app_config.dart';
+import 'package:solis_mobile/models/patient_account.dart';
+import 'package:solis_mobile/screens/encounter_screen.dart';
 import 'package:solis_mobile/screens/paywall_screen.dart';
 import 'package:solis_mobile/screens/patient_chart_screen.dart';
 import 'package:solis_mobile/services/auth_service.dart';
+import 'package:solis_mobile/services/local_clinical_engine.dart';
 import 'package:solis_mobile/services/subscriptions/revenuecat_backend.dart';
 import 'package:solis_mobile/services/subscriptions/subscription_service.dart';
 import 'package:solis_mobile/theme/solis_theme.dart';
@@ -41,6 +44,9 @@ class FakeStore implements SubscriptionBackend {
   Future<void> configure({String? appUserId}) async {}
   @override
   Future<bool> isPro() async => pro;
+  ProRenewal? renewing;
+  @override
+  Future<ProRenewal?> renewal() async => pro ? renewing : null;
   @override
   Future<List<SubscriptionPlan>> plans() async => offered;
   @override
@@ -77,14 +83,14 @@ void main() {
 
   group('who has to pay', () {
     test('only signed-in clinicians in a build that sells Pro', () async {
-      expect(SubscriptionService(backend: null).blocksNewVisits(FakeAuth()), isFalse, reason: 'no RevenueCat key in this build');
+      expect(SubscriptionService(backend: null).blocksRealClaims(FakeAuth()), isFalse, reason: 'no RevenueCat key in this build');
       final subs = SubscriptionService(backend: FakeStore());
-      expect(subs.blocksNewVisits(FakeAuth(demo: true, account: false)), isFalse, reason: 'the demo is free for reviewers and trials');
-      expect(subs.blocksNewVisits(FakeAuth()), isTrue);
+      expect(subs.blocksRealClaims(FakeAuth(demo: true, account: false)), isFalse, reason: 'the demo is free for reviewers and trials');
+      expect(subs.blocksRealClaims(FakeAuth()), isTrue);
       await subs.restore();
       final pro = SubscriptionService(backend: FakeStore(pro: true));
       await pro.refresh();
-      expect(pro.blocksNewVisits(FakeAuth()), isFalse);
+      expect(pro.blocksRealClaims(FakeAuth()), isFalse);
     });
 
     test('a build without a key never offers a purchase', () async {
@@ -175,42 +181,65 @@ void main() {
     });
   });
 
-  group('new visits', () {
+  group('notes are free; the paywall waits for the first real claim', () {
     late AuthService savedAuth;
     setUp(() => savedAuth = AuthService.instance);
     tearDown(() => AuthService.instance = savedAuth);
 
-    testWidgets('need Pro for a signed-in clinician; an access code unlocks them', (tester) async {
-      final repo = await realRepo();
-      final a = await billablePatient(repo);
-      AuthService.instance = FakeAuth();
-      SubscriptionService.instance = SubscriptionService(backend: FakeStore(grantedCustomers: {'access_REVIEW2026'}));
-      await _pump(tester, PatientChartScreen(accountNumber: a.accountNumber));
-      await tester.tap(find.text("Start today's visit"));
-      await tester.pumpAndSettle();
-      expect(find.byType(PaywallScreen), findsOneWidget);
-      expect(repo.byNumber(a.accountNumber)!.visits, isEmpty);
-      await tester.tap(find.byKey(const Key('paywall_code')));
-      await tester.pumpAndSettle();
-      await tester.enterText(find.byKey(const Key('access_code')), 'review-2026');
-      await tester.tap(find.byKey(const Key('access_code_submit')));
-      await tester.pumpAndSettle();
-      expect(find.byType(PaywallScreen), findsNothing);
-      expect(repo.byNumber(a.accountNumber)!.visits, hasLength(1));
-    });
-
-    testWidgets('closing the paywall starts nothing', (tester) async {
+    testWidgets('a signed-in clinician without Pro starts visits freely', (tester) async {
       final repo = await realRepo();
       final a = await billablePatient(repo);
       AuthService.instance = FakeAuth();
       SubscriptionService.instance = SubscriptionService(backend: FakeStore());
       await _pump(tester, PatientChartScreen(accountNumber: a.accountNumber));
       await tester.tap(find.text("Start today's visit"));
+      await tester.pump(const Duration(milliseconds: 600));
+      expect(find.byType(PaywallScreen), findsNothing);
+      expect(repo.byNumber(a.accountNumber)!.visits, hasLength(1));
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump(const Duration(seconds: 5));
+    });
+
+    testWidgets('billing a claim asks for Pro; closing it bills nothing, a code unlocks it', (tester) async {
+      final repo = await realRepo();
+      final a = await billablePatient(repo);
+      var v = await visitWith(repo, a);
+      // A recorded, signed visit whose clean claim the clinician confirmed.
+      const talk = 'Doctor: What brings you in?\nPatient: Sore throat and runny nose for three days.';
+      final enc = LocalClinicalEngine.synthesizeOnDevice(rawSpeech: talk, patientName: 'Jane Doe', mrn: '1', ageGender: '56F', attending: 'Dr');
+      v = v.copyWith(transcript: talk, encounter: enc.copyWith(isSigned: true, signedAtUtc: DateTime.now().toUtc()).toJson());
+      await repo.updateVisit(a.accountNumber, v);
+      AuthService.instance = FakeAuth();
+      SubscriptionService.instance = SubscriptionService(backend: FakeStore(grantedCustomers: {'access_REVIEW2026'}));
+      await _pump(tester, EncounterScreen(accountNumber: a.accountNumber, visitNumber: v.number, initialReviewTab: 3));
+      await tester.pump(const Duration(milliseconds: 600));
+      final ready = find.text('Mark ready to bill');
+      await tester.tap(ready);
       await tester.pumpAndSettle();
+      expect(find.byType(PaywallScreen), findsOneWidget);
       await tester.tap(find.byType(CloseButton));
       await tester.pumpAndSettle();
-      expect(repo.byNumber(a.accountNumber)!.visits, isEmpty);
+      expect(repo.byNumber(a.accountNumber)!.visit(v.number)!.status, VisitStatus.signed);
+
+      await tester.tap(ready);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('paywall_code')));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byKey(const Key('access_code')), 'review-2026');
+      await tester.tap(find.byKey(const Key('access_code_submit')));
+      await tester.pumpAndSettle();
+      expect(find.byType(PaywallScreen), findsNothing);
+      expect(repo.byNumber(a.accountNumber)!.visit(v.number)!.status, VisitStatus.claimReady);
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump(const Duration(seconds: 5));
     });
+  });
+
+  test('Settings names the trial end or renewal date', () {
+    final d = DateTime(2026, 11, 25, 12);
+    expect(ProRenewal(endsAt: d, inTrial: true).describe(), 'Free trial until Nov 25, 2026, then the plan starts');
+    expect(ProRenewal(endsAt: d).describe(), 'Renews Nov 25, 2026');
+    expect(ProRenewal(endsAt: d, willRenew: false).describe(), 'Ends Nov 25, 2026 (cancelled)');
   });
 
   testWidgets('settings shows the plan and the legal links', (tester) async {
