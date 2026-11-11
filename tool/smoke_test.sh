@@ -10,11 +10,14 @@ fail() { echo "SMOKE FAIL: $*"; adb logcat -d > "$OUT/logcat.txt"; shot fail; ex
 shot() { adb exec-out screencap -p > "$OUT/$1.png" || true; }
 dump() { adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1; adb shell cat /sdcard/ui.xml 2>/dev/null; }
 # Waits for text (in text or content-desc) and prints the centre of its bounds.
+# A leading ^ matches only labels that start with the text (e.g. a tab, not
+# a sentence that mentions it).
 find_text() {
-  local want=$1 tries=${2:-30} xml line
+  local want=$1 tries=${2:-30} xml line pat
+  if [ "${want#^}" != "$want" ]; then pat="${want#^}"; else pat="[^\"]*$want"; fi
   for _ in $(seq "$tries"); do
     xml=$(dump)
-    line=$(echo "$xml" | tr '>' '\n' | grep -i -m1 -E "(text|content-desc)=\"[^\"]*$want" || true)
+    line=$(echo "$xml" | tr '>' '\n' | grep -i -m1 -E "(text|content-desc)=\"$pat" || true)
     if [ -n "$line" ]; then
       echo "$line" | sed -E 's/.*bounds="\[([0-9]+),([0-9]+)\]\[([0-9]+),([0-9]+)\]".*/\1 \2 \3 \4/' | awk '{print int(($1+$3)/2), int(($2+$4)/2)}'
       return 0
@@ -43,7 +46,7 @@ for b in "Allow" "While using the app" "Continue" "Got it"; do
 done
 # After sign-in the app opens on "Today"; switch to the Patients tab.
 shot 3-today
-tap_text "Patients" 30
+tap_text "^Patients" 30
 find_text "Margaret" 20 >/dev/null || fail "demo patients never appeared"
 shot 4-patients
 tap_text "Margaret" 10
