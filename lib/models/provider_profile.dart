@@ -21,6 +21,13 @@ class ProviderProfile {
   final List<SavedPlace> savedPlaces; // places that set POS and facility from a location fix
   final bool preferOnDevice; // write notes on this phone by default
 
+  /// Diagnoses the clinician starred, code to description, in the order
+  /// they were added. Code search lists them first.
+  final Map<String, String> favoriteDiagnoses;
+
+  /// Services (CPT/HCPCS) the clinician starred.
+  final List<String> favoriteServices;
+
   const ProviderProfile({
     required this.fullName,
     required this.credentials,
@@ -42,7 +49,23 @@ class ProviderProfile {
     this.blockScreenshots = false,
     this.savedPlaces = const [],
     this.preferOnDevice = false,
+    this.favoriteDiagnoses = const {},
+    this.favoriteServices = const [],
   });
+
+  /// Stars or unstars a diagnosis.
+  ProviderProfile toggleFavoriteDiagnosis(String code, String description) {
+    final key = code.trim().toUpperCase();
+    final next = {...favoriteDiagnoses};
+    if (next.remove(key) == null) next[key] = description;
+    return copyWith(favoriteDiagnoses: next);
+  }
+
+  /// Stars or unstars a service code.
+  ProviderProfile toggleFavoriteService(String code) {
+    final key = code.trim().toUpperCase();
+    return copyWith(favoriteServices: favoriteServices.contains(key) ? favoriteServices.where((c) => c != key).toList() : [...favoriteServices, key]);
+  }
 
   String get displayName => credentials.isEmpty ? 'Dr. $fullName' : '$fullName, $credentials';
 
@@ -148,6 +171,8 @@ class ProviderProfile {
     bool? blockScreenshots,
     List<SavedPlace>? savedPlaces,
     bool? preferOnDevice,
+    Map<String, String>? favoriteDiagnoses,
+    List<String>? favoriteServices,
   }) =>
       ProviderProfile(
         fullName: fullName ?? this.fullName,
@@ -170,6 +195,8 @@ class ProviderProfile {
         blockScreenshots: blockScreenshots ?? this.blockScreenshots,
         savedPlaces: savedPlaces ?? this.savedPlaces,
         preferOnDevice: preferOnDevice ?? this.preferOnDevice,
+        favoriteDiagnoses: favoriteDiagnoses ?? this.favoriteDiagnoses,
+        favoriteServices: favoriteServices ?? this.favoriteServices,
       );
 
   Map<String, dynamic> toJson() => {
@@ -193,6 +220,8 @@ class ProviderProfile {
         'blockScreenshots': blockScreenshots,
         'savedPlaces': savedPlaces.map((p) => p.toJson()).toList(),
         'preferOnDevice': preferOnDevice,
+        if (favoriteDiagnoses.isNotEmpty) 'favoriteDiagnoses': favoriteDiagnoses,
+        if (favoriteServices.isNotEmpty) 'favoriteServices': favoriteServices,
       };
 
   factory ProviderProfile.fromJson(Map<String, dynamic> j) => ProviderProfile(
@@ -218,6 +247,8 @@ class ProviderProfile {
         blockScreenshots: j['blockScreenshots'] ?? false,
         savedPlaces: [for (final p in (j['savedPlaces'] as List? ?? const [])) SavedPlace.fromJson((p as Map).cast<String, dynamic>())],
         preferOnDevice: j['preferOnDevice'] == true,
+        favoriteDiagnoses: {for (final e in ((j['favoriteDiagnoses'] as Map?) ?? const {}).entries) '${e.key}': '${e.value}'},
+        favoriteServices: [for (final c in (j['favoriteServices'] as List? ?? const [])) '$c'],
       );
 }
 

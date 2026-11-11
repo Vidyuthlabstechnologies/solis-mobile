@@ -44,7 +44,7 @@ owner.
 | 14 | Referring provider NPI (2310A) for specialties and tests that need it | P1 | S | app | B5 |
 | 15 | Prior authorization number field (REF*G1) on the claim | P1 | S | app | B5 |
 | 16 | CLIA number (REF*X4) for in-office lab lines | P2 | S | app | |
-| 17 | Attestation text versioned and stored with every signature | P1 | S | app | |
+| 17 | Attestation text versioned and stored with every signature | P1 | S | app | B7 |
 | 18 | Retention policy: records kept per state rules, with a purge report | P2 | M | app | |
 
 ## B. Visit capture and recording (17)
@@ -108,10 +108,10 @@ owner.
 | 63 | Chronic care management (99490, 99491) monthly time tracking | P2 | L | app | |
 | 64 | Transitional care management (99495/99496) after discharge | P2 | M | app | |
 | 65 | HCC / risk adjustment flags for chronic conditions not coded this year | P2 | M | app | |
-| 66 | Favorite codes per clinician | P1 | S | app | |
+| 66 | Favorite codes per clinician | P1 | S | app | B7 |
 | 67 | Recent codes list on code search | P1 | S | app | B1 |
 | 68 | Laterality and 7th-character pickers in code search | P2 | S | app | |
-| 69 | Show why the E/M level was picked, element by element (UX item 20 remainder) | P1 | S | app | |
+| 69 | Show why the E/M level was picked, element by element (UX item 20 remainder) | P1 | S | app | B7 |
 | 70 | Coding notes filtered to the codes on this claim (UX item 40) | P2 | S | app | |
 | 71 | Vaccine and injection admin codes paired with product codes | P2 | M | app | |
 | 72 | In-office lab and POCT codes with QW modifier | P2 | S | app | |
@@ -237,7 +237,7 @@ owner.
 | 162 | Two-factor sign-in | P1 | M | worker | |
 | 163 | Password reset in the app | P1 | S | worker | |
 | 164 | Break-glass access log for a patient outside the clinician's panel | P3 | M | worker | |
-| 165 | Redact SSN and other identifiers from transcripts before upload | P1 | S | app | |
+| 165 | Redact SSN and other identifiers from transcripts before upload | P1 | S | app | B7 |
 | 166 | Clear the clipboard after copying PHI (60 s) | P1 | S | app | B1 |
 
 ## K. Accessibility, layout and polish (14)
@@ -299,7 +299,9 @@ owner.
 - **B4** (shipped): 25, 47, 84.
 - **B5** (shipped): 14, 15, 36, 80, 120.
 - **B6** (shipped): 93, 113, 115, 118.
-- **Next**: 7, 17, 66, 69, 12, 61, 45, 46. 135 needs a local-notification
-  plugin and 154 a biometric plugin; both are held for a decision.
+- **B7** (shipped): 17, 66, 69, 165.
+- **Next**: 7, 12, 61, 45, 46, 83, 104. 135 needs a local-notification
+  plugin, and 153/154 (app lock) a biometric plugin; both are held for a
+  decision.
 - **B5 onward**: the remaining `app` items by priority; `worker`, `vendor`
   and `license` items once those are in place.

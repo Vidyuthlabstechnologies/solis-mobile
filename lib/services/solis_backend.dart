@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'net/pinned_http.dart';
+import 'security/redaction.dart';
 
 /// Client for the SOLIS Worker (`/api/v2`). Vendor keys (Anthropic, Stedi,
 /// Deepgram) live only as Worker secrets; the app holds just the app token,
@@ -117,7 +118,8 @@ class SolisBackend {
     final json = await _post(
       '/note',
       {
-        'transcript': transcript,
+        // SSNs, Medicare IDs and card numbers never leave the phone.
+        'transcript': redactIdentifiers(transcript),
         'patient': {'age': age, 'sex': sex},
         'placeOfService': placeOfService,
         'visitType': visitType,

@@ -7,6 +7,13 @@ All notable changes to the SOLIS app are recorded here. The format follows
 ## [Unreleased]
 
 ### Added
+- Favorite codes: star a diagnosis or service in code search and it is
+  listed first.
+- Signatures store the attestation's version and exact text, and the
+  attestation is part of the sealed note.
+- "Why this level" names each MDM element: problems, data and risk.
+- Social Security numbers, Medicare IDs and card numbers are removed from
+  the transcript before it is sent to write the note.
 - Service facility on the claim (box 32, 837P 2310C) for visits away from
   the practice address, picked from saved places. A saved place learns the
   address the first time it is entered.
