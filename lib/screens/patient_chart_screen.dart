@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'paywall_screen.dart';
 import '../models/patient_account.dart';
 import '../services/account_repository.dart';
 import '../services/billing/eligibility_service.dart';
@@ -72,6 +73,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
       _openVisit(account, today.last.number);
       return;
     }
+    if (!await ensurePro(context) || !mounted) return;
     final choice = choosePlaceOfService(provider: _repo.provider, account: account);
     final visit = await _repo.addVisit(account.accountNumber, dateOfService: DateTime.now(), placeOfService: choice.code, posSource: choice.source);
     // Check coverage in the background while the visit runs.
@@ -81,6 +83,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
 
   /// A visit on another date (late documentation), with its place of service.
   Future<void> _startVisitOnDate(PatientAccount account) async {
+    if (!await ensurePro(context) || !mounted) return;
     var date = DateTime.now();
     var pos = choosePlaceOfService(provider: _repo.provider, account: account).code;
     final ok = await showDialog<bool>(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/legal_links.dart';
 import '../services/account_repository.dart';
 import '../services/app_session.dart';
 import '../services/auth_service.dart';
@@ -204,6 +205,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 24),
                       const MedicalDisclaimer(),
+                      const SizedBox(height: 4),
+                      const LegalLinks(),
                       const SizedBox(height: 12),
                       Row(
                         children: [

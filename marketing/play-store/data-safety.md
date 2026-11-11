@@ -7,6 +7,10 @@ Re-checked for v1.0.2 (2026-10-21): the network calls added in 1.0.1 and 1.0.2 a
 data, the signed code-set files on R2 (`manifest.json` and changed files) and the CMS updates list from the code-set
 Worker (`/v1/transmittals`). They carry no user, patient or account data (only what any HTTPS request carries), so the answers below are unchanged.
 
+Re-checked for Play Billing (2026-11-09): SOLIS Pro is sold through Google Play Billing via RevenueCat. The new
+flows are in the table (marked **new**). Changes to the answers: **Purchase history** is now ticked (collected, not
+shared), and User IDs gains the RevenueCat customer ID. Payment card details are handled by Google Play, never by SOLIS.
+
 ## How the app actually moves data (what the answers are based on)
 
 | Flow | What leaves the phone | Where it goes | When |
@@ -23,6 +27,7 @@ Worker (`/v1/transmittals`). They carry no user, patient or account data (only w
 | ML Kit SDK telemetry | Device model, OS, app package and version, per-installation ID, performance and error codes | Google (ML Kit), not shared | Whenever ML Kit runs |
 | Play Integrity | Attestation token (device attestation, app metadata) | Google Play, verified by the SOLIS server | Sign-in and sign-up |
 | Visit location | Nothing. GPS fix and street address are stored with the visit on the phone. The street address is looked up by Android's system Geocoder | Stays on the phone (Geocoder is an OS service) | Consent and visit start |
+| **new** Subscription (SOLIS Pro) | SOLIS account ID (as the RevenueCat customer ID), Google Play purchase token and product, device/app info the SDK sends | RevenueCat (`api.revenuecat.com`), processor for subscriptions; Google Play Billing handles payment | App start in a signed-in, non-demo session; paywall, purchase, restore, access code. No patient data |
 | Patients, visits, notes, claims | Stored on the phone (app-private storage, Android file-based encryption). There is no SOLIS patient database on the server | Phone | Always |
 
 Everything off the phone uses HTTPS/WSS (TLS). The SOLIS server host is TLS-pinned in the app.
@@ -74,7 +79,11 @@ Tick these and leave every other type unticked:
 | --- | --- | --- | --- | --- | --- |
 | **Other financial info** | Yes | No | No | Optional | App functionality |
 
-- Claim charges, payer and insurance member details sent to Stedi. No payment cards, no purchase history.
+| **Purchase history** | Yes | No | No | Optional | App functionality, Account management |
+
+- Claim charges, payer and insurance member details sent to Stedi. No payment cards (Google Play handles them).
+- Purchase history: the SOLIS Pro subscription record (product, purchase token, status) sent to RevenueCat.
+  Optional because demo mode and builds without subscriptions never buy.
   Optional because claims are optional (a clinician can use SOLIS for notes only).
   If you judge claim charges are not the user's own financial info, this row can be left out; keeping it is the
   more conservative answer.
