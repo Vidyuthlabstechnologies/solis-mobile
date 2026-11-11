@@ -80,6 +80,7 @@ class ClaimSubmissionService {
     return [
       if (claim == null) 'No claim has been built for this visit.',
       if (visit.status == VisitStatus.inProgress) 'Sign the note first.',
+      if (claim != null && !visit.codesConfirmedFor(claim)) codesNotConfirmed,
       if (!provider.isComplete) 'Complete your provider profile: ${provider.missingForClaims.join(', ')}.',
       if (!_repo.demoMode && provider.isDemoIdentity) 'The provider profile has the demo NPI or tax ID.',
       if (claim != null)
@@ -94,6 +95,9 @@ class ClaimSubmissionService {
           if (i.severity == IssueSeverity.error) i.title,
     ];
   }
+
+  /// The blocker shown until the clinician confirms the current codes.
+  static const codesNotConfirmed = 'Confirm the E/M level and codes before sending.';
 
   /// Sends one signed visit's claim. Unreachable clearinghouse: the claim is
   /// queued with its file and key and sent later by [retryQueued].
@@ -273,9 +277,19 @@ class ClaimSubmissionService {
       return SendResult(SendStatus.failed, problems: errors.isEmpty ? ['HTTP ${res.httpStatus}'] : errors, testMode: test);
     }
     final accepted = res.outcome == SubmissionOutcome.accepted;
+    final audited = latest.withAudit(
+      _repo.provider.displayName,
+      accepted ? '${_sendLabel(extra)} sent' : '${_sendLabel(extra)} rejected',
+      detail: [
+        if (latest.claim != null) latest.claim!.codeSummary,
+        if ((res.testMode ?? test)) 'test',
+        if (!accepted && errors.isNotEmpty) errors.first,
+      ].join('; '),
+      atUtc: _now().toUtc(),
+    );
     await _repo.updateVisit(
       accountNumber,
-      latest.copyWith(
+      audited.copyWith(
         status: accepted ? VisitStatus.submitted : VisitStatus.rejected,
         submission: {
           'submittedAtUtc': nowIso,

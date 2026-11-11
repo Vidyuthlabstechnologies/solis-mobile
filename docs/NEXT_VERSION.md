@@ -74,3 +74,5 @@ where they already cover it.
 - 2026-11-11: owner approved the plan, the 14-day trial with the full Pro
   flow, Pro at $149 a month or $1,548 a year, and free on-device notes.
 - B8: build-order step 1 (recording never lost, sentence-level sources).
+- B9: step 2 (code confirm, audit trail, rejection fixes; claim status
+  timeline already shipped in B3).

@@ -7,7 +7,11 @@ import 'knowledge_widgets.dart';
 /// What the clinician chose in the sign sheet.
 class SignSheetResult {
   final bool markOrders;
-  const SignSheetResult({required this.markOrders});
+
+  /// The clinician ticked the E/M level and codes as reviewed.
+  final bool codesConfirmed;
+
+  const SignSheetResult({required this.markOrders, this.codesConfirmed = false});
 }
 
 /// The final review before signing: attestation, the claim that will be
@@ -29,6 +33,9 @@ class SignAndSendSheet extends StatefulWidget {
   final bool testMode;
   final String? payerName;
 
+  /// The E/M code on the claim, named in the confirmation ("99214").
+  final String? emCode;
+
   const SignAndSendSheet({
     super.key,
     required this.attestation,
@@ -43,7 +50,13 @@ class SignAndSendSheet extends StatefulWidget {
     required this.connected,
     required this.testMode,
     required this.payerName,
+    this.emCode,
   });
+
+  /// The confirmation the clinician ticks before a claim can be billed.
+  static String confirmText(String? emCode) => emCode == null
+      ? 'I reviewed every code above and they match my note.'
+      : 'I reviewed the E/M level ($emCode) and every code above, and they match my note.';
 
   /// The main button's words for these inputs.
   static String actionLabel({required bool hasClaim, required bool hasErrors, required bool connected, required bool testMode}) {
@@ -58,6 +71,7 @@ class SignAndSendSheet extends StatefulWidget {
 
 class _SignAndSendSheetState extends State<SignAndSendSheet> {
   late bool _markOrders = widget.ordersToMark > 0;
+  bool _codesConfirmed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +81,9 @@ class _SignAndSendSheetState extends State<SignAndSendSheet> {
     final hasClaim = widget.claimId != null;
     final hasErrors = widget.errors.isNotEmpty;
     final label = SignAndSendSheet.actionLabel(hasClaim: hasClaim, hasErrors: hasErrors, connected: widget.connected, testMode: widget.testMode);
+    // A claim that will be billed now needs the clinician's own confirmation
+    // of the level and codes; the codes are suggestions until then.
+    final needsConfirm = hasClaim && !hasErrors;
 
     Widget row(IconData icon, String text, {Color? color, TextStyle? style}) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 4),
@@ -140,6 +157,16 @@ class _SignAndSendSheetState extends State<SignAndSendSheet> {
                           color: SolisTheme.onTint(SolisTheme.danger, isDark: dark)),
                     for (final i in widget.errors) issue(i, true),
                     for (final i in widget.warnings) issue(i, false),
+                    if (needsConfirm)
+                      CheckboxListTile(
+                        key: const Key('confirm_codes'),
+                        contentPadding: EdgeInsets.zero,
+                        controlAffinity: ListTileControlAffinity.leading,
+                        value: _codesConfirmed,
+                        onChanged: (v) => setState(() => _codesConfirmed = v ?? false),
+                        title: Text(SignAndSendSheet.confirmText(widget.emCode)),
+                        subtitle: const Text('Required. SOLIS suggests codes; you decide what is billed.'),
+                      ),
                   ],
                   if (widget.ordersToMark > 0) ...[
                     const SizedBox(height: 8),
@@ -167,7 +194,9 @@ class _SignAndSendSheetState extends State<SignAndSendSheet> {
                   height: 48,
                   child: FilledButton.icon(
                     key: const Key('sign_confirm'),
-                    onPressed: () => Navigator.pop(context, SignSheetResult(markOrders: _markOrders)),
+                    onPressed: needsConfirm && !_codesConfirmed
+                        ? null
+                        : () => Navigator.pop(context, SignSheetResult(markOrders: _markOrders, codesConfirmed: needsConfirm && _codesConfirmed)),
                     icon: Icon(label.contains('send') ? Icons.outbox_outlined : Icons.draw_outlined),
                     label: Text(label, overflow: TextOverflow.ellipsis),
                   ),

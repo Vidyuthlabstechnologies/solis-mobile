@@ -183,6 +183,49 @@ class RecordingCheckpoint {
   }
 }
 
+/// The clinician's confirmation of the E/M level and codes on a claim.
+/// Valid only for the codes it names: [fingerprint] is
+/// [ClaimDraft.codeFingerprint] at the time of the confirmation.
+class CodeConfirmation {
+  final DateTime atUtc;
+  final String by;
+  final String fingerprint;
+  final String codes;
+
+  const CodeConfirmation({required this.atUtc, required this.by, required this.fingerprint, required this.codes});
+
+  Map<String, dynamic> toJson() => {'atUtc': atUtc.toIso8601String(), 'by': by, 'fingerprint': fingerprint, 'codes': codes};
+
+  static CodeConfirmation? fromJson(Object? j) {
+    if (j is! Map) return null;
+    final at = DateTime.tryParse('${j['atUtc'] ?? ''}');
+    if (at == null || j['fingerprint'] == null) return null;
+    return CodeConfirmation(atUtc: at, by: '${j['by'] ?? ''}', fingerprint: '${j['fingerprint']}', codes: '${j['codes'] ?? ''}');
+  }
+}
+
+/// One line of a visit's audit trail: who did what, and when.
+class AuditEvent {
+  final DateTime atUtc;
+  final String by;
+  final String action;
+  final String detail;
+
+  const AuditEvent({required this.atUtc, required this.by, required this.action, this.detail = ''});
+
+  Map<String, dynamic> toJson() => {'atUtc': atUtc.toIso8601String(), 'by': by, 'action': action, if (detail.isNotEmpty) 'detail': detail};
+
+  static AuditEvent? fromJson(Object? j) {
+    if (j is! Map) return null;
+    final at = DateTime.tryParse('${j['atUtc'] ?? ''}');
+    if (at == null) return null;
+    return AuditEvent(atUtc: at, by: '${j['by'] ?? ''}', action: '${j['action'] ?? ''}', detail: '${j['detail'] ?? ''}');
+  }
+
+  /// One line for an exported audit trail (UTC, tab separated).
+  String toLine() => [atUtc.toIso8601String(), by, action, detail].join('\t');
+}
+
 /// One date of service under an account: Visit 1, Visit 2, ...
 class Visit {
   final int number;
@@ -216,6 +259,19 @@ class Visit {
   /// Set while a recording runs; see [RecordingCheckpoint].
   final RecordingCheckpoint? liveRecording;
 
+  /// The clinician's confirmation of the claim's E/M level and codes.
+  final CodeConfirmation? codeConfirmation;
+
+  /// Who signed, confirmed, changed or sent what on this visit.
+  final List<AuditEvent> audit;
+
+  /// Whether the clinician confirmed exactly these codes.
+  bool codesConfirmedFor(ClaimDraft claim) => codeConfirmation?.fingerprint == claim.codeFingerprint;
+
+  /// This visit with [action] added to the audit trail.
+  Visit withAudit(String by, String action, {String detail = '', DateTime? atUtc}) =>
+      copyWith(audit: [...audit, AuditEvent(atUtc: atUtc ?? DateTime.now().toUtc(), by: by, action: action, detail: detail)]);
+
   const Visit({
     required this.number,
     required this.dateOfService,
@@ -236,6 +292,8 @@ class Visit {
     this.priorAuthNumber,
     this.serviceFacility,
     this.liveRecording,
+    this.codeConfirmation,
+    this.audit = const [],
   });
 
   Visit copyWith({
@@ -260,6 +318,8 @@ class Visit {
     bool clearServiceFacility = false,
     RecordingCheckpoint? liveRecording,
     bool clearLiveRecording = false,
+    CodeConfirmation? codeConfirmation,
+    List<AuditEvent>? audit,
   }) =>
       Visit(
         number: number,
@@ -282,6 +342,8 @@ class Visit {
         priorAuthNumber: priorAuthNumber == null ? this.priorAuthNumber : (priorAuthNumber.trim().isEmpty ? null : priorAuthNumber.trim()),
         serviceFacility: clearServiceFacility ? null : (serviceFacility ?? this.serviceFacility),
         liveRecording: clearLiveRecording ? null : (liveRecording ?? this.liveRecording),
+        codeConfirmation: codeConfirmation ?? this.codeConfirmation,
+        audit: audit ?? this.audit,
       );
 
   Map<String, dynamic> toJson() => {
@@ -304,6 +366,8 @@ class Visit {
         if (priorAuthNumber != null) 'priorAuthNumber': priorAuthNumber,
         if (serviceFacility != null) 'serviceFacility': serviceFacility!.toJson(),
         if (liveRecording != null) 'liveRecording': liveRecording!.toJson(),
+        if (codeConfirmation != null) 'codeConfirmation': codeConfirmation!.toJson(),
+        if (audit.isNotEmpty) 'audit': [for (final e in audit) e.toJson()],
       };
 
   factory Visit.fromJson(Map<String, dynamic> j) => Visit(
@@ -326,6 +390,8 @@ class Visit {
         priorAuthNumber: j['priorAuthNumber'] as String?,
         serviceFacility: j['serviceFacility'] is Map ? ServiceFacility.fromJson((j['serviceFacility'] as Map).cast<String, dynamic>()) : null,
         liveRecording: RecordingCheckpoint.fromJson(j['liveRecording']),
+        codeConfirmation: CodeConfirmation.fromJson(j['codeConfirmation']),
+        audit: [for (final e in (j['audit'] as List? ?? const [])) ?AuditEvent.fromJson(e)],
       );
 }
 

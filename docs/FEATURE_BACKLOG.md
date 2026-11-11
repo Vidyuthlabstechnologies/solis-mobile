@@ -305,6 +305,12 @@ owner.
   after a kill or crash; every note sentence linked to its transcript line,
   and sentences with no source highlighted. See
   docs/NEXT_VERSION.md.
+- **B9** (next-version brief step 2): the clinician must tick the E/M
+  level and codes before a claim is billed, and any later code change needs
+  a new confirmation (the send service blocks it). There is a per-visit
+  audit trail (signed, confirmed, codes changed, sections edited, sent or
+  rejected) that can be copied for an auditor, and one-tap fixes on rejected
+  or denied claims.
 - **Next**: 7, 12, 61, 45, 46, 83, 104. 135 needs a local-notification
   plugin, and 153/154 (app lock) a biometric plugin; both are held for a
   decision.

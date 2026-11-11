@@ -146,10 +146,17 @@ void main() {
     expect(find.textContaining('I personally performed this encounter'), findsOneWidget);
     expect(find.textContaining('G43.109'), findsWidgets);
     expect(find.text('Sign and mark ready'), findsOneWidget);
+    // The codes are suggestions until the clinician confirms them.
+    expect(tester.widget<ButtonStyleButton>(find.byKey(const Key('sign_confirm'))).onPressed, isNull);
+    await tester.ensureVisible(find.byKey(const Key('confirm_codes')));
+    await tester.tap(find.byKey(const Key('confirm_codes')));
+    await tester.pump();
     await tester.tap(find.byKey(const Key('sign_confirm')));
     await _settle(tester);
     final visit = repo.byNumber(acct)!.visit(n)!;
     expect(visit.status, VisitStatus.claimReady);
+    expect(visit.codesConfirmedFor(visit.claim!), isTrue);
+    expect(visit.audit.map((e) => e.action), ['Signed note', 'Confirmed E/M level and codes']);
     // A real SHA-256 over the signed note, not a constant.
     final seal = (visit.encounter!['sha256Seal'] as String);
     expect(seal, matches(RegExp(r'^[0-9a-f]{64}$')));

@@ -370,6 +370,9 @@ void main() {
     await t.tap(fix);
     await _settle(t);
     expect(find.byKey(const Key('sign_confirm')), findsOneWidget);
+    await t.ensureVisible(find.byKey(const Key('confirm_codes')));
+    await t.tap(find.byKey(const Key('confirm_codes')));
+    await t.pump();
     await t.tap(find.byKey(const Key('sign_confirm')));
     await _settle(t);
     expect(repo.byNumber(acct)!.visit(n)!.status, VisitStatus.claimReady);
