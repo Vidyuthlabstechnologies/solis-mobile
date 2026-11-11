@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Smoke test for an installed SOLIS APK on a running emulator or phone:
 #   tool/smoke_test.sh <apk> <screenshot dir>
-# Opens the app, taps "Use demo account", opens the first patient, and fails
+# Opens the app, taps "Use demo account", opens the Patients tab and a demo patient, and fails
 # if the app crashes or a step's text never appears.
 set -uo pipefail
 APK=$1; OUT=$2; PKG=com.solis.clinical.solis_mobile
@@ -10,11 +10,14 @@ fail() { echo "SMOKE FAIL: $*"; adb logcat -d > "$OUT/logcat.txt"; shot fail; ex
 shot() { adb exec-out screencap -p > "$OUT/$1.png" || true; }
 dump() { adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1; adb shell cat /sdcard/ui.xml 2>/dev/null; }
 # Waits for text (in text or content-desc) and prints the centre of its bounds.
+# A leading ^ matches only labels that start with the text (e.g. a tab, not
+# a sentence that mentions it).
 find_text() {
-  local want=$1 tries=${2:-30} xml line
+  local want=$1 tries=${2:-30} xml line pat
+  if [ "${want#^}" != "$want" ]; then pat="${want#^}"; else pat="[^\"]*$want"; fi
   for _ in $(seq "$tries"); do
     xml=$(dump)
-    line=$(echo "$xml" | tr '>' '\n' | grep -i -m1 -E "(text|content-desc)=\"[^\"]*$want" || true)
+    line=$(echo "$xml" | tr '>' '\n' | grep -i -m1 -E "(text|content-desc)=\"$pat" || true)
     if [ -n "$line" ]; then
       echo "$line" | sed -E 's/.*bounds="\[([0-9]+),([0-9]+)\]\[([0-9]+),([0-9]+)\]".*/\1 \2 \3 \4/' | awk '{print int(($1+$3)/2), int(($2+$4)/2)}'
       return 0
@@ -41,12 +44,15 @@ shot 2-demo
 for b in "Allow" "While using the app" "Continue" "Got it"; do
   xy=$(find_text "$b" 2) && adb shell input tap $xy && sleep 2
 done
-find_text "Patients" 30 >/dev/null || fail "patient list never appeared"
-shot 3-patients
-tap_text "Margaret" 20 || true
+# After sign-in the app opens on "Today"; switch to the Patients tab.
+shot 3-today
+tap_text "^Patients" 30
+find_text "Margaret" 20 >/dev/null || fail "demo patients never appeared"
+shot 4-patients
+tap_text "Margaret" 10
 sleep 3
 alive || fail "app crashed opening a patient"
-shot 4-patient
+shot 5-patient
 
 adb logcat -d > "$OUT/logcat.txt"
 if grep -E "FATAL EXCEPTION|Fatal signal" "$OUT/logcat.txt" | grep -q .; then fail "crash in logcat"; fi
