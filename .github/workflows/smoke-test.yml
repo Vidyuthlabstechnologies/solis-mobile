@@ -1,0 +1,81 @@
+name: Smoke test on Android
+
+# Installs an APK on an Android emulator, opens it, enters the demo account,
+# opens a patient, and fails on a crash. Screenshots are uploaded.
+# By default it builds the standalone APK (debug key). Give run_id to test
+# the standalone APK from a Release run instead.
+on:
+  workflow_dispatch:
+    inputs:
+      flavor:
+        description: "Build to test"
+        type: choice
+        options: [standalone, play]
+        default: standalone
+      release_run_id:
+        description: "Optional: test app-standalone-release.apk from this Release run ID"
+        required: false
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: Fit Gradle into the runner's memory
+        run: |
+          sudo fallocate -l 8G /swapfile && sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile
+          mkdir -p ~/.gradle
+          printf 'org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g\nkotlin.daemon.jvmargs=-Xmx2g\norg.gradle.workers.max=2\n' > ~/.gradle/gradle.properties
+
+      - name: Get the APK from a Release run
+        if: inputs.release_run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download "${{ inputs.release_run_id }}" --dir rel
+          mkdir -p out && cp "$(find rel -name app-standalone-release.apk | head -1)" out/app.apk
+
+      - uses: actions/setup-java@v4
+        if: inputs.release_run_id == ''
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        if: inputs.release_run_id == ''
+        with:
+          channel: stable
+          flutter-version: 3.47.9
+          cache: true
+      - name: Build the APK
+        if: inputs.release_run_id == ''
+        run: |
+          flutter pub get
+          flutter build apk --release --flavor ${{ inputs.flavor }} --target-platform android-x64
+          mkdir -p out && cp build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk out/app.apk
+
+      - name: Run on the emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+          disable-animations: true
+          script: bash tool/smoke_test.sh out/app.apk shots
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-test-${{ github.run_number }}
+          path: shots/
+          retention-days: 14
