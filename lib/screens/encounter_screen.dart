@@ -16,6 +16,7 @@ import '../models/provider_profile.dart';
 import '../services/account_repository.dart';
 import '../services/billing/claim_submission_service.dart';
 import '../services/billing/eligibility_service.dart';
+import '../services/billing/rejection_fixes.dart';
 import '../services/billing/x12_837p.dart';
 import '../services/coding/claim_builder.dart';
 import '../services/codesets/reference_data.dart';
@@ -504,6 +505,9 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
   /// snackbar offers Undo, which restores the claim as it was.
   void _onClaimChanged(ClaimDraft claim, {String? undoLabel}) {
     final before = _claim;
+    if (before != null && before.codeSummary != claim.codeSummary) {
+      unawaited(_record('Changed codes', detail: 'from ${before.codeSummary} to ${claim.codeSummary}'));
+    }
     setState(() {
       _claim = claim;
       _claimReady = false;
@@ -664,6 +668,65 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
         ),
       );
 
+  /// Adds [action] to the visit's audit trail; with [confirmCodes] also
+  /// records the clinician's confirmation of the current codes.
+  Future<void> _record(String action, {String detail = '', bool confirmCodes = false}) async {
+    final visit = _visitOrNull;
+    if (visit == null || widget.previewRecording) return;
+    final by = _repo.provider.displayName;
+    final claim = _claim;
+    var updated = visit.withAudit(by, action, detail: detail);
+    if (confirmCodes && claim != null) {
+      updated = updated.copyWith(
+        codeConfirmation: CodeConfirmation(atUtc: DateTime.now().toUtc(), by: by, fingerprint: claim.codeFingerprint, codes: claim.codeSummary),
+      );
+    }
+    await _repo.updateVisit(widget.accountNumber, updated);
+  }
+
+  /// Asks the clinician to confirm the E/M level and codes when the current
+  /// claim has not been confirmed (or changed since). True when confirmed.
+  Future<bool> _ensureCodesConfirmed() async {
+    final claim = _claim;
+    if (claim == null) return false;
+    if (_visit.codesConfirmedFor(claim)) return true;
+    var ticked = false;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setLocal) => AlertDialog(
+          key: const Key('confirm_codes_dialog'),
+          icon: const Icon(Icons.fact_check_outlined, size: 32),
+          title: const Text('Confirm the codes', textAlign: TextAlign.center),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (final l in claim.lines) Text('${[l.code, ...l.modifiers].join('-')}  ${l.description}'),
+              for (final d in claim.billable) Text('${d.code}  ${d.description}'),
+              const SizedBox(height: 8),
+              CheckboxListTile(
+                key: const Key('confirm_codes'),
+                contentPadding: EdgeInsets.zero,
+                controlAffinity: ListTileControlAffinity.leading,
+                value: ticked,
+                onChanged: (v) => setLocal(() => ticked = v ?? false),
+                title: Text(SignAndSendSheet.confirmText(claim.emLine?.code)),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Cancel')),
+            FilledButton(key: const Key('confirm_codes_ok'), onPressed: ticked ? () => Navigator.pop(ctx, true) : null, child: const Text('Confirm')),
+          ],
+        ),
+      ),
+    );
+    if (ok != true || !mounted) return false;
+    await _record('Confirmed E/M level and codes', detail: claim.codeSummary, confirmCodes: true);
+    return true;
+  }
+
   /// True from the tap on Send until the send has finished, so a double tap
   /// (or a tap while the confirm dialog is opening) cannot send twice.
   bool _sendInFlight = false;
@@ -680,6 +743,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
   }
 
   Future<void> _submitClaimOnce() async {
+    if (!await _ensureCodesConfirmed() || !mounted) return;
     if (!_claims.isConnected) {
       _copyClaim();
       return;
@@ -819,12 +883,53 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       if (s['correlationId'] != null) 'Clearinghouse reference ${s['correlationId']}',
       ...claimHistoryLines(s),
     ];
-    return NoteBanner(icon: icon, title: title, message: lines.isEmpty ? 'Waiting for the payer.' : lines.join('\n'), color: color);
+    final banner = NoteBanner(icon: icon, title: title, message: lines.isEmpty ? 'Waiting for the payer.' : lines.join('\n'), color: color);
+    if (status != VisitStatus.rejected && status != VisitStatus.denied) return banner;
+    // One tap to the place that fixes what the rejection names.
+    final fixes = RejectionFixes.forMessages([
+      ...((s['errors'] as List?) ?? const []).map((e) => '$e'),
+      if (s['statusExplanation'] != null) '${s['statusExplanation']}',
+      if (s['lastStatus'] != null) '${s['lastStatus']}',
+    ]);
+    if (fixes.isEmpty) return banner;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        banner,
+        const SizedBox(height: 8),
+        Wrap(
+          key: const Key('rejection_fixes'),
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final f in fixes)
+              OutlinedButton.icon(
+                icon: Icon(switch (f.kind) {
+                  FixKind.scanCard => Icons.document_scanner_outlined,
+                  FixKind.editProvider => Icons.badge_outlined,
+                  FixKind.editPatient => Icons.person_outline_rounded,
+                  _ => Icons.receipt_long_outlined,
+                }),
+                label: Text(f.label),
+                onPressed: () {
+                  if (f.kind == FixKind.editLine) {
+                    setState(() => _reviewTab = 3);
+                  } else {
+                    unawaited(_onFix(f));
+                  }
+                },
+              ),
+          ],
+        ),
+      ],
+    );
   }
 
-  void _markClaimReady() {
+  Future<void> _markClaimReady() async {
+    if (!await _ensureCodesConfirmed() || !mounted) return;
     setState(() => _claimReady = true);
-    _persist();
+    await _persist();
+    if (!mounted) return;
     HapticFeedback.mediumImpact();
     _showMessage('Claim marked ready to bill.', icon: Icons.task_alt_rounded);
   }
@@ -1757,6 +1862,69 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
     _showMessage('Note copied. Paste it into the EHR within 60 seconds; then the clipboard clears.', icon: Icons.content_copy_rounded);
   }
 
+  /// Who signed, confirmed, changed and sent what on this visit, newest
+  /// first, with a copy of the whole trail for an auditor.
+  void _openAuditTrail() {
+    final visit = _visitOrNull;
+    if (visit == null) return;
+    final events = visit.audit.reversed.toList();
+    final c = visit.codeConfirmation;
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) {
+        final theme = Theme.of(ctx);
+        return ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(ctx).height * 0.85),
+          child: SafeArea(
+            child: ListView(
+              key: const Key('audit_trail'),
+              shrinkWrap: true,
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
+              children: [
+                Text('Audit trail', style: theme.textTheme.titleLarge),
+                const SizedBox(height: 4),
+                Text(
+                  c == null
+                      ? 'Codes not confirmed yet.'
+                      : (_claim != null && !visit.codesConfirmedFor(_claim!))
+                          ? 'Codes changed after ${c.by} confirmed them on ${_formatAddendumTime(c.atUtc)}; confirm again before billing.'
+                          : 'Codes confirmed by ${c.by} on ${_formatAddendumTime(c.atUtc)}: ${c.codes}.',
+                  style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                ),
+                const SizedBox(height: 12),
+                if (events.isEmpty)
+                  const EmptyState(icon: Icons.history_edu_outlined, title: 'Nothing yet', message: 'Signing, code confirmations, code changes and claims are recorded here.')
+                else
+                  for (final e in events)
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: const Icon(Icons.history_rounded),
+                      title: Text(e.action),
+                      subtitle: Text([_formatAddendumTime(e.atUtc), e.by, if (e.detail.isNotEmpty) e.detail].join('\n')),
+                    ),
+                const SizedBox(height: 8),
+                OutlinedButton.icon(
+                  key: const Key('copy_audit'),
+                  icon: const Icon(Icons.content_copy_rounded),
+                  label: const Text('Copy audit trail'),
+                  onPressed: events.isEmpty
+                      ? null
+                      : () {
+                          final text = ['time_utc\tby\taction\tdetail', for (final e in visit.audit) e.toLine()].join('\n');
+                          unawaited(PhiClipboard.copy(text));
+                          Navigator.pop(ctx);
+                          _showMessage('Audit trail copied. It clears from the clipboard in 60 seconds.', icon: Icons.content_copy_rounded);
+                        },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void _openFhirExportDialog() {
     final fhirBundle = FhirExportService.generateFhirR4Bundle(_encounter);
     final jsonString = const JsonEncoder.withIndent('  ').convert(fhirBundle);
@@ -1892,6 +2060,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       }
       _editing[key] = !wasEditing;
     });
+    if (_editing[key] == false) unawaited(_record('Edited ${key[0].toUpperCase()}${key.substring(1)}'));
     _persist();
   }
 
@@ -1945,6 +2114,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
         connected: connected,
         testMode: _claims.isTest,
         payerName: _account.insurance?.payerName,
+        emCode: claim?.emLine?.code,
       ),
     );
     if (result == null || !mounted) return;
@@ -1959,6 +2129,8 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
       if (errors.isEmpty && !connected && claim != null) _claimReady = true;
     });
     await _persist();
+    await _record('Signed note', detail: _encounter.sha256Seal.isEmpty ? '' : 'seal ${_encounter.sha256Seal.substring(0, 16)}');
+    if (result.codesConfirmed && claim != null) await _record('Confirmed E/M level and codes', detail: claim.codeSummary, confirmCodes: true);
     if (!mounted) return;
     if (errors.isNotEmpty) {
       setState(() => _reviewTab = 3);
@@ -2419,6 +2591,8 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
                 _openSessionDetails();
               case 'fhir':
                 _openFhirExportDialog();
+              case 'audit':
+                _openAuditTrail();
               case 'theme':
                 widget.onThemeToggle?.call(!widget.isDark);
             }
@@ -2427,6 +2601,7 @@ class _EncounterScreenState extends State<EncounterScreen> with SingleTickerProv
             if (hasNote && !_isRecording && compact) _menuItem('copy', Icons.content_copy_rounded, 'Copy note'),
             _menuItem('session', Icons.tune_rounded, 'Session details'),
             if (hasNote) _menuItem('fhir', Icons.data_object_rounded, 'Export FHIR R4'),
+            _menuItem('audit', Icons.history_edu_outlined, 'Audit trail'),
             if (widget.onThemeToggle != null)
               _menuItem('theme', widget.isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined, widget.isDark ? 'Light theme' : 'Dark theme'),
           ],

@@ -37,7 +37,14 @@ ClaimDraft cleanClaim() => ClaimDraft(
 Future<Visit> visitWith(AccountRepository repo, PatientAccount a,
     {VisitStatus status = VisitStatus.signed, ClaimDraft? claim, String dos = '2026-10-15', String pos = '11'}) async {
   final v = await repo.addVisit(a.accountNumber, dateOfService: DateTime.parse(dos), placeOfService: pos);
-  final updated = v.copyWith(status: status, claim: claim ?? cleanClaim(), encounter: const {'subjective': 'x'});
+  final c = claim ?? cleanClaim();
+  // The clinician confirmed these codes when signing.
+  final updated = v.copyWith(
+    status: status,
+    claim: c,
+    encounter: const {'subjective': 'x'},
+    codeConfirmation: CodeConfirmation(atUtc: DateTime.utc(2026, 10, 15), by: 'Test', fingerprint: c.codeFingerprint, codes: c.codeSummary),
+  );
   await repo.updateVisit(a.accountNumber, updated);
   return updated;
 }

@@ -186,6 +186,28 @@ class ClaimDraft {
 
   double get totalCharge => lines.fold(0, (s, l) => s + l.lineCharge);
 
+  /// The E/M service line, if the claim has one.
+  ServiceLine? get emLine {
+    for (final l in lines) {
+      if (l.isEvaluationAndManagement) return l;
+    }
+    return null;
+  }
+
+  /// What the clinician confirms before a claim can go out: the billed
+  /// diagnoses in order and every service with its modifiers and units. Any
+  /// change to these after the confirmation needs a new confirmation.
+  String get codeFingerprint => [
+        'dx:${billable.map((d) => d.code).join(',')}',
+        for (final l in lines) 'svc:${[l.code, ...l.modifiers].join('-')}x${l.unitsLabel}>${l.diagnosisCodes.join(',')}',
+      ].join('|');
+
+  /// Codes in words for the audit trail: "99214, J06.9, I10".
+  String get codeSummary => [
+        for (final l in lines) [l.code, ...l.modifiers].join('-'),
+        for (final d in billable) d.code,
+      ].join(', ');
+
   ClaimDraft copyWith({List<ClaimDiagnosis>? diagnoses, List<ServiceLine>? lines, String? primaryCode}) => ClaimDraft(
         diagnoses: diagnoses ?? this.diagnoses,
         lines: lines ?? this.lines,
