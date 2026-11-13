@@ -19,6 +19,7 @@ import 'services/theme_preference.dart';
 import 'services/transcription/native_speech_provider.dart';
 import 'widgets/on_device_speech_card.dart';
 import 'theme/solis_theme.dart';
+import 'services/front_desk.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +31,8 @@ Future<void> main() async {
   final auth = AuthService.instance;
   SolisBackend.defaultSessions = auth;
   await auth.restore();
+  // Front desk mode stays on across restarts until the PIN turns it off.
+  await FrontDesk.instance.restore();
   // SOLIS Pro through Google Play Billing, only when this build has a
   // RevenueCat key. Offline it stays as last known and never blocks start.
   if (AppConfig.hasRevenueCat) {

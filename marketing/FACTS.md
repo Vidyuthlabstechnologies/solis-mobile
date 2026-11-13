@@ -66,6 +66,32 @@ big billing department.
   registry), tax ID, specialty, insurers accepted.
 - **Works offline** in on-device mode.
 
+## New in v1.1.0 (all real, shipped)
+- **Recordings survive interruptions.** A call, the app being closed or a dead
+  battery keeps what was captured (saved every 5 seconds) and offers to resume.
+- **Sentence-level sources.** Tap any sentence in the note to see the
+  conversation turn it came from; sentences without a source are flagged.
+- **Templates and length.** SOAP, primary care, urgent care (return
+  precautions as said, or "not discussed") and psychiatry (mental status in
+  the patient's words). Brief, standard or detailed; abbreviations spelled
+  out or kept. Ruled-out diagnoses stay out of later visits.
+- **Code confirmation and audit trail.** A claim cannot be sent until the
+  clinician confirms the E/M level and codes. Signing, confirming, changes
+  and sends are logged per visit and can be copied.
+- **Rejections with fixes.** Rejected claims show suggested fixes.
+- **Front desk mode, free.** Staff scan cards and edit patient details on the
+  clinician's phone; notes, billing and settings are hidden; a PIN leaves the
+  mode. It is one phone handed over, not separate staff logins.
+- **What SOLIS did for you.** Today shows notes signed, claims sent and amount
+  billed today and over 7 days, plus time saved (an estimate of 15 minutes per
+  signed note; always call it an estimate).
+- **Patient summary.** Plain-language after-visit summary from the signed
+  note, to copy or text to the patient.
+- **Plans.** On-device notes are free and unlimited. SOLIS Pro ($149 a month
+  or $1,548 a year) sends claims, with a 14-day free trial through Google
+  Play. The app reminds the clinician on Today in the last 3 days of the
+  trial and links to cancel in Google Play.
+
 ## Privacy and security (say exactly this, no more)
 - Keys never ship inside the app; vendor keys live on the SOLIS server.
 - Card photos deleted after reading; full SSN never stored.

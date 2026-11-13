@@ -83,3 +83,7 @@ where they already cover it.
   All five build-order steps are done; still open from the brief: offline
   claim queue is already in (B3/B4 outbox), staff seats, trial-end email
   reminder (needs the worker), website and listing copy.
+- B13: staff seats as a free front desk mode on the clinician's phone
+  (separate staff logins need practice sync, not built), trial-ending
+  reminder in the app, listing and release notes for 1.1.0. Still open:
+  trial email (docs/TRIAL_EMAIL.md, needs the Worker) and the website copy.

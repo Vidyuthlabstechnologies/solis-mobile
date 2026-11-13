@@ -48,6 +48,23 @@ class ProRenewal {
 
   const ProRenewal({this.endsAt, this.willRenew = true, this.inTrial = false});
 
+  /// How many days before a trial ends the reminder shows.
+  static const remindDays = 3;
+
+  /// The reminder shown on Today in the last [remindDays] days of a trial
+  /// that will turn into a paid plan; null otherwise.
+  String? trialEndingReminder(DateTime now) {
+    final end = endsAt;
+    if (!inTrial || !willRenew || end == null) return null;
+    final left = end.difference(now);
+    if (left.isNegative || left > const Duration(days: remindDays)) return null;
+    final d = end.toLocal();
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    final days = left.inHours < 24 ? 'today' : 'in ${(left.inHours / 24).ceil()} days';
+    return 'Your free trial ends $days (${months[d.month - 1]} ${d.day}). Google Play then charges the plan you chose. '
+        'To stop, cancel in Google Play before then and you pay nothing.';
+  }
+
   /// "Free trial until Nov 25, then renews", "Renews Dec 11",
   /// "Ends Dec 11 (cancelled)".
   String describe() {
