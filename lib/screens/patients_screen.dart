@@ -13,6 +13,11 @@ import '../services/billing/claims_csv.dart';
 import '../services/coding/place_of_service.dart';
 import '../services/patient_list.dart';
 import '../services/value_report.dart';
+import '../config/app_config.dart';
+import '../services/front_desk.dart';
+import '../services/subscriptions/subscription_service.dart';
+import '../widgets/front_desk_widgets.dart';
+import '../widgets/legal_links.dart';
 import '../services/security/phi_clipboard.dart';
 import '../widgets/medical_disclaimer.dart';
 import '../theme/solis_theme.dart';
@@ -67,6 +72,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
   void initState() {
     super.initState();
     _repo.addListener(_onChanged);
+    FrontDesk.instance.addListener(_onChanged);
+    SubscriptionService.instance.addListener(_onChanged);
     if (!PatientsScreen._refreshedThisLaunch && _claims.isConnected) {
       PatientsScreen._refreshedThisLaunch = true;
       // Send what waited in the outbox and pick up payer answers.
@@ -84,6 +91,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
   @override
   void dispose() {
     _repo.removeListener(_onChanged);
+    FrontDesk.instance.removeListener(_onChanged);
+    SubscriptionService.instance.removeListener(_onChanged);
     _statusTimer?.cancel();
     _search.dispose();
     super.dispose();
@@ -157,7 +166,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
           children: [
             Icon(icon, size: 20),
             const SizedBox(width: 12),
-            Text(label),
+            Flexible(child: Text(label)),
           ],
         ),
       );
@@ -237,8 +246,85 @@ class _PatientsScreenState extends State<PatientsScreen> {
     );
   }
 
+  Future<void> _signOut() async {
+    final nav = Navigator.of(context);
+    await FrontDesk.instance.resetForSignOut();
+    await AuthService.instance.signOut();
+    _repo.setDemoMode(false);
+    nav.pushNamedAndRemoveUntil(AppSession.loginRoute, (_) => false);
+  }
+
+  Future<void> _startFrontDesk() async {
+    if (await showTurnOnFrontDesk(context)) {
+      setState(() => _tab = 1);
+      _message('Front desk mode is on. Hand the phone to your staff.');
+    }
+  }
+
+  Future<void> _leaveFrontDesk() async {
+    if (await showTurnOffFrontDesk(context, onForgot: _signOut)) _message('Front desk mode is off.');
+  }
+
+  /// Front desk mode: staff scan cards and edit patient details; visits,
+  /// notes, money and settings stay hidden.
+  Widget _buildFrontDesk(BuildContext context) {
+    if (_tab > 1) _tab = 1;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_tab == 0 ? 'Today' : 'Patients'),
+        actions: [
+          IconButton(
+            tooltip: 'Add patient without a card',
+            icon: const Icon(Icons.person_add_alt_outlined),
+            onPressed: () => _openScan(manual: true),
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _openScan,
+        icon: const Icon(Icons.document_scanner_outlined),
+        label: const Text('Scan card'),
+      ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _tab,
+        onDestinationSelected: (i) => setState(() => _tab = i),
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.today_outlined), selectedIcon: Icon(Icons.today_rounded), label: 'Today'),
+          NavigationDestination(icon: Icon(Icons.people_outline_rounded), selectedIcon: Icon(Icons.people_rounded), label: 'Patients'),
+        ],
+      ),
+      body: SafeArea(
+        top: false,
+        child: Column(
+          children: [
+            FrontDeskStrip(onExit: _leaveFrontDesk),
+            if (_repo.demoMode) const _DemoStrip(),
+            Expanded(child: _tab == 0 ? _buildFrontDeskToday(context) : _buildPatients(context)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Today's patients for the front desk: names only, opening the chart.
+  Widget _buildFrontDeskToday(BuildContext context) {
+    final seen = <String>{};
+    final today = [for (final (a, _) in visitsOn(_repo.accounts)) if (seen.add(a.accountNumber)) a];
+    if (today.isEmpty) {
+      return const EmptyState(icon: Icons.today_outlined, title: 'No patients today yet', message: 'Scan a card to add the next patient.');
+    }
+    return ListView.separated(
+      key: const Key('front_desk_today'),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 96),
+      itemCount: today.length,
+      separatorBuilder: (_, _) => const SizedBox(height: 8),
+      itemBuilder: (context, i) => _PatientTile(account: today[i], onTap: () => _openChart(today[i])),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (FrontDesk.instance.isOn) return _buildFrontDesk(context);
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final provider = _repo.provider;
@@ -282,14 +368,11 @@ class _PatientsScreenState extends State<PatientsScreen> {
               if (v == 'csv') _copyClaimsCsv();
               if (v == 'unidentified') _addUnidentified();
               if (v == 'about') showSolisAbout(context);
-              if (v == 'signout') {
-                final nav = Navigator.of(context);
-                await AuthService.instance.signOut();
-                _repo.setDemoMode(false);
-                nav.pushNamedAndRemoveUntil(AppSession.loginRoute, (_) => false);
-              }
+              if (v == 'frontdesk') _startFrontDesk();
+              if (v == 'signout') await _signOut();
             },
             itemBuilder: (_) => [
+              _menuItem('frontdesk', Icons.badge_outlined, 'Front desk mode (free)'),
               _menuItem('integrations', Icons.hub_outlined, 'Integrations'),
               _menuItem('unidentified', Icons.person_search_outlined, 'Unidentified patient (EMS, ED)'),
               _menuItem('deleted', Icons.restore_from_trash_outlined, 'Recently deleted'),
@@ -406,17 +489,53 @@ class _PatientsScreenState extends State<PatientsScreen> {
     );
   }
 
+  /// In the last days of a free trial: when it ends and how to cancel.
+  Widget? _trialCard(BuildContext context) {
+    final text = SubscriptionService.instance.renewal?.trialEndingReminder(DateTime.now());
+    if (text == null) return null;
+    final theme = Theme.of(context);
+    return Card(
+      key: const Key('trial_reminder'),
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 12, 8, 4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              Icon(Icons.event_available_outlined, color: theme.colorScheme.primary),
+              const SizedBox(width: 12),
+              Expanded(child: Text('Free trial ending', style: theme.textTheme.titleSmall)),
+            ]),
+            const SizedBox(height: 8),
+            Text(text),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                key: const Key('manage_trial'),
+                onPressed: () => openExternal(context, AppConfig.playSubscriptionsUrl),
+                child: const Text('Manage in Google Play'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildToday(BuildContext context, List<BillingItem> items) {
     final visits = visitsOn(_repo.accounts);
+    final trial = _trialCard(context);
     final summary = _daySummaryCard(context, items);
     final value = _valueCard(context);
     if (visits.isEmpty) {
       return ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
         children: [
-          ?summary,
-          if (summary != null && value != null) const SizedBox(height: 8),
-          ?value,
+          for (final (i, w) in [?trial, ?summary, ?value].indexed) ...[
+            if (i > 0) const SizedBox(height: 8),
+            w,
+          ],
           const EmptyState(
             icon: Icons.today_outlined,
             title: 'No visits today',
@@ -425,7 +544,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
         ],
       );
     }
-    final header = [?summary, ?value];
+    final header = [?trial, ?summary, ?value];
     final offset = header.length;
     return ListView.separated(
       key: const Key('today_list'),

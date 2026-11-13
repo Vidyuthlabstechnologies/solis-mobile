@@ -18,63 +18,77 @@ Notes:
 
 ## Full description (paste exactly, between the lines)
 
+Updated for version 1.1.0 (the next-version brief, docs/NEXT_VERSION.md).
+
 ---
-SOLIS is a documentation and billing assistant for US physicians and small practices: primary care, urgent care, specialty clinics, nursing-home rounds and ambulance/EMS. It listens to the visit, writes the note, and builds a clean claim, on the doctor's phone.
+SOLIS is a documentation and billing assistant for US physicians and small practices: primary care, urgent care, psychiatry, specialty clinics, nursing-home rounds and ambulance/EMS. It listens to the visit, writes the note, and builds a clean claim, on the doctor's phone.
 
 SOLIS helps clinicians document and bill. It is not a medical device and does not diagnose or treat. The clinician reviews and signs every note.
 
 CONSENT FIRST
-Before anything is recorded, the patient hears a short script in English or Spanish and agrees out loud or signs on the phone. The time and location are saved with the visit. If the patient declines, nothing is recorded and you can type the note instead.
+Before anything is recorded, the patient hears a short script in English or Spanish and agrees out loud or signs on the phone.
 
-AMBIENT CAPTURE WITH SPEAKER SEPARATION
-SOLIS tells the doctor's voice from the patient's. Your practice chooses the engine: on-device, where audio stays on the phone after a one-time download of about 150 MB, or cloud, using the Deepgram medical model, only when the practice turns it on.
+A RECORDING THAT DOES NOT GET LOST
+SOLIS tells the doctor's voice from the patient's. On-device mode keeps audio on the phone after a one-time download of about 150 MB; cloud mode uses the Deepgram medical model only when the practice turns it on. If a call or a dead battery cuts a visit off, SOLIS keeps what it heard and offers to resume.
 
-THE NOTE WRITES ITSELF
-A concise SOAP note for your review. Nothing is invented: no vitals or exam findings that were not said. Every diagnosis links to the words it came from.
+EVERY SENTENCE SHOWS WHERE IT CAME FROM
+Nothing is invented: no vitals or exam findings that were not said. Tap a sentence to see the words it came from. Sentences without a source are flagged.
+
+YOUR TEMPLATE, YOUR LENGTH
+SOAP, primary care, urgent care with return precautions, or psychiatry with mental status in the patient's words. Brief, standard or detailed, with abbreviations spelled out or kept.
 
 DIAGNOSIS CODES FROM THE PATIENT'S OWN WORDS
-"My feet burn at night" is coded as a symptom until you confirm a diagnosis (ICD-10-CM outpatient guideline IV.H). Uncertain wording waits for one-tap confirmation.
+"My feet burn at night" is coded as a symptom until you confirm a diagnosis (ICD-10-CM outpatient guideline IV.H). Diagnoses you ruled out stay out.
 
-PROCEDURE CODES THAT MATCH
-The E/M level is picked from place of service, new or established patient, and medical decision making.
+CODES YOU CONFIRM
+The E/M level is picked from place of service, new or established patient, and medical decision making. Nothing is sent until you confirm the level and codes, and every signature, change and send goes into the visit's audit trail.
 
 CHECKS BEFORE THE CLAIM GOES OUT
-Claims are checked against the official CMS code sets for the date of service: ICD-10-CM, HCPCS, the physician fee schedule, NCCI medically unlikely edits and add-on edits, Medicare Code Editor age, maternity and manifestation lists, and ICD-10-CM Excludes1 and 7th-character rules. 59 of 63 official coding rules are fully enforced. The other 4 (NCCI procedure-to-procedure pairs, mutually exclusive pairs, most comprehensive code and lab panels) need the AMA CPT license and are not in the app.
+Claims are checked against the official CMS code sets for the date of service: ICD-10-CM, HCPCS, the physician fee schedule, NCCI medically unlikely and add-on edits, Medicare Code Editor lists, and ICD-10-CM Excludes1 and 7th-character rules. 59 of 63 official coding rules are fully enforced. The other 4 need the AMA CPT license and are not in the app. Each check has a Why with the rule in plain English and its official citation. Works offline.
 
-A WHY ON EVERY CHECK
-Each check shows the rule in plain English, what it means on this claim, its official citation and the guideline text. Works offline.
+CLAIMS THAT FOLLOW UP
+Eligibility at check-in, 837P claims and claim status through the Stedi clearinghouse. Rejections come back with suggested fixes. Claims made without signal wait and go out when the phone is back online. Your practice must be enrolled with each payer for electronic claims.
 
-OFFICIAL CODING NOTES
-Excludes1, Excludes2, Code first, Use additional code, Code also and 7th-character notes from ICD-10-CM, shown under each diagnosis.
+SCAN THE CARDS, OR LET THE FRONT DESK DO IT
+Insurance card, driver's license (reads the barcode) and SSN card are read on the phone with Google ML Kit. Photos are deleted after reading and only the last 4 SSN digits are kept. Front desk mode lets staff scan cards and update patient details on your phone while notes and billing stay hidden. It is free.
+
+AFTER THE VISIT
+A plain-language summary for the patient (what we found, medicines, what to do next, when to get help) to copy or text. Today shows notes signed, claims sent and an estimate of the time saved.
 
 ORDERS FROM THE CONVERSATION
-Labs, imaging, prescriptions, referrals and prior authorizations said in the visit are listed for review. You check them and mark them as sent. SOLIS does not connect to an EHR, lab or pharmacy.
-
-SCAN THE CARDS
-Insurance card, driver's license (reads the barcode) and SSN card are read on the phone with Google ML Kit. Photos are deleted after reading. Only the last 4 SSN digits are kept.
-
-ONE ACCOUNT PER PATIENT
-Each patient has one account number with a check digit, and visits by date, each with its own place of service.
-
-ELIGIBILITY AND CLAIMS
-Eligibility at check-in, 837P claims and claim status through the Stedi clearinghouse. Export as CMS-1500 data and 837P. Your practice must be enrolled with each payer for electronic claims.
-
-PROVIDER PROFILE
-Name, NPI (looked up in the national NPI registry), tax ID, specialty and insurers accepted.
+Labs, imaging, prescriptions and referrals said in the visit are listed for review. SOLIS does not connect to an EHR, lab or pharmacy.
 
 PRIVACY
-Vendor keys never ship inside the app; they live on the SOLIS server. On-device mode keeps audio on the phone. Card photos are deleted after reading and the full SSN is never stored. SOLIS is built for HIPAA workflows, and a Business Associate Agreement template is available for practices.
+On-device mode keeps audio on the phone. Card photos are deleted after reading and the full SSN is never stored. SOLIS is built for HIPAA workflows, and a Business Associate Agreement template is available for practices.
+
+PLANS
+Notes on the phone are free and unlimited. SOLIS Pro is a Google Play subscription that sends claims, with a 14-day free trial. Cancel any time in Google Play.
 
 TRY IT WITHOUT AN ACCOUNT
-Tap "Use demo account" on the sign-in screen to try every screen with fictional patients. The demo account stays on the phone.
+Tap "Use demo account" on the sign-in screen to try every screen with fictional patients.
 
-PILOT STAGE
-SOLIS 1.0.0 is in its pilot stage for US practices on Android 8 and later. CPT is a registered trademark of the American Medical Association.
+SOLIS is in its pilot stage for US practices on Android 8 and later. CPT is a registered trademark of the American Medical Association.
 ---
 
-Full description: 3,824 / 4,000 characters. It uses capitalized section headings because Play renders plain text;
-no emojis, no "HIPAA compliant", no rankings or prices. The CPT trademark line is there because the checks paragraph
-names CPT; keep or adjust it to match the AMA license terms once you have one.
+Full description: 3,917 / 4,000 characters. It uses capitalized section headings because Play renders plain text;
+no emojis, no "HIPAA compliant", no rankings. It names the free tier and the trial but no price, because the price
+Google Play shows depends on the country; the price ($149 a month or $1,548 a year) is set in Play Console.
+The CPT trademark line is there because the checks paragraph names CPT; keep or adjust it to match the AMA license
+terms once you have one.
+
+## Release notes for 1.1.0 (Play Console > the release > Release notes, en-US)
+
+---
+- A recording cut off by a call or a dead battery is kept and can resume.
+- Tap any note sentence to see the words it came from.
+- Templates for primary care, urgent care and psychiatry, plus note length.
+- Confirm codes before sending, with an audit trail on every visit.
+- Free front desk mode for scanning cards.
+- Plain-language patient summary to copy or text.
+- Notes are free; SOLIS Pro sends claims, with a 14-day free trial.
+---
+
+Release notes: 433 / 500 characters.
 
 ## Category and tags
 
@@ -125,5 +139,7 @@ Screenshot order and alt text (each max 140):
 7. `07_scan-cards.png`: Scanning an insurance card and driver's license to fill the patient details.
 8. `08_billing.png`: Billing list grouped by needs signature, needs fixes and ready to send.
 
-All screenshots are real app renders with fictional demo data (`screenshots/out`). To regenerate:
+All screenshots are real app renders with fictional demo data (`screenshots/out`). They show version 1.0;
+worth adding for 1.1: the sentence sources sheet, the note style sheet, the What SOLIS did for you card and
+the patient summary. To regenerate:
 `python marketing/play-store/graphics/render.py` (needs Google Chrome and Pillow).

@@ -15,6 +15,7 @@ import 'encounter_screen.dart';
 import 'patients_screen.dart';
 import 'scan_card_screen.dart';
 import '../services/patient_merge.dart';
+import '../services/front_desk.dart';
 
 /// One patient account: demographics, insurance and every visit (date of
 /// service) under the account number.
@@ -37,6 +38,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
   void initState() {
     super.initState();
     _repo.addListener(_changed);
+    FrontDesk.instance.addListener(_changed);
     // Coverage is rechecked when the chart opens and the last check is a
     // day old, so an expired plan shows before the visit, not after a denial.
     WidgetsBinding.instance.addPostFrameCallback((_) => _refreshEligibilityIfStale());
@@ -54,6 +56,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
   @override
   void dispose() {
     _repo.removeListener(_changed);
+    FrontDesk.instance.removeListener(_changed);
     super.dispose();
   }
 
@@ -337,6 +340,8 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
     final inNetwork = ins != null && _repo.provider.acceptedPayers.any((p) => _payerMatch(p, ins.payerName));
     final visits = [...account.visits]..sort((a, b) => b.number.compareTo(a.number));
     final openToday = account.visits.where((v) => v.dateOfService == _today() && v.status == VisitStatus.inProgress).toList();
+    // Front desk staff see details and insurance only: no visits or notes.
+    final frontDesk = FrontDesk.instance.isOn;
 
     return Scaffold(
       appBar: AppBar(
@@ -355,6 +360,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
             onPressed: () => _editAccount(account, scan: true),
           ),
           IconButton(tooltip: 'Edit patient details', icon: const Icon(Icons.edit_outlined), onPressed: () => _editAccount(account)),
+          if (!frontDesk)
           PopupMenuButton<String>(
             key: const Key('chart_menu'),
             tooltip: 'More',
@@ -392,7 +398,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: SafeArea(
+      bottomNavigationBar: frontDesk ? null : SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
           child: SizedBox(
@@ -509,6 +515,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
                     ],
                   ),
           ),
+          if (!frontDesk) ...[
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.only(left: 4, bottom: 8),
@@ -532,6 +539,7 @@ class _PatientChartScreenState extends State<PatientChartScreen> {
                 ],
               ),
             ),
+          ],
         ],
       ),
     );

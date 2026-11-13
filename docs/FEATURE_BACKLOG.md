@@ -330,6 +330,12 @@ owner.
   with an estimated time saved labeled as an estimate), and a plain-language
   patient summary from the signed note (what we found, medicines, what to
   do next, when to get help) to copy or text to the patient.
+- **B13** (rest of the next-version brief): free front desk mode (staff
+  scan cards and edit patient details on the clinician's phone, notes and
+  billing hidden, PIN to leave, stays on across restarts), trial-ending
+  reminder on Today in the last 3 days, Play listing and release notes for
+  1.1.0, version 1.1.0+4. Trial email plan in docs/TRIAL_EMAIL.md (needs the
+  Worker).
 - **Next**: 7, 12, 61, 45, 46, 83, 104. 135 needs a local-notification
   plugin, and 153/154 (app lock) a biometric plugin; both are held for a
   decision.
